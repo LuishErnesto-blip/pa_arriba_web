@@ -1,0 +1,410 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pa'arriba - ¡Tu Transformación Digital!</title>
+<!-- NUEVO: Favicon de Pa'arriba -->
+    <link rel="icon" href="{% static 'core/logo_pa_arriba_fav_icon.png' %}" type="image/png">
+    <!-- Importación de la fuente Montserrat directamente en el HTML para evitar errores de Django -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap">
+    <link rel="stylesheet" href="{% static 'core/style.css' %}">
+</head>
+<body>
+    <header class="hero-section">
+        <!-- NUEVO CONTENEDOR PARA EL LOGO Y LA ONDA QUE SE HARÁ STICKY -->
+        <div class="sticky-header-content">
+            <div class="logo-animado">
+                <img src="{% static 'core/logo_pa_arriba.png' %}" alt="Logo Pa'arriba" class="logo-image">
+            </div>
+            <!-- Nuevo contenedor para la onda de frecuencia debajo del logo -->
+            <div class="frequency-wave-container">
+                <div class="frequency-wave"></div>
+            </div>
+        </div>
+        <!-- FIN NUEVO CONTENEDOR -->
+
+    <h1>Pa'arriba: Crece, Avanza, Mejora, Re-emprende</h1>
+        <p>Impulsando tu Transformación Digital y Evolución como Emprendedor</p>
+<!-- Bombilla con cadena y efecto de encendido -->
+<div class="lightbulb-container" onclick="toggleBulb()">
+    <!-- SVG de la bombilla y la cadena consolidados -->
+    <!-- Ajustado el viewBox para acomodar la cadena más larga y el glow -->
+    <svg class="bulb-svg" viewBox="0 -10 100 240" xmlns="http://www.w3.org/2000/svg">
+        <!-- Bombilla (vidrio) -->
+        <path class="bulb-glass" d="M50,0 C25,0 15,25 15,60 C15,95 25,120 35,130 L65,130 C75,120 85,95 85,60 C85,25 75,0 50,0 Z" />
+
+        <!-- Reflejo -->
+        <path class="glass-reflection" d="M40,10 Q55,5 60,25 Q50,20 40,10 Z" />
+
+        <!-- Base metálica -->
+        <rect x="35" y="130" width="30" height="10" class="base-top" />
+        <rect x="38" y="140" width="24" height="5" class="base-middle" />
+        <rect x="40" y="145" width="20" height="3" class="base-bottom" />
+
+        <!-- Filamento -->
+        <path class="filament" d="M45,40 Q50,30 55,40 M45,45 L55,45 M45,50 Q50,60 55,50 M48,55 L48,125 M52,55 L52,125" />
+
+        <!-- Cadena - y2 ajustado para ser 30% más larga -->
+        <line class="chain-line" x1="50" y1="148" x2="50" y2="219.5" />
+        <!-- Sujetador - cy ajustado para la nueva longitud de la cadena -->
+        <circle class="chain-end" cx="50" cy="222" r="3" />
+        
+        <!-- Luz encendida -->
+        <circle class="bulb-glow" cx="50" cy="65" r="40" />
+    </svg>
+</div>
+        <!-- FIN: Nuevo contenedor para la bombilla y la cadena -->
+    </header>
+
+    <!-- NUEVO: Contenedor principal para las tarjetas de acordeón -->
+    <main id="accordion-container">
+        <!-- Tarjeta para la sección de Filosofía -->
+        <div class="accordion-card filosofia-card" data-section-id="filosofia">
+            <div class="accordion-header">
+                <h2>Nuestra Filosofía</h2>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                <section class="filosofia-section">
+                    <!-- Contenedor para partículas -->
+                    <div id="tsparticles" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;">
+                        <!-- El canvas para las partículas será creado y gestionado por el script -->
+                        <canvas id="particlesCanvas"></canvas>
+                    </div>
+                    <div class="content-box">
+                        <h3>Misión</h3>
+                        <p>Ser el motor que impulse la transformación digital de emprendedores, proporcionando soluciones innovadoras y personalizadas que les permitan crecer, avanzar, mejorar y re-emprender en un entorno digital en constante evolución.</p>
+                        <h3>Visión</h3>
+                        <p>Ser líderes reconocidos en el ecosistema emprendedor digital, inspirando y capacitando a millones de emprendedores para alcanzar su máximo potencial, innovando constantemente y adaptándonos a las necesidades del mercado.</p>
+                        <h3>Valores</h3>
+                        <ul>
+                            <li><strong>1. Innovación:</strong> Cada solución debe ser original y disruptiva, no solo funcional.</li>
+                            <li><strong>2. Accesibilidad:</strong> La tecnología debe ser fácil de usar, sin barreras técnicas.</li>
+                            <li><strong>3. Confianza:</strong> El usuario debe sentir seguridad y claridad al tomar decisiones.</li>
+                            <li><strong>4. Crecimiento estratégico:</strong> No solo resolvemos problemas, sino que impulsamos negocios a largo plazo.</li>
+                            <li><strong>5. Enfoque en resultados:</strong> Cada herramienta debe impactar directamente la rentabilidad y sostenibilidad del negocio.</li>
+                        </ul>
+                    </div>
+                    <div class="golden-circle">
+                        <h3>Nuestro Propósito se basa en el Círculo Dorado: ¿Por qué? ¿Cómo? ¿Qué?</h3>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Tarjeta para la sección de Prototipos -->
+        <div class="accordion-card prototipos-card" data-section-id="prototipos">
+            <div class="accordion-header">
+                <h2>Nuestros Prototipos</h2>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                <section class="prototipos-section">
+                    <p>Transformamos tus ideas en realidades digitales, prototipos que no solo son funcionales, sino que venden una experiencia única y diferencial para el re-emprendedor.</p>
+                    <div class="prototipos-grid">
+                        <!-- Prototipo 1: Libro Digital / App de Cabeza de Pollo -->
+                        <div class="prototipo-item">
+                            <h3>"Prototipo: Libro Digital Interactivo"</h3>
+                            <div class="video-container">
+                                <video class="prototipo-video" autoplay loop muted playsinline>
+                                    <source src="{% static 'core/clip_demo_libro_digital_app.mp4' %}" type="video/mp4">
+                                    Tu navegador no soporta el elemento de video.
+                                </video>
+                            </div>
+                            <p>Convierte tu contenido en una experiencia inmersiva. Ideal para cursos, guías o catálogos interactivos, llevando el aprendizaje y la información a otro nivel.</p>
+                            <button class="cta-button">¡Explora la Demo!</button>
+                        </div>
+
+                        <!-- Prototipo 2: Calculadora de Precios de Platos -->
+                        <div class="prototipo-item">
+                            <h3>"Prototipo: Calculadora de Costos para Restaurantes"</h3>
+                            <div class="video-container">
+                                <video class="prototipo-video" autoplay loop muted playsinline>
+                                    <source src="{% static 'core/clip_demo_calculadora_precios_platos_app.mp4' %}" type="video/mp4">
+                                    Tu navegador no soporta el elemento de video.
+                                </video>
+                            </div>
+                            <p>Optimiza la rentabilidad de tu negocio gastronómico. Calcula costos de ingredientes y precios de venta de forma precisa y sencilla.</p>
+                            <button class="cta-button">Calcula tu Rentabilidad</button>
+                        </div>
+
+                        <!-- Prototipo 3: Diseñador de Uñas / SPA -->
+                        <div class="prototipo-item">
+                            <h3>"Prototipo: Diseñador de Uñas Virtual para SPAs"</h3>
+                            <div class="video-container">
+                                <video class="prototipo-video" autoplay loop muted playsinline>
+                                    <source src="{% static 'core/clip_demo_diseñador_de_uñas_app.mp4' %}" type="video/mp4">
+                                    Tu navegador no soporta el elemento de video.
+                                </video>
+                            </div>
+                            <p>Visualiza diseños de uñas en tiempo real sobre la mano del cliente. Una herramienta interactiva que revoluciona la experiencia en tu salón de belleza.</p>
+                            <button class="cta-button">Diseña tu Estilo</button>
+                        </div>
+
+                        <!-- Prototipo 4: Cabeza de Pollo (App de Gestión) -->
+                        <div class="prototipo-item">
+                            <h3>"Prototipo: App de Gestión Empresarial 'Cabeza de Pollo'"</h3>
+                            <div class="video-container">
+                                <video class="prototipo-video" autoplay loop muted playsinline>
+                                    <source src="{% static 'core/clip_demo_final_cabeza_de_pollo_app.mp4' %}" type="video/mp4">
+                                    Tu navegador no soporta el elemento de video.
+                                </video>
+                            </div>
+                            <p>Simplifica la administración de tu negocio. Controla inventario, ventas y clientes desde una interfaz intuitiva y eficiente, liberándote de las "cabezas de pollo".</p>
+                            <button class="cta-button">Organiza tu Negocio</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Tarjeta para la sección de Testimonios -->
+        <div class="accordion-card testimonios-card" data-section-id="testimonios">
+            <div class="accordion-header">
+                <h2>Lo Que Dicen Nuestros Emprendedores</h2>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                <section class="testimonios-section">
+                    <div class="testimonios-grid">
+                        <div class="testimonio-item">
+                            <div class="testimonio-foto-placeholder"></div>
+                            <p>"Pa'arriba me ayudó a lanzar mi tienda online de artesanías. Su asesoramiento fue clave para digitalizar mi negocio y aumentar mis ventas. ¡Totalmente recomendados!"</p>
+                            <p class="autor">- Ana María, Artesana Digital</p>
+                        </div>
+                        <div class="testimonio-item">
+                            <div class="testimonio-foto-placeholder"></div>
+                            <p>"Gracias a Pa'arriba, pude entender mejor mis finanzas y optimizar mis recursos. Su enfoque práctico y sus prototipos me dieron la claridad que necesitaba para crecer."</p>
+                            <p class="autor">- Carlos R., Emprendedor Financiero</p>
+                        </div>
+                        <div class="testimonio-item">
+                            <div class="testimonio-foto-placeholder"></div>
+                            <p>"El equipo de Pa'arriba es excepcional. Con su plataforma educativa, mis empleados mejoraron sus habilidades digitales, y nuestro negocio experimentó un crecimiento exponencial."</p>
+                            <p class="autor">- Sofía P., Directora de Pyme</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Tarjeta para la sección de Footer -->
+        <div class="accordion-card footer-card" data-section-id="footer">
+            <div class="accordion-header">
+                <h2>Información de Contacto</h2>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                <footer class="footer-section">
+                    <div class="footer-content">
+                        <p>CONTACTO: <a href="mailto:info@pa-arriba.com">info@pa-arriba.com</a></p>
+                        <div class="social-links">
+                            <a href="#" target="_blank">Facebook</a>
+                            <a href="#" target="_blank">Instagram</a>
+                            <a href="#" target="_blank">LinkedIn</a>
+                        </div>
+                    </div>
+                    <p class="copyright">&copy; 2025 Pa'arriba. Crece, Avanza, Mejora, Re-emprende.</p>
+                </footer>
+            </div>
+        </div>
+    </main>
+    <!-- FIN NUEVO: Contenedor principal para las tarjetas de acordeón -->
+
+<script>
+// Función para encender/apagar la bombilla y mostrar/ocultar las tarjetas de acordeón
+function toggleBulb() {
+    const bulbSvg = document.querySelector('.bulb-svg'); // Selecciona el SVG
+    bulbSvg.classList.toggle('on'); // Aplica la clase 'on' al SVG
+
+    // Modificado: Ahora el body.revealed controla la visibilidad del contenedor de acordeones
+    const accordionContainer = document.getElementById('accordion-container');
+    accordionContainer.classList.toggle('revealed');
+
+    // Reproducir sonido de bombilla
+    const bulbSound = document.getElementById('bulbSound');
+    if (bulbSound) {
+        bulbSound.currentTime = 0; // Reinicia el sonido si ya se está reproduciendo
+        bulbSound.play().catch(e => console.error("Error al reproducir sonido de bombilla:", e));
+    }
+
+    // Reproducir/pausar música de fondo
+    const spaceMusic = document.getElementById('spaceMusic');
+    if (spaceMusic) {
+        if (accordionContainer.classList.contains('revealed')) { // Basado en si las tarjetas están visibles
+            spaceMusic.volume = 0.035; // Volumen inicial suave
+            spaceMusic.play().catch(e => console.error("Error al reproducir música espacial:", e));
+        } else {
+            spaceMusic.pause();
+            spaceMusic.currentTime = 0; // Reinicia la música al apagar
+        }
+    }
+}
+
+// NUEVO: Función para expandir/contraer las tarjetas de acordeón
+function toggleAccordionCard(event) {
+    const header = event.currentTarget; // El elemento clickeado (accordion-header)
+    const card = header.closest('.accordion-card'); // La tarjeta de acordeón padre
+    const content = card.querySelector('.accordion-content');
+    const icon = header.querySelector('.accordion-icon');
+
+    // Cierra cualquier otra tarjeta abierta (para que solo una esté expandida a la vez)
+    document.querySelectorAll('.accordion-card.expanded').forEach(openCard => {
+        if (openCard !== card) { // Si no es la tarjeta actual
+            openCard.classList.remove('expanded');
+            openCard.querySelector('.accordion-content').style.maxHeight = '0';
+            openCard.querySelector('.accordion-icon').textContent = '+';
+            // Ocultar el contenido de la sección/footer interna
+            const openCardContentElement = openCard.querySelector('.accordion-content').firstElementChild;
+            if (openCardContentElement) {
+                openCardContentElement.style.display = 'none';
+            }
+            // Pausar videos de otras tarjetas si están reproduciéndose
+            openCard.querySelectorAll('.prototipo-video').forEach(video => {
+                video.pause();
+                video.currentTime = 0; // Reiniciar video
+            });
+        }
+    });
+
+    // Alterna el estado de la tarjeta actual
+    card.classList.toggle('expanded');
+    const currentContentElement = content.firstElementChild; 
+
+    if (card.classList.contains('expanded')) {
+        if (currentContentElement) {
+            currentContentElement.style.display = 'block'; // Muestra la sección/footer interna
+        }
+        content.style.maxHeight = content.scrollHeight + 'px'; // Expande al alto real del contenido
+        icon.textContent = '-';
+        // Reproducir videos de la tarjeta actual
+        card.querySelectorAll('.prototipo-video').forEach(video => {
+            video.play().catch(e => console.error("Error al reproducir video de prototipo:", e));
+        });
+    } else {
+        content.style.maxHeight = '0'; // Contrae
+        icon.textContent = '+';
+        if (currentContentElement) {
+            currentContentElement.style.display = 'none'; // Oculta la sección/footer interna
+        }
+        // Pausar videos de la tarjeta actual
+        card.querySelectorAll('.prototipo-video').forEach(video => {
+            video.pause();
+            video.currentTime = 0; // Reiniciar video
+        });
+    }
+}
+
+// NUEVO: Añadir event listeners a los headers de las tarjetas cuando el DOM esté cargado
+document.addEventListener('DOMContentLoaded', () => {
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    accordionHeaders.forEach(header => {
+        header.addEventListener('click', toggleAccordionCard);
+    });
+});
+
+// NUEVO: JavaScript para el header sticky (mantenido de tu código original)
+window.addEventListener('scroll', function() {
+    const stickyHeaderContent = document.querySelector('.sticky-header-content');
+    const heroSection = document.querySelector('.hero-section');
+    const body = document.body;
+
+    const stickyHeight = 80;
+    const activationPoint = heroSection.offsetHeight - stickyHeight;
+
+    if (window.scrollY > activationPoint) {
+        stickyHeaderContent.classList.add('is-sticky');
+        body.style.paddingTop = stickyHeight + 'px';
+    } else {
+        stickyHeaderContent.classList.remove('is-sticky');
+        body.style.paddingTop = '0';
+    }
+});
+
+</script>
+<!-- Script de tsparticles -->
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+
+<!-- Configuración personalizada de tsParticles -->
+<script>
+// Usamos window.onload para asegurar que tsParticles esté completamente cargado y disponible
+window.onload = function () {
+    // Verificamos que tsParticles esté disponible y que el contenedor exista
+    if (window.tsParticles && document.getElementById("tsparticles")) {
+        tsParticles.load("tsparticles", {
+            fullScreen: { enable: false }, // Las partículas no ocuparán toda la pantalla, solo el contenedor
+            fpsLimit: 60, // Limite de cuadros por segundo para un rendimiento suave
+            particles: {
+                number: {
+                    value: 80, // Cantidad de partículas
+                    density: {
+                        enable: true,
+                        area: 800 // Área para la densidad de partículas
+                    }
+                },
+                color: {
+                    value: "#FFD700" // Color dorado para las partículas
+                },
+                opacity: {
+                    value: 1, // Opacidad máxima para que las partículas sean claramente visibles
+                },
+                size: {
+                    value: 8, // Tamaño ligeramente mayor para que se noten más
+                    random: true // Tamaño aleatorio para un efecto más natural
+                },
+                move: {
+                    enable: true, // Habilitar movimiento de partículas
+                    speed: 1, // Velocidad de movimiento
+                    direction: "none", // Sin dirección específica, se moverán aleatoriamente
+                    outModes: {
+                        default: "bounce" // Rebotarán al llegar a los bordes del contenedor
+                    }
+                }
+            },
+            interactivity: {
+                events: {
+                    onHover: {
+                        enable: false // Deshabilitar interacción al pasar el ratón
+                    }
+                },
+                modes: {
+                    grab: {
+                        distance: 400,
+                        links: {
+                            opacity: 1
+                        }
+                    },
+                    bubble: {
+                        distance: 400,
+                        size: 40,
+                        duration: 2,
+                        opacity: 8,
+                        speed: 3
+                    },
+                    repulse: {
+                        distance: 200,
+                        duration: 0.4
+                    },
+                    push: {
+                        quantity: 4
+                    },
+                    remove: {
+                        quantity: 2
+                    }
+                }
+            },
+            detectRetina: true // Adaptar la densidad de partículas a pantallas retina
+        });
+    } else {
+        // Mensaje de error si la librería o el contenedor no están disponibles
+        console.error("tsParticles no está disponible o el contenedor no existe.");
+    }
+};
+</script>
+<!-- Audio para el sonido de la bombilla -->
+<audio id="bulbSound" src="{% static 'core/light_switch_on.mp3' %}" preload="auto"></audio>
+<!-- Audio para el fondo musical espacial -->
+<audio id="spaceMusic" src="{% static 'core/space_ambience.wav' %}" preload="auto" loop></audio>
+</body>
+</html>

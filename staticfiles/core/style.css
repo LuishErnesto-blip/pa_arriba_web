@@ -1,0 +1,570 @@
+/* Importar la fuente Montserrat desde Google Fonts
+He incluido los pesos 300 (Light), 400 (Regular), 600 (Semi-bold), 700 (Bold) y 900 (Black/Extra Bold)
+para tener todos los que se usan en tu prototipo y en los ajustes anteriores. */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap');
+
+/* Variables de Colores de Pa'arriba (¡Ahora exactos de Penpot!) */
+:root {
+    --color-background-dark: #000000; /* Fondo general oscuro: Negro puro de Penpot */
+    --color-blue-section: #0D47A1; /* Azul oscuro para sección de prototipos de Penpot */
+    --color-gray-section: #212121; /* Gris oscuro para filosofía y testimonios de Penpot */
+    --color-light-bg-box: #F5F5DC; /* Color de fondo de las cajas de prototipos (Beige/crema de Penpot) */
+    --color-text-light: #FFFFFF; /* Texto general blanco puro de Penpot */
+    --color-text-gray: #B0B0B0; /* Gris para algunos textos secundarios y autores en testimonios de Penpot */
+    --color-border-testimonial: #E8E8EA; /* Borde gris muy claro para testimonios de Penpot */
+    --color-placeholder-photo: #B0C4DE; /* Azul grisáceo claro para fotos de testimonios de Penpot */
+    --color-green-slogan: #4CAF50; /* Tu color verde para el slogan "Crece, Avanza..." */
+    --color-orange-accent: #FF5C00; /* Tu color naranja para acentos, si es necesario */
+    --color-accent-gold: #FFD700; /* Tu dorado para el Círculo Dorado */
+}
+
+/* Estilos generales */
+body {
+    background-color: var(--color-background-dark); /* Fondo oscuro: Negro puro */
+    color: var(--color-text-light); /* Texto por defecto en blanco (se sobrescribirá) */
+    font-family: 'Montserrat', sans-serif; /* Usamos Montserrat como la fuente principal */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrar horizontalmente */
+    min-height: 100vh;
+}
+
+.hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    text-align: center;
+    width: 100%;
+    max-width: 1200px; /* Limitar ancho para escritorio */
+    margin: 0 auto; /* Centrar */
+}
+
+.hero-section .logo {
+    max-width: 200px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.hero-section h1 {
+    font-size: 2.5em; /* Ajustado para ser imponente */
+    font-weight: 900; /* Montserrat Black/Extra Bold para el slogan */
+    margin-bottom: 10px;
+    color: #1877f2; /* Manteniendo azul para el slogan */
+}
+
+.hero-section p {
+    font-size: 1.1em;
+    font-weight: 300; /* Light */
+    max-width: 600px;
+    color: var(--color-text-light); /* Texto de "Impulsando..." en blanco */
+}
+
+/* Sección Filosofía */
+.filosofia-section {
+    background-color: var(--color-gray-section); /* Gris oscuro de Penpot */
+    padding: 30px 20px;
+    margin-top: 30px;
+    width: 90%;
+    max-width: 900px;
+    border-radius: 8px;
+}
+
+.filosofia-section h2 {
+    font-size: 2em; /* Título de sección */
+    font-weight: 900; /* Extra Bold como en "Nuestros Prototipos" */
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--color-text-light); /* Blanco puro */
+}
+
+.filosofia-section .content-box h3 {
+    font-size: 1.5em; /* Subtítulos (Misión, Visión, Valores) */
+    font-weight: 600; /* Semi-bold */
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: var(--color-text-light); /* Blanco puro */
+}
+
+.filosofia-section .content-box p {
+    font-size: 1em; /* Texto de misión/visión */
+    font-weight: 300; /* Light */
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: var(--color-text-light); /* Blanco para contraste sobre gris oscuro */
+}
+
+.filosofia-section .content-box ul {
+    list-style: none;
+    padding-left: 0; /* Quitar padding por defecto de listas */
+}
+
+.filosofia-section .content-box li {
+    font-size: 1em; /* Texto de valores */
+    font-weight: 300; /* Light */
+    line-height: 1.5;
+    margin-bottom: 10px;
+    color: var(--color-text-light); /* Blanco */
+}
+
+.filosofia-section .golden-circle h3 {
+    font-size: 1.3em; /* Texto de "Nuestro Propósito..." */
+    font-weight: 600; /* Semi-bold */
+    text-align: center;
+    margin-top: 30px;
+    color: var(--color-accent-gold); /* Dorado */
+}
+
+/* Estilos para la sección de Prototipos */
+.prototipos-section {
+    background-color: var(--color-blue-section); /* Azul oscuro de Penpot */
+    padding: 40px 20px;
+    margin-top: 40px;
+    width: 100%;
+    text-align: center;
+}
+
+.prototipos-section h2 {
+    color: var(--color-text-light); /* Blanco */
+    font-size: 28px; /* Tamaño exacto de Penpot */
+    font-weight: 900; /* Montserrat Black/Extra Bold de Penpot */
+    margin-bottom: 20px;
+}
+
+.prototipos-section p {
+    color: var(--color-text-light); /* Blanco */
+    font-size: 14px; /* Tamaño exacto de Penpot */
+    font-weight: 300; /* Light de Penpot */
+    max-width: 800px;
+    margin: 0 auto 30px auto;
+    line-height: 1.2; /* Ajustado para Penpot */
+}
+
+.prototipos-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.prototipo-item {
+    background-color: var(--color-light-bg-box); /* Beige/crema de Penpot */
+    padding: 25px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.prototipo-item h3 {
+    color: var(--color-background-dark); /* Negro para el título sobre fondo claro */
+    font-size: 20px; /* Tamaño exacto de Penpot */
+    font-weight: 300; /* Light de Penpot */
+    margin-bottom: 15px;
+}
+
+.prototipo-item .placeholder-image {
+    width: 100%;
+    height: 150px;
+    background-color: var(--color-placeholder-photo); /* Azul grisáceo de Penpot */
+    border-radius: 6px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-background-dark); /* Texto sobre placeholder en negro */
+    font-size: 0.9em;
+    font-weight: 400;
+}
+
+.prototipo-item p {
+    color: var(--color-background-dark); /* Negro para el texto sobre fondo claro */
+    font-size: 14px; /* Tamaño exacto de Penpot */
+    font-weight: 300; /* Light de Penpot */
+    line-height: 1.2; /* Ajustado para Penpot */
+    margin: 0;
+}
+
+/* Estilos para la sección de Testimonios */
+.testimonios-section {
+    background-color: var(--color-gray-section); /* Gris oscuro de Penpot */
+    padding: 50px 20px;
+    margin-top: 40px;
+    width: 100%;
+    text-align: center;
+}
+
+.testimonios-section h2 {
+    color: var(--color-text-light); /* Blanco */
+    font-size: 28px; /* Tamaño exacto de Penpot */
+    font-weight: 900; /* Montserrat Black/Extra Bold de Penpot */
+    margin-bottom: 30px;
+}
+
+.testimonios-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.testimonio-item {
+    background-color: transparent; /* Fondo transparente */
+    padding: 25px;
+    border: 2px solid var(--color-border-testimonial); /* Borde gris claro de Penpot */
+    border-radius: 8px; /* Mantener bordes redondeados, Penpot no especifica aquí */
+    text-align: left;
+    box-shadow: none; /* Eliminar sombra, no se ve en Penpot */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.testimonio-item p {
+    color: var(--color-text-light); /* Blanco */
+    font-size: 12px; /* Tamaño exacto de Penpot */
+    font-weight: 300; /* Light de Penpot */
+    line-height: 1.2; /* Ajustado para Penpot */
+    margin-bottom: 15px;
+}
+
+.testimonio-item .autor {
+    font-size: 12px; /* Tamaño exacto de Penpot */
+    font-weight: 300; /* Light de Penpot */
+    color: var(--color-text-gray); /* Gris claro de Penpot */
+    font-style: normal; /* No cursiva en Penpot */
+    text-align: right;
+    margin-top: auto;
+}
+
+.testimonio-item .testimonio-foto-placeholder {
+    width: 80px; /* Ancho según el prototipo de Penpot */
+    height: 80px; /* Alto igual para que sea un cuadrado */
+    background-color: var(--color-placeholder-photo); /* Azul grisáceo de Penpot */
+    border-radius: 50%; /* Para que sea circular, como suelen ser las fotos de perfil/testimonio */
+    margin: 0 auto 15px auto; /* Centrar y darle margen inferior */
+    display: flex; /* Para centrar el contenido futuro si se añade */
+    align-items: center;
+    justify-content: center;
+    color: var(--color-background-dark); /* Color de texto si se añade un icono o iniciales */
+    font-size: 0.9em;
+}
+
+/* Estilos para el Pie de Página (Footer) */
+.footer-section {
+    background-color: var(--color-background-dark); /* Negro puro */
+    color: var(--color-text-light);
+    padding: 40px 20px;
+    margin-top: 40px;
+    width: 100%;
+    text-align: center;
+}
+
+.footer-content {
+    margin-bottom: 20px;
+}
+
+.footer-content p {
+    font-size: 1em;
+    font-weight: 400;
+    margin-bottom: 10px;
+    color: var(--color-text-gray); /* Gris claro como en Penpot */
+}
+
+.footer-content a {
+    color: var(--color-text-gray); /* Gris claro como en Penpot */
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+.footer-content a:hover {
+    color: var(--color-primary-orange); /* Naranja vibrante en hover */
+}
+
+.social-links {
+    margin-top: 15px;
+}
+
+.social-links a {
+    display: inline-block;
+    margin: 0 15px;
+    font-size: 1.1em;
+    color: var(--color-text-gray); /* Gris claro como en Penpot */
+}
+
+.copyright {
+    font-size: 0.9em;
+    font-weight: 400;
+    color: var(--color-text-gray); /* Gris claro como en Penpot */
+    margin-top: 20px;
+}
+
+/* --- MEDIA QUERIES para Responsividad (Ajustados con las nuevas fuentes/tamaños) --- */
+
+/* Para pantallas medianas (tabletas, min-width: 768px) */
+@media (min-width: 768px) {
+    .hero-section {
+        padding: 60px 40px;
+    }
+    .hero-section .logo {
+        max-width: 250px;
+    }
+    .hero-section h1 {
+        font-size: 3em; /* Título más grande */
+    }
+    .hero-section p {
+        font-size: 1.2em; /* Slogan un poco más grande */
+    }
+
+    .filosofia-section {
+        padding: 40px;
+        width: 85%;
+    }
+    .filosofia-section h2 {
+        font-size: 2.5em;
+    }
+    .filosofia-section .content-box h3 {
+        font-size: 1.8em;
+    }
+    .filosofia-section .content-box p,
+    .filosofia-section .content-box li {
+        font-size: 1.1em;
+    }
+    .filosofia-section .golden-circle h3 {
+        font-size: 1.5em;
+    }
+
+    .prototipos-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .prototipos-section h2 {
+        font-size: 2.8em;
+    }
+    .prototipos-section p {
+        font-size: 1.2em;
+    }
+    .prototipo-item h3 {
+        font-size: 1.6em;
+    }
+    .prototipo-item p {
+        font-size: 1.05em;
+    }
+
+    .testimonios-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .testimonios-section h2 {
+        font-size: 2.8em;
+    }
+    .testimonio-item p {
+        font-size: 1.1em;
+    }
+    .testimonio-item .autor {
+        font-size: 1em;
+    }
+
+    .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 800px;
+        margin: 0 auto 20px auto;
+    }
+    .footer-content p {
+        margin-bottom: 0;
+    }
+    .social-links {
+        margin-top: 0;
+    }
+    .footer-section {
+        padding: 50px 40px;
+    }
+}
+
+/* Para pantallas grandes (escritorios, min-width: 1024px) */
+@media (min-width: 1024px) {
+    .hero-section {
+        padding: 80px 60px;
+    }
+    .hero-section .logo {
+        max-width: 300px;
+    }
+    .hero-section h1 {
+        font-size: 3.5em; /* Título grande para escritorio */
+    }
+    .hero-section p {
+        font-size: 1.3em; /* Slogan más grande */
+    }
+
+    .filosofia-section {
+        padding: 50px;
+        width: 80%;
+    }
+    .filosofia-section h2 {
+        font-size: 3em;
+    }
+    .filosofia-section .content-box h3 {
+        font-size: 2em;
+    }
+    .filosofia-section .content-box p,
+    .filosofia-section .content-box li {
+        font-size: 1.2em;
+    }
+    .filosofia-section .golden-circle h3 {
+        font-size: 1.6em;
+    }
+
+    .prototipos-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .prototipos-section {
+        padding: 60px 40px;
+    }
+    .prototipos-section h2 {
+        font-size: 3.2em;
+    }
+    .prototipo-item h3 {
+        font-size: 1.8em;
+    }
+    .prototipo-item p {
+        font-size: 1.1em;
+    }
+
+    .testimonios-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .testimonios-section {
+        padding: 70px 40px;
+    }
+    .testimonios-section h2 {
+        font-size: 3.2em;
+    }
+    .testimonio-item p {
+        font-size: 1.15em;
+    }
+
+    .footer-section {
+        padding: 60px 60px;
+    }
+    .footer-content {
+        max-width: 900px;
+    }
+    .footer-content p,
+    .footer-content a,
+    .copyright {
+        font-size: 1.05em;
+    }
+    .social-links a {
+        font-size: 1.2em;
+    }
+}
+
+/* Para pantallas muy grandes (min-width: 1440px), si tienes un diseño específico */
+@media (min-width: 1440px) {
+    .prototipos-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* --- Animaciones para la transformación digital de Pa'arriba --- */
+
+/* Animación para el logo: Efecto de revelado/activación */
+@keyframes logoReveal {
+    0% {
+        opacity: 0;
+        transform: scale(0.5); /* Empieza pequeño */
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1); /* Rebote sutil: un poco más grande de lo normal */
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1); /* Vuelve a su tamaño normal */
+    }
+}
+
+/* Animación para las líneas láser */
+@keyframes laserScan {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%); /* Para la línea horizontal, empieza a la izquierda */
+    }
+    25% {
+        opacity: 1; /* Se vuelve visible */
+    }
+    75% {
+        opacity: 1;
+        transform: translateX(100%); /* Para la línea horizontal, termina a la derecha */
+    }
+    100% {
+        opacity: 1; /* Desaparece */
+        transform: translateX(100%); /* Asegura que no regrese */
+    }
+}
+
+/* Nueva animación para la línea láser vertical */
+@keyframes laserScanVertical {
+    0% {
+        opacity: 0;
+        transform: translateY(-100%); /* Comienza fuera de vista (arriba) */
+    }
+    25% {
+        opacity: 1; /* Se vuelve visible */
+    }
+    75% {
+        opacity: 1;
+        transform: translateY(100%); /* Termina fuera de vista (abajo) */
+    }
+    100% {
+        opacity: 1; /* Desaparece */
+        transform: translateY(100%); /* Asegura que no regrese */
+    }
+}
+
+/* Aplicar la animación al logo y preparar para efectos visuales */
+.logo-animado {
+    animation: logoReveal 1.5s ease-out forwards;
+    position: relative; /* Esencial para posicionar los pseudo-elementos */
+    /* overflow: hidden; */ /* ¡COMENTA O ELIMINA TEMPORALMENTE ESTA LÍNEA! */
+    z-index: 2;
+    /* Nueva adición para la prueba extrema: Quita la imagen del logo temporalmente para ver la línea limpia */
+    /* background-image: url('../img/logo_pa_arriba.png'); */
+    /* background-size: contain; */
+    /* background-repeat: no-repeat; */
+    /* background-position: center; */
+}
+
+/* Pseudo-elemento para la línea horizontal */
+.logo-animado::before {
+    content: '';
+    position: absolute;
+    /* CAMBIA A COLOR SÓLIDO Y ANCHO / ALTO AÚN MÁS GRANDE PARA PRUEBA EXTREMA */
+    background: linear-gradient(to right, transparent, var(--color-blue-section), transparent);
+    width: 100%;
+    height: 2px; /* ¡AÚN MÁS GRUESO PARA LA PRUEBA EXTREMA! */
+    top: 0;
+    animation: laserScan 1.5s ease-in-out forwards infinite;
+    animation-delay: 0.8s;
+    transform-origin: left;
+    z-index: 3;
+}
+
+/* Pseudo-elemento para la línea vertical */
+.logo-animado::after {
+    content: '';
+    position: absolute;
+    /* CAMBIA A COLOR SÓLIDO Y ANCHO / ALTO AÚN MÁS GRANDE PARA PRUEBA EXTREMA */
+    background: linear-gradient(to right, transparent, var(--color-blue-section), transparent);
+    width: 2px; /* ¡AÚN MÁS GRUESO PARA LA PRUEBA EXTREMA! */
+    height: 100%;
+    left: 0;
+    animation: laserScanVertical 1.5s ease-in-out forwards infinite;
+    animation-delay: 1.0s;
+    transform-origin: top;
+    z-index: 3;
+}
