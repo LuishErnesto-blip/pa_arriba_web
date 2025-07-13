@@ -27,7 +27,16 @@ SECRET_KEY = 'django-insecure-b5rp4(515x-@2el5=6_&7*7b#2yw1(=ju_9olo02m(4_lzssuq
 DEBUG = True
 
 ALLOWED_HOSTS = []
+# MODIFICADO: Añadir el dominio de Render a ALLOWED_HOSTS
+# Esto es crucial para que tu app responda en Render
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
+# Si estás en desarrollo local y DEBUG es True, puedes mantener localhost
+if DEBUG:
+    ALLOWED_HOSTS.append('localhost')
+    ALLOWED_HOSTS.append('127.0.0.1')
 
 # Application definition
 
