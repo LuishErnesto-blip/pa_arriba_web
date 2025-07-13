@@ -24,19 +24,25 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-b5rp4(515x-@2el5=6_&7*7b#2yw1(=ju_9olo02m(4_lzssuq'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# MODIFICADO: Leer DEBUG desde una variable de entorno. Por defecto True para desarrollo local.
+DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'
 
+# MODIFICADO: Configuración de ALLOWED_HOSTS para Render y desarrollo local
 ALLOWED_HOSTS = []
-# MODIFICADO: Añadir el dominio de Render a ALLOWED_HOSTS
-# Esto es crucial para que tu app responda en Render
-RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
-# Si estás en desarrollo local y DEBUG es True, puedes mantener localhost
+# Obtener los hosts permitidos de una variable de entorno (para Render u otros despliegues)
+# Si la variable DJANGO_ALLOWED_HOSTS existe, la usa (separados por coma)
+# Esto es más robusto que depender de RENDER_EXTERNAL_HOSTNAME directamente para ALLOWED_HOSTS
+allowed_hosts_str = os.environ.get('DJANGO_ALLOWED_HOSTS')
+if allowed_hosts_str:
+    ALLOWED_HOSTS.extend(allowed_hosts_str.split(','))
+
+# Si estamos en desarrollo local (DEBUG es True), asegura que localhost y 127.0.0.1 estén permitidos
 if DEBUG:
-    ALLOWED_HOSTS.append('localhost')
-    ALLOWED_HOSTS.append('127.0.0.1')
+    if 'localhost' not in ALLOWED_HOSTS:
+        ALLOWED_HOSTS.append('localhost')
+    if '127.0.0.1' not in ALLOWED_HOSTS:
+        ALLOWED_HOSTS.append('127.0.0.1')
 
 # Application definition
 
@@ -142,5 +148,3 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# La importación de os que tenías al final, la moví al inicio.
-# Configuración para archivos estáticos (CSS, JS, imágenes)
