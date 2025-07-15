@@ -459,6 +459,8 @@ body {
     font-size: 0.9em;
 }
 
+
+
 /* Estilos para el Pie de Página (Footer) */
 .footer-section {
     /* Degradado animado con colores más perceptibles y velocidad ajustada */
@@ -1144,3 +1146,17 @@ body.sticky-header-active { /* Esta clase será añadida por JS cuando el header
 /* Animación de entrada para las tarjetas cuando se revela el contenedor */
 /* Esta animación ya está definida arriba en @keyframes fadeInScaleUp */
 
+/* Estilos para el encabezado de la sección Tienda */
+.shop-header i,
+.shop-header h2 {
+    color: #FF5C00; /* Este es un color "Tomate" vibrante, puedes ajustarlo si tienes un hex específico de tu marca */
+}
+
+/* Clase para forzar el color naranja de la marca */
+.text-pa-arriba-orange-force {
+    color: var(--color-orange-accent);
+}
+
+.bg-pa-arriba-orange-force {
+    background-color: var(--color-orange-accent);
+}
