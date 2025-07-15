@@ -1,7 +1,57 @@
-/* Importar la fuente Montserrat desde Google Fonts
-He incluido los pesos 300 (Light), 400 (Regular), 600 (Semi-bold), 700 (Bold) y 900 (Black/Extra Bold)
-para tener todos los que se usan en tu prototipo y en los ajustes anteriores. */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap');
+/* --- INICIO BLOQUE NUEVO PARA EFECTO REVEAL --- */
+.filosofia-section,
+.prototipos-section,
+.testimonios-section,
+.footer-section {
+    display: none; /* Aseguramos que las secciones estén ocultas inicialmente */
+    opacity: 0;
+    transform: scaleY(0);
+    transform-origin: top; /* La animación de despliegue comenzará desde la parte superior */
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Transición suave para el despliegue */
+}
+
+/* MODIFICADO: Estas clases ahora controlan la visibilidad de las tarjetas de acordeón, no las secciones directamente */
+/* Las secciones internas se controlan con JavaScript al expandir la tarjeta */
+body.revealed .filosofia-section,
+body.revealed .prototipos-section,
+body.revealed .testimonios-section,
+body.revealed .footer-section {
+    /* Estas reglas se mantienen para las animaciones internas de las secciones si se desea */
+    /* Pero la visibilidad inicial de las secciones está ahora dentro de .accordion-content */
+    animation: none; /* Desactivamos la animación de despliegue aquí, se manejará por el acordeón */
+    display: none; /* Aseguramos que las secciones estén ocultas por defecto, se mostrarán al expandir la tarjeta */
+    opacity: 1; /* Para que el contenido sea visible cuando la tarjeta se expanda */
+    transform: scaleY(1); /* Para que el contenido sea visible cuando la tarjeta se expanda */
+}
+
+/* Nuevos keyframes para la animación de despliegue */
+@keyframes deploySection {
+    0% {
+        opacity: 0;
+        transform: scaleY(0); /* Empieza como una línea horizontal */
+    }
+    100% {
+        opacity: 1;
+        transform: scaleY(1); /* Se expande a su altura completa */
+    }
+}
+
+/* Nuevos keyframes para la animación de degradado de fondo */
+@keyframes animateBackgroundGradient {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 100% 100%;
+    }
+}
+
+/* --- FIN BLOQUE NUEVO PARA EFECTO REVEAL --- */
+
+/* Aplicamos box-sizing: border-box globalmente para un manejo consistente del modelo de caja */
+* {
+    box-sizing: border-box;
+}
 
 /* Variables de Colores de Pa'arriba (¡Ahora exactos de Penpot!) */
 :root {
@@ -19,6 +69,12 @@ para tener todos los que se usan en tu prototipo y en los ajustes anteriores. */
 }
 
 /* Estilos generales */
+html, body { /* Aseguramos que tanto html como body ocupen el 100% y sin márgenes */
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     background-color: var(--color-background-dark); /* Fondo oscuro: Negro puro */
     color: var(--color-text-light); /* Texto por defecto en blanco (se sobrescribirá) */
@@ -29,24 +85,77 @@ body {
     flex-direction: column;
     align-items: center; /* Centrar horizontalmente */
     min-height: 100vh;
+    overflow-x: hidden;
+    transition: padding-top 0.3s ease-in-out; /* Transición suave para el padding del body */
 }
 
 .hero-section {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 40px 20px;
+    padding: 40px 20px 180px 20px; /* Ajustado el PADDING INFERIOR para la bombilla */
     text-align: center;
     width: 100%;
     max-width: 1200px; /* Limitar ancho para escritorio */
     margin: 0 auto; /* Centrar */
+    position: relative; /* CLAVE: Permite posicionamiento absoluto de elementos hijos */
 }
 
-.hero-section .logo {
-    max-width: 200px;
-    height: auto;
-    margin-bottom: 20px;
+/* --- NUEVO: Contenedor para el logo y la onda que se hará sticky --- */
+.sticky-header-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease-in-out;
+    position: relative; /* Para que el logo y la onda se posicionen dentro de él */
+    padding-top: 20px; /* Espacio superior para el logo */
+    padding-bottom: 20px; /* Espacio inferior para la onda */
+    background-color: transparent; /* Por defecto transparente */
 }
+
+.sticky-header-content.is-sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px; /* Altura reducida cuando es sticky */
+    background-color: var(--color-background-dark); /* Fondo oscuro para el header fijo */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Sombra sutil */
+    z-index: 1000; /* Asegura que esté por encima de otras secciones */
+    flex-direction: row; /* Cambia a fila para centrar horizontalmente */
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px; /* Quita padding vertical y añade horizontal */
+    overflow: hidden; /* Asegura que nada se salga */
+}
+
+/* Ajustes para el logo y la onda cuando el contenedor es sticky */
+.sticky-header-content.is-sticky .logo-animado {
+    width: 60px; /* Logo más pequeño */
+    height: 60px;
+    margin-bottom: 0; /* Elimina margen inferior */
+    margin-right: 15px; /* Espacio entre logo y onda */
+}
+
+.sticky-header-content.is-sticky .frequency-wave-container {
+    height: 40px; /* Onda más pequeña */
+    position: relative; /* Vuelve a relativo para fluir con el logo */
+    left: auto;
+    right: auto;
+    top: auto;
+    width: 150px; /* Ancho para la onda */
+}
+
+/* Ocultar el texto principal y la bombilla cuando el header es sticky */
+/* Usamos la combinación de selectores para asegurar que solo se oculten cuando el sticky-header-content tiene la clase is-sticky */
+.sticky-header-content.is-sticky ~ h1,
+.sticky-header-content.is-sticky ~ p,
+.sticky-header-content.is-sticky ~ .lightbulb-container {
+    display: none;
+}
+/* --- FIN NUEVO: Contenedor para el logo y la onda que se hará sticky --- */
 
 .hero-section h1 {
     font-size: 2.5em; /* Ajustado para ser imponente */
@@ -64,12 +173,18 @@ body {
 
 /* Sección Filosofía */
 .filosofia-section {
-    background-color: var(--color-gray-section); /* Gris oscuro de Penpot */
+    /* Degradado animado con colores más perceptibles y velocidad ajustada */
+    background-image: linear-gradient(45deg, rgba(33, 33, 33, 0.7), rgba(74, 74, 74, 0.7), rgba(33, 33, 33, 0.7)); 
+    background-size: 250% 250%; /* Permite el movimiento del degradado más pronunciado */
+    animation: animateBackgroundGradient 8s linear infinite alternate; /* Animación de fondo más rápida */
     padding: 30px 20px;
-    margin-top: 30px;
-    width: 90%;
-    max-width: 900px;
+    margin-top: 40px; /* Ajustado para dar espacio después del hero */
+    width: 100%; /* Ocupa el 100% del ancho disponible */
+    max-width: 900px; /* Limita el ancho máximo */
+    margin: 0 auto; /* Centra la sección */
     border-radius: 8px;
+    position: relative; /* ¡CLAVE PARA LAS PARTÍCULAS! Establece un contexto de posicionamiento para #tsparticles */
+    overflow: hidden; /* Asegura que las partículas no se salgan de la sección */
 }
 
 .filosofia-section h2 {
@@ -78,6 +193,31 @@ body {
     text-align: center;
     margin-bottom: 20px;
     color: var(--color-text-light); /* Blanco puro */
+    position: relative; /* Asegura que el contenido esté por encima de las partículas */
+    z-index: 1; /* Asegura que el contenido esté por encima de las partículas */
+    /* --- MODIFICADO: Efecto 3D/Relieve/Glitch en Títulos (más visible) --- */
+    text-shadow: 
+        3px 3px 6px rgba(0,0,0,0.8), /* Sombra más fuerte para relieve */
+        -3px -3px 6px rgba(255,255,255,0.3); /* Luz más fuerte para relieve */
+    animation: glitchEffect 2.5s infinite alternate; /* Aplicar efecto glitch, más frecuente y notorio */
+    /* --- FIN MODIFICADO --- */
+}
+
+/* Keyframes para el efecto Glitch/Vibración en títulos (más pronunciado) */
+@keyframes glitchEffect {
+    0% { transform: translate(0); text-shadow: 3px 3px 6px rgba(0,0,0,0.8), -3px -3px 6px rgba(255,255,255,0.3); }
+    2% { transform: translate(-4px, -4px); text-shadow: 4px 4px 7px rgba(0,0,0,0.9), -4px -4px 7px rgba(255,255,255,0.4); }
+    4% { transform: translate(4px, 4px); text-shadow: 3px 3px 6px rgba(0,0,0,0.8), -3px -3px 6px rgba(255,255,255,0.3); }
+    6% { transform: translate(-3px, 3px); text-shadow: 4px 4px 7px rgba(0,0,0,0.9), -4px -4px 7px rgba(255,255,255,0.4); }
+    8% { transform: translate(3px, -3px); text-shadow: 3px 3px 6px rgba(0,0,0,0.8), -3px -3px 6px rgba(255,255,255,0.3); }
+    10% { transform: translate(0); text-shadow: 3px 3px 6px rgba(0,0,0,0.8), -3px -3px 6px rgba(255,255,255,0.3); }
+    /* El resto del tiempo no hay glitch */
+    100% { transform: translate(0); text-shadow: 3px 3px 6px rgba(0,0,0,0.8), -3px -3px 6px rgba(255,255,255,0.3); }
+}
+
+.filosofia-section .content-box {
+    position: relative; /* Asegura que el contenido esté por encima de las partículas */
+    z-index: 1; /* Asegura que el contenido esté por encima de las partículas */
 }
 
 .filosofia-section .content-box h3 {
@@ -109,6 +249,11 @@ body {
     color: var(--color-text-light); /* Blanco */
 }
 
+.filosofia-section .golden-circle {
+    position: relative; /* Asegura que el contenido esté por encima de las partículas */
+    z-index: 1; /* Asegura que el contenido esté por encima de las partículas */
+}
+
 .filosofia-section .golden-circle h3 {
     font-size: 1.3em; /* Texto de "Nuestro Propósito..." */
     font-weight: 600; /* Semi-bold */
@@ -119,11 +264,15 @@ body {
 
 /* Estilos para la sección de Prototipos */
 .prototipos-section {
-    background-color: var(--color-blue-section); /* Azul oscuro de Penpot */
+    background-image: linear-gradient(45deg, var(--color-blue-section), #3F72AF, var(--color-blue-section)); /* Degradado animado con colores más perceptibles y velocidad ajustada */
+    background-size: 250% 250%; /* Permite el movimiento del degradado más pronunciado */
+    animation: animateBackgroundGradient 8s linear infinite alternate; /* Animación de fondo más rápida */
     padding: 40px 20px;
     margin-top: 40px;
     width: 100%;
     text-align: center;
+    position: relative; /* También a esta sección para futuros efectos o z-index */
+    overflow: hidden;
 }
 
 .prototipos-section h2 {
@@ -131,6 +280,12 @@ body {
     font-size: 28px; /* Tamaño exacto de Penpot */
     font-weight: 900; /* Montserrat Black/Extra Bold de Penpot */
     margin-bottom: 20px;
+    /* --- MODIFICADO: Efecto 3D/Relieve/Glitch en Títulos (más visible) --- */
+    text-shadow: 
+        3px 3px 6px rgba(0,0,0,0.8), /* Sombra más fuerte para relieve */
+        -3px -3px 6px rgba(255,255,255,0.3); /* Luz más fuerte para relieve */
+    animation: glitchEffect 2.5s infinite alternate; /* Aplicar efecto glitch, más frecuente y notorio */
+    /* --- FIN MODIFICADO --- */
 }
 
 .prototipos-section p {
@@ -147,15 +302,18 @@ body {
     grid-template-columns: 1fr;
     gap: 30px;
     max-width: 1000px;
-    margin: 0 auto;
+    margin: 0 auto; /* Centra el grid */
 }
 
 .prototipo-item {
     background-color: var(--color-light-bg-box); /* Beige/crema de Penpot */
     padding: 25px;
     border-radius: 8px;
-    text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex; /* Usar flexbox para organizar contenido interno */
+    flex-direction: column; /* Apilar elementos verticalmente */
+    align-items: center; /* Centrar horizontalmente */
+    text-align: center; /* Centrar texto */
 }
 
 .prototipo-item h3 {
@@ -165,18 +323,27 @@ body {
     margin-bottom: 15px;
 }
 
-.prototipo-item .placeholder-image {
-    width: 100%;
-    height: 150px;
-    background-color: var(--color-placeholder-photo); /* Azul grisáceo de Penpot */
-    border-radius: 6px;
+/* Contenedor para el video */
+.video-container {
+    width: 100%; /* Ocupa todo el ancho disponible en el item */
+    max-width: 300px; /* NUEVO: Limita el ancho máximo del contenedor del video */
+    margin: 0 auto; /* NUEVO: Centra el contenedor del video dentro de su padre */
+    padding-top: 177.77%; /* Relación de aspecto 16:9 (altura / ancho = 9 / 16 = 0.5625) */
+    position: relative;
     margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-background-dark); /* Texto sobre placeholder en negro */
-    font-size: 0.9em;
-    font-weight: 400;
+    border-radius: 6px; /* Bordes redondeados para el contenedor del video */
+    overflow: hidden; /* Asegura que el video no se salga de los bordes redondeados */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Sombra sutil para el video */
+}
+
+.prototipo-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Asegura que el video cubra el contenedor sin distorsión */
+    border-radius: 6px; /* Bordes redondeados para el video mismo */
 }
 
 .prototipo-item p {
@@ -184,16 +351,49 @@ body {
     font-size: 14px; /* Tamaño exacto de Penpot */
     font-weight: 300; /* Light de Penpot */
     line-height: 1.2; /* Ajustado para Penpot */
-    margin: 0;
+    margin-bottom: 20px; /* Espacio antes del botón CTA */
 }
+
+/* Estilos para el botón CTA */
+.cta-button {
+    background-color: var(--color-orange-accent); /* Naranja vibrante */
+    color: var(--color-text-light); /* Texto blanco */
+    padding: 12px 25px;
+    border: none;
+    border-radius: 50px; /* Botón ovalado */
+    font-size: 1em;
+    font-weight: 700; /* Bold */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(255, 92, 0, 0.4); /* Sombra naranja */
+    text-transform: uppercase; /* Texto en mayúsculas */
+    letter-spacing: 0.5px;
+}
+
+.cta-button:hover {
+    background-color: #FF7F33; /* Naranja ligeramente más claro en hover */
+    transform: translateY(-3px); /* Efecto de "levantar" */
+    box-shadow: 0 6px 15px rgba(255, 92, 0, 0.6);
+}
+
+.cta-button:active {
+    transform: translateY(0); /* Efecto de "presionar" */
+    box-shadow: 0 2px 5px rgba(255, 92, 0, 0.3);
+}
+
 
 /* Estilos para la sección de Testimonios */
 .testimonios-section {
-    background-color: var(--color-gray-section); /* Gris oscuro de Penpot */
+    /* Degradado animado con colores más perceptibles y velocidad ajustada */
+    background-image: linear-gradient(45deg, var(--color-gray-section), #4a4a4a, var(--color-gray-section));
+    background-size: 250% 250%; /* Permite el movimiento del degradado más pronunciado */
+    animation: animateBackgroundGradient 8s linear infinite alternate; /* Animación de fondo más rápida */
     padding: 50px 20px;
     margin-top: 40px;
     width: 100%;
     text-align: center;
+    position: relative; /* También a esta sección para futuros efectos o z-index */
+    overflow: hidden;
 }
 
 .testimonios-section h2 {
@@ -201,6 +401,12 @@ body {
     font-size: 28px; /* Tamaño exacto de Penpot */
     font-weight: 900; /* Montserrat Black/Extra Bold de Penpot */
     margin-bottom: 30px;
+    /* --- MODIFICADO: Efecto 3D/Relieve/Glitch en Títulos (más visible) --- */
+    text-shadow: 
+        3px 3px 6px rgba(0,0,0,0.8), /* Sombra más fuerte para relieve */
+        -3px -3px 6px rgba(255,255,255,0.3); /* Luz más fuerte para relieve */
+    animation: glitchEffect 2.5s infinite alternate; /* Aplicar efecto glitch, más frecuente y notorio */
+    /* --- FIN MODIFICADO --- */
 }
 
 .testimonios-grid {
@@ -208,7 +414,7 @@ body {
     grid-template-columns: 1fr;
     gap: 30px;
     max-width: 1000px;
-    margin: 0 auto;
+    margin: 0 auto; /* Centra el grid */
 }
 
 .testimonio-item {
@@ -246,7 +452,7 @@ body {
     background-color: var(--color-placeholder-photo); /* Azul grisáceo de Penpot */
     border-radius: 50%; /* Para que sea circular, como suelen ser las fotos de perfil/testimonio */
     margin: 0 auto 15px auto; /* Centrar y darle margen inferior */
-    display: flex; /* Para centrar el contenido futuro si se añade */
+    display: flex;
     align-items: center;
     justify-content: center;
     color: var(--color-background-dark); /* Color de texto si se añade un icono o iniciales */
@@ -255,12 +461,17 @@ body {
 
 /* Estilos para el Pie de Página (Footer) */
 .footer-section {
-    background-color: var(--color-background-dark); /* Negro puro */
+    /* Degradado animado con colores más perceptibles y velocidad ajustada */
+    background-image: linear-gradient(45deg, var(--color-background-dark), #333333, var(--color-background-dark));
+    background-size: 250% 250%; /* Permite el movimiento del degradado más pronunciado */
+    animation: animateBackgroundGradient 8s linear infinite alternate; /* Animación de fondo más rápida */
     color: var(--color-text-light);
     padding: 40px 20px;
     margin-top: 40px;
     width: 100%;
     text-align: center;
+    position: relative; /* También a esta sección para futuros efectos o z-index */
+    overflow: hidden;
 }
 
 .footer-content {
@@ -282,7 +493,7 @@ body {
 }
 
 .footer-content a:hover {
-    color: var(--color-primary-orange); /* Naranja vibrante en hover */
+    color: var(--color-orange-accent); /* Naranja vibrante en hover */
 }
 
 .social-links {
@@ -308,169 +519,249 @@ body {
 /* Para pantallas medianas (tabletas, min-width: 768px) */
 @media (min-width: 768px) {
     .hero-section {
-        padding: 60px 40px;
+        padding: 60px 40px 200px 40px; /* Ajustado el PADDING INFERIOR para tabletas */
     }
-    .hero-section .logo {
-        max-width: 250px;
+    /* Ajustes para el sticky header en tabletas */
+    .sticky-header-content.is-sticky {
+        height: 70px; /* Altura ligeramente menor para tabletas */
     }
-    .hero-section h1 {
-        font-size: 3em; /* Título más grande */
+    .sticky-header-content.is-sticky .logo-animado {
+        width: 50px;
+        height: 50px;
     }
-    .hero-section p {
-        font-size: 1.2em; /* Slogan un poco más grande */
+    .sticky-header-content.is-sticky .frequency-wave-container {
+        height: 35px;
+        width: 120px;
     }
-
-    .filosofia-section {
-        padding: 40px;
-        width: 85%;
+    .frequency-wave-container {
+        left: 40px; /* Alineado con el padding izquierdo de hero-section en tabletas */
+        right: 40px; /* Alineado con el padding derecho de hero-section en tabletas */
+        top: 130px; /* Ajuste vertical para tabletas (logo es más grande, padding es más grande) */
     }
-    .filosofia-section h2 {
-        font-size: 2.5em;
-    }
-    .filosofia-section .content-box h3 {
-        font-size: 1.8em;
-    }
-    .filosofia-section .content-box p,
-    .filosofia-section .content-box li {
-        font-size: 1.1em;
-    }
-    .filosofia-section .golden-circle h3 {
-        font-size: 1.5em;
+    .lightbulb-container {
+        width: 70px;
+        height: 161px; /* Ajuste de altura para tabletas (70px * 2.3) */
+        bottom: 0; /* Ancla el contenedor a la parte inferior de hero-section */
     }
 
     .prototipos-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .prototipos-section h2 {
-        font-size: 2.8em;
-    }
-    .prototipos-section p {
-        font-size: 1.2em;
-    }
-    .prototipo-item h3 {
-        font-size: 1.6em;
-    }
-    .prototipo-item p {
-        font-size: 1.05em;
-    }
-
-    .testimonios-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .testimonios-section h2 {
-        font-size: 2.8em;
-    }
-    .testimonio-item p {
-        font-size: 1.1em;
-    }
-    .testimonio-item .autor {
-        font-size: 1em;
-    }
-
-    .footer-content {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        max-width: 800px;
-        margin: 0 auto 20px auto;
-    }
-    .footer-content p {
-        margin-bottom: 0;
-    }
-    .social-links {
-        margin-top: 0;
-    }
-    .footer-section {
-        padding: 50px 40px;
+        grid-template-columns: 1fr 1fr; /* 2 columnas en tabletas */
     }
 }
 
 /* Para pantallas grandes (escritorios, min-width: 1024px) */
 @media (min-width: 1024px) {
     .hero-section {
-        padding: 80px 60px;
+        padding: 80px 60px 220px 60px; /* Ajustado el PADDING INFERIOR para escritorio */
     }
-    .hero-section .logo {
-        max-width: 300px;
+    /* Ajustes para el sticky header en escritorio */
+    .sticky-header-content.is-sticky {
+        height: 80px; /* Altura estándar para escritorio */
     }
-    .hero-section h1 {
-        font-size: 3.5em; /* Título grande para escritorio */
+    .sticky-header-content.is-sticky .logo-animado {
+        width: 60px;
+        height: 60px;
     }
-    .hero-section p {
-        font-size: 1.3em; /* Slogan más grande */
+    .sticky-header-content.is-sticky .frequency-wave-container {
+        height: 40px;
+        width: 150px;
     }
-
-    .filosofia-section {
-        padding: 50px;
-        width: 80%;
+    .frequency-wave-container {
+        left: 60px; /* Alineado con el padding izquierdo de hero-section en escritorios */
+        right: 60px; /* Alineado con el padding derecho de hero-section en escritorios */
+        top: 150px; /* Ajuste vertical para escritorios */
     }
-    .filosofia-section h2 {
-        font-size: 3em;
-    }
-    .filosofia-section .content-box h3 {
-        font-size: 2em;
-    }
-    .filosofia-section .content-box p,
-    .filosofia-section .content-box li {
-        font-size: 1.2em;
-    }
-    .filosofia-section .golden-circle h3 {
-        font-size: 1.6em;
+    .lightbulb-container {
+        width: 80px;
+        height: 192px; /* Ajuste de altura para escritorios (80px * 2.3) */
+        bottom: 0; /* Ancla el contenedor a la parte inferior de hero-section */
     }
 
     .prototipos-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-    .prototipos-section {
-        padding: 60px 40px;
-    }
-    .prototipos-section h2 {
-        font-size: 3.2em;
-    }
-    .prototipo-item h3 {
-        font-size: 1.8em;
-    }
-    .prototipo-item p {
-        font-size: 1.1em;
-    }
-
-    .testimonios-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-    .testimonios-section {
-        padding: 70px 40px;
-    }
-    .testimonios-section h2 {
-        font-size: 3.2em;
-    }
-    .testimonio-item p {
-        font-size: 1.15em;
-    }
-
-    .footer-section {
-        padding: 60px 60px;
-    }
-    .footer-content {
-        max-width: 900px;
-    }
-    .footer-content p,
-    .footer-content a,
-    .copyright {
-        font-size: 1.05em;
-    }
-    .social-links a {
-        font-size: 1.2em;
+        grid-template-columns: 1fr 1fr 1fr 1fr; /* 4 columnas en escritorio */
     }
 }
 
-/* Para pantallas muy grandes (min-width: 1440px), si tienes un diseño específico */
-@media (min-width: 1440px) {
-    .prototipos-grid {
-        grid-template-columns: repeat(4, 1fr);
+/* Ajustar padding del body para compensar el header fijo */
+body.sticky-header-active { /* Esta clase será añadida por JS cuando el header sticky esté activo */
+    padding-top: 80px; /* Altura del header sticky */
+}
+
+/* Media queries para el padding del body en modo sticky */
+@media (min-width: 768px) {
+    body.sticky-header-active {
+        padding-top: 70px; /* Ajuste para la altura del header sticky en tabletas */
     }
 }
 
-/* --- Animaciones para la transformación digital de Pa'arriba --- */
+@media (min-width: 1024px) {
+    body.sticky-header-active {
+        padding-top: 80px; /* Ajuste para la altura del header sticky en escritorios */
+    }
+}
+
+/* MODIFICADO: Las animaciones de revelado de secciones ahora se aplican a las tarjetas de acordeón */
+/* Cuando el body tiene 'revealed', las tarjetas de acordeón se animan para aparecer */
+#accordion-container.revealed .accordion-card:nth-child(1) {
+    animation-delay: 0.2s;
+    animation: fadeInScaleUp 0.8s ease-out forwards;
+}
+
+#accordion-container.revealed .accordion-card:nth-child(2) {
+    animation-delay: 0.4s;
+    animation: fadeInScaleUp 0.8s ease-out forwards;
+}
+
+#accordion-container.revealed .accordion-card:nth-child(3) {
+    animation-delay: 0.6s;
+    animation: fadeInScaleUp 0.8s ease-out forwards;
+}
+
+#accordion-container.revealed .accordion-card:nth-child(4) {
+    animation-delay: 0.8s;
+    animation: fadeInScaleUp 0.8s ease-out forwards;
+}
+
+/* Nueva animación para el efecto de aparición de las tarjetas */
+@keyframes fadeInScaleUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50px) scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+/* ANIMACIONES INDIVIDUALES DE PROTOTIPOS */
+.prototipo-item {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease-out forwards;
+    animation-play-state: paused; /* Inicia pausada hasta que se active .revealed */
+}
+
+/* Activar animación cuando la tarjeta padre está expandida */
+.accordion-card.expanded .prototipo-item {
+    animation-play-state: running;
+}
+
+/* Retraso escalonado para cada tarjeta */
+.prototipo-item:nth-child(1) {
+    animation-delay: 0.2s;
+}
+.prototipo-item:nth-child(2) {
+    animation-delay: 0.4s;
+}
+.prototipo-item:nth-child(3) {
+    animation-delay: 0.6s;
+}
+.prototipo-item:nth-child(4) {
+    animation-delay: 0.8s;
+}
+
+/* Keyframes para efecto FadeIn + Up */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ANIMACIONES INDIVIDUALES DE TESTIMONIOS */
+.testimonio-item {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease-out forwards;
+    animation-play-state: paused;
+}
+
+/* Activar animación cuando la tarjeta padre está expandida */
+.accordion-card.expanded .testimonio-item {
+    animation-play-state: running;
+}
+
+.testimonio-item:nth-child(1) {
+    animation-delay: 0.2s;
+}
+.testimonio-item:nth-child(2) {
+    animation-delay: 0.4s;
+}
+.testimonio-item:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.prototipo-item {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.prototipo-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.testimonio-item {
+    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+
+.testimonio-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: var(--color-accent-gold);
+    transform: translateY(-3px);
+}
+
+.bulb-svg {
+    transition: transform 0.2s ease;
+}
+
+.bulb-svg:active {
+    transform: scale(0.95) rotate(-2deg);
+}
+
+.footer-content a,
+.social-links a {
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.footer-content a::after,
+.social-links a::after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--color-orange-accent);
+    transition: width 0.3s ease;
+}
+
+.footer-content a:hover::after,
+.social-links a:hover::after {
+    width: 100%;
+}
+
+.lightbulb-container,
+.testimonio-item,
+.prototipo-item,
+.footer-content a,
+.social-links a {
+    cursor: pointer;
+}
+
+/* --- Corrección para la visibilidad del Canvas de tsParticles --- */
+/* Aseguramos que el canvas dentro de #tsparticles se comporte como un bloque para respetar sus dimensiones */
+#tsparticles canvas {
+    display: block !important; /* Forzamos display: block para que ocupe el 100% del ancho/alto de su padre */
+}
+
+/* --- Animaciones para la transformación digital de Pa'arriba (Restauradas y Ajustadas) --- */
 
 /* Animación para el logo: Efecto de revelado/activación */
 @keyframes logoReveal {
@@ -488,83 +779,368 @@ body {
     }
 }
 
-/* Animación para las líneas láser */
-@keyframes laserScan {
-    0% {
-        opacity: 0;
-        transform: translateX(-100%); /* Para la línea horizontal, empieza a la izquierda */
-    }
-    25% {
-        opacity: 1; /* Se vuelve visible */
-    }
-    75% {
-        opacity: 1;
-        transform: translateX(100%); /* Para la línea horizontal, termina a la derecha */
-    }
-    100% {
-        opacity: 1; /* Desaparece */
-        transform: translateX(100%); /* Asegura que no regrese */
-    }
-}
-
-/* Nueva animación para la línea láser vertical */
-@keyframes laserScanVertical {
-    0% {
-        opacity: 0;
-        transform: translateY(-100%); /* Comienza fuera de vista (arriba) */
-    }
-    25% {
-        opacity: 1; /* Se vuelve visible */
-    }
-    75% {
-        opacity: 1;
-        transform: translateY(100%); /* Termina fuera de vista (abajo) */
-    }
-    100% {
-        opacity: 1; /* Desaparece */
-        transform: translateY(100%); /* Asegura que no regrese */
-    }
-}
-
-/* Aplicar la animación al logo y preparar para efectos visuales */
+/* Contenedor del logo y donde se aplican los pseudo-elementos */
 .logo-animado {
+    position: relative; /* ¡Esencial para los pseudo-elementos! */
+    width: 200px; /* Tamaño del contenedor, donde queremos que se dibuje el logo y las líneas */
+    height: 200px; /* Tamaño del contenedor */
+    margin: 0 auto; /* Para centrarlo horizontalmente */
+    display: flex; /* Usamos flexbox para centrar la imagen dentro */
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    overflow: hidden; /* ¡MUY IMPORTANTE: ESTA LÍNEA DEBE ESTAR ACTIVA PARA UN MEJOR EFECTO DE ESCANEO! */
     animation: logoReveal 1.5s ease-out forwards;
-    position: relative; /* Esencial para posicionar los pseudo-elementos */
-    /* overflow: hidden; */ /* ¡COMENTA O ELIMINA TEMPORALMENTE ESTA LÍNEA! */
-    z-index: 2;
-    /* Nueva adición para la prueba extrema: Quita la imagen del logo temporalmente para ver la línea limpia */
-    /* background-image: url('../img/logo_pa_arriba.png'); */
-    /* background-size: contain; */
-    /* background-repeat: no-repeat; */
-    /* background-position: center; */
+    z-index: 1;
+    perspective: 600px; /* CLAVE: Define la perspectiva para el efecto 3D en el logo */
 }
 
-/* Pseudo-elemento para la línea horizontal */
-.logo-animado::before {
-    content: '';
-    position: absolute;
-    /* CAMBIA A COLOR SÓLIDO Y ANCHO / ALTO AÚN MÁS GRANDE PARA PRUEBA EXTREMA */
-    background: linear-gradient(to right, transparent, var(--color-blue-section), transparent);
-    width: 100%;
-    height: 2px; /* ¡AÚN MÁS GRUESO PARA LA PRUEBA EXTREMA! */
-    top: 0;
-    animation: laserScan 1.5s ease-in-out forwards infinite;
-    animation-delay: 0.8s;
-    transform-origin: left;
-    z-index: 3;
+/* Estilos para la etiqueta <img> dentro del contenedor .logo-animado */
+.logo-image {
+    max-width: 100%; /* La imagen no será más ancha que su contenedor de 200px */
+    max-height: 100%; /* La imagen no será más alta que su contenedor de 200px */
+    display: block; /* Para evitar espacios extra */
+    object-fit: contain; /* Ajusta la imagen dentro del contenedor sin recortarla */
+    position: relative; /* ¡CLAVE: La imagen debe tener position para que z-index funcione! */
+    z-index: 10000; /* Aseguramos que la imagen esté por encima del contenedor (z-index 1) */
+    animation: logoHeartbeat 1s ease-in-out infinite; /* Nueva animación de latido para el logo */
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.7)); /* Más brillo para que resalte */
 }
 
-/* Pseudo-elemento para la línea vertical */
-.logo-animado::after {
-    content: '';
-    position: absolute;
-    /* CAMBIA A COLOR SÓLIDO Y ANCHO / ALTO AÚN MÁS GRANDE PARA PRUEBA EXTREMA */
-    background: linear-gradient(to right, transparent, var(--color-blue-section), transparent);
-    width: 2px; /* ¡AÚN MÁS GRUESO PARA LA PRUEBA EXTREMA! */
+/* NUEVOS ESTILOS PARA LA ONDA DE FRECUENCIA */
+.frequency-wave-container {
+    /* Eliminamos width y max-width, usamos left/right para que ocupe el espacio correcto */
+    height: 100px; /* Altura del contenedor para la onda */
+    overflow: hidden; /* Oculta cualquier parte de la onda que se salga */
+    position: absolute; /* Posicionamiento absoluto dentro de hero-section */
+    left: 20px; /* Alineado con el padding izquierdo de hero-section */
+    right: 20px; /* Alineado con el padding derecho de hero-section en hero-section */
+    top: 100px; /* Ajuste vertical: Esto puede necesitar afinación. Coloca la onda detrás del logo. */
+    z-index: 9998; /* Asegura que esté por debajo del logo (z-index 10000) */
+}
+
+.frequency-wave {
+    width: 200%; /* Doble ancho para permitir la animación de bucle suave */
     height: 100%;
+    position: absolute;
+    top: 0;
     left: 0;
-    animation: laserScanVertical 1.5s ease-in-out forwards infinite;
-    animation-delay: 1.0s;
-    transform-origin: top;
-    z-index: 3;
+    /* El SVG para la onda. Color de trazo blanco para consistencia. */
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 600 100' xmlns='http://www.w3.org/2000/svg'><polyline fill='none' stroke='%23FFFFFF' stroke-width='1.5' points='0,50 50,50 70,10 90,90 110,50 200,50 230,30 260,70 290,50 600,50' /></svg>");
+    background-repeat: repeat-x; /* Repite la onda horizontalmente */
+    background-size: 600px 100px; /* Tamaño de un patrón de SVG repetido */
+    animation: moveWave 2s linear infinite, fadeWave 4s ease-in-out infinite; /* Combinamos animaciones */
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.4)); /* Efecto de destello/glow más difuso */
 }
+
+@keyframes moveWave {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%); /* Mueve una longitud de patrón completa para un bucle perfecto */
+    }
+}
+
+/* Nueva animación para el efecto de fade in/fade out (destello) */
+@keyframes fadeWave {
+    0%, 100% {
+        opacity: 0.1; /* Reducimos la opacidad mínima al 10% */
+    }
+    50% {
+        opacity: 0.8; /* Opacidad máxima al 80% */
+    }
+}
+
+/* Nueva animación para el latido del logo */
+@keyframes logoHeartbeat {
+    0%, 100% {
+        transform: scale(1) rotateY(0deg); /* Vuelve a su estado normal, sin giro */
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05) rotateY(5deg); /* Ligeramente más grande y con un giro sutil para efecto 3D */
+        opacity: 0.9; /* Ligeramente menos opaco para el efecto de "titileo" */
+    }
+}
+
+/* Estilos para la bombilla y la cadena */
+.lightbulb-container {
+    position: absolute; /* Posicionamiento absoluto dentro de hero-section */
+    bottom: 0; /* Ancla el contenedor a la parte inferior de hero-section */
+    left: 50%;
+    transform: translateX(-50%); /* Centrar horizontalmente */
+    width: 60px; /* Ancho del contenedor */
+    height: 144px; /* Alto del contenedor (60px * 2.3) para el SVG */
+    z-index: 10001; /* Asegurar que esté por encima de todo */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Alinea el SVG al inicio (arriba) del contenedor */
+    cursor: pointer;
+    animation: swingChain 2s ease-in-out infinite alternate; /* Aplicamos la animación aquí */
+}
+
+.bulb-svg {
+    width: 100%; /* El SVG ocupa el 100% del ancho de su contenedor */
+    height: 100%; /* El SVG ocupa el 100% del alto de su contenedor */
+    display: block;
+    pointer-events: all; /* El SVG de la bombilla sí es clickeable */
+}
+
+/* Vidrio de la bombilla */
+.bulb-glass {
+    fill: #1f1f1f;
+    stroke: #888;
+    stroke-width: 2;
+}
+
+/* Reflejo blanco en la bombilla */
+.glass-reflection {
+    fill: white;
+    opacity: 0.3;
+}
+
+/* Filamento */
+.filament {
+    fill: none;
+    stroke: #888;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+}
+
+.base-top, .base-middle, .base-bottom {
+    fill: #696969;
+    stroke: #505050;
+}
+
+.base-top { stroke-width: 1; }
+.base-middle { stroke-width: 1; }
+.base-bottom { stroke-width: 0.5; }
+
+.chain-line {
+    stroke: #CCC;
+    stroke-width: 1px; /* Grosor más delgado para las líneas de la cadena */
+    stroke-dasharray: 4 2; /* Para simular eslabones: 4px de línea, 2px de espacio */
+}
+.chain-end {
+    fill: #CCC;
+    display: block; /* Hacemos visible el círculo final de la cadena */
+    stroke: #888; /* Borde para el pasador */
+    stroke-width: 0.5; /* Grosor del borde */
+}
+
+/* Círculo de luz (apagado por defecto) */
+.bulb-glow {
+    fill: yellow;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    filter: blur(10px);
+}
+
+/* Clase activa para encender */
+/* Ahora el selector es más específico y coincide con el JS */
+.bulb-svg.on .bulb-glow {
+    opacity: 0.4;
+}
+
+/* Clase activa para cambiar color del vidrio cuando está encendido */
+/* Ahora el selector es más específico y coincide con el JS */
+.bulb-svg.on .bulb-glass {
+    fill: #fff6d2;
+    stroke: #ffdc73;
+}
+/* Animación de balanceo para la bombilla y la cadena (aplicada al contenedor) */
+@keyframes swingChain {
+    0% { transform: translateX(-50%) rotate(-3deg); }
+    100% { transform: translateX(-50%) rotate(3deg); }
+}
+
+/* --- NUEVOS ESTILOS PARA EL ACORDEÓN 3D FLOTANTE --- */
+
+/* Contenedor principal de las tarjetas de acordeón */
+#accordion-container {
+    width: 100%;
+    max-width: 900px; /* Mismo ancho máximo que tus secciones */
+    margin: 40px auto; /* Espacio superior e inferior */
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espacio entre las tarjetas */
+    opacity: 0; /* Inicialmente oculto */
+    transform: translateY(50px); /* Ligeramente hacia abajo */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Cuando la bombilla se enciende, el contenedor de acordeón se revela */
+#accordion-container.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Estilos base para cada tarjeta de acordeón */
+.accordion-card {
+    border-radius: 12px; /* Bordes más redondeados para un look moderno */
+    overflow: hidden; /* Asegura que el contenido no se salga */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), /* Sombra principal para efecto 3D */
+                0 0 40px rgba(255, 255, 255, 0.05) inset; /* Brillo interno sutil */
+    transition: all 0.4s ease-in-out, transform 0.3s ease-out; /* Transiciones suaves */
+    position: relative; /* Para el efecto flotante */
+    transform-style: preserve-3d; /* CLAVE para el efecto 3D */
+    perspective: 1000px; /* Perspectiva para el giro 3D */
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Borde sutil */
+}
+
+/* Efecto flotante 3D al pasar el ratón */
+.accordion-card:hover {
+    transform: translateY(-8px) rotateX(2deg) rotateY(-2deg); /* Ligeramente arriba y rotado */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6),
+                0 0 50px rgba(255, 255, 255, 0.1) inset;
+}
+
+/* Colores de fondo para cada tipo de tarjeta, coincidiendo con sus secciones */
+.filosofia-card {
+    background-color: var(--color-gray-section); /* Gris oscuro */
+}
+
+.prototipos-card {
+    background-color: var(--color-blue-section); /* Azul oscuro */
+}
+
+.testimonios-card {
+    background-color: var(--color-gray-section); /* Gris oscuro */
+}
+
+.footer-card {
+    background-color: var(--color-background-dark); /* Negro */
+}
+
+/* Encabezado de la tarjeta */
+.accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    color: var(--color-text-light);
+    font-weight: 700; /* Bold para el título */
+    font-size: 1.4em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* Línea divisoria sutil */
+    transition: background-color 0.3s ease;
+}
+
+.accordion-header h2 {
+    margin: 0; /* Elimina márgenes por defecto del h2 */
+    font-size: 1.2em; /* Ajustado para el tamaño del header de la tarjeta */
+    font-weight: 900; /* Extra Bold como tus títulos de sección */
+    text-shadow: 
+        2px 2px 4px rgba(0,0,0,0.7), /* Sombra para relieve */
+        -2px -2px 4px rgba(255,255,255,0.2); /* Luz para relieve */
+    animation: glitchEffect 2.5s infinite alternate; /* Mantenemos el glitch en los títulos */
+}
+
+.accordion-icon {
+    font-size: 1.8em; /* Tamaño del icono + / - */
+    font-weight: 300; /* Ligero */
+    transition: transform 0.3s ease;
+    user-select: none; /* Evita que el texto del icono sea seleccionable */
+}
+
+/* Contenido de la tarjeta (sección real) */
+.accordion-content {
+    max-height: 0; /* Inicialmente colapsado */
+    /* Eliminamos overflow: hidden aquí para permitir el scroll interno */
+    transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out; /* Transición suave */
+    padding: 0 25px; /* Padding horizontal, vertical se animará */
+    overflow-y: auto; /* Permite el scroll vertical si el contenido excede el max-height */
+    -webkit-overflow-scrolling: touch; /* Mejora el scroll en iOS */
+}
+
+/* Cuando la tarjeta está expandida */
+.accordion-card.expanded .accordion-content {
+    max-height: 9999px; /* Suficientemente grande para cualquier contenido */
+    padding-top: 25px; /* Añade padding superior al expandir */
+    padding-bottom: 25px; /* Añade padding inferior al expandir */
+}
+
+/* Estilos para las secciones internas dentro del acordeón */
+/* Aseguramos que las secciones dentro del acordeón no tengan margen superior extra */
+.accordion-content section,
+.accordion-content footer { /* CORREGIDO: Incluir footer aquí */
+    margin-top: 0 !important; /* Anula el margin-top de las secciones originales */
+    padding: 0 !important; /* Anula el padding de las secciones originales, se maneja por .accordion-content */
+    background-image: none !important; /* Elimina el degradado de fondo de las secciones, lo tiene la tarjeta */
+    animation: none !important; /* Desactiva animaciones de fondo de las secciones */
+    border-radius: 0 !important; /* Elimina border-radius de las secciones */
+    box-shadow: none !important; /* Elimina sombras de las secciones */
+    display: block !important; /* Asegura que la sección interna sea visible dentro de la tarjeta expandida */
+    opacity: 1 !important; /* Asegura que la sección interna sea visible */
+    transform: none !important; /* Elimina transformaciones de la sección interna */
+    position: relative !important; /* Asegura el posicionamiento para el contenido interno */
+    overflow: visible !important; /* Permite que el contenido interno se muestre */
+}
+
+/* Ajustes específicos para el contenido dentro de las secciones acordeón */
+.accordion-content .filosofia-section .content-box,
+.accordion-content .filosofia-section .golden-circle {
+    /* Restauramos los estilos de z-index y posición si es necesario */
+    position: relative;
+    z-index: 1;
+}
+
+/* Asegurar que las partículas se muestren solo dentro de la tarjeta de filosofía expandida */
+.accordion-card.filosofia-card .accordion-content #tsparticles {
+    display: block; /* Muestra el contenedor de partículas */
+}
+/* Ocultar las partículas cuando la tarjeta no está expandida */
+.accordion-card:not(.expanded) .accordion-content #tsparticles {
+    display: none;
+}
+
+/* Ajustes para el texto dentro de las secciones para que se vea bien en las tarjetas */
+.accordion-content .filosofia-section h2,
+.accordion-content .prototipos-section h2,
+.accordion-content .testimonios-section h2 {
+    display: none; /* Oculta los títulos de sección duplicados dentro del contenido expandido */
+}
+
+.accordion-content .prototipos-section p {
+    margin-bottom: 15px; /* Ajusta margen para que no haya doble margen */
+}
+.accordion-content .testimonios-section .testimonio-foto-placeholder {
+    margin-top: 0; /* Ajusta margen para que no haya doble margen */
+}
+/* CORREGIDO: Asegurar que el contenido del footer se muestre correctamente */
+.accordion-content .footer-section .footer-content,
+.accordion-content .footer-section .copyright {
+    display: block !important; /* Asegura que estos elementos no estén ocultos por alguna regla */
+    opacity: 1 !important; /* Asegura que sean completamente visibles */
+    /* Puedes añadir más ajustes de margen/padding si es necesario */
+}
+
+
+/* Media Queries para las tarjetas de acordeón */
+@media (min-width: 768px) {
+    #accordion-container {
+        gap: 30px; /* Más espacio entre tarjetas en pantallas grandes */
+    }
+    .accordion-header {
+        padding: 25px 35px;
+        font-size: 1.6em;
+    }
+    .accordion-header h2 {
+        font-size: 1.4em;
+    }
+    .accordion-icon {
+        font-size: 2em;
+    }
+    .accordion-content {
+        padding: 0 35px;
+    }
+    .accordion-card.expanded .accordion-content {
+        padding-top: 35px;
+        padding-bottom: 35px;
+    }
+}
+
+/* Animación de entrada para las tarjetas cuando se revela el contenedor */
+/* Esta animación ya está definida arriba en @keyframes fadeInScaleUp */
+

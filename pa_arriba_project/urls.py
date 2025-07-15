@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings # ¡Necesario para acceder a DEBUG, STATIC_URL, etc.!
-from django.conf.urls.static import static # ¡Necesario para servir archivos estáticos!
+from django.conf.urls.static import static 
 from pathlib import Path # Necesario para BASE_DIR con Path
 from django.views.generic.base import RedirectView # NUEVO: Importar RedirectView para el favicon
 
@@ -14,11 +14,8 @@ urlpatterns = [
 
 # ¡IMPORTANTE! Solo servir archivos estáticos en modo de desarrollo
 if settings.DEBUG:
-    # Aseguramos que Django sirve los archivos estáticos.
-    # document_root puede ser STATIC_ROOT o tus STATICFILES_DIRS específicos.
-    # Optamos por la carpeta de tu app 'core' donde está el logo
-    urlpatterns += static(settings.STATIC_URL, document_root=Path(settings.BASE_DIR) / 'core' / 'static')
-
-    # Opcional: También podrías añadir la línea de STATIC_ROOT por si acaso,
-    # aunque la de arriba es más directa para tu caso de uso del logo en desarrollo.
-    # urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    # Sirve los archivos de medios (ej. imágenes subidas por usuarios)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    # Sirve los archivos estáticos (CSS, JS, imágenes de tu diseño)
+    # STATIC_ROOT es la ubicación donde collectstatic copia todos los archivos estáticos.
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

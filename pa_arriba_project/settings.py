@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles', # Asegúrate de que esta línea esté presente
     'core', # Asegúrate de que tu app 'core' esté listada aquí
+    'store'
 ]
 
 MIDDLEWARE = [
@@ -135,8 +136,8 @@ STATIC_URL = '/static/' # Añadido el '/' al final para consistencia en Django
 
 # Directorios donde Django buscará archivos estáticos adicionales durante el desarrollo
 STATICFILES_DIRS = [
-    BASE_DIR / 'core' / 'static', # Esta es la forma moderna con pathlib.Path
-    # os.path.join(BASE_DIR, 'core', 'static'), # Esta es la forma antigua con os.path (también válida)
+    BASE_DIR / 'pa_arriba_project' / 'static', # Ejemplo: si tienes estáticos globales aquí
+    BASE_DIR / 'core' / 'static', # Aseguramos que los estáticos de la app 'core' sean encontrados
 ]
 
 # La ruta donde collectstatic reunirá todos los archivos estáticos para producción
@@ -148,3 +149,12 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Configuración para archivos multimedia (imágenes, videos, etc. subidos por usuarios)
+# MEDIA_ROOT es la ruta absoluta en el sistema de archivos donde se guardarán los archivos subidos.
+# os.path.join(BASE_DIR, 'media') crea una carpeta 'media' en la raíz de tu proyecto.
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = BASE_DIR / 'media' # Se crea una carpeta 'media' en la raíz del proyecto
+
+# MEDIA_URL es la URL pública que se usará para acceder a los archivos multimedia.
+# Por ejemplo, si subes una imagen 'producto.jpg', se accederá a ella a través de '/media/producto.jpg'
+MEDIA_URL = '/media/'
