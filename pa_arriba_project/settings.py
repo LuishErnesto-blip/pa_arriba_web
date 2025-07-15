@@ -136,10 +136,8 @@ STATIC_URL = '/static/' # Añadido el '/' al final para consistencia en Django
 
 # Directorios donde Django buscará archivos estáticos adicionales durante el desarrollo
 STATICFILES_DIRS = [
-    BASE_DIR / 'pa_arriba_project' / 'static', # Ejemplo: si tienes estáticos globales aquí
     BASE_DIR / 'core' / 'static', # Aseguramos que los estáticos de la app 'core' sean encontrados
 ]
-
 # La ruta donde collectstatic reunirá todos los archivos estáticos para producción
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
