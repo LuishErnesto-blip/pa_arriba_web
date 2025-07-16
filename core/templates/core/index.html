@@ -2,622 +2,1125 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pa'arriba - ¡Tu Transformación Digital!</title>
-<!-- NUEVO: Favicon de Pa'arriba -->
-    <link rel="icon" href="{% static 'core/logo_pa_arriba_fav_icon.png' %}" type="image/png">
-    <!-- Importación de la fuente Montserrat directamente en el HTML para evitar errores de Django -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap">
-    <link rel="stylesheet" href="{% static 'core/style.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Tailwind CSS CDN para clases de utilidad -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Meta Pixel Code -->
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.com/en_US/fbevents.js');
-    fbq('init', '755565750458789'); // TU ID DE PÍXEL REAL
-    fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=755565750458789&ev=PageView&noscript=1" // TU ID DE PÍXEL REAL
-    /></noscript>
-    <!-- End Meta Pixel Code -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pa'arriba - ¡Tu Transformación Digital!</title>
+    <!-- Favicon de Pa'arriba -->
+    <link rel="icon" href="{% static 'core/logo_pa_arriba_fav_icon.png' %}" type="image/png">
+    <!-- Importación de la fuente Montserrat directamente en el HTML para evitar errores de Django -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap">
+    <link rel="stylesheet" href="{% static 'core/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Tailwind CSS CDN para clases de utilidad -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.com/en_US/fbevents.js');
+    fbq('init', '755565750458789'); // TU ID DE PÍXEL REAL
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=755565750458789&ev=PageView&noscript=1" // TU ID DE PÍXEL REAL
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@graph": [
+    {
+      "@type": "Product",
+      "name": "Kit SEO para Negocios Locales",
+      "image": "https://placehold.co/150x150/E0E0E0/333333?text=SEO+Kit",
+      "description": "Haz que tu negocio aparezca en Google y en búsquedas locales sin ser experto en SEO. Este kit incluye auditoría, palabras clave estratégicas y seguimiento práctico.",
+      "sku": "h1",
+      "brand": { "@type": "Brand", "name": "Pa'Arriba" },
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "USD",
+        "price": "49.99",
+        "availability": "https://schema.org/InStock"
+      }
+    },
+    {
+      "@type": "Product",
+      "name": "Apps y Webs para Proyectos Pequeños",
+      "image": "https://placehold.co/150x150/E0E0E0/333333?text=Apps+Proyectos",
+      "description": "Soluciones digitales personalizadas desde $9.99 para organizar, comunicar y ejecutar tareas en pequeños negocios o emprendimientos. Precio según funcionalidad.",
+      "sku": "h2",
+      "brand": { "@type": "Brand", "name": "Pa'Arriba" },
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "USD",
+        "price": "9.99",
+        "availability": "https://schema.org/InStock"
+      }
+    },
+    {
+      "@type": "Product",
+      "name": "App de Email Marketing para Emprendedores",
+      "image": "https://placehold.co/150x150/E0E0E0/333333?text=Email+Mkt+App",
+      "description": "Automatiza tus campañas de correo, conecta con tus clientes y vende sin complicarte. Especialmente diseñada para emprendedores con tiempo limitado.",
+      "sku": "h3",
+      "brand": { "@type": "Brand", "name": "Pa'Arriba" },
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "USD",
+        "price": "29.99",
+        "availability": "https://schema.org/InStock"
+      }
+    },
+    {
+      "@type": "Product",
+      "name": "Curso a Domicilio de Marketing Digital (20h)",
+      "image": "https://placehold.co/150x150/E0E0E0/333333?text=Curso+Mkt+Domicilio",
+      "description": "Aprende a vender en redes, buscadores y por contenido desde cero. Este curso presencial está diseñado para emprendedores autodidactas que quieren dominar el marketing sin complicarse.",
+      "sku": "c1",
+      "brand": { "@type": "Brand", "name": "Pa'Arriba" },
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "USD",
+        "price": "200.00",
+        "availability": "https://schema.org/InStock"
+      }
+    },
+    {
+      "@type": "Product",
+      "name": "Certificación en Control de Costos para Emprendedores",
+      "image": "https://placehold.co/150x150/E0E0E0/333333?text=Control+de+Costos",
+      "description": "Aprende a calcular correctamente el precio de venta de tus productos y servicios. Este curso te da la claridad financiera que tu negocio necesita para crecer con rentabilidad.",
+      "sku": "c2",
+      "brand": { "@type": "Brand", "name": "Pa'Arriba" },
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "USD",
+        "price": "29.99",
+        "availability": "https://schema.org/InStock"
+      }
+    },
+    {
+      "@type": "Product",
+      "name": "Crea tu Web sin Programar y Vende Online (15h)",
+      "image": "https://placehold.co/150x150/E0E0E0/333333?text=Bootcamp+Web",
+      "description": "Diseña tu sitio web y activa tu canal de ventas online sin saber código. Te guiamos paso a paso para que lances tu plataforma digital en sólo 15 horas.",
+      "sku": "c3",
+      "brand": { "@type": "Brand", "name": "Pa'Arriba" },
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "USD",
+        "price": "150.00",
+        "availability": "https://schema.org/InStock"
+      }
+    },
+    {
+      "@type": "Product",
+      "name": "Consultoría Estratégica Personalizada (1h)",
+      "image": "https://placehold.co/150x150/E0E0E0/333333?text=Consultoria+1h",
+      "description": "En esta sesión 1:1 descubrimos oportunidades, aclaramos bloqueos y trazamos acciones rentables para tu negocio. Ideal para emprendedores en fase de reinvención.",
+      "sku": "s1",
+      "brand": { "@type": "Brand", "name": "Pa'Arriba" },
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "USD",
+        "price": "9.50",
+        "availability": "https://schema.org/InStock"
+      }
+    },
+    {
+      "@type": "Product",
+      "name": "Auditoría SEO con Recomendaciones Prácticas",
+      "image": "https://placehold.co/150x150/E0E0E0/333333?text=Auditoría+SEO",
+      "description": "Revisamos tu sitio y te entregamos un plan para posicionarte mejor en buscadores. Te decimos qué mejorar y cómo hacerlo, sin tecnicismos.",
+      "sku": "s2",
+      "brand": { "@type": "Brand", "name": "Pa'Arriba" },
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "USD",
+        "price": "36.00",
+        "availability": "https://schema.org/InStock"
+      }
+    },
+    {
+      "@type": "Product",
+      "name": "Mentoría Semanal de Marketing Digital (10h)",
+      "image": "https://placehold.co/150x150/E0E0E0/333333?text=Mentoría+Semanal",
+      "description": "Durante la semana, te guiamos en campañas reales, ajustes de estrategia, y generación de resultados concretos. Trabajo intensivo para negocios que quieren crecer cada semana.",
+      "sku": "s3",
+      "brand": { "@type": "Brand", "name": "Pa'Arriba" },
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "USD",
+        "price": "60.00",
+        "availability": "https://schema.org/InStock"
+      }
+    },
+    {
+      "@type": "Product",
+      "name": "Plantillas Profesionales para Redes Sociales",
+      "image": "https://placehold.co/150x150/E0E0E0/333333?text=Plantillas+RRSS",
+      "description": "Diseños modernos y editables listos para tus publicaciones en Instagram, Facebook y TikTok. Ideal para emprendedores que quieren ahorrar tiempo sin perder calidad.",
+      "sku": "p1",
+      "brand": { "@type": "Brand", "name": "Pa'Arriba" },
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "USD",
+        "price": "4.99",
+        "availability": "https://schema.org/InStock"
+      }
+    },
+    {
+      "@type": "Product",
+      "name": "Guía Editable para tu Plan de Negocios",
+      "image": "https://placehold.co/150x150/E0E0E0/333333?text=Guía+Negocios",
+      "description": "Completa esta guía con tus datos y define tu idea, tus costos, tus proyecciones y tu modelo. Ideal para negocios nuevos o en rediseño.",
+      "sku": "p2",
+      "brand": { "@type": "Brand", "name": "Pa'Arriba" },
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "USD",
+        "price": "9.99",
+        "availability": "https://schema.org/InStock"
+      }
+    },
+    {
+      "@type": "Product",
+      "name": "Kit Gráfico para Emprendedores",
+      "image": "https://placehold.co/150x150/E0E0E0/333333?text=Kit+Gráfico",
+      "description": "Recursos visuales editables que incluyen iconos, banners, fondos y mockups para redes sociales, presentaciones y páginas web. Profesionaliza tu imagen sin pagar diseño gráfico.", "sku": "p3", "brand": { "@type": "Brand", "name": "Pa'Arriba" }, "offers": { "@type": "Offer", "priceCurrency": "USD", "price": "4.99", "availability": "https://schema.org/InStock" 
+} 
+} 
+] 
+} 
+</script>
 </head>
 <body>
-    <header class="hero-section">
-        <!-- NUEVO CONTENEDOR PARA EL LOGO Y LA ONDA QUE SE HARÁ STICKY -->
-        <div class="sticky-header-content">
-            <div class="logo-animado">
-                <img src="{% static 'core/logo_pa_arriba.png' %}" alt="Logo Pa'arriba" class="logo-image">
-            </div>
-            <!-- Nuevo contenedor para la onda de frecuencia debajo del logo -->
-            <div class="frequency-wave-container">
-                <div class="frequency-wave"></div>
-            </div>
-        </div>
-        <!-- FIN NUEVO CONTENEDOR -->
+    <header class="hero-section">
+        <!-- Contenedor para el logo y la onda que se hará sticky -->
+        <div class="sticky-header-wrapper">
+            <div class="sticky-header-content">
+                <div class="logo-animado">
+                    <img src="{% static 'core/logo_pa_arriba.png' %}" alt="Logo Pa'arriba" class="logo-image">
+                </div>
+                <!-- Contenedor para la onda de frecuencia debajo del logo -->
+                <div class="frequency-wave-container">
+                    <div class="frequency-wave"></div>
+                </div>
+            </div>
+        </div>
+        <!-- FIN NUEVO CONTENEDOR -->
 
-    <h1>Pa'arriba: Crece, Avanza, Mejora, Re-emprende</h1>
-        <p>Impulsando tu Transformación Digital y Evolución como Emprendedor</p>
-<!-- Bombilla con cadena y efecto de encendido -->
-<div class="lightbulb-container" onclick="toggleBulb()">
-    <!-- SVG de la bombilla y la cadena consolidados -->
-    <!-- Ajustado el viewBox para acomodar la cadena más larga y el glow -->
-    <svg class="bulb-svg" viewBox="0 -10 100 240" xmlns="http://www.w3.org/2000/svg">
-        <!-- Bombilla (vidrio) -->
-        <path class="bulb-glass" d="M50,0 C25,0 15,25 15,60 C15,95 25,120 35,130 L65,130 C75,120 85,95 85,60 C85,25 75,0 50,0 Z" />
+        <h1>Pa'arriba: Crece, Avanza, Mejora, Re-emprende</h1>
+        <p>Impulsando tu Transformación Digital y Evolución como Emprendedor</p>
 
-        <!-- Reflejo -->
-        <path class="glass-reflection" d="M40,10 Q55,5 60,25 Q50,20 40,10 Z" />
+        <!-- INICIO: Bombilla con cadena y efecto de encendido - REUBICADA Y AJUSTADA -->
+        <!-- La bombilla se coloca aquí, debajo del párrafo, y se ajusta su posición con CSS -->
+        <div class="lightbulb-container" onclick="toggleBulb()">
+            <!-- SVG de la bombilla y la cadena consolidados -->
+            <svg class="bulb-svg" viewBox="0 -10 100 240" xmlns="http://www.w3.org/2000/svg">
+                <!-- Bombilla (vidrio) -->
+                <path class="bulb-glass" d="M50,0 C25,0 15,25 15,60 C15,95 25,120 35,130 L65,130 C75,120 85,95 85,60 C85,25 75,0 50,0 Z" />
 
-        <!-- Base metálica -->
-        <rect x="35" y="130" width="30" height="10" class="base-top" />
-        <rect x="38" y="140" width="24" height="5" class="base-middle" />
-        <rect x="40" y="145" width="20" height="3" class="base-bottom" />
+                <!-- Reflejo -->
+                <path class="glass-reflection" d="M40,10 Q55,5 60,25 Q50,20 40,10 Z" />
 
-        <!-- Filamento -->
-        <path class="filament" d="M45,40 Q50,30 55,40 M45,45 L55,45 M45,50 Q50,60 55,50 M48,55 L48,125 M52,55 L52,125" />
+                <!-- Base metálica -->
+                <rect x="35" y="130" width="30" height="10" class="base-top" />
+                <rect x="38" y="140" width="24" height="5" class="base-middle" />
+                <rect x="40" y="145" width="20" height="3" class="base-bottom" />
 
-        <!-- Cadena - y2 ajustado para ser 30% más larga -->
-        <line class="chain-line" x1="50" y1="148" x2="50" y2="219.5" />
-        <!-- Sujetador - cy ajustado para la nueva longitud de la cadena -->
-        <circle class="chain-end" cx="50" cy="222" r="3" />
-        
-        <!-- Luz encendida -->
-        <circle class="bulb-glow" cx="50" cy="65" r="40" />
-    </svg>
-</div>
-        <!-- FIN: Nuevo contenedor para la bombilla y la cadena -->
-    </header>
+                <!-- Filamento -->
+                <path class="filament" d="M45,40 Q50,30 55,40 M45,45 L55,45 M45,50 Q50,60 55,50 M48,55 L48,125 M52,55 L52,125" />
 
-    <!-- NUEVO: Contenedor principal para las tarjetas de acordeón -->
-    <main id="accordion-container">
-        <!-- Tarjeta para la sección de Filosofía -->
-        <div class="accordion-card filosofia-card" data-section-id="filosofia">
-            <div class="accordion-header">
-                <h2>Nuestra Filosofía</h2>
-                <span class="accordion-icon">+</span>
-            </div>
-            <div class="accordion-content">
-                <section class="filosofia-section">
-                    <!-- Contenedor para partículas -->
-                    <div id="tsparticles" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;">
-                        <!-- El canvas para las partículas será creado y gestionado por el script -->
-                        <canvas id="particlesCanvas"></canvas>
-                    </div>
-                    <div class="content-box">
-                        <h3>Misión</h3>
-                        <p>Ser el motor que impulse la transformación digital de emprendedores, proporcionando soluciones innovadoras y personalizadas que les permitan crecer, avanzar, mejorar y re-emprender en un entorno digital en constante evolución.</p>
-                        <h3>Visión</h3>
-                        <p>Ser líderes reconocidos en el ecosistema emprendedor digital, inspirando y capacitando a millones de emprendedores para alcanzar su máximo potencial, innovando constantemente y adaptándonos a las necesidades del mercado.</p>
-                        <h3>Valores</h3>
-                        <ul>
-                            <li><strong>1. Innovación:</strong> Cada solución debe ser original y disruptiva, no solo funcional.</li>
-                            <li><strong>2. Accesibilidad:</strong> La tecnología debe ser fácil de usar, sin barreras técnicas.</li>
-                            <li><strong>3. Confianza:</strong> El usuario debe sentir seguridad y claridad al tomar decisiones.</li>
-                            <li><strong>4. Crecimiento estratégico:</strong> No solo resolvemos problemas, sino que impulsamos negocios a largo plazo.</li>
-                            <li><strong>5. Enfoque en resultados:</strong> Cada herramienta debe impactar directamente la rentabilidad y sostenibilidad del negocio.</li>
-                        </ul>
-                    </div>
-                    <div class="golden-circle">
-                        <h3>Nuestro Propósito se basa en el Círculo Dorado: ¿Por qué? ¿Cómo? ¿Qué?</h3>
-                    </div>
-                </section>
-            </div>
-        </div>
+                <!-- Cadena - y2 ajustado para ser 30% más larga -->
+                <line class="chain-line" x1="50" y1="148" x2="50" y2="219.5" />
+                <!-- Sujetador - cy ajustado para la nueva longitud de la cadena -->
+                <circle class="chain-end" cx="50" cy="222" r="3" />
+                
+                <!-- Luz encendida -->
+                <circle class="bulb-glow" cx="50" cy="65" r="40" />
+            </svg>
+        </div>
+        <!-- FIN: Bombilla con cadena y efecto de encendido -->
+    </header>
 
-        <!-- Tarjeta para la sección de Prototipos -->
-        <div class="accordion-card prototipos-card" data-section-id="prototipos">
-            <div class="accordion-header">
-                <h2>Nuestros Prototipos</h2>
-                <span class="accordion-icon">+</span>
-            </div>
-            <div class="accordion-content">
-                <section class="prototipos-section">
-                    <p>Transformamos tus ideas en realidades digitales, prototipos que no solo son funcionales, sino que venden una experiencia única y diferencial para el re-emprendedor.</p>
-                    <div class="prototipos-grid">
-                        <!-- Prototipo 1: Libro Digital / App de Cabeza de Pollo -->
-                        <div class="prototipo-item">
-                            <h3>"Prototipo: Libro Digital Interactivo"</h3>
-                            <div class="video-container">
-                                <video class="prototipo-video" autoplay loop muted playsinline>
-                                    <source src="{% static 'core/clip_demo_libro_digital_app.mp4' %}" type="video/mp4">
-                                    Tu navegador no soporta el elemento de video.
-                                </video>
-                            </div>
-                            <p>Convierte tu contenido en una experiencia inmersiva. Ideal para cursos, guías o catálogos interactivos, llevando el aprendizaje y la información a otro nivel.</p>
-                            <button class="cta-button">¡Explora la Demo!</button>
-                        </div>
+    <!-- Contenedor principal para las tarjetas de acordeón -->
+    <main id="accordion-container">
+        <!-- Tarjeta para la sección de Filosofía -->
+        <div class="accordion-card filosofia-card" data-section-id="filosofia">
+            <div class="accordion-header">
+                <h2>Nuestra Filosofía</h2>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                <section class="filosofia-section">
+                    <!-- Contenedor para partículas -->
+                    <div id="tsparticles" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;">
+                        <!-- El canvas para las partículas será creado y gestionado por el script -->
+                        <canvas id="particlesCanvas"></canvas>
+                    </div>
+                    <div class="content-box">
+                        <h3>Misión</h3>
+                        <p>Ser el motor que impulse la transformación digital de emprendedores, proporcionando soluciones innovadoras y personalizadas que les permitan crecer, avanzar, mejorar y re-emprender en un entorno digital en constante evolución.</p>
+                        <h3>Visión</h3>
+                        <p>Ser líderes reconocidos en el ecosistema emprendedor digital, inspirando y capacitando a millones de emprendedores para alcanzar su máximo potencial, innovando constantemente y adaptándonos a las necesidades del mercado.</p>
+                        <h3>Valores</h3>
+                        <ul>
+                            <li><strong>1. Innovación:</strong> Cada solución debe ser original y disruptiva, no solo funcional.</li>
+                            <li><strong>2. Accesibilidad:</strong> La tecnología debe ser fácil de usar, sin barreras técnicas.</li>
+                            <li><strong>3. Confianza:</strong> El usuario debe sentir seguridad y claridad al tomar decisiones.</li>
+                            <li><strong>3. Confianza:</strong> El usuario debe sentir seguridad y claridad al tomar decisiones.</li>
+                            <li><strong>4. Crecimiento estratégico:</strong> No solo resolvemos problemas, sino que impulsamos negocios a largo plazo.</li>
+                            <li><strong>5. Enfoque en resultados:</strong> Cada herramienta debe impactar directamente la rentabilidad y sostenibilidad del negocio.</li>
+                        </ul>
+                    </div>
+                    <div class="golden-circle">
+                        <h3>Nuestro Propósito se basa en el Círculo Dorado: ¿Por qué? ¿Cómo? ¿Qué?</h3>
+                    </div>
+                </section>
+                <!-- Botón de colapsar al final de la tarjeta -->
+                <div class="flex justify-center mt-4">
+                    <span class="accordion-icon accordion-footer-collapse-btn cursor-pointer text-4xl leading-none">&minus;</span>
+                </div>
+            </div>
+        </div>
 
-                        <!-- Prototipo 2: Calculadora de Precios de Platos -->
-                        <div class="prototipo-item">
-                            <h3>"Prototipo: Calculadora de Costos para Restaurantes"</h3>
-                            <div class="video-container">
-                                <video class="prototipo-video" autoplay loop muted playsinline>
-                                    <source src="{% static 'core/clip_demo_calculadora_precios_platos_app.mp4' %}" type="video/mp4">
-                                    Tu navegador no soporta el elemento de video.
-                                </video>
-                            </div>
-                            <p>Optimiza la rentabilidad de tu negocio gastronómico. Calcula costos de ingredientes y precios de venta de forma precisa y sencilla.</p>
-                            <button class="cta-button">Calcula tu Rentabilidad</button>
-                        </div>
+        <!-- Tarjeta para la sección de Prototipos -->
+        <div class="accordion-card prototipos-card" data-section-id="prototipos">
+            <div class="accordion-header">
+                <h2>Nuestros Prototipos</h2>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                <section class="prototipos-section">
+                    <p>Transformamos tus ideas en realidades digitales, prototipos que no solo son funcionales, sino que venden una experiencia única y diferencial para el re-emprendedor.</p>
+                    <div class="prototipos-grid">
+                        <!-- Prototipo 1: Libro Digital / App de Cabeza de Pollo -->
+                        <div class="prototipo-item">
+                            <h3>"Prototipo: Libro Digital Interactivo"</h3>
+                            <div class="video-container">
+                                <video class="prototipo-video" autoplay loop muted playsinline>
+                                    <source src="{% static 'core/clip_demo_libro_digital_app.mp4' %}" type="video/mp4">
+                                    Tu navegador no soporta el elemento de video.
+                                </video>
+                            </div>
+                            <p>Convierte tu contenido en una experiencia inmersiva. Ideal para cursos, guías o catálogos interactivos, llevando el aprendizaje y la información a otro nivel.</p>
+                            <!-- Añadido onclick para WhatsApp -->
+                            <button class="cta-button" onclick="openWhatsAppForPrototype('Libro Digital Interactivo')">¡Explora la Demo!</button>
+                        </div>
 
-                        <!-- Prototipo 3: Diseñador de Uñas / SPA -->
-                        <div class="prototipo-item">
-                            <h3>"Prototipo: Diseñador de Uñas Virtual para SPAs"</h3>
-                            <div class="video-container">
-                                <video class="prototipo-video" autoplay loop muted playsinline>
-                                    <source src="{% static 'core/clip_demo_diseñador_de_uñas_app.mp4' %}" type="video/mp4">
-                                    Tu navegador no soporta el elemento de video.
-                                </video>
-                            </div>
-                            <p>Visualiza diseños de uñas en tiempo real sobre la mano del cliente. Una herramienta interactiva que revoluciona la experiencia en tu salón de belleza.</p>
-                            <button class="cta-button">Diseña tu Estilo</button>
-                        </div>
+                        <!-- Prototipo 2: Calculadora de Precios de Platos -->
+                        <div class="prototipo-item">
+                            <h3>"Prototipo: Calculadora de Costos para Restaurantes"</h3>
+                            <div class="video-container">
+                                <video class="prototipo-video" autoplay loop muted playsinline>
+                                    <source src="{% static 'core/clip_demo_calculadora_precios_platos_app.mp4' %}" type="video/mp4">
+                                    Tu navegador no soporta el elemento de video.
+                                </video>
+                            </div>
+                            <p>Optimiza la rentabilidad de tu negocio gastronómico. Calcula costos de ingredientes y precios de venta de forma precisa y sencilla.</p>
+                            <!-- Añadido onclick para WhatsApp -->
+                            <button class="cta-button" onclick="openWhatsAppForPrototype('Calculadora de Costos para Restaurantes')">Calcula tu Rentabilidad</button>
+                        </div>
 
-                        <!-- Prototipo 4: Cabeza de Pollo (App de Gestión) -->
-                        <div class="prototipo-item">
-                            <h3>"Prototipo: App de Gestión Empresarial 'Cabeza de Pollo'"</h3>
-                            <div class="video-container">
-                                <video class="prototipo-video" autoplay loop muted playsinline>
-                                    <source src="{% static 'core/clip_demo_final_cabeza_de_pollo_app.mp4' %}" type="video/mp4">
-                                    Tu navegador no soporta el elemento de video.
-                            </div>
-                            <p>Simplifica la administración de tu negocio. Controla inventario, ventas y clientes desde una interfaz intuitiva y eficiente, liberándote de las "cabezas de pollo".</p>
-                            <button class="cta-button">Organiza tu Negocio</button>
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </div>
+                        <!-- Prototipo 3: Diseñador de Uñas / SPA -->
+                        <div class="prototipo-item">
+                            <h3>"Prototipo: Diseñador de Uñas Virtual para SPAs"</h3>
+                            <div class="video-container">
+                                <video class="prototipo-video" autoplay loop muted playsinline>
+                                    <source src="{% static 'core/clip_demo_diseñador_de_uñas_app.mp4' %}" type="video/mp4">
+                                    Tu navegador no soporta el elemento de video.
+                                </video>
+                            </div>
+                            <p>Visualiza diseños de uñas en tiempo real sobre la mano del cliente. Una herramienta interactiva que revoluciona la experiencia en tu salón de belleza.</p>
+                            <!-- Añadido onclick para WhatsApp -->
+                            <button class="cta-button" onclick="openWhatsAppForPrototype('Diseñador de Uñas Virtual para SPAs')">Diseña tu Estilo</button>
+                        </div>
 
-        <!-- Tarjeta para la sección de Testimonios -->
-        <div class="accordion-card testimonios-card" data-section-id="testimonios">
-            <div class="accordion-header">
-                <h2>Lo Que Dicen Nuestros Emprendedores</h2>
-                <span class="accordion-icon">+</span>
-            </div>
-            <div class="accordion-content">
-                <section class="testimonios-section">
-                    <div class="testimonios-grid">
-                        <div class="testimonio-item">
-                            <div class="testimonio-foto-placeholder"></div>
-                            <p>"Pa'arriba me ayudó a lanzar mi tienda online de artesanías. Su asesoramiento fue clave para digitalizar mi negocio y aumentar mis ventas. ¡Totalmente recomendados!"</p>
-                            <p class="autor">- Ana María, Artesana Digital</p>
-                        </div>
-                        <div class="testimonio-item">
-                            <div class="testimonio-foto-placeholder"></div>
-                            <p>"Gracias a Pa'arriba, pude entender mejor mis finanzas y optimizar mis recursos. Su enfoque práctico y sus prototipos me dieron la claridad que necesitaba para crecer."</p>
-                            <p class="autor">- Carlos R., Emprendedor Financiero</p>
-                        </div>
-                        <div class="testimonio-item">
-                            <div class="testimonio-foto-placeholder"></div>
-                            <p>"El equipo de Pa'arriba es excepcional. Con su plataforma educativa, mis empleados mejoraron sus habilidades digitales, y nuestro negocio experimentó un crecimiento exponencial."</p>
-                            <p class="autor">- Sofía P., Directora de Pyme</p>
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </div>
+                        <!-- Prototipo 4: Cabeza de Pollo (App de Gestión) -->
+                        <div class="prototipo-item">
+                            <h3>"Prototipo: App de Gestión Empresarial 'Cabeza de Pollo'"</h3>
+                            <div class="video-container">
+                                <video class="prototipo-video" autoplay loop muted playsinline>
+                                    <source src="{% static 'core/clip_demo_final_cabeza_de_pollo_app.mp4' %}" type="video/mp4">
+                                    Tu navegador no soporta el elemento de video.
+                                </video>
+                            </div>
+                            <p>Simplifica la administración de tu negocio. Controla inventario, ventas y clientes desde una interfaz intuitiva y eficiente, liberándote de las "cabezas de pollo".</p>
+                            <!-- Añadido onclick para WhatsApp -->
+                            <button class="cta-button" onclick="openWhatsAppForPrototype('App de Gestión Empresarial Cabeza de Pollo')">Organiza tu Negocio</button>
+                        </div>
+                    </div>
+                </section>
+                <!-- Botón de colapsar al final de la tarjeta -->
+                <div class="flex justify-center mt-4">
+                    <span class="accordion-icon accordion-footer-collapse-btn cursor-pointer text-4xl leading-none">&minus;</span>
+                </div>
+            </div>
+        </div>
 
-        <!-- Tarjeta de Acordeón para la Tienda -->
-<div class="accordion-card rounded-xl shadow-lg mb-6 overflow-hidden" id="tienda-card"> <!-- ID AÑADIDO AQUÍ -->
-    <div class="accordion-header">
-        <h2 class="text-3xl font-extrabold flex items-center text-[var(--color-orange-accent)] text-pa-arriba-orange-force">
-            <i class="fas fa-shopping-cart text-[var(--color-orange-accent)] text-4xl mr-3 text-pa-arriba-orange-force"></i>
-            Tienda
-        </h2>
-        <!-- Icono de expansión/contracción (reemplaza el SVG de la flecha) -->
-        <span class="accordion-icon">+</span>
-    </div>
-    <div class="accordion-content p-6 rounded-b-xl">
-        <p class="text-gray-700 text-lg mb-4 leading-relaxed">
-            Explora nuestra selección de herramientas, recursos y productos digitales diseñados para impulsar tu emprendimiento. ¡Crece, avanza, mejora, re-emprende con las mejores soluciones a tu alcance!
-        </p>
-        <!-- INICIO: Contenido de la Tienda -->
-        <div id="store-content" class="flex flex-col items-center min-h-[300px] bg-gray-50 p-6 rounded-lg shadow-inner border border-dashed border-gray-300 text-gray-500 text-center">
-            <!-- Título de la sección de categorías -->
-            <h3 class="text-3xl font-bold text-gray-800 mb-8">Explora Nuestras Categorías</h3>
-            
-            <!-- Contenedor de las categorías (Grid Responsivo) -->
-            <div id="category-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-5xl mb-12">
-                
-                <!-- Categoría 1: Herramientas Digitales -->
-                <div class="category-card bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:scale-105 cursor-pointer flex flex-col items-center text-center border border-gray-200" data-category="herramientas">
-                    <i class="fas fa-tools text-pa-arriba-orange-force text-5xl mb-4"></i>
-                    <h4 class="text-xl font-semibold text-gray-800 mb-2">Herramientas Digitales</h4>
-                    <p class="text-gray-600 text-sm">Software, aplicaciones y utilidades para optimizar tu trabajo.</p>
-                </div>
+        <!-- Tarjeta para la sección de Testimonios -->
+        <div class="accordion-card testimonios-card" data-section-id="testimonios">
+            <div class="accordion-header">
+                <h2>Lo Que Dicen Nuestros Emprendedores</h2>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                <section class="testimonios-section">
+                    <div class="testimonios-grid">
+                        <div class="testimonio-item">
+                            <div class="testimonio-foto-placeholder"></div>
+                            <p>"Pa'arriba me ayudó a lanzar mi tienda online de artesanías. Su asesoramiento fue clave para digitalizar mi negocio y aumentar mis ventas. ¡Totalmente recomendados!"</p>
+                            <p class="autor">- Ana María, Artesana Digital</p>
+                        </div>
+                        <div class="testimonio-item">
+                            <div class="testimonio-foto-placeholder"></div>
+                            <p>"Gracias a Pa'arriba, pude entender mejor mis finanzas y optimizar mis recursos. Su enfoque práctico y sus prototipos me dieron la claridad que necesitaba para crecer."</p>
+                            <p class="autor">- Carlos R., Emprendedor Financiero</p>
+                        </div>
+                        <div class="testimonio-item">
+                            <div class="testimonio-foto-placeholder"></div>
+                            <p>"El equipo de Pa'arriba es excepcional. Con su plataforma educativa, mis empleados mejoraron sus habilidades digitales, y nuestro negocio experimentó un crecimiento exponencial."</p>
+                            <p class="autor">- Sofía P., Directora de Pyme</p>
+                        </div>
+                    </div>
+                </section>
+                <!-- Botón de colapsar al final de la tarjeta -->
+                <div class="flex justify-center mt-4">
+                    <span class="accordion-icon accordion-footer-collapse-btn cursor-pointer text-4xl leading-none">&minus;</span>
+                </div>
+            </div>
+        </div>
 
-                <!-- Categoría 2: Cursos y Capacitaciones -->
-                <div class="category-card bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:scale-105 cursor-pointer flex flex-col items-center text-center border border-gray-200" data-category="cursos">
-                    <i class="fas fa-graduation-cap text-pa-arriba-orange-force text-5xl mb-4"></i>
-                    <h4 class="text-xl font-semibold text-gray-800 mb-2">Cursos y Capacitaciones</h4>
-                    <p class="text-gray-600 text-sm">Aprende nuevas habilidades y estrategias para tu negocio.</p>
-                </div>
+        <!-- Tarjeta de Acordeón para la Tienda -->
+        <div class="accordion-card rounded-xl shadow-lg mb-6 overflow-hidden" id="tienda-card">
+            <div class="accordion-header">
+                <h2 class="text-3xl font-extrabold flex items-center text-[var(--color-orange-accent)] text-pa-arriba-orange-force">
+                    <i class="fas fa-shopping-cart text-[var(--color-orange-accent)] text-4xl mr-3 text-pa-arriba-orange-force"></i>
+                    Tienda
+                </h2>
+                <span class="accordion-icon">+</span>
+            </div>
+            <!-- MODIFICADO: Se ha movido el padding 'p-6' a un div interno para asegurar que 'max-height: 0' oculte completamente el contenido. -->
+            <div class="accordion-content rounded-b-xl"> 
+                <div class="p-6"> <!-- Nuevo contenedor para el padding -->
+            <p class="store-subtitle-paragraph text-lg mb-4 leading-relaxed">                        
+            Explora nuestra selección de herramientas, recursos y productos digitales diseñados para impulsar tu emprendimiento. ¡Crece, avanza, mejora, re-emprende con las mejores soluciones a tu alcance!
+                    </p>
+                    <!-- INICIO: Contenido de la Tienda -->
+                    <div id="store-content" class="flex flex-col items-center min-h-[300px] bg-gray-50 p-6 rounded-lg shadow-inner border border-dashed border-gray-300 text-gray-500 text-center">
+                        <!-- Título de la sección de categorías -->
+                        <h3 class="text-3xl font-bold text-gray-800 mb-8">Explora Nuestras Categorías</h3>
+                        
+                        <!-- Contenedor de las categorías (Grid Responsivo) -->
+                        <div id="category-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-5xl mb-12">
+                            
+                            <!-- Categoría 1: Herramientas Digitales -->
+                            <div class="category-card bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:scale-105 cursor-pointer flex flex-col items-center text-center border border-gray-200" data-category="herramientas">
+                                <i class="fas fa-tools text-pa-arriba-orange-force text-5xl mb-4"></i>
+                                <h4 class="text-xl font-semibold text-gray-800 mb-2">Herramientas Digitales</h4>
+                                <p class="text-gray-600 text-sm">Software, aplicaciones y utilidades para optimizar tu trabajo.</p>
+                            </div>
 
-                <!-- Categoría 3: Servicios de Consultoría -->
-                <div class="category-card bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:scale-105 cursor-pointer flex flex-col items-center text-center border border-gray-200" data-category="consultoria">
-                    <i class="fas fa-handshake text-pa-arriba-orange-force text-5xl mb-4"></i>
-                    <h4 class="text-xl font-semibold text-gray-800 mb-2">Servicios de Consultoría</h4>
-                    <p class="text-gray-600 text-sm">Asesoramiento personalizado para tus desafíos específicos.</p>
-                </div>
+                            <!-- Categoría 2: Cursos y Capacitaciones -->
+                            <div class="category-card bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:scale-105 cursor-pointer flex flex-col items-center text-center border border-gray-200" data-category="cursos">
+                                <i class="fas fa-graduation-cap text-pa-arriba-orange-force text-5xl mb-4"></i>
+                                <h4 class="text-xl font-semibold text-gray-800 mb-2">Cursos y Capacitaciones</h4>
+                                <p class="text-gray-600 text-sm">Aprende nuevas habilidades y estrategias para tu negocio.</p>
+                            </div>
 
-                <!-- Categoría 4: Plantillas y Recursos -->
-                <div class="category-card bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:scale-105 cursor-pointer flex flex-col items-center text-center border border-gray-200" data-category="plantillas">
-                    <i class="fas fa-file-alt text-pa-arriba-orange-force text-5xl mb-4"></i>
-                    <h4 class="text-xl font-semibold text-gray-800 mb-2">Plantillas y Recursos</h4>
-                    <p class="text-gray-600 text-sm">Documentos, diseños y materiales listos para usar.</p>
-                </div>
+                            <!-- Categoría 3: Servicios de Consultoría -->
+                            <div class="category-card bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:scale-105 cursor-pointer flex flex-col items-center text-center border border-gray-200" data-category="consultoria">
+                                <i class="fas fa-handshake text-pa-arriba-orange-force text-5xl mb-4"></i>
+                                <h4 class="text-xl font-semibold text-gray-800 mb-2">Servicios de Consultoría</h4>
+                                <p class="text-gray-600 text-sm">Asesoramiento personalizado para tus desafíos específicos.</p>
+                            </div>
 
-            </div>
+                            <!-- Categoría 4: Plantillas y Recursos -->
+                            <div class="category-card bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:scale-105 cursor-pointer flex flex-col items-center text-center border border-gray-200" data-category="plantillas">
+                                <i class="fas fa-file-alt text-pa-arriba-orange-force text-5xl mb-4"></i>
+                                <h4 class="text-xl font-semibold text-gray-800 mb-2">Plantillas y Recursos</h4>
+                                <p class="text-gray-600 text-sm">Documentos, diseños y materiales listos para usar.</p>
+                            </div>
 
-            <!-- Contenedor para la lista de productos/servicios -->
-            <div id="product-listing" class="w-full max-w-5xl">
-                <!-- Aquí se cargarán dinámicamente los productos según la categoría seleccionada -->
-                <h3 id="product-listing-title" class="text-2xl font-bold text-gray-800 mb-6">Productos Destacados</h3>
-                <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch"> <!-- MODIFICADO: Añadido items-stretch -->
-                    <!-- Los productos se insertarán aquí dinámicamente -->
-                </div>
-                <!-- Botón para volver a todas las categorías -->
-                <button id="back-to-categories-btn" class="mt-8 bg-gray-200 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-300 transition-colors duration-300 hidden">
-                    <i class="fas fa-arrow-left mr-2"></i> Volver a Todas las Categorías
-                </button>
-            </div>
-            
-        </div>
-        <!-- FIN: Contenido de la Tienda -->
-    </div>
-</div>
+                        </div>
+
+                        <!-- Contenedor para la sección de Productos Destacados como un acordeón anidado -->
+                        <div id="product-listing-accordion" class="w-full max-w-5xl rounded-xl shadow-lg overflow-hidden border border-gray-200 hidden"> 
+                            <div class="product-listing-header accordion-header bg-pa-arriba-orange-force text-white p-4 flex justify-between items-center cursor-pointer rounded-t-xl">
+                                <h3 id="product-listing-title" class="text-xl font-bold">Productos Destacados</h3>
+                                <span class="accordion-icon text-white text-3xl leading-none">+</span>
+                            </div>
+                            <div class="product-listing-content accordion-content p-6 bg-white rounded-b-xl">
+                                <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+                                    <!-- Los productos se insertarán aquí dinámicamente -->
+                                </div>
+                                <!-- Botón para volver a todas las categorías -->
+                                <button id="back-to-categories-btn" class="mt-8 bg-gray-200 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-300 transition-colors duration-300 w-full">
+                                    <i class="fas fa-arrow-left mr-2"></i> Volver a Todas las Categorías
+                                </button>
+                                <!-- Botón de colapsar al final de la tarjeta de productos destacados -->
+                                <div class="flex justify-center mt-4">
+                                    <span class="accordion-icon accordion-footer-collapse-btn cursor-pointer text-4xl leading-none">&minus;</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <!-- FIN: Contenido de la Tienda -->
+                </div> <!-- Cierre del nuevo contenedor para el padding -->
+            </div>
+        </div>
 
 
-        <!-- Tarjeta para la sección de Footer -->
-        <div class="accordion-card footer-card" data-section-id="footer">
-            <div class="accordion-header">
-                <h2>Información de Contacto</h2>
-                <span class="accordion-icon">+</span>
-            </div>
-            <div class="accordion-content">
-                <footer class="footer-section">
-                    <div class="footer-content">
-                        <p>CONTACTO: <a href="mailto:info@pa-arriba.com">paarriba.ec@gmail.com</a></p>
-                        <div class="social-links">
-                            <a href="#" target="_blank">Facebook</a>
-                            <a href="#" target="_blank">Instagram</a>
-                            <a href="#" target="_blank">LinkedIn</a>
-                        </div>
-                    </div>
-                    <p class="copyright">&copy; 2025 Pa'arriba. Crece, Avanza, Mejora, Re-emprende.</p>
-            <!-- Enlace a la Política de Privacidad -->
-            <p class="mt-4">
-                <a href="{% url 'privacy_policy' %}" class="text-pa-arriba-orange hover:underline">Política de Privacidad</a>
-            </p>
-                </footer>
-            </div>
-        </div>
-    </main>
-    <!-- FIN NUEVO: Contenedor principal para las tarjetas de acordeón -->
+        <!-- Tarjeta para la sección de Footer -->
+        <div class="accordion-card footer-card" data-section-id="footer">
+            <div class="accordion-header">
+                <h2>Información de Contacto</h2>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                <footer class="footer-section">
+                    <div class="footer-content" style="display: block;">
+                        <p>CONTACTO: <a href="mailto:info@pa-arriba.com">paarriba.ec@gmail.com</a></p>
+                        <div class="social-links">
+                            <a href="https://www.facebook.com/PaArribaEC" target="_blank">Facebook</a>
+                            <a href="https://www.instagram.com/paarribaec/" target="_blank">Instagram</a>
+                            <a href="#" target="_blank">LinkedIn</a>
+                        </div>
+                    <p class="mt-4">
+                        <a href="{% url 'privacy_policy' %}" class="text-pa-arriba-orange hover:underline">Política de Privacidad</a>
+                    </p>
+                    </div>
+                    <p class="copyright">&copy; 2025 Pa'arriba. Crece, Avanza, Mejora, Re-emprende.</p>
+                </footer>
+            </div>
+        </div>
+    </main>
+    <!-- FIN NUEVO: Contenedor principal para las tarjetas de acordeón -->
 
-    <!-- NUEVO: Modal de Detalles de Producto -->
-    <div id="product-detail-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50 hidden">
-        <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-md relative transform transition-all scale-95 opacity-0 duration-300 ease-out">
-            <button id="close-modal-btn" class="absolute top-3 right-3 text-gray-500 hover:text-gray-800 text-2xl font-bold">&times;</button>
-            <div class="text-center">
-                <img id="modal-product-image" src="" alt="Imagen del Producto" class="w-48 h-48 object-cover rounded-lg mx-auto mb-4">
-                <h3 id="modal-product-name" class="text-2xl font-bold text-gray-800 mb-2"></h3>
-                <p id="modal-product-description" class="text-gray-600 text-md mb-4"></p>
-                <span id="modal-product-price" class="text-pa-arriba-orange-force font-bold text-xl mb-6 block"></span>
-                <!-- NUEVO: Elemento para el mensaje de confirmación -->
-                <div id="buy-now-message" class="text-green-600 font-semibold mb-4 hidden"></div>
-                <button id="buy-now-btn" class="bg-pa-arriba-orange-force text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition-colors duration-300">Comprar Ahora</button>
-            </div>
-        </div>
-    </div>
-    <!-- FIN NUEVO: Modal de Detalles de Producto -->
+    <!-- Modal de Detalles de Producto -->
+    <div id="product-detail-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50 hidden">
+        <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-md relative transform transition-all scale-95 opacity-0 duration-300 ease-out">
+            <button id="close-modal-btn" class="absolute top-3 right-3 text-gray-500 hover:text-gray-800 text-2xl font-bold">&times;</button>
+            <div class="text-center">
+                <img id="modal-product-image" src="" alt="Imagen del Producto" class="w-48 h-48 object-cover rounded-lg mx-auto mb-4">
+                <h3 id="modal-product-name" class="text-2xl font-bold text-gray-800 mb-2"></h3>
+                <p id="modal-product-description" class="text-gray-600 text-md mb-4"></p>
+                <span id="modal-product-price" class="text-pa-arriba-orange-force font-bold text-xl mb-6 block"></span>
+                <!-- Elemento para el mensaje de confirmación -->
+                <div id="buy-now-message" class="text-green-600 font-semibold mb-4 hidden"></div>
+                <button id="buy-now-btn" class="bg-pa-arriba-orange-force text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition-colors duration-300">Comprar Ahora</button>
+            </div>
+        </div>
+    </div>
+    <!-- FIN NUEVO: Modal de Detalles de Producto -->
 
 <script>
 // Función para encender/apagar la bombilla y mostrar/ocultar las tarjetas de acordeón
 function toggleBulb() {
-    const bulbSvg = document.querySelector('.bulb-svg'); // Selecciona el SVG
-    bulbSvg.classList.toggle('on'); // Aplica la clase 'on' al SVG
+    const bulbSvg = document.querySelector('.bulb-svg'); // Selecciona el SVG
+    const lightbulbContainer = document.querySelector('.lightbulb-container'); // Selecciona el contenedor de la bombilla
+    bulbSvg.classList.toggle('on'); // Aplica la clase 'on' al SVG
 
-    // Modificado: Ahora el body.revealed controla la visibilidad del contenedor de acordeones
-    const accordionContainer = document.getElementById('accordion-container');
-    accordionContainer.classList.toggle('revealed');
+    const accordionContainer = document.getElementById('accordion-container');
+    accordionContainer.classList.toggle('revealed');
 
-    // Reproducir sonido de bombilla
-    const bulbSound = document.getElementById('bulbSound');
-    if (bulbSound) {
-        bulbSound.currentTime = 0; // Reinicia el sonido si ya se está reproduciendo
-        bulbSound.play().catch(e => console.error("Error al reproducir sonido de bombilla:", e));
-    }
+    // Reproducir sonido de bombilla
+    const bulbSound = document.getElementById('bulbSound');
+    if (bulbSound) {
+        bulbSound.currentTime = 0; // Reinicia el sonido si ya se está reproduciendo
+        bulbSound.play().catch(e => console.error("Error al reproducir sonido de bombilla:", e));
+    }
 
-    // Reproducir/pausar música de fondo
-    const spaceMusic = document.getElementById('spaceMusic');
-    if (spaceMusic) {
-        if (accordionContainer.classList.contains('revealed')) { // Basado en si las tarjetas están visibles
-            spaceMusic.volume = 0.035; // Volumen inicial suave
-            spaceMusic.play().catch(e => console.error("Error al reproducir música espacial:", e));
-        } else {
-            spaceMusic.pause();
-            spaceMusic.currentTime = 0; // Reinicia la música al apagar
-        }
-    }
+    // Reproducir/pausar música de fondo
+    const spaceMusic = document.getElementById('spaceMusic');
+    if (spaceMusic) {
+        if (accordionContainer.classList.contains('revealed')) { // Basado en si las tarjetas están visibles
+            spaceMusic.volume = 0.035; // Volumen inicial suave
+            spaceMusic.play().catch(e => console.error("Error al reproducir música espacial:", e));
+        } else {
+            spaceMusic.pause();
+            spaceMusic.currentTime = 0; // Reinicia la música al apagar
+        }
+    }
 }
 
-// NUEVO: Función para expandir/contraer las tarjetas de acordeón
+// Función para abrir WhatsApp con un mensaje predefinido para prototipos
+function openWhatsAppForPrototype(prototypeName) {
+    const phoneNumber = '593999032276'; // Reemplaza con tu número de WhatsApp
+    const message = `¡Hola! Me interesa el prototipo "${prototypeName}". ¿Podrías darme más información?`;
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank'); // Abre el enlace en una nueva pestaña
+}
+
+// Función para expandir/contraer las tarjetas de acordeón
 function toggleAccordionCard(event) {
-    const header = event.currentTarget; // El elemento clickeado (accordion-header)
-    const card = header.closest('.accordion-card'); // La tarjeta de acordeón padre
-    const content = card.querySelector('.accordion-content');
-    const icon = header.querySelector('.accordion-icon');
+    const header = event.currentTarget; // El elemento clickeado (accordion-header o accordion-footer-collapse-btn)
+    const card = header.closest('.accordion-card'); // La tarjeta de acordeón padre
+    const content = card.querySelector('.accordion-content');
+    const icon = header.querySelector('.accordion-icon');
 
-    // Cierra cualquier otra tarjeta abierta (para que solo una esté expandida a la vez)
-    document.querySelectorAll('.accordion-card.expanded').forEach(openCard => {
-        if (openCard !== card) { // Si no es la tarjeta actual
-            openCard.classList.remove('expanded');
-            openCard.querySelector('.accordion-content').style.maxHeight = '0';
-            openCard.querySelector('.accordion-icon').textContent = '+';
-            // Ocultar el contenido de la sección/footer interna
-            const openCardContentElement = openCard.querySelector('.accordion-content').firstElementChild;
-            if (openCardContentElement) {
-                openCardContentElement.style.display = 'none';
-            }
-            // Pausar videos de otras tarjetas si están reproduciéndose
-            openCard.querySelectorAll('.prototipo-video').forEach(video => {
-                video.pause();
-                video.currentTime = 0; // Reiniciar video
-            });
-        }
-    });
+    // Cierra cualquier otra tarjeta abierta (para que solo una esté expandida a la vez)
+    document.querySelectorAll('.accordion-card.expanded').forEach(openCard => {
+        if (openCard !== card) { // Si no es la tarjeta actual
+            openCard.classList.remove('expanded');
+            openCard.querySelector('.accordion-content').style.maxHeight = '0';
+            openCard.querySelector('.accordion-icon').textContent = '+';
+            // Ocultar el contenido de la sección/footer interna
+            const openCardContentElement = openCard.querySelector('.accordion-content > div'); // Selecciona el div interno con padding
+            if (openCardContentElement) {
+                openCardContentElement.style.display = 'none';
+            }
+            // Pausar videos de otras tarjetas si están reproduciéndose
+            openCard.querySelectorAll('.prototipo-video').forEach(video => {
+                video.pause();
+                video.currentTime = 0; // Reiniciar video
+            });
+            // Si la tarjeta que se cierra es la de la tienda, asegurarse de que se muestren las categorías
+            if (openCard.id === 'tienda-card') {
+                document.getElementById('category-grid').classList.remove('hidden');
+                document.getElementById('product-listing-accordion').classList.add('hidden');
+                toggleProductListingAccordion(false); // Colapsar el acordeón de productos si estaba abierto
+            }
+        }
+    });
 
-    // Alterna el estado de la tarjeta actual
-    card.classList.toggle('expanded');
-    const currentContentElement = content.firstElementChild; 
+    // Alterna el estado de la tarjeta actual
+    card.classList.toggle('expanded');
+    const currentContentInnerWrapper = content.querySelector('div'); // Selecciona el div interno con padding
 
-    if (card.classList.contains('expanded')) {
-        if (currentContentElement) {
-            currentContentElement.style.display = 'block'; // Muestra la sección/footer interna
-        }
-        content.style.maxHeight = content.scrollHeight + 'px'; // Expande al alto real del contenido
-        icon.textContent = '-';
-        // Reproducir videos de la tarjeta actual
-        card.querySelectorAll('.prototipo-video').forEach(video => {
-            video.play().catch(e => console.error("Error al reproducir video de prototipo:", e));
-        });
-    } else {
-        content.style.maxHeight = '0'; // Contrae
-        icon.textContent = '+';
-        if (currentContentElement) {
-            currentContentElement.style.display = 'none'; // Oculta la sección/footer interna
-        }
-        // Pausar videos de la tarjeta actual
-        card.querySelectorAll('.prototipo-video').forEach(video => {
-            video.pause();
-            video.currentTime = 0; // Reiniciar video
-        });
-    }
+    if (card.classList.contains('expanded')) {
+        if (currentContentInnerWrapper) {
+            currentContentInnerWrapper.style.display = 'block'; // Muestra el div interno
+        }
+        // Calcular scrollHeight basado en el div interno con padding
+        content.style.maxHeight = currentContentInnerWrapper.scrollHeight + 'px'; 
+        icon.textContent = '-';
+        // Reproducir videos de la tarjeta actual
+        card.querySelectorAll('.prototipo-video').forEach(video => {
+            video.play().catch(e => console.error("Error al reproducir video de prototipo:", e));
+        });
+    } else {
+        content.style.maxHeight = '0'; // Contrae
+        icon.textContent = '+';
+        if (currentContentInnerWrapper) {
+            currentContentInnerWrapper.style.display = 'none'; // Oculta el div interno
+        }
+        // Pausar videos de la tarjeta actual
+        card.querySelectorAll('.prototipo-video').forEach(video => {
+            video.pause();
+            video.currentTime = 0; // Reiniciar video
+        });
+        // Si la tarjeta que se cierra es la de la tienda, asegurarse de que se muestren las categorías
+        if (card.id === 'tienda-card') {
+            document.getElementById('category-grid').classList.remove('hidden');
+            document.getElementById('product-listing-accordion').classList.add('hidden');
+            toggleProductListingAccordion(false); // Colapsar el acordeón de productos si estaba abierto
+        }
+    }
 }
 
-// NUEVO: Añadir event listeners a los headers de las tarjetas cuando el DOM esté cargado
+// Función para manejar el acordeón de productos destacados dentro de la tienda
+function toggleProductListingAccordion(expand = false) {
+    const productListingAccordion = document.getElementById('product-listing-accordion');
+    const productListingHeader = productListingAccordion.querySelector('.product-listing-header');
+    const productListingContent = productListingAccordion.querySelector('.product-listing-content');
+    const productListingIcon = productListingHeader.querySelector('.accordion-icon');
+
+    if (expand) {
+        productListingAccordion.classList.add('expanded');
+        productListingAccordion.classList.remove('hidden'); // Asegurarse de que sea visible
+        // Pequeño retraso para permitir que el elemento se haga visible antes de calcular scrollHeight
+        setTimeout(() => {
+            productListingContent.style.maxHeight = productListingContent.scrollHeight + 'px';
+        }, 10);
+        productListingIcon.textContent = '-';
+    } else {
+        productListingAccordion.classList.remove('expanded');
+        productListingContent.style.maxHeight = '0';
+        productListingIcon.textContent = '+';
+        // Ocultar completamente después de la transición
+        setTimeout(() => {
+            productListingAccordion.classList.add('hidden');
+        }, 300); // Coincide con la duración de la transición CSS
+    }
+}
+
+
+// Añadir event listeners a los headers y botones de pie de página de las tarjetas cuando el DOM esté cargado
 document.addEventListener('DOMContentLoaded', () => {
-    const accordionHeaders = document.querySelectorAll('.accordion-header');
-    accordionHeaders.forEach(header => {
-        header.addEventListener('click', toggleAccordionCard);
-    });
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    accordionHeaders.forEach(header => {
+        header.addEventListener('click', toggleAccordionCard);
+    });
 
-    // --- Lógica de la Tienda ---
+    // Añadir event listeners a los nuevos botones de colapsar en el pie de página de cada tarjeta
+    const footerCollapseButtons = document.querySelectorAll('.accordion-footer-collapse-btn');
+    footerCollapseButtons.forEach(button => {
+        button.addEventListener('click', (event) => {
+            const card = event.target.closest('.accordion-card');
+            if (card) {
+                // Simular un clic en el header de la tarjeta para activar la función existente
+                card.querySelector('.accordion-header').click();
+            }
+        });
+    });
 
-    // Array de productos (datos de ejemplo)
-    const products = [
-        // Herramientas Digitales
-        { id: 'h1', name: 'Kit de Herramientas SEO Esencial', category: 'herramientas', description: 'Optimiza tu visibilidad online con este kit de herramientas SEO que incluye análisis de palabras clave, auditoría de sitio y seguimiento de ranking.', price: '49.99', image: 'https://placehold.co/150x150/E0E0E0/333333?text=SEO+Kit' },
-        { id: 'h2', name: 'Software de Gestión de Proyectos Ágil', category: 'herramientas', description: 'Organiza tus proyectos y equipos de forma eficiente con nuestro software intuitivo, ideal para metodologías Scrum y Kanban.', price: '79.99', image: 'https://placehold.co/150x150/E0E0E0/333333?text=Project+Mgmt' },
-        { id: 'h3', name: 'Plataforma de Email Marketing Pro', category: 'herramientas', description: 'Crea campañas de email marketing impactantes, automatizadas y personalizadas para llegar a tu audiencia de manera efectiva.', price: '59.99', image: 'https://placehold.co/150x150/E0E0E0/333333?text=Email+Mkt' },
-        
-        // Cursos y Capacitaciones
-        { id: 'c1', name: 'Curso Completo de Marketing Digital', category: 'cursos', description: 'Domina las estrategias de marketing digital desde cero, incluyendo SEO, SEM, redes sociales y content marketing.', price: '199.00', image: 'https://placehold.co/150x150/E0E0E0/333333?text=Curso+Mkt' },
-        { id: 'c2', name: 'Taller de Finanzas para Emprendedores', category: 'cursos', description: 'Aprende a gestionar tus finanzas y optimizar tus recursos con este taller práctico, cubriendo desde presupuestos hasta inversiones.', price: '129.00', image: 'https://placehold.co/150x150/E0E0E0/333333?text=Finanzas' },
-        { id: 'c3', name: 'Bootcamp de Desarrollo Web Rápido', category: 'cursos', description: 'Crea tu propia página web o aplicación en tiempo récord con este bootcamp intensivo, ideal para principiantes y avanzados.', price: '299.00', image: 'https://placehold.co/150x150/E0E0E0/333333?text=Web+Dev' },
+    // --- Lógica de la Tienda ---
 
-        // Servicios de Consultoría
-        { id: 's1', name: 'Consultoría Estratégica de Negocios (1h)', category: 'consultoria', description: 'Sesión personalizada de una hora para definir la estrategia de tu emprendimiento, identificar oportunidades y resolver desafíos.', price: '99.00', image: 'https://placehold.co/150x150/E0E0E0/333333?text=Consultoria' },
-        { id: 's2', name: 'Auditoría SEO y Recomendaciones', category: 'consultoria', description: 'Análisis profundo de tu sitio web y plan de mejora SEO para aumentar tu ranking en motores de búsqueda y atraer más tráfico.', price: '149.00', image: 'https://placehold.co/150x150/E0E0E0/333333?text=SEO+Audit' },
-        { id: 's3', name: 'Mentoría de Marketing Digital (Mensual)', category: 'consultoria', description: 'Acompañamiento y guía continua para tus campañas de marketing digital, con reuniones regulares y soporte personalizado.', price: '249.00', image: 'https://placehold.co/150x150/E0E0E0/333333?text=Mentoria' },
+    // Array de productos (datos de ejemplo)
+const products = [
+  // 🧰 Herramientas Digitales
+  {
+    id: 'h1',
+    name: 'Kit SEO para Negocios Locales',
+    category: 'herramientas',
+    description: 'Haz que tu negocio aparezca en Google y en búsquedas locales sin ser experto en SEO. Este kit incluye auditoría, palabras clave estratégicas y seguimiento práctico.',
+    price: '49.99',
+    image: 'https://placehold.co/150x150/E0E0E0/333333?text=SEO+Kit',
+    impact: 'Aumenta tu visibilidad digital',
+    targetUser: 'Emprendedores sin equipo de marketing',
+    technicalLevel: 'Básico',
+    timeToImplement: '1 hora'
+  },
+  {
+    id: 'h2',
+    name: 'Apps y Webs para Proyectos Pequeños',
+    category: 'herramientas',
+    description: 'Soluciones digitales personalizadas desde $9.99 para organizar, comunicar y ejecutar tareas en pequeños negocios o emprendimientos. Precio según funcionalidad.',
+    price: '9.99',
+    image: 'https://placehold.co/150x150/E0E0E0/333333?text=Apps+Proyectos',
+    impact: 'Digitaliza tu operación sin complicaciones',
+    targetUser: 'Emprendedores multitarea',
+    technicalLevel: 'Intermedio',
+    timeToImplement: 'Dependiendo del requerimiento'
+  },
+  {
+    id: 'h3',
+    name: 'App de Email Marketing para Emprendedores',
+    category: 'herramientas',
+    description: 'Automatiza tus campañas de correo, conecta con tus clientes y vende sin complicarte. Especialmente diseñada para emprendedores con tiempo limitado.',
+    price: '29.99',
+    image: 'https://placehold.co/150x150/E0E0E0/333333?text=Email+Mkt+App',
+    impact: 'Genera clientes recurrentes con correos efectivos',
+    targetUser: 'Negocios en crecimiento que venden online',
+    technicalLevel: 'Básico',
+    timeToImplement: '1 hora'
+  },
 
-        // Plantillas y Recursos
-        { id: 'p1', name: 'Pack de Plantillas para Redes Sociales', category: 'plantillas', description: 'Diseños profesionales y editables listos para tus publicaciones en redes sociales, ahorrándote tiempo y esfuerzo.', price: '29.99', image: 'https://placehold.co/150x150/E0E0E0/333333?text=RRSS+Templates' },
-        { id: 'p2', name: 'Guía Completa de Plan de Negocios', category: 'plantillas', description: 'Plantilla detallada y editable para crear un plan de negocios sólido, desde la idea hasta la ejecución y financiación.', price: '39.99', image: 'https://placehold.co/150x150/E0E0E0/333333?text=Business+Plan' },
-        { id: 'p3', name: 'Recursos Gráficos para Emprendedores', category: 'plantillas', description: 'Colección de iconos, ilustraciones y elementos gráficos de alta calidad para potenciar la identidad visual de tu marca.', price: '19.99', image: 'https://placehold.co/150x150/E0E0E0/333333?text=Graphic+Res' },
-    ];
+  // 📚 Cursos y Capacitaciones
+  {
+    id: 'c1',
+    name: 'Curso a Domicilio de Marketing Digital (20h)',
+    category: 'cursos',
+    description: 'Aprende a vender en redes, buscadores y por contenido desde cero. Este curso presencial está diseñado para emprendedores autodidactas que quieren dominar el marketing sin complicarse.',
+    price: '200.00',
+    image: 'https://placehold.co/150x150/E0E0E0/333333?text=Curso+Mkt+Domicilio',
+    impact: 'Activa tus ventas online desde casa',
+    targetUser: 'Emprendedores sin formación técnica',
+    technicalLevel: 'Básico a Intermedio',
+    timeToImplement: '20 horas presenciales'
+  },
+  {
+    id: 'c2',
+    name: 'Certificación en Control de Costos para Emprendedores',
+    category: 'cursos',
+    description: 'Aprende a calcular correctamente el precio de venta de tus productos y servicios. Este curso te da la claridad financiera que tu negocio necesita para crecer con rentabilidad.',
+    price: '29.99',
+    image: 'https://placehold.co/150x150/E0E0E0/333333?text=Control+de+Costos',
+    impact: 'Optimiza tu rentabilidad desde el precio',
+    targetUser: 'Negocios sin claridad financiera',
+    technicalLevel: 'Básico',
+    timeToImplement: '1 día'
+  },
+  {
+    id: 'c3',
+    name: 'Crea tu Web sin Programar y Vende Online (15h)',
+    category: 'cursos',
+    description: 'Diseña tu sitio web y activa tu canal de ventas online sin saber código. Te guiamos paso a paso para que lances tu plataforma digital en sólo 15 horas.',
+    price: '150.00',
+    image: 'https://placehold.co/150x150/E0E0E0/333333?text=Bootcamp+Web',
+    impact: 'Genera presencia digital sin depender de técnicos',
+    targetUser: 'Negocios que aún no tienen página web',
+    technicalLevel: 'Básico',
+    timeToImplement: '15 horas intensivas'
+  },
 
-    const categoryGrid = document.getElementById('category-grid');
-    const productListing = document.getElementById('product-listing');
-    const productsGrid = document.getElementById('products-grid');
-    const productListingTitle = document.getElementById('product-listing-title');
-    const backToCategoriesBtn = document.getElementById('back-to-categories-btn');
+  // 🧑‍💼 Servicios de Consultoría
+  {
+    id: 's1',
+    name: 'Consultoría Estratégica Personalizada (1h)',
+    category: 'consultoria',
+    description: 'En esta sesión 1:1 descubrimos oportunidades, aclaramos bloqueos y trazamos acciones rentables para tu negocio. Ideal para emprendedores en fase de reinvención.',
+    price: '9.50',
+    image: 'https://placehold.co/150x150/E0E0E0/333333?text=Consultoria+1h',
+    impact: 'Define tu dirección con claridad',
+    targetUser: 'Emprendedores indecisos o en transición',
+    technicalLevel: 'No técnico',
+    timeToImplement: '1 hora'
+  },
+  {
+    id: 's2',
+    name: 'Auditoría SEO con Recomendaciones Prácticas',
+    category: 'consultoria',
+    description: 'Revisamos tu sitio y te entregamos un plan para posicionarte mejor en buscadores. Te decimos qué mejorar y cómo hacerlo, sin tecnicismos.',
+    price: '36.00',
+    image: 'https://placehold.co/150x150/E0E0E0/333333?text=Auditoría+SEO',
+    impact: 'Atrae más clientes vía Google',
+    targetUser: 'Negocios con página web activa',
+    technicalLevel: 'Intermedio',
+    timeToImplement: '3 horas estimadas'
+  },
+  {
+    id: 's3',
+    name: 'Mentoría Semanal de Marketing Digital (10h)',
+    category: 'consultoria',
+    description: 'Durante la semana, te guiamos en campañas reales, ajustes de estrategia, y generación de resultados concretos. Trabajo intensivo para negocios que quieren crecer cada semana.',
+    price: '60.00',
+    image: 'https://placehold.co/150x150/E0E0E0/333333?text=Mentoría+Semanal',
+    impact: 'Evoluciona tu marketing semana a semana',
+    targetUser: 'Negocios que necesitan acompañamiento activo',
+    technicalLevel: 'Intermedio',
+    timeToImplement: '10 horas semanales'
+  },
 
-    // Elementos del modal
-    const productDetailModal = document.getElementById('product-detail-modal');
-    const closeModalBtn = document.getElementById('close-modal-btn');
-    const modalProductImage = document.getElementById('modal-product-image');
-    const modalProductName = document.getElementById('modal-product-name');
-    const modalProductDescription = document.getElementById('modal-product-description');
-    const modalProductPrice = document.getElementById('modal-product-price');
-    const buyNowBtn = document.getElementById('buy-now-btn');
-    const buyNowMessage = document.getElementById('buy-now-message'); // NUEVO: Elemento para el mensaje
+  // 📦 Plantillas y Recursos
+  {
+    id: 'p1',
+    name: 'Plantillas Profesionales para Redes Sociales',
+    category: 'plantillas',
+    description: 'Diseños modernos y editables listos para tus publicaciones en Instagram, Facebook y TikTok. Ideal para emprendedores que quieren ahorrar tiempo sin perder calidad.',
+    price: '4.99',
+    image: 'https://placehold.co/150x150/E0E0E0/333333?text=Plantillas+RRSS',
+    impact: 'Publica contenido profesional sin pagar diseñador',
+    targetUser: 'Negocios que gestionan sus propias redes',
+    technicalLevel: 'Básico',
+    timeToImplement: 'Menos de 1 hora'
+  },
+  {
+    id: 'p2',
+    name: 'Guía Editable para tu Plan de Negocios',
+    category: 'plantillas',
+    description: 'Completa esta guía con tus datos y define tu idea, tus costos, tus proyecciones y tu modelo. Ideal para negocios nuevos o en rediseño.',
+    price: '9.99',
+    image: 'https://placehold.co/150x150/E0E0E0/333333?text=Guía+Negocios',
+    impact: 'Estructura tu idea para convertirla en empresa',
+    targetUser: 'Emprendedores en etapa inicial',
+    technicalLevel: 'Básico',
+    timeToImplement: '2 horas'
+  },
+  {
+    id: 'p3',
+    name: 'Kit Gráfico para Emprendedores',
+    category: 'plantillas',
+    description: 'Recursos visuales editables que incluyen iconos, banners, fondos, y mockups para redes sociales, presentaciones y páginas web. Profesionaliza tu imagen sin pagar diseño gráfico.',
+    price: '4.99',
+    image: 'https://placehold.co/150x150/E0E0E0/333333?text=Kit+Gráfico',
+    impact: 'Haz que tu marca luzca profesional desde el día uno',
+    targetUser: 'Negocios que necesitan mejorar su imagen visual',
+    technicalLevel: 'Básico',
+    timeToImplement: 'Menos de 1 hora'
+  }
+];
 
-    let currentProduct = null; // Variable para almacenar el producto actual en el modal
+    const categoryGrid = document.getElementById('category-grid');
+    const productListingAccordion = document.getElementById('product-listing-accordion'); // Referencia al nuevo acordeón
+    const productsGrid = document.getElementById('products-grid');
+    const productListingTitle = document.getElementById('product-listing-title');
+    const backToCategoriesBtn = document.getElementById('back-to-categories-btn');
 
-    // Función para mostrar productos en el grid
-    function displayProducts(category = null) {
-        productsGrid.innerHTML = ''; // Limpiar productos existentes
-        let filteredProducts = products;
-        let titleText = "Productos Destacados";
+    // Elementos del modal
+    const productDetailModal = document.getElementById('product-detail-modal');
+    const closeModalBtn = document.getElementById('close-modal-btn');
+    const modalProductImage = document.getElementById('modal-product-image');
+    const modalProductName = document.getElementById('modal-product-name');
+    const modalProductDescription = document.getElementById('modal-product-description');
+    const modalProductPrice = document.getElementById('modal-product-price');
+    const buyNowBtn = document.getElementById('buy-now-btn');
+    const buyNowMessage = document.getElementById('buy-now-message'); // Elemento para el mensaje
 
-        if (category) {
-            filteredProducts = products.filter(product => product.category === category);
-            // Capitalizar la primera letra de la categoría para el título
-            titleText = `Productos de ${category.charAt(0).toUpperCase() + category.slice(1)}`;
-            categoryGrid.classList.add('hidden'); // Ocultar categorías
-            backToCategoriesBtn.classList.remove('hidden'); // Mostrar botón de volver
-        } else {
-            // Si no hay categoría seleccionada, mostrar las categorías y ocultar el botón de volver
-            categoryGrid.classList.remove('hidden');
-            backToCategoriesBtn.classList.add('hidden');
-        }
+    let currentProduct = null; // Variable para almacenar el producto actual en el modal
 
-        productListingTitle.textContent = titleText; // Actualizar título
+    // Función para mostrar productos en el grid
+    function displayProducts(category = null) {
+        productsGrid.innerHTML = ''; // Limpiar productos existentes
+        let filteredProducts = products;
+        let titleText = "Productos Destacados";
 
-        if (filteredProducts.length > 0) {
-            filteredProducts.forEach(product => {
-                // MODIFICADO: Añadido flex-col y justify-between a product-card
-                const productCard = `
-                    <div class="product-card bg-white p-6 rounded-xl shadow-md border border-gray-200 flex flex-col items-center text-center justify-between">
-                        <div> <!-- Contenedor para imagen, título, descripción y precio -->
-                            <img src="${product.image}" alt="${product.name}" class="w-32 h-32 object-cover rounded-lg mx-auto mb-4">
-                            <h4 class="text-xl font-semibold text-gray-800 mb-2">${product.name}</h4>
-                            <p class="text-gray-600 text-sm mb-3">${product.description}</p>
-                            <span class="text-pa-arriba-orange-force font-bold text-lg mb-4 block">\$${product.price}</span> <!-- Añadido 'block' para asegurar que ocupe su propia línea -->
-                        </div>
-                        <button class="cta-button-small bg-pa-arriba-orange-force text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors duration-300 w-full">Ver Detalles</button> <!-- Añadido w-full para que el botón ocupe todo el ancho disponible -->
-                    </div>
-                `;
-                productsGrid.innerHTML += productCard;
-            });
+        if (category) {
+            filteredProducts = products.filter(product => product.category === category);
+            // Capitalizar la primera letra de la categoría para el título
+            titleText = `Productos de ${category.charAt(0).toUpperCase() + category.slice(1)}`;
+            categoryGrid.classList.add('hidden'); // Ocultar categorías
+            productListingAccordion.classList.remove('hidden'); // Mostrar el acordeón de productos
+            toggleProductListingAccordion(true); // Expandir el acordeón de productos
+        } else {
+            // Si no hay categoría seleccionada, mostrar las categorías y ocultar el acordeón de productos
+            categoryGrid.classList.remove('hidden');
+            productListingAccordion.classList.add('hidden'); // Ocultar el acordeón de productos
+            toggleProductListingAccordion(false); // Colapsar el acordeón de productos
+        }
 
-            // Añadir event listeners a los nuevos botones "Ver Detalles"
-            productsGrid.querySelectorAll('.cta-button-small[data-product-id]').forEach(button => {
-                button.addEventListener('click', (event) => {
-                    const productId = event.target.dataset.productId;
-                    openProductModal(productId);
-                });
-            });
+        productListingTitle.textContent = titleText; // Actualizar título
 
-        } else {
-            productsGrid.innerHTML = '<p class="text-gray-600">No hay productos disponibles en esta categoría.</p>';
-        }
-    }
+        if (filteredProducts.length > 0) {
+            filteredProducts.forEach(product => {
+                // MODIFICADO: Estilo de la tarjeta de producto para que se parezca a la de categoría
+                const productCard = `
+                    <div class="product-card bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:scale-105 cursor-pointer flex flex-col items-center text-center border border-gray-200">
+                        <div> <!-- Contenedor para imagen, título, descripción y precio -->
+                            <img src="${product.image}" alt="${product.name}" class="w-32 h-32 object-cover rounded-lg mx-auto mb-4">
+                            <h4 class="text-xl font-semibold text-gray-800 mb-2">${product.name}</h4>
+                            <p class="text-gray-600 text-sm mb-3">${product.description}</p>
+                            <!-- NUEVOS CAMPOS -->
+<div class="text-sm text-gray-700 mb-3 space-y-1 text-left">
+  <p><strong>Impacto:</strong> ${product.impact || '—'}</p>
+  <p><strong>Para:</strong> ${product.targetUser || '—'}</p>
+  <p><strong>Nivel técnico:</strong> ${product.technicalLevel || '—'}</p>
+  <p><strong>Implementación:</strong> ${product.timeToImplement || '—'}</p>
+</div>
+                            <span class="text-pa-arriba-orange-force font-bold text-lg mb-4 block">\$${product.price}</span>
+                        </div>
+                        <button class="cta-button-small bg-pa-arriba-orange-force text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors duration-300 w-full" data-product-id="${product.id}">Ver Detalles</button>
+                    </div>
+                `;
+                productsGrid.innerHTML += productCard;
+            });
 
-    // Función para abrir el modal de detalles del producto
-    function openProductModal(productId) {
-        currentProduct = products.find(p => p.id === productId); // Almacenar el producto actual
-        if (currentProduct) {
-            modalProductImage.src = currentProduct.image;
-            modalProductImage.alt = currentProduct.name;
-            modalProductName.textContent = currentProduct.name;
-            modalProductDescription.textContent = currentProduct.description;
-            modalProductPrice.textContent = `$${currentProduct.price}`;
-            
-            // Ocultar cualquier mensaje previo al abrir el modal
-            buyNowMessage.classList.add('hidden');
-            buyNowMessage.textContent = '';
+            // Añadir event listeners a los nuevos botones "Ver Detalles"
+            productsGrid.querySelectorAll('.cta-button-small[data-product-id]').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const productId = event.target.dataset.productId;
+                    openProductModal(productId);
+                });
+            });
 
-            // Mostrar el modal con una pequeña animación
-            productDetailModal.classList.remove('hidden');
-            setTimeout(() => {
-                productDetailModal.querySelector('div').classList.remove('scale-95', 'opacity-0');
-                productDetailModal.querySelector('div').classList.add('scale-100', 'opacity-100');
-            }, 10); // Pequeño retraso para que la transición se aplique
-        }
-    }
+        } else {
+            productsGrid.innerHTML = '<p class="text-gray-600">No hay productos disponibles en esta categoría.</p>';
+        }
+    }
 
-    // Función para cerrar el modal de detalles del producto
-    function closeProductModal() {
-        productDetailModal.querySelector('div').classList.remove('scale-100', 'opacity-100');
-        productDetailModal.querySelector('div').classList.add('scale-95', 'opacity-0');
-        setTimeout(() => {
-            productDetailModal.classList.add('hidden');
-            currentProduct = null; // Limpiar el producto actual al cerrar el modal
-        }, 300); // Coincide con la duración de la transición
-    }
+    // Función para abrir el modal de detalles del producto
+    function openProductModal(productId) {
+        currentProduct = products.find(p => p.id === productId); // Almacenar el producto actual
+        if (currentProduct) {
+            modalProductImage.src = currentProduct.image;
+            modalProductImage.alt = currentProduct.name;
+            modalProductName.textContent = currentProduct.name;
+            modalProductDescription.textContent = currentProduct.description;
+            modalProductPrice.textContent = `$${currentProduct.price}`;
+            
+            // Ocultar cualquier mensaje previo al abrir el modal
+            buyNowMessage.classList.add('hidden');
+            buyNowMessage.textContent = '';
 
-    // Función para manejar el clic en "Comprar Ahora" (envía a WhatsApp)
-    function handleBuyNow() {
-        if (currentProduct) {
-            // Mostrar mensaje de confirmación
-            buyNowMessage.textContent = 'Redirigiendo a WhatsApp...';
-            buyNowMessage.classList.remove('hidden');
-            
-            // Deshabilitar el botón temporalmente para evitar clics múltiples
-            buyNowBtn.disabled = true;
-            buyNowBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            // Mostrar el modal con una pequeña animación
+            productDetailModal.classList.remove('hidden');
+            setTimeout(() => {
+                productDetailModal.querySelector('div').classList.remove('scale-95', 'opacity-0');
+                productDetailModal.querySelector('div').classList.add('scale-100', 'opacity-100');
+            }, 10); // Pequeño retraso para que la transición se aplique
+        }
+    }
 
-            const phoneNumber = '593999032276'; // Reemplaza con tu número de WhatsApp (código de país + número)
-            const message = `¡Hola! Me interesa el producto "${currentProduct.name}" con un precio de $${currentProduct.price}. ¿Podrías darme más información?`;
-            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-            
-            // Pequeño retraso para que el usuario vea el mensaje antes de la redirección
-            setTimeout(() => {
-                window.open(whatsappUrl, '_blank'); // Abre el enlace en una nueva pestaña
-                closeProductModal(); // Cierra el modal después de iniciar la compra
-                // Restablecer el botón después de la acción
-                buyNowBtn.disabled = false;
-                buyNowBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-            }, 1500); // Retraso de 1.5 segundos
-        } else {
-            console.error("No hay producto seleccionado para comprar.");
-        }
-    }
+    // Función para cerrar el modal de detalles del producto
+    function closeProductModal() {
+        productDetailModal.querySelector('div').classList.remove('scale-100', 'opacity-100');
+        productDetailModal.querySelector('div').classList.add('scale-95', 'opacity-0');
+        setTimeout(() => {
+            productDetailModal.classList.add('hidden');
+            currentProduct = null; // Limpiar el producto actual al cerrar el modal
+        }, 300); // Coincide con la duración de la transición
+    }
 
-    // Event listeners para las tarjetas de categoría
-    document.querySelectorAll('.category-card').forEach(card => {
-        card.addEventListener('click', () => {
-            const category = card.dataset.category;
-            displayProducts(category);
-        });
-    });
+    // Función para manejar el clic en "Comprar Ahora" (envía a WhatsApp)
+    function handleBuyNow() {
+        if (currentProduct) {
+            // Mostrar mensaje de confirmación
+            buyNowMessage.textContent = 'Redirigiendo a WhatsApp...';
+            buyNowMessage.classList.remove('hidden');
+            
+            // Deshabilitar el botón temporalmente para evitar clics múltiples
+            buyNowBtn.disabled = true;
+            buyNowBtn.classList.add('opacity-50', 'cursor-not-allowed');
 
-    // Event listener para el botón "Volver a Todas las Categorías"
-    backToCategoriesBtn.addEventListener('click', () => {
-        displayProducts(null); // Mostrar todas las categorías y productos destacados
-    });
+            const phoneNumber = '593999032276'; // Reemplaza con tu número de WhatsApp (código de país + número)
+            const message = `¡Hola! Me interesa el producto "${currentProduct.name}" con un precio de $${currentProduct.price}. ¿Podrías darme más información?`;
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            
+            // Pequeño retraso para que el usuario vea el mensaje antes de la redirección
+            setTimeout(() => {
+                window.open(whatsappUrl, '_blank'); // Abre el enlace en una nueva pestaña
+                closeProductModal(); // Cierra el modal después de iniciar la compra
+                // Restablecer el botón después de la acción
+                buyNowBtn.disabled = false;
+                buyNowBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            }, 1500); // Retraso de 1.5 segundos
+        } else {
+            console.error("No hay producto seleccionado para comprar.");
+        }
+    }
 
-    // Event listeners para cerrar el modal
-    closeModalBtn.addEventListener('click', closeProductModal);
-    productDetailModal.addEventListener('click', (event) => {
-        // Cierra el modal si se hace clic en el overlay (fuera del contenido del modal)
-        if (event.target === productDetailModal) {
-            closeProductModal();
-        }
-    });
+    // Event listeners para las tarjetas de categoría
+    document.querySelectorAll('.category-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const category = card.dataset.category;
+            displayProducts(category);
+        });
+    });
 
-    // Event listener para el botón "Comprar Ahora"
-    buyNowBtn.addEventListener('click', handleBuyNow);
+    // Event listener para el botón "Volver a Todas las Categorías"
+    backToCategoriesBtn.addEventListener('click', () => {
+        displayProducts(null); // Mostrar todas las categorías y productos destacados
+    });
 
-    // Mostrar productos destacados al cargar la página inicialmente
-    displayProducts(null); // Esto mostrará las categorías y los productos destacados por defecto.
+    // Event listener para el header del acordeón de productos destacados
+    productListingAccordion.querySelector('.product-listing-header').addEventListener('click', () => {
+        toggleProductListingAccordion(productListingAccordion.classList.contains('expanded') ? false : true);
+    });
 
-    // --- Fin Lógica de la Tienda ---
+    // Event listener para el botón de colapsar en el pie del acordeón de productos destacados
+    productListingAccordion.querySelector('.product-listing-content .accordion-footer-collapse-btn').addEventListener('click', () => {
+        toggleProductListingAccordion(false); // Siempre colapsar
+    });
+
+
+    // Event listeners para cerrar el modal
+    closeModalBtn.addEventListener('click', closeProductModal);
+    productDetailModal.addEventListener('click', (event) => {
+        // Cierra el modal si se hace clic en el overlay (fuera del contenido del modal)
+        if (event.target === productDetailModal) {
+            closeProductModal();
+        }
+    });
+
+    // Event listener para el botón "Comprar Ahora"
+    buyNowBtn.addEventListener('click', handleBuyNow);
+
+    // Mostrar productos destacados al cargar la página inicialmente
+    displayProducts(null); // Esto mostrará las categorías y los productos destacados por defecto.
+
+    // --- Fin Lógica de la Tienda ---
 });
 
-// NUEVO: JavaScript para el header sticky (mantenido de tu código original)
+// JavaScript para el header sticky - Revisado para evitar saltos
 window.addEventListener('scroll', function() {
-    const stickyHeaderContent = document.querySelector('.sticky-header-content');
-    const heroSection = document.querySelector('.hero-section');
-    const body = document.body;
+    const stickyHeaderContent = document.querySelector('.sticky-header-content');
+    const stickyHeaderWrapper = document.querySelector('.sticky-header-wrapper'); // Nuevo wrapper
+    const heroSection = document.querySelector('.hero-section');
 
-    const stickyHeight = 80;
-    const activationPoint = heroSection.offsetHeight - stickyHeight;
+    // Obtener la altura dinámica del sticky header content
+    const stickyHeight = stickyHeaderContent.offsetHeight; 
+    // El punto de activación es cuando el scroll supera la altura de la sección hero menos la altura del sticky header
+    const activationPoint = heroSection.offsetHeight - stickyHeight;
 
-    if (window.scrollY > activationPoint) {
-        stickyHeaderContent.classList.add('is-sticky');
-        body.style.paddingTop = stickyHeight + 'px';
-    } else {
-        stickyHeaderContent.classList.remove('is-sticky');
-        body.style.paddingTop = '0';
-    }
+    if (window.scrollY > activationPoint) {
+        stickyHeaderContent.classList.add('is-sticky');
+        // Ajustar el padding del wrapper para mantener el espacio
+        stickyHeaderWrapper.style.height = stickyHeight + 'px'; 
+    } else {
+        stickyHeaderContent.classList.remove('is-sticky');
+        stickyHeaderWrapper.style.height = 'auto'; // Restablecer la altura del wrapper
+    }
 });
 
 </script>
+<!-- INICIO: Estilos CSS para la bombilla - AGREGADOS AL FINAL DEL HTML PARA SIMPLIFICAR LA PRUEBA -->
+<!-- En una implementación real, estos estilos irían en style.css -->
+<style>
+    /* Estilos para el contenedor de la bombilla */
+    .lightbulb-container {
+        position: absolute; /* O fixed si quieres que siempre se vea en la misma posición de la ventana */
+        /* Ajustar top para que esté debajo del texto */
+        top: 478px; /* Ajustado para que quede más abajo del párrafo */
+        left: 50%; /* Centrar horizontalmente */
+        transform: translateX(-50%); /* Ajuste para centrado perfecto */
+        width: 50px; /* Ancho del contenedor */
+        height: 120px; /* Alto del contenedor */
+        cursor: pointer;
+        z-index: 1000; /* Asegura que esté por encima de otros elementos */
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Transición suave */
+    }
+
+    /* Clase para ocultar la bombilla */
+    .lightbulb-container.hidden-bulb {
+        opacity: 0;
+        pointer-events: none; /* Deshabilita clics cuando está oculta */
+        transform: translate(-50%, -50px); /* Opcional: moverla un poco hacia arriba al ocultar */
+    }
+
+    /* Estilos del SVG de la bombilla */
+    .bulb-svg {
+        width: 100%;
+        height: 100%;
+        overflow: visible; /* Permitir que el glow se extienda */
+    }
+
+    .bulb-glass {
+        fill: #f0f0f0; /* Color del vidrio de la bombilla apagada */
+        stroke: #ccc;
+        stroke-width: 1;
+        transition: fill 0.5s ease-out;
+    }
+
+    .bulb-svg.on .bulb-glass {
+        fill: #fff; /* Color del vidrio de la bombilla encendida */
+    }
+
+    .glass-reflection {
+        fill: #ffffff;
+        opacity: 0.7;
+    }
+
+    .base-top, .base-middle, .base-bottom {
+        fill: #888; /* Color de la base metálica */
+    }
+
+    .filament {
+        fill: none;
+        stroke: #666; /* Color del filamento apagado */
+        stroke-width: 2;
+        transition: stroke 0.5s ease-out;
+    }
+
+    .bulb-svg.on .filament {
+        stroke: #FFD700; /* Color del filamento encendido (dorado) */
+    }
+
+    .chain-line {
+        stroke: #555; /* Color de la cadena */
+        stroke-width: 2;
+        stroke-linecap: round;
+    }
+
+    .chain-end {
+        fill: #555; /* Color del sujetador de la cadena */
+    }
+
+    .bulb-glow {
+        fill: #FFD700; /* Color del brillo (dorado) */
+        opacity: 0; /* Oculto por defecto */
+        transition: opacity 0.5s ease-out;
+        filter: blur(8px); /* Efecto de desenfoque para el brillo */
+    }
+
+    .bulb-svg.on .bulb-glow {
+        opacity: 0.8; /* Mostrar el brillo cuando la bombilla está encendida */
+    }
+
+    /* Corrección para eliminar la barra de desplazamiento en el footer */
+    .footer-card .accordion-content {
+        overflow: hidden; /* Asegura que no haya barras de desplazamiento */
+    }
+</style>
+<!-- FIN: Estilos CSS para la bombilla -->
+
 <!-- Script de tsparticles -->
 <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
 
@@ -625,77 +1128,77 @@ window.addEventListener('scroll', function() {
 <script>
 // Usamos window.onload para asegurar que tsParticles esté completamente cargado y disponible
 window.onload = function () {
-    // Verificamos que tsParticles esté disponible y que el contenedor exista
-    if (window.tsParticles && document.getElementById("tsparticles")) {
-        tsParticles.load("tsparticles", {
-            fullScreen: { enable: false }, // Las partículas no ocuparán toda la pantalla, solo el contenedor
-            fpsLimit: 60, // Limite de cuadros por segundo para un rendimiento suave
-            particles: {
-                number: {
-                    value: 80, // Cantidad de partículas
-                    density: {
-                        enable: true,
-                        area: 800 // Área para la densidad de partículas
-                    }
-                },
-                color: {
-                    value: "#FFD700" // Color dorado para las partículas
-                },
-                opacity: {
-                    value: 1, // Opacidad máxima para que las partículas sean claramente visibles
-                },
-                size: {
-                    value: 8, // Tamaño ligeramente mayor para que se noten más
-                    random: true // Tamaño aleatorio para un efecto más natural
-                }
-                ,
-                move: {
-                    enable: true, // Habilitar movimiento de partículas
-                    speed: 1, // Velocidad de movimiento
-                    direction: "none", // Sin dirección específica, se moverán aleatoriamente
-                    outModes: {
-                        default: "bounce" // Rebotarán al llegar a los bordes del contenedor
-                    }
-                }
-            },
-            interactivity: {
-                events: {
-                    onHover: {
-                        enable: false // Deshabilitar interacción al pasar el ratón
-                    }
-                },
-                modes: {
-                    grab: {
-                        distance: 400,
-                        links: {
-                            opacity: 1
-                        }
-                    },
-                    bubble: {
-                        distance: 400,
-                        size: 40,
-                        duration: 2,
-                        opacity: 8,
-                        speed: 3
-                    },
-                    repulse: {
-                        distance: 200,
-                        duration: 0.4
-                    },
-                    push: {
-                        quantity: 4
-                    },
-                    remove: {
-                        quantity: 2
-                    }
-                }
-            },
-            detectRetina: true // Adaptar la densidad de partículas a pantallas retina
-        });
-    } else {
-        // Mensaje de error si la librería o el contenedor no están disponibles
-        console.error("tsParticles no está disponible o el contenedor no existe.");
-    }
+    // Verificamos que tsParticles esté disponible y que el contenedor exista
+    if (window.tsParticles && document.getElementById("tsparticles")) {
+        tsParticles.load("tsparticles", {
+            fullScreen: { enable: false }, // Las partículas no ocuparán toda la pantalla, solo el contenedor
+            fpsLimit: 60, // Limite de cuadros por segundo para un rendimiento suave
+            particles: {
+                number: {
+                    value: 80, // Cantidad de partículas
+                    density: {
+                        enable: true,
+                        area: 800 // Área para la densidad de partículas
+                    }
+                },
+                color: {
+                    value: "#FFD700" // Color dorado para las partículas
+                },
+                opacity: {
+                    value: 1, // Opacidad máxima para que las partículas sean claramente visibles
+                },
+                size: {
+                    value: 8, // Tamaño ligeramente mayor para que se noten más
+                    random: true // Tamaño aleatorio para un efecto más natural
+                }
+                ,
+                move: {
+                    enable: true, // Habilitar movimiento de partículas
+                    speed: 1, // Velocidad de movimiento
+                    direction: "none", // Sin dirección específica, se moverán aleatoriamente
+                    outModes: {
+                        default: "bounce" // Rebotarán al llegar a los bordes del contenedor
+                    }
+                }
+            },
+            interactivity: {
+                events: {
+                    onHover: {
+                        enable: false // Deshabilitar interacción al pasar el ratón
+                    }
+                },
+                modes: {
+                    grab: {
+                        distance: 400,
+                        links: {
+                            opacity: 1
+                        }
+                    },
+                    bubble: {
+                        distance: 400,
+                        size: 40,
+                        duration: 2,
+                        opacity: 8,
+                        speed: 3
+                    },
+                    repulse: {
+                        distance: 200,
+                        duration: 0.4
+                    },
+                    push: {
+                        quantity: 4
+                    },
+                    remove: {
+                        quantity: 2
+                    }
+                }
+            },
+            detectRetina: true // Adaptar la densidad de partículas a pantallas retina
+        });
+    } else {
+        // Mensaje de error si la librería o el contenedor no están disponibles
+        console.error("tsParticles no está disponible o el contenedor no existe.");
+    }
 };
 </script>
 <!-- Audio para el sonido de la bombilla -->

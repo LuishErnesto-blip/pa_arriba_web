@@ -106,7 +106,7 @@ body {
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
     transition: all 0.3s ease-in-out;
     position: relative; /* Para que el logo y la onda se posicionen dentro de él */
@@ -120,7 +120,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 80px; /* Altura reducida cuando es sticky */
+    height: 120px; /* Altura reducida cuando es sticky */
     background-color: var(--color-background-dark); /* Fondo oscuro para el header fijo */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Sombra sutil */
     z-index: 1000; /* Asegura que esté por encima de otras secciones */
@@ -299,10 +299,11 @@ body {
 
 .prototipos-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 30px;
+    /* NUEVO: Columnas responsivas */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 40px; /* Mantén este valor */
     max-width: 1000px;
-    margin: 0 auto; /* Centra el grid */
+    margin: 0 auto;
 }
 
 .prototipo-item {
@@ -314,6 +315,7 @@ body {
     flex-direction: column; /* Apilar elementos verticalmente */
     align-items: center; /* Centrar horizontalmente */
     text-align: center; /* Centrar texto */
+    margin-bottom: 40px; /* NUEVO: Añade espacio debajo de cada tarjeta de prototipo */
 }
 
 .prototipo-item h3 {
@@ -326,16 +328,15 @@ body {
 /* Contenedor para el video */
 .video-container {
     width: 100%; /* Ocupa todo el ancho disponible en el item */
-    max-width: 300px; /* NUEVO: Limita el ancho máximo del contenedor del video */
-    margin: 0 auto; /* NUEVO: Centra el contenedor del video dentro de su padre */
-    padding-top: 177.77%; /* Relación de aspecto 16:9 (altura / ancho = 9 / 16 = 0.5625) */
+    max-width: 900px; /* Limita el ancho máximo del contenedor del video */
+    margin: 0 auto; /* Centra el contenedor del video dentro de su padre */
+    padding-top: 177.77%; /* NUEVO: Relación de aspecto 1:2 (altura es el doble del ancho) para videos verticales */
     position: relative;
     margin-bottom: 15px;
     border-radius: 6px; /* Bordes redondeados para el contenedor del video */
     overflow: hidden; /* Asegura que el video no se salga de los bordes redondeados */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Sombra sutil para el video */
 }
-
 .prototipo-video {
     position: absolute;
     top: 0;
@@ -478,6 +479,7 @@ body {
 
 .footer-content {
     margin-bottom: 20px;
+    text-align: center; /* NUEVO: Centra el contenido */
 }
 
 .footer-content p {
@@ -500,13 +502,17 @@ body {
 
 .social-links {
     margin-top: 15px;
+    text-align: center; /* NUEVO: Centra el contenido inline-block */
 }
 
 .social-links a {
     display: inline-block;
     margin: 0 15px;
     font-size: 1.1em;
-    color: var(--color-text-gray); /* Gris claro como en Penpot */
+    color: #FFFFFF; /* Cambiado a blanco */
+    border-radius: 5px; /* Opcional: para esquinas ligeramente redondeadas */
+    text-decoration: none; /* Opcional: para quitar el subrayado por defecto */
+
 }
 
 .copyright {
@@ -536,10 +542,15 @@ body {
         width: 120px;
     }
     .frequency-wave-container {
-        left: 40px; /* Alineado con el padding izquierdo de hero-section en tabletas */
-        right: 40px; /* Alineado con el padding derecho de hero-section en tabletas */
-        top: 130px; /* Ajuste vertical para tabletas (logo es más grande, padding es más grande) */
-    }
+    height: 100px;
+    overflow: hidden;
+    position: absolute; /* CAMBIADO: Vuelve a ser absoluto */
+    left: 0; /* NUEVO: Se ancla al borde izquierdo */
+    right: 0; /* NUEVO: Se ancla al borde derecho */
+    top: 0px;
+    width: auto; /* CAMBIADO: Permitimos que left/right definan el ancho */
+    z-index: 9998;
+}
     .lightbulb-container {
         width: 70px;
         height: 161px; /* Ajuste de altura para tabletas (70px * 2.3) */
@@ -784,9 +795,10 @@ body.sticky-header-active { /* Esta clase será añadida por JS cuando el header
 /* Contenedor del logo y donde se aplican los pseudo-elementos */
 .logo-animado {
     position: relative; /* ¡Esencial para los pseudo-elementos! */
-    width: 200px; /* Tamaño del contenedor, donde queremos que se dibuje el logo y las líneas */
-    height: 200px; /* Tamaño del contenedor */
+    width: 170px; /* Tamaño del contenedor, donde queremos que se dibuje el logo y las líneas */
+    height: 170px; /* Tamaño del contenedor */
     margin: 0 auto; /* Para centrarlo horizontalmente */
+    margin-top: -20px; /* NUEVO: Mueve el logo 20px hacia arriba. Ajusta este valor si necesitas más o menos */
     display: flex; /* Usamos flexbox para centrar la imagen dentro */
     justify-content: center; /* Centrar horizontalmente */
     align-items: center; /* Centrar verticalmente */
@@ -810,14 +822,14 @@ body.sticky-header-active { /* Esta clase será añadida por JS cuando el header
 
 /* NUEVOS ESTILOS PARA LA ONDA DE FRECUENCIA */
 .frequency-wave-container {
-    /* Eliminamos width y max-width, usamos left/right para que ocupe el espacio correcto */
-    height: 100px; /* Altura del contenedor para la onda */
-    overflow: hidden; /* Oculta cualquier parte de la onda que se salga */
-    position: absolute; /* Posicionamiento absoluto dentro de hero-section */
-    left: 20px; /* Alineado con el padding izquierdo de hero-section */
-    right: 20px; /* Alineado con el padding derecho de hero-section en hero-section */
-    top: 100px; /* Ajuste vertical: Esto puede necesitar afinación. Coloca la onda detrás del logo. */
-    z-index: 9998; /* Asegura que esté por debajo del logo (z-index 10000) */
+    height: 100px;
+    overflow: hidden;
+    position: absolute; /* CAMBIADO: Vuelve a ser absoluto */
+    left: 0; /* NUEVO: Se ancla al borde izquierdo */
+    right: 0; /* NUEVO: Se ancla al borde derecho */
+    top: 100px;
+    z-index: 0;
+    width: auto; /* CAMBIADO: Permite que left/right definan el ancho. Opcionalmente, puedes usar width: 100%; */
 }
 
 .frequency-wave {
@@ -1159,4 +1171,23 @@ body.sticky-header-active { /* Esta clase será añadida por JS cuando el header
 
 .bg-pa-arriba-orange-force {
     background-color: var(--color-orange-accent);
+}
+
+/* SOLUCIÓN FORZADA PARA .sticky-header-wrapper: Asegura que ocupe el ancho completo */
+.sticky-header-wrapper {
+    width: 100% !important; /* Fuerza el ancho al 100% */
+    max-width: 100% !important; /* Asegura que no haya un límite de ancho */
+    box-sizing: border-box !important; /* Asegura que el padding y el borde se incluyan en el ancho */
+    /* Si tiene un height fijo que lo esté limitando, también deberíamos forzarlo a auto. */
+    height: auto !important; /* Permite que la altura se ajuste al contenido */
+}
+
+/* Nueva clase para el subtítulo o párrafo de la tienda, con los mismos estilos de .prototipos-section p */
+.store-subtitle-paragraph {
+    color: var(--color-text-light); /* Color de texto blanco (tu variable personalizada) */
+    font-size: 14px; /* Tamaño de fuente */
+    font-weight: 300; /* Grosor de la fuente */
+    max-width: 800px; /* Ancho máximo */
+    margin: 0 auto 30px auto; /* Centrado y margen inferior */
+    line-height: 1.2; /* Altura de línea */
 }
