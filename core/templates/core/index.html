@@ -488,6 +488,16 @@
                 <footer class="footer-section">
                     <div class="footer-content" style="display: block;">
                         <p>CONTACTO: <a href="mailto:info@pa-arriba.com">paarriba.ec@gmail.com</a></p>
+<p class="mt-2">
+  WHATSAPP: 
+  <a 
+    href="https://wa.me/593997277796?text=Hola%20Pa%E2%80%99Arriba%2C%20quiero%20mejorar%20mi%20negocio%20y%20necesito%20una%20gu%C3%ADa%20personalizada." 
+    target="_blank" 
+    class="text-pa-arriba-orange font-semibold hover:underline"
+  >
+    +593 997 277 796
+  </a>
+</p>
                         <div class="social-links">
                             <a href="https://www.facebook.com/PaArribaEC" target="_blank">Facebook</a>
                             <a href="https://www.instagram.com/paarribaec/" target="_blank">Instagram</a>
@@ -501,6 +511,13 @@
                 </footer>
             </div>
         </div>
+        <div class="footer-legal-preview text-center text-sm text-gray-500 mt-6">
+  <p>
+    <a href="/privacy-policy/" class="text-pa-arriba-orange hover:underline">Política de Privacidad</a>
+  </p>
+  <p class="mt-1 text-xs">&copy; 2025 Pa’Arriba. Crece, Avanza, Mejora, Re-emprende.</p>
+</div>
+
     </main>
     <!-- FIN NUEVO: Contenedor principal para las tarjetas de acordeón -->
 
@@ -591,6 +608,8 @@ function toggleAccordionCard(event) {
         }
     });
 
+    
+
     // Alterna el estado de la tarjeta actual
     card.classList.toggle('expanded');
     const currentContentInnerWrapper = content.querySelector('div'); // Selecciona el div interno con padding
@@ -655,22 +674,41 @@ function toggleProductListingAccordion(expand = false) {
 
 // Añadir event listeners a los headers y botones de pie de página de las tarjetas cuando el DOM esté cargado
 document.addEventListener('DOMContentLoaded', () => {
-    const accordionHeaders = document.querySelectorAll('.accordion-header');
-    accordionHeaders.forEach(header => {
-        header.addEventListener('click', toggleAccordionCard);
-    });
+  const accordionHeaders = document.querySelectorAll('.accordion-header');
+  accordionHeaders.forEach(header => {
+    header.addEventListener('click', toggleAccordionCard);
+  });
 
-    // Añadir event listeners a los nuevos botones de colapsar en el pie de página de cada tarjeta
-    const footerCollapseButtons = document.querySelectorAll('.accordion-footer-collapse-btn');
-    footerCollapseButtons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            const card = event.target.closest('.accordion-card');
-            if (card) {
-                // Simular un clic en el header de la tarjeta para activar la función existente
-                card.querySelector('.accordion-header').click();
-            }
-        });
+  // 🎯 Botones de colapsar en pie de página de las tarjetas
+  const footerCollapseButtons = document.querySelectorAll('.accordion-footer-collapse-btn');
+  footerCollapseButtons.forEach(button => {
+    button.addEventListener('click', (event) => {
+      const card = event.target.closest('.accordion-card');
+      if (card) {
+        card.querySelector('.accordion-header').click();
+      }
     });
+  });
+
+  // 👣 Expande automáticamente la tarjeta del footer al cargar
+  const footerAccordion = document.querySelector('.footer-card');
+  if (footerAccordion) {
+    footerAccordion.classList.add('expanded');
+
+    const footerHeader = footerAccordion.querySelector('.accordion-header');
+    const footerContent = footerAccordion.querySelector('.accordion-content');
+    const footerIcon = footerHeader?.querySelector('.accordion-icon');
+
+    if (footerContent) {
+      footerContent.style.maxHeight = footerContent.scrollHeight + 'px';
+      footerContent.classList.remove('hidden');
+    }
+
+    if (footerIcon) {
+      footerIcon.textContent = '-';
+    }
+  }
+});
 
     // --- Lógica de la Tienda ---
 
@@ -887,8 +925,9 @@ const products = [
 </div>
                             <span class="text-pa-arriba-orange-force font-bold text-lg mb-4 block">\$${product.price}</span>
                         </div>
-                        <button class="cta-button-small bg-pa-arriba-orange-force text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors duration-300 w-full" data-product-id="${product.id}">Ver Detalles</button>
-                    </div>
+<button class="cta-button-small text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors duration-300 w-full" style="background-color: #ff5c00;" data-product-id="${product.id}">
+  Ver Detalles
+</button>
                 `;
                 productsGrid.innerHTML += productCard;
             });
@@ -950,7 +989,7 @@ const products = [
             buyNowBtn.disabled = true;
             buyNowBtn.classList.add('opacity-50', 'cursor-not-allowed');
 
-            const phoneNumber = '593999032276'; // Reemplaza con tu número de WhatsApp (código de país + número)
+            const phoneNumber = '593997277796'; // Reemplaza con tu número de WhatsApp (código de país + número)
             const message = `¡Hola! Me interesa el producto "${currentProduct.name}" con un precio de $${currentProduct.price}. ¿Podrías darme más información?`;
             const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
             
@@ -1007,7 +1046,7 @@ const products = [
     displayProducts(null); // Esto mostrará las categorías y los productos destacados por defecto.
 
     // --- Fin Lógica de la Tienda ---
-});
+
 
 // JavaScript para el header sticky - Revisado para evitar saltos
 window.addEventListener('scroll', function() {
