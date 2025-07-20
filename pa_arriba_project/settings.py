@@ -10,8 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+import os # Necesario para os.environ.get y para construir rutas
 from pathlib import Path
-import os # ¡ASEGÚRATE DE QUE ESTA LÍNEA ESTÉ AQUÍ! Es necesaria para os.path.join
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,8 +31,6 @@ DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'
 ALLOWED_HOSTS = []
 
 # Obtener los hosts permitidos de una variable de entorno (para Render u otros despliegues)
-# Si la variable DJANGO_ALLOWED_HOSTS existe, la usa (separados por coma)
-# Esto es más robusto que depender de RENDER_EXTERNAL_HOSTNAME directamente para ALLOWED_HOSTS
 allowed_hosts_str = os.environ.get('DJANGO_ALLOWED_HOSTS')
 if allowed_hosts_str:
     ALLOWED_HOSTS.extend(allowed_hosts_str.split(','))
@@ -52,9 +50,12 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles', # Asegúrate de que esta línea esté presente
+    'django.contrib.staticfiles',
     'core', # Asegúrate de que tu app 'core' esté listada aquí
-    'store'
+    'store', # Tu aplicación de tienda
+    'blog', # Tu aplicación de blog
+    'ckeditor', # La aplicación CKEditor
+    'ckeditor_uploader', # NUEVO: Necesario para la subida de imágenes en CKEditor
 ]
 
 MIDDLEWARE = [
@@ -72,10 +73,14 @@ ROOT_URLCONF = 'pa_arriba_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
+        'DIRS': [
+            os.path.join(BASE_DIR, 'core', 'templates'), # Ruta a la carpeta 'templates' dentro de tu app 'core'
+            os.path.join(BASE_DIR, 'core', 'templates', 'core'), # Ruta explícita a la subcarpeta 'core' dentro de 'templates'
+        ],
+        'APP_DIRS': True, # Mantenemos esto por si acaso, pero 'DIRS' tendrá prioridad
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -83,7 +88,6 @@ TEMPLATES = [
         },
     },
 ]
-
 WSGI_APPLICATION = 'pa_arriba_project.wsgi.application'
 
 
@@ -93,7 +97,7 @@ WSGI_APPLICATION = 'pa_arriba_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3', # La base de datos SQLite se guardará en la raíz del proyecto
     }
 }
 
@@ -120,25 +124,25 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-ec' # Establece el idioma por defecto a español de Ecuador
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Guayaquil' # Establece la zona horaria a Guayaquil, Ecuador
 
-USE_I18N = True
+USE_I18N = True # Habilita el soporte para internacionalización
 
-USE_TZ = True
+USE_TZ = True # Habilita el soporte para zonas horarias
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = '/static/' # Añadido el '/' al final para consistencia en Django
+STATIC_URL = '/static/' # URL base para servir archivos estáticos
 
-# Directorios donde Django buscará archivos estáticos adicionales durante el desarrollo
+# Directorios adicionales donde Django buscará archivos estáticos (además de los de cada app)
 STATICFILES_DIRS = [
-    BASE_DIR / 'core' / 'static', # Aseguramos que los estáticos de la app 'core' sean encontrados
+    BASE_DIR / 'core' / 'static', # Incluye los archivos estáticos de tu app 'core'
 ]
-# La ruta donde collectstatic reunirá todos los archivos estáticos para producción
+# La ruta absoluta donde 'collectstatic' reunirá todos los archivos estáticos para producción
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 
@@ -147,12 +151,49 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
 # Configuración para archivos multimedia (imágenes, videos, etc. subidos por usuarios)
 # MEDIA_ROOT es la ruta absoluta en el sistema de archivos donde se guardarán los archivos subidos.
-# os.path.join(BASE_DIR, 'media') crea una carpeta 'media' en la raíz de tu proyecto.
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_ROOT = BASE_DIR / 'media' # Se crea una carpeta 'media' en la raíz del proyecto
+# Esto creará una carpeta 'media' en la raíz de tu proyecto (junto a manage.py).
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # MEDIA_URL es la URL pública que se usará para acceder a los archivos multimedia.
-# Por ejemplo, si subes una imagen 'producto.jpg', se accederá a ella a través de '/media/producto.jpg'
 MEDIA_URL = '/media/'
+
+# NUEVO: Configuración para la ruta de subida de CKEditor
+# Los archivos subidos a través de CKEditor se guardarán en MEDIA_ROOT/uploads/
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+
+# Configuración para django-ckeditor
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',  # Usamos la barra de herramientas 'full' para incluir todos los botones estándar
+        'height': 400,      # Altura del editor
+        'width': '100%',    # Ancho del editor
+
+        # Plugins adicionales importantes para funcionalidad extendida
+        'extraPlugins': 'codesnippet,autogrow,clipboard,pastefromword', # Añade resaltado de código, auto-crecimiento, y mejoras de pegado
+        'autoGrow_minHeight': 200, # Altura mínima cuando auto-crece
+        'autoGrow_maxHeight': 800, # Altura máxima cuando auto-crece
+        'removePlugins': 'resize', # Deshabilita el redimensionamiento manual del editor
+
+        # Configuraciones CRÍTICAS para permitir contenido HTML completo y evitar codificación
+        'allowedContent': True,     # Permite todo el contenido HTML, necesario para pegar HTML y mantener estilos
+        'htmlEncodeOutput': False,  # No codifica automáticamente el HTML (importante para que el HTML se renderice como tal)
+        'entities': False,          # No convierte caracteres a entidades HTML (ej. '&' a '&amp;')
+        'fullPage': False,          # No genera un documento HTML completo (solo el fragmento de contenido)
+        'basicEntities': False,     # Evita la conversión de caracteres básicos a entidades HTML
+
+        # Configuraciones de pegado para mantener formato
+        'pasteFromWordRemoveFontStyles': False, # No remueve estilos de fuente al pegar de Word
+        'pasteFromWordRemoveStyles': False,     # No remueve estilos al pegar de Word
+        'forcePasteAsPlainText': False,         # No fuerza pegar como texto plano por defecto
+
+        # Configuraciones de entrada (cómo se manejan Enter y Shift+Enter)
+        'enterMode': 1, # CKEDITOR.ENTER_P (Enter crea <p> - el comportamiento que prefieres)
+        'shiftEnterMode': 2, # CKEDITOR.ENTER_BR (Shift+Enter crea <br>)
+
+        # Tema para el resaltado de código (si usas el plugin codesnippet)
+        'codeSnippet_theme': 'default',
+    },
+}

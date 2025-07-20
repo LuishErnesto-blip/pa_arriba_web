@@ -2,7 +2,7 @@
 from django.urls import path
 # Importa las vistas de tu aplicación actual (core)
 from . import views
-
+app_name = 'core' # NUEVO: Define el namespace de la aplicación 'core'
 # Define los patrones de URL para tu aplicación core
 urlpatterns = [
     # URL para la página principal (landing page) de tu aplicación

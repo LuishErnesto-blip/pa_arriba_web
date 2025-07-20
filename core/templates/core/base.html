@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Pa'arriba - ¡Tu Transformación Digital!{% endblock %}</title>
+    <!-- Favicon de Pa'arriba -->
+    <link rel="icon" href="{% static 'core/logo_pa_arriba_fav_icon.png' %}" type="image/png">
+    <!-- Importación de la fuente Montserrat directamente en el HTML para evitar errores de Django -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap">
+    <link rel="stylesheet" href="{% static 'core/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Tailwind CSS CDN para clases de utilidad -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    {% include 'core/meta_pixel.html' %} {# Meta Pixel #}
+    {% include 'product_schema.html' %} {# Schema.org JSON-LD #}
+
+    {% block extra_head %}{% endblock %} {# Para CSS o meta tags específicos de una página #}
+</head>
+<body>
+    {% block content %}
+    {# El contenido único de cada página irá aquí #}
+    {% endblock %}
+
+    <!-- Script de tsparticles -->
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+
+    <!-- Audio para el sonido de la bombilla -->
+    <audio id="bulbSound" src="{% static 'core/light_switch_on.mp3' %}" preload="auto"></audio>
+    <!-- Audio para el fondo musical espacial -->
+    <audio id="spaceMusic" src="{% static 'core/space_ambience.wav' %}" preload="auto" loop></audio>
+
+    <script src="{% static 'core/script.js' %}"></script> {# Nuestro JavaScript refactorizado #}
+    {% block extra_js %}{% endblock %} {# Para JS específico de una página #}
+    {% include 'core/footer_section.html' %} {# ¡NUEVO: Footer global aquí! #}
+
+</body>
+</html>

@@ -1,21 +1,40 @@
+"""
+URL configuration for pa_arriba_project project.
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/5.2/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
 from django.contrib import admin
 from django.urls import path, include
-from django.conf import settings # ¡Necesario para acceder a DEBUG, STATIC_URL, etc.!
-from django.conf.urls.static import static 
-from pathlib import Path # Necesario para BASE_DIR con Path
-from django.views.generic.base import RedirectView # NUEVO: Importar RedirectView para el favicon
+
+# Importaciones necesarias para servir archivos estáticos y de medios en desarrollo
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
-    # NUEVO: URL para el favicon
-    path('favicon.ico', RedirectView.as_view(url=settings.STATIC_URL + 'core/logo_pa_arriba_fav_icon.png', permanent=True)),
-    path('admin/', admin.site.urls),
-    path('', include('core.urls')), # O la ruta a tu app principal 'core'
+    path('admin/', admin.site.urls), # Ruta para el panel de administración de Django
+    path('', include('core.urls')), # Incluye las URLs de tu aplicación 'core' (probablemente la página de inicio)
+    path('store/', include('store.urls')), # Incluye las URLs de tu aplicación 'store'
+    path('blog/', include('blog.urls')), # Incluye las URLs de tu aplicación 'blog'
+    path('ckeditor/', include('ckeditor_uploader.urls')), # URLs para el uploader de CKEditor
 ]
 
-# ¡IMPORTANTE! Solo servir archivos estáticos en modo de desarrollo
+# ¡IMPORTANTE! Solo servir archivos estáticos y de medios en modo de desarrollo
+# Estas configuraciones son cruciales para que las imágenes y otros archivos se muestren
+# correctamente cuando estás desarrollando localmente. NO deben usarse en producción.
 if settings.DEBUG:
-    # Sirve los archivos de medios (ej. imágenes subidas por usuarios)
+    # Sirve archivos de medios (imágenes subidas por usuarios)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    # Sirve los archivos estáticos (CSS, JS, imágenes de tu diseño)
-    # STATIC_ROOT es la ubicación donde collectstatic copia todos los archivos estáticos.
+    # Sirve archivos estáticos (CSS, JS, imágenes de diseño)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+

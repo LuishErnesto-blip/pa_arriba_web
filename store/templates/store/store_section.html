@@ -1,0 +1,100 @@
+{% load static %} {# ¡CRÍTICO: Asegúrate de que esta línea esté aquí! #}
+<!-- Tarjeta de Acordeón para la Tienda -->
+<div class="accordion-card rounded-xl shadow-lg overflow-hidden" id="tienda-card">
+    <div class="accordion-header">
+        <h2 class="text-3xl font-extrabold flex items-center text-[var(--color-orange-accent)] text-pa-arriba-orange-force">
+            <i class="fas fa-shopping-cart text-[var(--color-orange-accent)] text-4xl mr-3 text-pa-arriba-orange-force"></i>
+            Tienda
+        </h2>
+        <span class="accordion-icon">+</span>
+    </div>
+    <!-- MODIFICADO: Se ha movido el padding 'p-6' a un div interno para asegurar que 'max-height: 0' oculte completamente el contenido. -->
+    <div class="accordion-content rounded-b-xl"> 
+        <div class="p-6"> <!-- Nuevo contenedor para el padding -->
+            <p class="store-subtitle-paragraph text-lg mb-4 leading-relaxed">         
+            Explora nuestra selección de herramientas, recursos y productos digitales diseñados para impulsar tu emprendimiento. ¡Crece, avanza, mejora, re-emprende con las mejores soluciones a tu alcance!
+            </p>
+            <!-- INICIO: Contenido de la Tienda -->
+            <div id="store-content" class="flex flex-col items-center min-h-[300px] bg-gray-50 p-6 rounded-lg shadow-inner border border-dashed border-gray-300 text-gray-500 text-center">
+                <!-- Título de la sección de categorías -->
+                <h3 class="text-3xl font-bold text-gray-800 mb-8">Explora Nuestras Categorías</h3>
+                
+                <!-- Contenedor de las categorías (Grid Responsivo) -->
+                <div id="category-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-5xl mb-12">
+                    
+                    <!-- Categoría 1: Herramientas Digitales -->
+                    <div class="category-card bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:scale-105 cursor-pointer flex flex-col items-center text-center border border-gray-200" data-category="herramientas">
+                        <i class="fas fa-tools text-pa-arriba-orange-force text-5xl mb-4"></i>
+                        <h4 class="text-xl font-semibold text-gray-800 mb-2">Herramientas Digitales</h4>
+                        <p class="text-gray-600 text-sm">Software, aplicaciones y utilidades para optimizar tu trabajo.</p>
+                    </div>
+
+                    <!-- Categoría 2: Cursos y Capacitaciones -->
+                    <div class="category-card bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:scale-105 cursor-pointer flex flex-col items-center text-center border border-gray-200" data-category="cursos">
+                        <i class="fas fa-graduation-cap text-pa-arriba-orange-force text-5xl mb-4"></i>
+                        <h4 class="text-xl font-semibold text-gray-800 mb-2">Cursos y Capacitaciones</h4>
+                        <p class="text-gray-600 text-sm">Aprende nuevas habilidades y estrategias para tu negocio.</p>
+                    </div>
+
+                    <!-- Categoría 3: Servicios de Consultoría -->
+                    <div class="category-card bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:scale-105 cursor-pointer flex flex-col items-center text-center border border-gray-200" data-category="consultoria">
+                        <i class="fas fa-handshake text-pa-arriba-orange-force text-5xl mb-4"></i>
+                        <h4 class="text-xl font-semibold text-gray-800 mb-2">Servicios de Consultoría</h4>
+                        <p class="text-gray-600 text-sm">Asesoramiento personalizado para tus desafíos específicos.</p>
+                    </div>
+
+                    <!-- Categoría 4: Plantillas y Recursos -->
+                    <div class="category-card bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:scale-105 cursor-pointer flex flex-col items-center text-center border border-gray-200" data-category="plantillas">
+                        <i class="fas fa-file-alt text-pa-arriba-orange-force text-5xl mb-4"></i>
+                        <h4 class="text-xl font-semibold text-gray-800 mb-2">Plantillas y Recursos</h4>
+                        <p class="text-gray-600 text-sm">Documentos, diseños y materiales listos para usar.</p>
+                    </div>
+
+                </div>
+
+                <!-- Contenedor para la sección de Productos Destacados como un acordeón anidado -->
+                <div id="product-listing-accordion" class="w-full max-w-5xl rounded-xl shadow-lg overflow-hidden border border-gray-200 hidden"> 
+                    <div class="product-listing-header accordion-header bg-pa-arriba-orange-force text-white p-4 flex justify-between items-center cursor-pointer rounded-t-xl">
+                        <h3 id="product-listing-title" class="text-xl font-bold">Productos Destacados</h3>
+                        <span class="accordion-icon text-white text-3xl leading-none">+</span>
+                    </div>
+                    <div class="product-listing-content accordion-content p-6 bg-white rounded-b-xl">
+                        <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+                            <!-- Los productos se insertarán aquí dinámicamente -->
+                        </div>
+                        <!-- Botón para volver a todas las categorías -->
+                        <button id="back-to-categories-btn" class="mt-8 bg-gray-200 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-300 transition-colors duration-300 w-full">
+                            <i class="fas fa-arrow-left mr-2"></i> Volver a Todas las Categorías
+                        </button>
+                        <!-- Botón de colapsar al final de la tarjeta de productos destacados -->
+                        <div class="flex justify-center mt-4">
+                            <span class="accordion-icon accordion-footer-collapse-btn cursor-pointer text-4xl leading-none">&minus;</span>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <!-- FIN: Contenido de la Tienda -->
+            <!-- Botón de colapsar al final de la tarjeta - MOVido DENTRO del div p-6 -->
+            <div class="flex justify-center mt-4">
+                <span class="accordion-icon accordion-footer-collapse-btn cursor-pointer text-4xl leading-none">&minus;</span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal de Detalles de Producto -->
+<div id="product-detail-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50 hidden">
+    <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-md relative transform transition-all scale-95 opacity-0 duration-300 ease-out">
+        <button id="close-modal-btn" class="absolute top-3 right-3 text-gray-500 hover:text-gray-800 text-2xl font-bold">&times;</button>
+        <div class="text-center">
+            <img id="modal-product-image" src="" alt="Imagen del Producto" class="w-48 h-48 object-cover rounded-lg mx-auto mb-4">
+            <h3 id="modal-product-name" class="text-2xl font-bold text-gray-800 mb-2"></h3>
+            <p id="modal-product-description" class="text-gray-600 text-md mb-4"></p>
+            <span id="modal-product-price" class="text-pa-arriba-orange-force font-bold text-xl block"></span>
+            <!-- Elemento para el mensaje de confirmación -->
+            <div id="buy-now-message" class="text-green-600 font-semibold mb-4 hidden"></div>
+            <button id="buy-now-btn" class="bg-pa-arriba-orange-force text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition-colors duration-300" style="background-color: var(--pa-arriba-orange-force); color: var(--color-text-light);">Comprar Ahora</button>
+        </div>
+    </div>
+</div>
+<!-- FIN NUEVO: Modal de Detalles de Producto -->

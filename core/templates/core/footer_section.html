@@ -1,0 +1,37 @@
+{% load static %}
+<!-- Sección de Footer Estática y Global, ahora con estructura de acordeón -->
+<footer class="footer-section bg-gray-800 text-white py-8 px-4 rounded-t-xl shadow-lg">
+    <div class="max-w-6xl mx-auto text-center">
+        <!-- Header del acordeón del footer -->
+        <div class="footer-accordion-header flex justify-between items-center cursor-pointer px-4 py-3">
+            <h2 class="text-3xl font-bold text-pa-arriba-orange-force m-0">Información de Contacto</h2>
+            <span class="accordion-icon text-3xl text-pa-arriba-orange-force">+</span>
+        </div>
+
+        <!-- Contenido del acordeón del footer -->
+        <div class="footer-accordion-content">
+            <div class="footer-content pt-4">
+                <p class="mb-2">CONTACTO: <a href="mailto:info@pa-arriba.com" class="text-pa-arriba-orange-light hover:underline">paarriba.ec@gmail.com</a></p>
+                <p class="mt-2 mb-4">
+                    WHATSAPP: 
+                    <a 
+                        href="https://wa.me/593997277796?text=Hola%20Pa%E2%80%99Arriba%2C%20quiero%20mejorar%20mi%20negocio%20y%20necesito%20una%20gu%C3%ADa%20personalizada." 
+                        target="_blank" 
+                        class="text-pa-arriba-orange-light font-semibold hover:underline"
+                    >
+                        +593 997 277 796
+                    </a>
+                </p>
+                <div class="social-links flex justify-center space-x-6 text-2xl">
+                    <a href="https://www.facebook.com/PaArribaEC" target="_blank" class="hover:text-pa-arriba-orange-force transition-colors duration-300"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/paarribaec/" target="_blank" class="hover:text-pa-arriba-orange-force transition-colors duration-300"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@paarribaec?lang=es" target="_blank" rel="noopener noreferrer" class="hover:text-pa-arriba-orange-force transition-colors duration-300"><i class="fab fa-tiktok"></i></a>
+                </div>
+                <p class="mt-6 text-sm">
+                <a href="{% url 'core:privacy_policy' %}" class="text-pa-arriba-orange-light hover:underline">Política de Privacidad</a>
+                </p>
+            </div>
+        </div>
+        <p class="copyright text-sm mt-4">&copy; 2025 Pa'arriba. Crece, Avanza, Mejora, Re-emprende.</p>
+    </div>
+</footer>
