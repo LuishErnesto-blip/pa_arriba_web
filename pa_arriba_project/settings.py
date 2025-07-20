@@ -55,7 +55,6 @@ INSTALLED_APPS = [
     'store', # Tu aplicación de tienda
     'blog', # Tu aplicación de blog
     'ckeditor', # La aplicación CKEditor
-    'ckeditor_uploader', # NUEVO: Necesario para la subida de imágenes en CKEditor
 ]
 
 MIDDLEWARE = [
