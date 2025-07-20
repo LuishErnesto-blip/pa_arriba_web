@@ -21,26 +21,23 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-b5rp4(515x-@2el5=6_&7*7b#2yw1(=ju_9olo02m(4_lzssuq'
+# MODIFICADO: Mejor práctica: obtener SECRET_KEY de una variable de entorno.
+# Usar un valor por defecto para desarrollo local si la variable no existe.
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-b5rp4(515x-@2el5=6_&7*7b#2yw1(=ju_9olo02m(4_lzssuq')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# MODIFICADO: Leer DEBUG desde una variable de entorno. Por defecto True para desarrollo local.
-DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'
+# MODIFICADO: DEBUG debe ser False en producción. Por defecto False si no se especifica.
+DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 
 # MODIFICADO: Configuración de ALLOWED_HOSTS para Render y desarrollo local
-ALLOWED_HOSTS = []
-
+# La URL de tu aplicación en Render: https://pa-arriba-landing.onrender.com
+ALLOWED_HOSTS = ['pa-arriba-landing.onrender.com', '127.0.0.1', 'localhost']
 # Obtener los hosts permitidos de una variable de entorno (para Render u otros despliegues)
+# Esta lógica se mantiene para permitir flexibilidad, pero la URL de Render ya está incluida.
 allowed_hosts_str = os.environ.get('DJANGO_ALLOWED_HOSTS')
 if allowed_hosts_str:
     ALLOWED_HOSTS.extend(allowed_hosts_str.split(','))
 
-# Si estamos en desarrollo local (DEBUG es True), asegura que localhost y 127.0.0.1 estén permitidos
-if DEBUG:
-    if 'localhost' not in ALLOWED_HOSTS:
-        ALLOWED_HOSTS.append('localhost')
-    if '127.0.0.1' not in ALLOWED_HOSTS:
-        ALLOWED_HOSTS.append('127.0.0.1')
 
 # Application definition
 
@@ -59,6 +56,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', # AÑADIDO: Para servir archivos estáticos en producción
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -87,12 +85,19 @@ TEMPLATES = [
         },
     },
 ]
+
 WSGI_APPLICATION = 'pa_arriba_project.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# MANTENIDO: Configuración de base de datos SQLite para desarrollo local y despliegue inicial.
+# IMPORTANTE: En Render, SQLite es una base de datos efímera (temporal).
+# Esto significa que cualquier dato guardado (como los artículos de tu blog)
+# se perderá cada vez que la aplicación se reinicie o se despliegue una nueva versión.
+# Para persistencia de datos en producción, se recomienda usar PostgreSQL.
+# Te guiaré en cómo migrar a PostgreSQL y tus datos una vez que el sitio esté funcionando.
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -139,10 +144,21 @@ STATIC_URL = '/static/' # URL base para servir archivos estáticos
 
 # Directorios adicionales donde Django buscará archivos estáticos (además de los de cada app)
 STATICFILES_DIRS = [
-    BASE_DIR / 'core' / 'static', # Incluye los archivos estáticos de tu app 'core'
+    os.path.join(BASE_DIR, 'core', 'static'), # MODIFICADO: Usar os.path.join para consistencia
 ]
 # La ruta absoluta donde 'collectstatic' reunirá todos los archivos estáticos para producción
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # MODIFICADO: Usar os.path.join para consistencia
+
+# AÑADIDO: Configuración de almacenamiento de archivos estáticos para WhiteNoise
+# Esto le dice a Django cómo manejar los archivos estáticos en producción.
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 
 # Default primary key field type
@@ -154,7 +170,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Configuración para archivos multimedia (imágenes, videos, etc. subidos por usuarios)
 # MEDIA_ROOT es la ruta absoluta en el sistema de archivos donde se guardarán los archivos subidos.
 # Esto creará una carpeta 'media' en la raíz de tu proyecto (junto a manage.py).
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # MODIFICADO: Usar os.path.join para consistencia
 
 # MEDIA_URL es la URL pública que se usará para acceder a los archivos multimedia.
 MEDIA_URL = '/media/'
