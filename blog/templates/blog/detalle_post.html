@@ -9,7 +9,7 @@
 <main class="container mx-auto px-4 py-8 mt-20"> {# Ajusta el margen superior para el sticky header #}
     <article class="bg-white rounded-lg shadow-lg overflow-hidden p-6 md:p-8 lg:p-10 max-w-4xl mx-auto">
         {% if post.image %} {# Muestra la imagen destacada si existe #}
-        <img src="{{ post.image.url }}" alt="{{ post.image_alt_text|default:post.title }}" class="w-full h-64 object-cover rounded-lg mb-6 shadow-md">
+        <img src="{% static 'core/gallery_images/' %}{{ post.image.name|cut:'blog_images/' }}" alt="{{ post.image_alt_text|default:post.title }}" class="w-full h-64 object-cover rounded-lg mb-6 shadow-md">
         {% endif %}
 
         <h1 class="text-4xl font-extrabold text-gray-900 mb-4">{{ post.title }}</h1>
