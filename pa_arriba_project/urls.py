@@ -20,6 +20,14 @@ from django.urls import path, include
 # Importaciones necesarias para servir archivos estáticos y de medios en desarrollo
 from django.conf import settings
 from django.conf.urls.static import static
+# AÑADIDO: Importaciones para el sitemap
+from django.contrib.sitemaps.views import sitemap
+from blog.sitemaps import PostSitemap # Importa la clase PostSitemap
+
+# Define los sitemaps disponibles para tu proyecto
+sitemaps = {
+    'posts': PostSitemap, # 'posts' es un nombre que le das a este sitemap
+}
 
 urlpatterns = [
     path('admin/', admin.site.urls), # Ruta para el panel de administración de Django
@@ -27,6 +35,7 @@ urlpatterns = [
     path('store/', include('store.urls')), # Incluye las URLs de tu aplicación 'store'
     path('blog/', include('blog.urls')), # Incluye las URLs de tu aplicación 'blog'
     path('ckeditor/', include('ckeditor_uploader.urls')), # URLs para el uploader de CKEditor
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 ]
 
 # ¡IMPORTANTE! Solo servir archivos estáticos y de medios en modo de desarrollo

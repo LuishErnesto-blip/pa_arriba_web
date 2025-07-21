@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'store', # Tu aplicación de tienda
     'blog', # Tu aplicación de blog
     'ckeditor', # La aplicación CKEditor
+    'django.contrib.sitemaps', # AÑADIDO: Para generar sitemaps XML
 ]
 
 MIDDLEWARE = [
