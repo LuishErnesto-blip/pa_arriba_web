@@ -164,6 +164,12 @@ STORAGES = {
 # incluyendo el sitemap.xml cuando se genere estáticamente.
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
+# AÑADIDO: Ignorar sitemap.xml de las carpetas de templates de Django
+# Esto evita conflictos con el sitemap.xml que creamos manualmente en core/static.
+STATICFILES_IGNORE_PATTERNS = [
+    'sitemaps/sitemap.xml', # Ignora el sitemap.xml de django.contrib.sitemaps/templates
+]
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
