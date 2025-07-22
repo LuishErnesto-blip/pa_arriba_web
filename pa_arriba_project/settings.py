@@ -144,7 +144,6 @@ STATIC_URL = '/static/' # URL base para servir archivos estáticos
 # Directorios adicionales donde Django buscará archivos estáticos (además de los de cada app)
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'core', 'static'), # MODIFICADO: Usar os.path.join para consistencia
-    os.path.join(BASE_DIR, 'media'), # AÑADIDO: Incluye la carpeta media para que collectstatic la procese
 ]
 # La ruta absoluta donde 'collectstatic' reunirá todos los archivos estáticos para producción
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # MODIFICADO: Usar os.path.join para consistencia
