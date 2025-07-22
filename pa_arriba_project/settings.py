@@ -53,8 +53,9 @@ INSTALLED_APPS = [
     'blog', # Tu aplicación de blog
     'ckeditor', # La aplicación CKEditor
     'django.contrib.sitemaps', # AÑADIDO: Para generar sitemaps XML
+    'django.contrib.sites', # AÑADIDO: Necesario para el sitemap
 ]
-
+SITE_ID = 1 # AÑADIDO: ID del sitio por defecto, necesario para django.contrib.sites
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware', # AÑADIDO: Para servir archivos estáticos en producción
@@ -161,6 +162,11 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
+
+# AÑADIDO: Define el backend de almacenamiento de archivos estáticos a usar en producción.
+# Esto es crucial para que WhiteNoise sirva correctamente todos los archivos estáticos,
+# incluyendo el sitemap.xml cuando se genere estáticamente.
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 
 # Default primary key field type
