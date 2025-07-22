@@ -52,10 +52,7 @@ INSTALLED_APPS = [
     'store', # Tu aplicación de tienda
     'blog', # Tu aplicación de blog
     'ckeditor', # La aplicación CKEditor
-    'django.contrib.sitemaps', # AÑADIDO: Para generar sitemaps XML
-    'django.contrib.sites', # AÑADIDO: Necesario para el sitemap
 ]
-SITE_ID = 1 # AÑADIDO: ID del sitio por defecto, necesario para django.contrib.sites
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware', # AÑADIDO: Para servir archivos estáticos en producción

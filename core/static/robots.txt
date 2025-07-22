@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://pa-arriba-landing.onrender.com/sitemap.xml
