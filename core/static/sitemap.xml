@@ -1,42 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    {# URL de la página principal (Home) #}
     <url>
         <loc>https://pa-arriba-landing.onrender.com/</loc>
-        <lastmod>2025-07-22</lastmod> {# Actualiza con la fecha de la última modificación importante de tu home #}
+        <lastmod>2025-07-22</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
-
-    {# URL de la página del Blog (Lista de posts) #}
     <url>
         <loc>https://pa-arriba-landing.onrender.com/blog/</loc>
-        <lastmod>2025-07-22</lastmod> {# Actualiza con la fecha de la última modificación importante de tu página de blog #}
+        <lastmod>2025-07-22</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
-
-    {# URL de la página de la Tienda #}
     <url>
         <loc>https://pa-arriba-landing.onrender.com/store/</loc>
-        <lastmod>2025-07-22</lastmod> {# Actualiza con la fecha de la última modificación importante de tu página de tienda #}
+        <lastmod>2025-07-22</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
-
-    {# URL de la página de Política de Privacidad #}
     <url>
         <loc>https://pa-arriba-landing.onrender.com/privacy-policy/</loc>
-        <lastmod>2025-07-22</lastmod> {# Actualiza con la fecha de la última modificación importante de tu política de privacidad #}
+        <lastmod>2025-07-22</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
-
-    {# URLs de los posts individuales del blog (AÑADIR MANUALMENTE CADA VEZ QUE CREES UNO NUEVO) #}
-    {# Ejemplo para un post: #}
     <url>
         <loc>https://pa-arriba-landing.onrender.com/blog/finanzas-y-eficiencia-para-emprendedores-claves-para-optimizar-tu-negocio-digital-en-ecuador/</loc>
-        <lastmod>2025-07-19</lastmod> {# Fecha de publicación o última modificación del post #}
+        <lastmod>2025-07-19</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
@@ -58,6 +48,4 @@
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
-    {# AÑADE MÁS <url> BLOQUES AQUÍ PARA CADA NUEVO POST DE BLOG QUE PUBLIQUES #}
-
 </urlset>
