@@ -42,11 +42,12 @@ def robots_txt(request):
 def sitemap_xml(request):
     """
     Vista para servir el archivo sitemap.xml estático.
-    Lee el contenido del archivo sitemap.xml desde la carpeta static
+    Lee el contenido del archivo sitemap.xml desde la carpeta STATIC_ROOT
     y lo devuelve con el Content-Type correcto.
     """
-    # Construye la ruta absoluta al archivo sitemap.xml dentro de la carpeta static de la app 'core'.
-    sitemap_path = os.path.join(settings.BASE_DIR, 'core', 'static', 'sitemap.xml')
+    # MODIFICADO: Construye la ruta absoluta al archivo sitemap.xml dentro de STATIC_ROOT.
+    # Aquí es donde collectstatic mueve el archivo en producción.
+    sitemap_path = os.path.join(settings.STATIC_ROOT, 'sitemap.xml')
     try:
         # Abre y lee el contenido del archivo sitemap.xml
         with open(sitemap_path, 'r') as f:
@@ -54,6 +55,6 @@ def sitemap_xml(request):
         # Devuelve el contenido como una respuesta HTTP con el tipo de contenido XML
         return HttpResponse(content, content_type='application/xml')
     except FileNotFoundError:
-        # En caso de que el archivo sitemap.xml no se encuentre (lo cual no debería pasar si está en static)
+        # En caso de que el archivo sitemap.xml no se encuentre
         # Retorna un error 404.
         return HttpResponse("Sitemap not found.", status=404, content_type="text/plain")
