@@ -26,14 +26,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-b5rp4(515x-@2el5=6_&7*7b#2yw1(=ju_9olo02m(4_lzssuq')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# MODIFICADO: DEBUG debe ser False en producción. Por defecto False si no se especifica.
+# Usar variable de entorno: True solo en desarrollo local
 DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 
 # MODIFICADO: Configuración de ALLOWED_HOSTS para Render y desarrollo local
 # La URL de tu aplicación en Render: https://pa-arriba-landing.onrender.com
 ALLOWED_HOSTS = ['pa-arriba-landing.onrender.com', '127.0.0.1', 'localhost']
-# Obtener los hosts permitidos de una variable de entorno (para Render u otros despliegues)
-# Esta lógica se mantiene para permitir flexibilidad, pero la URL de Render ya está incluida.
 allowed_hosts_str = os.environ.get('DJANGO_ALLOWED_HOSTS')
 if allowed_hosts_str:
     ALLOWED_HOSTS.extend(allowed_hosts_str.split(','))
@@ -48,14 +46,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core', # Asegúrate de que tu app 'core' esté listada aquí
-    'store', # Tu aplicación de tienda
-    'blog', # Tu aplicación de blog
-    'ckeditor', # La aplicación CKEditor
+    'core',
+    'store',
+    'blog',
+    'ckeditor',
+    'termometro',  # ← NUEVA APP que acabas de crear
 ]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware', # AÑADIDO: Para servir archivos estáticos en producción
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -70,10 +70,10 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'core', 'templates'), # Ruta a la carpeta 'templates' dentro de tu app 'core'
-            os.path.join(BASE_DIR, 'core', 'templates', 'core'), # Ruta explícita a la subcarpeta 'core' dentro de 'templates'
+            os.path.join(BASE_DIR, 'core', 'templates'),
+            os.path.join(BASE_DIR, 'core', 'templates', 'core'),
         ],
-        'APP_DIRS': True, # Mantenemos esto por si acaso, pero 'DIRS' tendrá prioridad
+        'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -89,136 +89,72 @@ WSGI_APPLICATION = 'pa_arriba_project.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
-# MANTENIDO: Configuración de base de datos SQLite para desarrollo local y despliegue inicial.
-# IMPORTANTE: En Render, SQLite es una base de datos efímera (temporal).
-# Esto significa que cualquier dato guardado (como los artículos de tu blog)
-# se perderá cada vez que la aplicación se reinicie o se despliegue una nueva versión.
-# Para persistencia de datos en producción, se recomienda usar PostgreSQL.
-# Te guiaré en cómo migrar a PostgreSQL y tus datos una vez que el sitio esté funcionando.
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3', # La base de datos SQLite se guardará en la raíz del proyecto
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
 
 # Password validation
-# https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',},
 ]
 
 
 # Internationalization
-# https://docs.djangoproject.com/en/5.2/topics/i18n/
-
-LANGUAGE_CODE = 'es-ec' # Establece el idioma por defecto a español de Ecuador
-
-TIME_ZONE = 'America/Guayaquil' # Establece la zona horaria a Guayaquil, Ecuador
-
-USE_I18N = True # Habilita el soporte para internacionalización
-
-USE_TZ = True # Habilita el soporte para zonas horarias
+LANGUAGE_CODE = 'es-ec'
+TIME_ZONE = 'America/Guayaquil'
+USE_I18N = True
+USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.2/howto/static-files/
+# Static files
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'core', 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATIC_URL = '/static/' # URL base para servir archivos estáticos
-
-# Directorios adicionales donde Django buscará archivos estáticos (además de los de cada app)
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'core', 'static'), # MODIFICADO: Usar os.path.join para consistencia
-]
-# La ruta absoluta donde 'collectstatic' reunirá todos los archivos estáticos para producción
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # MODIFICADO: Usar os.path.join para consistencia
-
-# AÑADIDO: Configuración de almacenamiento de archivos estáticos para WhiteNoise
-# Esto le dice a Django cómo manejar los archivos estáticos en producción.
 STORAGES = {
-    "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
-    },
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
+    "default": {"BACKEND": "django.core.files.storage.FileSystemStorage",},
+    "staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",},
 }
 
-# AÑADIDO: Define el backend de almacenamiento de archivos estáticos a usar en producción.
-# Esto es crucial para que WhiteNoise sirva correctamente todos los archivos estáticos,
-# incluyendo el sitemap.xml cuando se genere estáticamente.
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-# AÑADIDO: Ignorar sitemap.xml de las carpetas de templates de Django
-# Esto evita conflictos con el sitemap.xml que creamos manualmente en core/static.
-STATICFILES_IGNORE_PATTERNS = [
-    'sitemaps/sitemap.xml', # Ignora el sitemap.xml de django.contrib.sitemaps/templates
-]
+STATICFILES_IGNORE_PATTERNS = ['sitemaps/sitemap.xml']
 
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# Configuración para archivos multimedia (imágenes, videos, etc. subidos por usuarios)
-# MEDIA_ROOT es la ruta absoluta en el sistema de archivos donde se guardarán los archivos subidos.
-# Esto creará una carpeta 'media' en la raíz de tu proyecto (junto a manage.py).
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # MODIFICADO: Usar os.path.join para consistencia
-
-# MEDIA_URL es la URL pública que se usará para acceder a los archivos multimedia.
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-# NUEVO: Configuración para la ruta de subida de CKEditor
-# Los archivos subidos a través de CKEditor se guardarán en MEDIA_ROOT/uploads/
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 
-# Configuración para django-ckeditor
 CKEDITOR_CONFIGS = {
     'default': {
-        'toolbar': 'full',  # Usamos la barra de herramientas 'full' para incluir todos los botones estándar
-        'height': 400,      # Altura del editor
-        'width': '100%',    # Ancho del editor
-
-        # Plugins adicionales importantes para funcionalidad extendida
-        'extraPlugins': 'codesnippet,autogrow,clipboard,pastefromword', # Añade resaltado de código, auto-crecimiento, y mejoras de pegado
-        'autoGrow_minHeight': 200, # Altura mínima cuando auto-crece
-        'autoGrow_maxHeight': 800, # Altura máxima cuando auto-crece
-        'removePlugins': 'resize', # Deshabilita el redimensionamiento manual del editor
-
-        # Configuraciones CRÍTICAS para permitir contenido HTML completo y evitar codificación
-        'allowedContent': True,     # Permite todo el contenido HTML, necesario para pegar HTML y mantener estilos
-        'htmlEncodeOutput': False,  # No codifica automáticamente el HTML (importante para que el HTML se renderice como tal)
-        'entities': False,          # No convierte caracteres a entidades HTML (ej. '&' a '&amp;')
-        'fullPage': False,          # No genera un documento HTML completo (solo el fragmento de contenido)
-        'basicEntities': False,     # Evita la conversión de caracteres básicos a entidades HTML
-
-        # Configuraciones de pegado para mantener formato
-        'pasteFromWordRemoveFontStyles': False, # No remueve estilos de fuente al pegar de Word
-        'pasteFromWordRemoveStyles': False,     # No remueve estilos al pegar de Word
-        'forcePasteAsPlainText': False,         # No fuerza pegar como texto plano por defecto
-
-        # Configuraciones de entrada (cómo se manejan Enter y Shift+Enter)
-        'enterMode': 1, # CKEDITOR.ENTER_P (Enter crea <p> - el comportamiento que prefieres)
-        'shiftEnterMode': 2, # CKEDITOR.ENTER_BR (Shift+Enter crea <br>)
-
-        # Tema para el resaltado de código (si usas el plugin codesnippet)
+        'toolbar': 'full',
+        'height': 400,
+        'width': '100%',
+        'extraPlugins': 'codesnippet,autogrow,clipboard,pastefromword',
+        'autoGrow_minHeight': 200,
+        'autoGrow_maxHeight': 800,
+        'removePlugins': 'resize',
+        'allowedContent': True,
+        'htmlEncodeOutput': False,
+        'entities': False,
+        'fullPage': False,
+        'basicEntities': False,
+        'pasteFromWordRemoveFontStyles': False,
+        'pasteFromWordRemoveStyles': False,
+        'forcePasteAsPlainText': False,
+        'enterMode': 1,  # CKEDITOR.ENTER_P
+        'shiftEnterMode': 2,  # CKEDITOR.ENTER_BR
         'codeSnippet_theme': 'default',
     },
 }
