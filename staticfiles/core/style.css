@@ -1,39 +1,41 @@
 /* --- INICIO BLOQUE NUEVO PARA EFECTO REVEAL --- */
-.filosofia-section,
-.prototipos-section,
-.testimonios-section,
+/* Estilos para el footer global. Ahora es colapsable. */
 .footer-section {
-    display: none; /* Aseguramos que las secciones estén ocultas inicialmente */
-    opacity: 0;
-    transform: scaleY(0);
-    transform-origin: top; /* La animación de despliegue comenzará desde la parte superior */
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Transición suave para el despliegue */
+    background-image: linear-gradient(45deg, var(--pa-arriba-orange-force), var(--pa-arriba-orange-light), var(--pa-arriba-orange-force));    background-size: 250% 250%;
+    background-size: 250% 250%;
+    animation: animateBackgroundGradient 8s linear infinite alternate;
+    color: var(--color-background-dark);
+    padding: 32px 16px; /* Padding ajustado para el contenedor principal del footer */
+    margin-top: 40px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    overflow: hidden; /* Asegura que el contenido oculto no se desborde */
+    border-top-left-radius: 0.75rem; /* rounded-t-xl */
+    border-top-right-radius: 0.75rem; /* rounded-t-xl */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1); /* shadow-lg */
 }
 
-/* MODIFICADO: Estas clases ahora controlan la visibilidad de las tarjetas de acordeón, no las secciones directamente */
-/* Las secciones internas se controlan con JavaScript al expandir la tarjeta */
-body.revealed .filosofia-section,
-body.revealed .prototipos-section,
-body.revealed .testimonios-section,
-body.revealed .footer-section {
-    /* Estas reglas se mantienen para las animaciones internas de las secciones si se desea */
-    /* Pero la visibilidad inicial de las secciones está ahora dentro de .accordion-content */
-    animation: none; /* Desactivamos la animación de despliegue aquí, se manejará por el acordeón */
-    display: none; /* Aseguramos que las secciones estén ocultas por defecto, se mostrarán al expandir la tarjeta */
-    opacity: 1; /* Para que el contenido sea visible cuando la tarjeta se expanda */
-    transform: scaleY(1); /* Para que el contenido sea visible cuando la tarjeta se expanda */
+/* Estilos para el contenido del acordeón del footer */
+.footer-accordion-content {
+    max-height: 0; /* Inicialmente colapsado */
+    overflow: hidden;
+    transition: max-height 0.5s ease-out; /* Transición para la expansión/contracción */
 }
 
-/* Nuevos keyframes para la animación de despliegue */
-@keyframes deploySection {
-    0% {
-        opacity: 0;
-        transform: scaleY(0); /* Empieza como una línea horizontal */
-    }
-    100% {
-        opacity: 1;
-        transform: scaleY(1); /* Se expande a su altura completa */
-    }
+/* Cuando el footer está expandido */
+.footer-section.expanded .footer-accordion-content {
+    max-height: 500px; /* Un valor lo suficientemente grande para contener el contenido */
+}
+
+/* Icono del acordeón */
+.footer-accordion-header .accordion-icon {
+    transition: transform 0.3s ease-out; /* Transición para la rotación del icono */
+}
+
+/* Rotar el icono cuando el footer está expandido */
+.footer-section.expanded .footer-accordion-header .accordion-icon {
+    transform: rotate(180deg); /* Flecha hacia arriba cuando está expandido */
 }
 
 /* Nuevos keyframes para la animación de degradado de fondo */
@@ -66,6 +68,11 @@ body.revealed .footer-section {
     --color-green-slogan: #4CAF50; /* Tu color verde para el slogan "Crece, Avanza..." */
     --color-orange-accent: #FF5C00; /* Tu color naranja para acentos, si es necesario */
     --color-accent-gold: #FFD700; /* Tu dorado para el Círculo Dorado */
+    /* Nuevos colores para la tienda */
+    --pa-arriba-orange-light: #FF8C42; /* Naranja más claro para enlaces y hover */
+    --pa-arriba-orange-force: #FF5C00; /* Naranja principal de la marca */
+    --pa-arriba-blue-dark: #0D47A1; /* Azul oscuro para títulos */
+    --pa-arriba-blue-light: #42A5F5; /* Azul claro para categorías */
 }
 
 /* Estilos generales */
@@ -73,10 +80,15 @@ html, body { /* Aseguramos que tanto html como body ocupen el 100% y sin márgen
     width: 100%;
     margin: 0;
     padding: 0;
+    overflow-x: hidden; /* Aseguramos que el html y body no tengan scrollbars extra */
 }
 
 body {
-    background-color: var(--color-background-dark); /* Fondo oscuro: Negro puro */
+    /* MODIFICADO: Aplicamos el degradado animado de tu marca al body */
+    background-image: linear-gradient(45deg, var(--color-background-dark), #333333, var(--color-background-dark));    background-size: 120% 250%; /* Mismo tamaño para la animación */
+    background-size: 250% 250%; /* Mismo tamaño para la animación */
+    animation: animateBackgroundGradient 5s linear infinite alternate; /* Misma animación */
+    
     color: var(--color-text-light); /* Texto por defecto en blanco (se sobrescribirá) */
     font-family: 'Montserrat', sans-serif; /* Usamos Montserrat como la fuente principal */
     margin: 0;
@@ -87,6 +99,7 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
     transition: padding-top 0.3s ease-in-out; /* Transición suave para el padding del body */
+    position: relative; /* CLAVE: Establece un contexto de posicionamiento para la onda */
 }
 
 .hero-section {
@@ -97,8 +110,9 @@ body {
     text-align: center;
     width: 100%;
     max-width: 1200px; /* Limitar ancho para escritorio */
-    margin: 0 auto; /* Centrar */
+    margin: 0; /* Centrar */
     position: relative; /* CLAVE: Permite posicionamiento absoluto de elementos hijos */
+    z-index: 1; /* Asegura que el contenido del hero esté por encima de la onda */
 }
 
 /* --- NUEVO: Contenedor para el logo y la onda que se hará sticky --- */
@@ -113,6 +127,7 @@ body {
     padding-top: 20px; /* Espacio superior para el logo */
     padding-bottom: 20px; /* Espacio inferior para la onda */
     background-color: transparent; /* Por defecto transparente */
+    z-index: 1000; /* Asegura que el header sticky esté por encima de todo */
 }
 
 .sticky-header-content.is-sticky {
@@ -140,16 +155,17 @@ body {
 }
 
 .sticky-header-content.is-sticky .frequency-wave-container {
-    height: 40px; /* Onda más pequeña */
-    position: relative; /* Vuelve a relativo para fluir con el logo */
+    height: 60px; /* Onda más pequeña */
+    position: absolute; /* Vuelve a relativo para fluir con el logo */
     left: auto;
     right: auto;
-    top: auto;
-    width: 150px; /* Ancho para la onda */
+    top: 50%; /* Centra verticalmente la onda dentro del sticky header */
+    transform: translateY(-50%); /* Ajuste para centrado perfecto */
+    width: 100%; /* Asegura que ocupe el 100% del ancho del sticky header */
+    z-index: 0; /* Asegura que la onda esté detrás del logo en el sticky header */
 }
 
 /* Ocultar el texto principal y la bombilla cuando el header es sticky */
-/* Usamos la combinación de selectores para asegurar que solo se oculten cuando el sticky-header-content tiene la clase is-sticky */
 .sticky-header-content.is-sticky ~ h1,
 .sticky-header-content.is-sticky ~ p,
 .sticky-header-content.is-sticky ~ .lightbulb-container {
@@ -162,6 +178,11 @@ body {
     font-weight: 900; /* Montserrat Black/Extra Bold para el slogan */
     margin-bottom: 10px;
     color: #1877f2; /* Manteniendo azul para el slogan */
+    /* NUEVO: Efecto 3D/Relieve/Glitch en Título H1 */
+    text-shadow: 
+        3px 3px 6px rgba(0,0,0,0.8), /* Sombra más fuerte para relieve */
+        -3px -3px 6px rgba(255,255,255,0.3); /* Luz más fuerte para relieve */
+    animation: glitchEffect 2.5s infinite alternate; /* Aplicar efecto glitch, más frecuente y notorio */
 }
 
 .hero-section p {
@@ -307,20 +328,21 @@ body {
 }
 
 .prototipo-item {
-    background-color: var(--color-light-bg-box); /* Beige/crema de Penpot */
+    background-color: var(--color-light-bg-box);
     padding: 25px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    display: flex; /* Usar flexbox para organizar contenido interno */
-    flex-direction: column; /* Apilar elementos verticalmente */
-    align-items: center; /* Centrar horizontalmente */
-    text-align: center; /* Centrar texto */
-    margin-bottom: 40px; /* NUEVO: Añade espacio debajo de cada tarjeta de prototipo */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 40px;
+    overflow: visible; /* Aseguramos que el contenido no se oculte */
 }
 
 .prototipo-item h3 {
     color: var(--color-background-dark); /* Negro para el título sobre fondo claro */
-    font-size: 20px; /* Tamaño exacto de Penpot */
+    font-size: 31px; /* Tamaño exacto de Penpot */
     font-weight: 300; /* Light de Penpot */
     margin-bottom: 15px;
 }
@@ -343,22 +365,27 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Asegura que el video cubra el contenedor sin distorsión */
+    object-fit: contain; /* Asegura que el video cubra el contenedor sin distorsión */
     border-radius: 6px; /* Bordes redondeados para el video mismo */
 }
 
 .prototipo-item p {
-    color: var(--color-background-dark); /* Negro para el texto sobre fondo claro */
-    font-size: 14px; /* Tamaño exacto de Penpot */
-    font-weight: 300; /* Light de Penpot */
-    line-height: 1.2; /* Ajustado para Penpot */
-    margin-bottom: 20px; /* Espacio antes del botón CTA */
+    color: var(--color-background-dark) !important; /* Forzamos el negro para que contraste con el fondo crema */
+    font-size: 22px;
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    /* Aseguramos que no se oculte por overflow en su propio nivel */
+    overflow: visible !important;
+    /* Aseguramos que no tenga display: none o visibility: hidden */
+    display: block !important;
+    visibility: visible !important;
 }
 
 /* Estilos para el botón CTA */
 .cta-button {
-    background-color: var(--color-orange-accent); /* Naranja vibrante */
-    color: var(--color-text-light); /* Texto blanco */
+    background-color: var(--color-orange-accent) !important; /* Forzar el color naranja */
+    color: var(--color-text-light) !important; /* Forzar el texto blanco */
     padding: 12px 25px;
     border: none;
     border-radius: 50px; /* Botón ovalado */
@@ -372,7 +399,7 @@ body {
 }
 
 .cta-button:hover {
-    background-color: #FF7F33; /* Naranja ligeramente más claro en hover */
+    background-color: #FF7F33 !important; /* Naranja ligeramente más claro en hover */
     transform: translateY(-3px); /* Efecto de "levantar" */
     box-shadow: 0 6px 15px rgba(255, 92, 0, 0.6);
 }
@@ -411,9 +438,9 @@ body {
 }
 
 .testimonios-grid {
-    display: grid;
+    display: grid !important; /* MODIFICADO: Forzar display: grid */
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 50px !important; /* MODIFICADO: Forzar el gap */
     max-width: 1000px;
     margin: 0 auto; /* Centra el grid */
 }
@@ -431,7 +458,7 @@ body {
 }
 
 .testimonio-item p {
-    color: var(--color-text-light); /* Blanco */
+    color: #333; /* MODIFICADO: Cambiado a gris muy oscuro para legibilidad por defecto */
     font-size: 12px; /* Tamaño exacto de Penpot */
     font-weight: 300; /* Light de Penpot */
     line-height: 1.2; /* Ajustado para Penpot */
@@ -441,7 +468,7 @@ body {
 .testimonio-item .autor {
     font-size: 12px; /* Tamaño exacto de Penpot */
     font-weight: 300; /* Light de Penpot */
-    color: var(--color-text-gray); /* Gris claro de Penpot */
+    color: #555; /* MODIFICADO: Cambiado a gris medio para legibilidad por defecto */
     font-style: normal; /* No cursiva en Penpot */
     text-align: right;
     margin-top: auto;
@@ -460,22 +487,8 @@ body {
     font-size: 0.9em;
 }
 
-
-
 /* Estilos para el Pie de Página (Footer) */
-.footer-section {
-    /* Degradado animado con colores más perceptibles y velocidad ajustada */
-    background-image: linear-gradient(45deg, var(--color-background-dark), #333333, var(--color-background-dark));
-    background-size: 250% 250%; /* Permite el movimiento del degradado más pronunciado */
-    animation: animateBackgroundGradient 8s linear infinite alternate; /* Animación de fondo más rápida */
-    color: var(--color-text-light);
-    padding: 40px 20px;
-    margin-top: 40px;
-    width: 100%;
-    text-align: center;
-    position: relative; /* También a esta sección para futuros efectos o z-index */
-    overflow: hidden;
-}
+/* NOTA: La regla .footer-section ya está definida al inicio del archivo, se elimina la duplicidad aquí. */
 
 .footer-content {
     margin-bottom: 20px;
@@ -509,16 +522,18 @@ body {
     display: inline-block;
     margin: 0 15px;
     font-size: 1.1em;
-    color: #FFFFFF; /* Cambiado a blanco */
+    /* MODIFICADO: Color de los iconos sociales del footer a negro */
+    color: var(--color-background-dark); 
     border-radius: 5px; /* Opcional: para esquinas ligeramente redondeadas */
     text-decoration: none; /* Opcional: para quitar el subrayado por defecto */
-
+    /* NUEVO: Animación glitch para los iconos sociales del footer */
+    animation: glitchEffect 2.5s infinite alternate;
 }
 
 .copyright {
     font-size: 0.9em;
     font-weight: 400;
-    color: var(--color-text-gray); /* Gris claro como en Penpot */
+    color: var(--color-background-dark); /* Gris claro como en Penpot */
     margin-top: 20px;
 }
 
@@ -538,19 +553,16 @@ body {
         height: 50px;
     }
     .sticky-header-content.is-sticky .frequency-wave-container {
-        height: 35px;
-        width: 120px;
-    }
+        height: 50px; /* AJUSTE PARA TABLETAS: Aseguramos que la onda se vea bien */
+        width: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+        }
     .frequency-wave-container {
-    height: 100px;
-    overflow: hidden;
-    position: absolute; /* CAMBIADO: Vuelve a ser absoluto */
-    left: 0; /* NUEVO: Se ancla al borde izquierdo */
-    right: 0; /* NUEVO: Se ancla al borde derecho */
-    top: 0px;
-    width: auto; /* CAMBIADO: Permitimos que left/right definan el ancho */
-    z-index: 9998;
-}
+        height: 100px; /* Mantén la altura normal de la onda */
+        top: 300px; /* Ajuste vertical para tabletas si es necesario */
+        width: 100%;
+    }
     .lightbulb-container {
         width: 70px;
         height: 161px; /* Ajuste de altura para tabletas (70px * 2.3) */
@@ -559,6 +571,266 @@ body {
 
     .prototipos-grid {
         grid-template-columns: 1fr 1fr; /* 2 columnas en tabletas */
+    }
+}
+
+/* Para pantallas grandes (escritorios, min-width: 1024px) */
+@media (min-width: 1024px) {
+    .hero-section {
+        padding: 80px 60px 220px 60px; /* Ajustado el PADDING INFERIOR para escritorio */
+    }
+    /* Ajustes para el sticky header en escritorio */
+    .sticky-header-content.is-sticky {
+        height: 80px; /* Altura estándar para escritorio */
+    }
+    .sticky-header-content.is-sticky .logo-animado {
+        width: 60px;
+        height: 60px;
+    }
+    .sticky-header-content.is-sticky .frequency-wave-container {
+        height: 60px; /* AJUSTE PARA ESCRITORIOS: Aseguramos que la onda se vea bien */
+        width: 100%; /* Asegura el 100% del ancho */
+        transform: translateY(-50%);
+    }
+    
+    .frequency-wave-container {
+        height: 100px; /* Mantén la altura normal de la onda */
+        top: 300px; /* Ajuste vertical para escritorios si es necesario */
+        width: 100%;
+    }
+    .lightbulb-container {
+        width: 80px;
+        height: 192px; /* Ajuste de altura para escritorios (80px * 2.3) */
+        bottom: 0; /* Ancla el contenedor a la parte inferior de hero-section */
+    }
+
+    .prototipos-grid {
+        grid-template-columns: 1fr 1fr 1fr 1fr; /* 4 columnas en escritorio */
+    }
+}
+
+/* Ajustar padding del body para compensar el header fijo */
+body.sticky-header-active { /* Esta clase será añadida por JS cuando el header sticky esté activo */
+    padding-top: 80px; /* Altura del header sticky */
+}
+
+/* Media queries para el padding del body en modo sticky */
+@media (min-width: 768px) {
+    body.sticky-header-active {
+        padding-top: 70px; /* Ajuste para la altura del header sticky en tabletas */
+    }
+}
+
+@media (min-width: 1024px) {
+    body.sticky-header-active {
+        padding-top: 80px; /* Ajuste para la altura del header sticky en escritorios */
+    }
+}
+
+/* MODIFICADO: Las animaciones de revelado de secciones ahora se aplican a las tarjetas de acordeón */
+/* Cuando el body tiene 'revealed', las tarjetas de acordeón se animan para aparecer */
+/* NOTA: Estas reglas se han movido y ajustado en la sección #accordion-container.revealed .accordion-card */
+
+/* --- NUEVOS ESTILOS PARA EL ACORDEÓN 3D FLOTANTE --- */
+
+/* Contenedor principal de las tarjetas de acordeón */
+#accordion-container {
+    width: 100%;
+    max-width: 900px; /* Mismo ancho máximo que tus secciones */
+    margin: 40px auto; /* Espacio superior e inferior */
+    display: none; /* INICIALMENTE OCULTO COMPLETAMENTE */
+    flex-direction: column;
+    gap: 20px; /* Espacio entre las tarjetas */
+    /* Eliminamos opacity, visibility, max-height, overflow y transition de aquí */
+    /* La transición de aparición de las tarjetas se manejará en .accordion-card */
+}
+
+/* Cuando la bombilla se enciende, el contenedor de acordeón se revela */
+#accordion-container.revealed {
+    display: flex; /* REVELADO: Se muestra como flexbox */
+    /* Eliminamos opacity, transform, visibility, max-height, overflow de aquí */
+}
+
+/* Estilos base para cada tarjeta de acordeón */
+.accordion-card {
+    margin-bottom: 20px;
+    border-radius: 12px; /* Bordes más redondeados para un look moderno */
+    overflow: hidden; /* Asegura que el contenido no se salga */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), /* Sombra principal para efecto 3D */
+                0 0 40px rgba(255, 255, 255, 0.05) inset; /* Brillo interno sutil */
+    transition: all 0.8s ease-in-out, transform 0.3s ease-out; /* Transiciones suaves */
+    position: relative; /* Para el efecto flotante */
+    transform-style: preserve-3d; /* CLAVE para el efecto 3D */
+    perspective: 1000px; /* Perspectiva para el giro 3D */
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Borde sutil */
+
+    /* CLAVE: Ocultar cada tarjeta individualmente por defecto */
+    opacity: 0;
+    transform: translateY(50px);
+    visibility: hidden;
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out, visibility 0.8s ease-out; /* Transición para la animación de entrada */
+}
+
+/* Efecto flotante 3D al pasar el ratón */
+.accordion-card:hover {
+    transform: translateY(-8px) rotateX(2deg) rotateY(-2deg); /* Ligeramente arriba y rotado */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6),
+                0 0 50px rgba(255, 255, 255, 0.1) inset;
+}
+
+/* Cuando el contenedor principal se revela, las tarjetas individuales se animan */
+#accordion-container.revealed .accordion-card {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+}
+
+/* Retrasos escalonados para la animación de entrada */
+#accordion-container.revealed .accordion-card:nth-child(1) { animation-delay: 0.4s; }
+#accordion-container.revealed .accordion-card:nth-child(2) { animation-delay: 0.6s; }
+#accordion-container.revealed .accordion-card:nth-child(3) { animation-delay: 0.8s; }
+#accordion-container.revealed .accordion-card:nth-child(4) { animation-delay: 1.0s; }
+
+
+/* Colores de fondo para cada tipo de tarjeta, coincidiendo con sus secciones */
+.filosofia-card {
+    background-color: var(--color-gray-section); /* Gris oscuro */
+}
+
+.prototipos-card {
+    background-color: var(--color-blue-section); /* Azul oscuro */
+}
+
+.testimonios-card {
+    background-color: var(--color-gray-section); /* Gris oscuro */
+}
+
+.footer-card {
+    background-color: var(--color-background-dark); /* Negro */
+}
+
+/* Encabezado de la tarjeta */
+.accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    color: var(--color-text-light);
+    font-weight: 700; /* Bold para el título */
+    font-size: 1.4em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* Línea divisoria sutil */
+    transition: background-color 0.3s ease;
+}
+
+.accordion-header h2 {
+    margin: 0; /* Elimina márgenes por defecto del h2 */
+    font-size: 1.2em; /* Ajustado para el tamaño del header de la tarjeta */
+    font-weight: 900; /* Extra Bold como tus títulos de sección */
+    text-shadow: 
+        2px 2px 4px rgba(0,0,0,0.7), /* Sombra para relieve */
+        -2px -2px 4px rgba(255,255,255,0.2); /* Luz para relieve */
+    animation: glitchEffect 2.5s infinite alternate; /* Mantenemos el glitch en los títulos */
+}
+
+.accordion-icon {
+    font-size: 1.8em; /* Tamaño del icono + / - */
+    font-weight: 300; /* Ligero */
+    transition: transform 0.3s ease;
+    user-select: none; /* Evita que el texto del icono sea seleccionable */
+}
+
+/* Contenido de la tarjeta (sección real) */
+.accordion-content {
+    max-height: 0; /* Inicialmente colapsado */
+    overflow: hidden; /* Asegura que el contenido no se desborde */
+    transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out; /* Transición suave */
+    padding: 0 25px; /* Padding horizontal, vertical se animará */
+    overflow-y: auto; /* Permite el scroll vertical si el contenido excede el max-height */
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Cuando la tarjeta está expandida */
+.accordion-card.expanded .accordion-content {
+    max-height: 9999px; /* Suficientemente grande para cualquier contenido */
+    padding-top: 25px; /* Añade padding superior al expandir */
+    padding-bottom: 25px; /* Añade padding inferior al expandir */
+}
+
+/* Estilos para las secciones internas dentro del acordeón */
+/* Aseguramos que las secciones dentro del acordeón no tengan margen superior extra */
+.accordion-content section,
+.accordion-content footer { /* CORREGIDO: Incluir footer aquí */
+    margin-top: 0 !important; /* Anula el margin-top de las secciones originales */
+    padding: 0 !important; /* Anula el padding de las secciones originales, se maneja por .accordion-content */
+    background-image: none !important; /* Elimina el degradado de fondo de las secciones, lo tiene la tarjeta */
+    animation: none !important; /* Desactiva animaciones de fondo de las secciones */
+    border-radius: 0 !important; /* Elimina border-radius de las secciones */
+    box-shadow: none !important; /* Elimina sombras de las secciones */
+    display: block !important; /* Asegura que la sección interna sea visible dentro de la tarjeta expandida */
+    opacity: 1 !important; /* Asegura que la sección interna sea visible */
+    transform: none !important; /* Elimina transformaciones de la sección interna */
+    position: relative !important; /* Asegura el posicionamiento para el contenido interno */
+    overflow: visible !important; /* Permite que el contenido interno se muestre */
+}
+
+/* Ajustes específicos para el contenido dentro de las secciones acordeón */
+.accordion-content .filosofia-section .content-box,
+.accordion-content .filosofia-section .golden-circle {
+    /* Restauramos los estilos de z-index y posición si es necesario */
+    position: relative;
+    z-index: 1;
+}
+
+/* Asegurar que las partículas se muestren solo dentro de la tarjeta de filosofía expandida */
+.accordion-card.filosofia-card .accordion-content #tsparticles {
+    display: block; /* Muestra el contenedor de partículas */
+}
+/* Ocultar las partículas cuando la tarjeta no está expandida */
+.accordion-card:not(.expanded) .accordion-content #tsparticles {
+    display: none;
+}
+
+/* Ajustes para el texto dentro de las secciones para que se vea bien en las tarjetas */
+.accordion-content .filosofia-section h2,
+.accordion-content .prototipos-section h2,
+.accordion-content .prototipos-section p, /* Agregado para que el texto de prototipos se vea bien */
+.accordion-content .testimonios-section h2 {
+    display: none; /* Oculta los títulos de sección duplicados dentro del contenido expandido */
+}
+
+.accordion-content .prototipos-section p {
+    margin-bottom: 15px; /* Ajusta margen para que no haya doble margen */
+}
+.accordion-content .testimonios-section .testimonio-foto-placeholder {
+    margin-top: 0; /* Ajusta margen para que no haya doble margen */
+}
+/* CORREGIDO: Asegurar que el contenido del footer se muestre correctamente */
+.accordion-content .footer-section .footer-content,
+.accordion-content .footer-section .copyright {
+    display: block !important; /* Asegura que estos elementos no estén ocultos por alguna regla */
+    opacity: 1 !important; /* Asegura que sean completamente visibles */
+    /* Puedes añadir más ajustes de margen/padding si es necesario */
+}
+
+
+/* Media Queries para las tarjetas de acordeón */
+@media (min-width: 768px) {
+    #accordion-container {
+        gap: 30px; /* Más espacio entre tarjetas en pantallas grandes */
+    }
+    .accordion-header {
+        padding: 20px 25px; /* Revertido a valores originales para consistencia */
+        font-size: 1.4em; /* Revertido a valores originales para consistencia */
+    }
+    .accordion-header h2 {
+        font-size: 1.2em; /* Revertido a valores originales para consistencia */
+    }
+    .accordion-icon {
+        font-size: 1.8em; /* Revertido a valores originales para consistencia */
+    }
+    .accordion-content {
+        padding: 0 25px; /* Revertido a valores originales para consistencia */
     }
 }
 
@@ -615,25 +887,8 @@ body.sticky-header-active { /* Esta clase será añadida por JS cuando el header
 
 /* MODIFICADO: Las animaciones de revelado de secciones ahora se aplican a las tarjetas de acordeón */
 /* Cuando el body tiene 'revealed', las tarjetas de acordeón se animan para aparecer */
-#accordion-container.revealed .accordion-card:nth-child(1) {
-    animation-delay: 0.2s;
-    animation: fadeInScaleUp 0.8s ease-out forwards;
-}
+/* NOTA: Estas reglas se han movido y ajustado en la sección #accordion-container.revealed .accordion-card */
 
-#accordion-container.revealed .accordion-card:nth-child(2) {
-    animation-delay: 0.4s;
-    animation: fadeInScaleUp 0.8s ease-out forwards;
-}
-
-#accordion-container.revealed .accordion-card:nth-child(3) {
-    animation-delay: 0.6s;
-    animation: fadeInScaleUp 0.8s ease-out forwards;
-}
-
-#accordion-container.revealed .accordion-card:nth-child(4) {
-    animation-delay: 0.8s;
-    animation: fadeInScaleUp 0.8s ease-out forwards;
-}
 
 /* Nueva animación para el efecto de aparición de las tarjetas */
 @keyframes fadeInScaleUp {
@@ -724,10 +979,16 @@ body.sticky-header-active { /* Esta clase será añadida por JS cuando el header
 }
 
 .testimonio-item:hover {
-    background-color: rgba(255, 255, 255, 0.05);
-    border-color: var(--color-accent-gold);
+    background-color: #333; /* Fondo oscuro al pasar el cursor (gris muy oscuro/casi negro) */
+    border-color: #333; /* Borde también oscuro */
     transform: translateY(-3px);
 }
+
+.testimonio-item:hover p,
+.testimonio-item:hover .autor {
+    color: var(--color-text-light); /* Cambiar texto a blanco al pasar el cursor */
+}
+
 
 .bulb-svg {
     transition: transform 0.2s ease;
@@ -827,13 +1088,13 @@ body.sticky-header-active { /* Esta clase será añadida por JS cuando el header
     position: absolute; /* CAMBIADO: Vuelve a ser absoluto */
     left: 0; /* NUEVO: Se ancla al borde izquierdo */
     right: 0; /* NUEVO: Se ancla al borde derecho */
-    top: 100px;
-    z-index: 0;
+    top: 97px;
+    z-index: 9998;
     width: auto; /* CAMBIADO: Permite que left/right definan el ancho. Opcionalmente, puedes usar width: 100%; */
 }
 
 .frequency-wave {
-    width: 200%; /* Doble ancho para permitir la animación de bucle suave */
+    width: 220%; /* Doble ancho para permitir la animación de bucle suave */
     height: 100%;
     position: absolute;
     top: 0;
@@ -894,36 +1155,39 @@ body.sticky-header-active { /* Esta clase será añadida por JS cuando el header
     animation: swingChain 2s ease-in-out infinite alternate; /* Aplicamos la animación aquí */
 }
 
-.bulb-svg {
-    width: 100%; /* El SVG ocupa el 100% del ancho de su contenedor */
-    height: 100%; /* El SVG ocupa el 100% del alto de su contenedor */
-    display: block;
-    pointer-events: all; /* El SVG de la bombilla sí es clickeable */
+/* Clase para ocultar la bombilla (si se usa en JS, aunque no la estamos usando activamente ahora) */
+.lightbulb-container.hidden-bulb {
+    opacity: 0;
+    pointer-events: none; /* Deshabilita clics cuando está oculta */
+    transform: translate(-50%, -50px); /* Opcional: moverla un poco hacia arriba al ocultar */
 }
 
-/* Vidrio de la bombilla */
+/* Estilos del SVG de la bombilla */
+.bulb-svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible; /* Permitir que el glow se extienda */
+}
+
 .bulb-glass {
-    fill: #1f1f1f;
+    fill: #FFFFFF; /* Color del vidrio de la bombilla apagada */
     stroke: #888;
     stroke-width: 2;
+    transition: fill 0.5s ease-out;
 }
 
-/* Reflejo blanco en la bombilla */
+.bulb-svg.on .bulb-glass {
+    fill: #fff6d2 !important; /* Color del vidrio de la bombilla encendida */
+    stroke: #ffdc73 !important; /* Añadido !important */
+}
+
 .glass-reflection {
-    fill: white;
+    fill: #ffffff;
     opacity: 0.3;
 }
 
-/* Filamento */
-.filament {
-    fill: none;
-    stroke: #888;
-    stroke-width: 1.5;
-    stroke-linecap: round;
-}
-
 .base-top, .base-middle, .base-bottom {
-    fill: #696969;
+    fill: #696969; /* Color de la base metálica */
     stroke: #505050;
 }
 
@@ -954,240 +1218,204 @@ body.sticky-header-active { /* Esta clase será añadida por JS cuando el header
 /* Clase activa para encender */
 /* Ahora el selector es más específico y coincide con el JS */
 .bulb-svg.on .bulb-glow {
-    opacity: 0.4;
+    opacity: 0.4 !important; /* Añadido !important */
 }
 
-/* Clase activa para cambiar color del vidrio cuando está encendido */
-/* Ahora el selector es más específico y coincide con el JS */
-.bulb-svg.on .bulb-glass {
-    fill: #fff6d2;
-    stroke: #ffdc73;
-}
 /* Animación de balanceo para la bombilla y la cadena (aplicada al contenedor) */
 @keyframes swingChain {
     0% { transform: translateX(-50%) rotate(-3deg); }
     100% { transform: translateX(-50%) rotate(3deg); }
 }
 
-/* --- NUEVOS ESTILOS PARA EL ACORDEÓN 3D FLOTANTE --- */
+/* Corrección para eliminar la barra de desplazamiento en el footer */
+.footer-card .accordion-content {
+    overflow: hidden; /* Asegura que no haya barras de desplazamiento */
+}
 
-/* Contenedor principal de las tarjetas de acordeón */
-#accordion-container {
+/* Ajuste específico para el botón "Comprar Ahora" en el modal de la tienda */
+#buy-now-btn {
+    /* Forzamos el color de fondo naranja de tu variable --pa-arriba-orange-force */
+    background-color: var(--pa-arriba-orange-force) !important;
+    /* Forzamos el color de texto blanco de tu variable --color-text-light */
+    color: var(--color-text-light) !important;
+    /* Aseguramos que la opacidad de Tailwind sea 1 para que el color no se vea transparente */
+    --tw-bg-opacity: 1 !important;
+    /* Aseguramos que no haya background-image que lo anule, ya que algunos navegadores pueden tenerla por defecto */
+    background-image: none !important;
+    /* Aseguramos que el borde sea sólido y del mismo color si es necesario, aunque 'border: none;' ya lo hace */
+    border: none !important;
+}
+
+/* Ajuste para el estado hover del botón */
+#buy-now-btn:hover {
+    background-color: var(--pa-arriba-orange-light) !important; /* Naranja ligeramente más claro en hover */
+}
+
+/* Aseguramos que los iconos de Font Awesome dentro de las tarjetas de categoría sean naranja */
+.category-card .fas,
+.category-card .far,
+.category-card .fab {
+    color: var(--pa-arriba-orange-force) !important; /* Forzamos el color naranja de tu marca */
+}
+
+/* =============================================================================
+   Estilos para las Secciones de Galería Dinámica y Certificaciones (CONSOLIDADO Y CORREGIDO)
+   ============================================================================= */
+.full-width-gallery-container {
     width: 100%;
-    max-width: 900px; /* Mismo ancho máximo que tus secciones */
-    margin: 40px auto; /* Espacio superior e inferior */
-    display: flex;
-    flex-direction: column;
-    gap: 20px; /* Espacio entre las tarjetas */
-    opacity: 0; /* Inicialmente oculto */
-    transform: translateY(50px); /* Ligeramente hacia abajo */
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    overflow: hidden; /* Oculta el desbordamiento para el carrusel */
+    background-color: var(--color-gray-section); /* Fondo al mismo gris de la landing */
+    padding-bottom: 50px; /* Espacio debajo del carrusel */
 }
 
-/* Cuando la bombilla se enciende, el contenedor de acordeón se revela */
-#accordion-container.revealed {
-    opacity: 1;
-    transform: translateY(0);
+.full-width-gallery-container h2 {
+    color: var(--color-text-light); /* Título en blanco */
+    margin-top: 50px; /* Margen superior para el título */
+    margin-bottom: 30px; /* Margen inferior para el título */
 }
 
-/* Estilos base para cada tarjeta de acordeón */
-.accordion-card {
-    border-radius: 12px; /* Bordes más redondeados para un look moderno */
-    overflow: hidden; /* Asegura que el contenido no se salga */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), /* Sombra principal para efecto 3D */
-                0 0 40px rgba(255, 255, 255, 0.05) inset; /* Brillo interno sutil */
-    transition: all 0.4s ease-in-out, transform 0.3s ease-out; /* Transiciones suaves */
-    position: relative; /* Para el efecto flotante */
-    transform-style: preserve-3d; /* CLAVE para el efecto 3D */
-    perspective: 1000px; /* Perspectiva para el giro 3D */
-    cursor: pointer;
-    border: 1px solid rgba(255, 255, 255, 0.1); /* Borde sutil */
-}
-
-/* Efecto flotante 3D al pasar el ratón */
-.accordion-card:hover {
-    transform: translateY(-8px) rotateX(2deg) rotateY(-2deg); /* Ligeramente arriba y rotado */
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6),
-                0 0 50px rgba(255, 255, 255, 0.1) inset;
-}
-
-/* Colores de fondo para cada tipo de tarjeta, coincidiendo con sus secciones */
-.filosofia-card {
-    background-color: var(--color-gray-section); /* Gris oscuro */
-}
-
-.prototipos-card {
-    background-color: var(--color-blue-section); /* Azul oscuro */
-}
-
-.testimonios-card {
-    background-color: var(--color-gray-section); /* Gris oscuro */
-}
-
-.footer-card {
-    background-color: var(--color-background-dark); /* Negro */
-}
-
-/* Encabezado de la tarjeta */
-.accordion-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 25px;
-    color: var(--color-text-light);
-    font-weight: 700; /* Bold para el título */
-    font-size: 1.4em;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* Línea divisoria sutil */
-    transition: background-color 0.3s ease;
-}
-
-.accordion-header h2 {
-    margin: 0; /* Elimina márgenes por defecto del h2 */
-    font-size: 1.2em; /* Ajustado para el tamaño del header de la tarjeta */
-    font-weight: 900; /* Extra Bold como tus títulos de sección */
-    text-shadow: 
-        2px 2px 4px rgba(0,0,0,0.7), /* Sombra para relieve */
-        -2px -2px 4px rgba(255,255,255,0.2); /* Luz para relieve */
-    animation: glitchEffect 2.5s infinite alternate; /* Mantenemos el glitch en los títulos */
-}
-
-.accordion-icon {
-    font-size: 1.8em; /* Tamaño del icono + / - */
-    font-weight: 300; /* Ligero */
-    transition: transform 0.3s ease;
-    user-select: none; /* Evita que el texto del icono sea seleccionable */
-}
-
-/* Contenido de la tarjeta (sección real) */
-.accordion-content {
-    max-height: 0; /* Inicialmente colapsado */
-    /* Eliminamos overflow: hidden aquí para permitir el scroll interno */
-    transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out; /* Transición suave */
-    padding: 0 25px; /* Padding horizontal, vertical se animará */
-    overflow-y: auto; /* Permite el scroll vertical si el contenido excede el max-height */
-    -webkit-overflow-scrolling: touch; /* Mejora el scroll en iOS */
-}
-
-/* Cuando la tarjeta está expandida */
-.accordion-card.expanded .accordion-content {
-    max-height: 9999px; /* Suficientemente grande para cualquier contenido */
-    padding-top: 25px; /* Añade padding superior al expandir */
-    padding-bottom: 25px; /* Añade padding inferior al expandir */
-}
-
-/* Estilos para las secciones internas dentro del acordeón */
-/* Aseguramos que las secciones dentro del acordeón no tengan margen superior extra */
-.accordion-content section,
-.accordion-content footer { /* CORREGIDO: Incluir footer aquí */
-    margin-top: 0 !important; /* Anula el margin-top de las secciones originales */
-    padding: 0 !important; /* Anula el padding de las secciones originales, se maneja por .accordion-content */
-    background-image: none !important; /* Elimina el degradado de fondo de las secciones, lo tiene la tarjeta */
-    animation: none !important; /* Desactiva animaciones de fondo de las secciones */
-    border-radius: 0 !important; /* Elimina border-radius de las secciones */
-    box-shadow: none !important; /* Elimina sombras de las secciones */
-    display: block !important; /* Asegura que la sección interna sea visible dentro de la tarjeta expandida */
-    opacity: 1 !important; /* Asegura que la sección interna sea visible */
-    transform: none !important; /* Elimina transformaciones de la sección interna */
-    position: relative !important; /* Asegura el posicionamiento para el contenido interno */
-    overflow: visible !important; /* Permite que el contenido interno se muestre */
-}
-
-/* Ajustes específicos para el contenido dentro de las secciones acordeón */
-.accordion-content .filosofia-section .content-box,
-.accordion-content .filosofia-section .golden-circle {
-    /* Restauramos los estilos de z-index y posición si es necesario */
+.carousel-wrapper {
+    overflow: hidden; /* Asegura que solo se vea el contenido del carrusel */
+    width: 100%;
     position: relative;
-    z-index: 1;
+    padding: 20px 0; /* Un poco de padding vertical para las imágenes */
 }
 
-/* Asegurar que las partículas se muestren solo dentro de la tarjeta de filosofía expandida */
-.accordion-card.filosofia-card .accordion-content #tsparticles {
-    display: block; /* Muestra el contenedor de partículas */
-}
-/* Ocultar las partículas cuando la tarjeta no está expandida */
-.accordion-card:not(.expanded) .accordion-content #tsparticles {
-    display: none;
+.carousel-track {
+    display: flex;
+    white-space: nowrap; /* Evita que los ítems se envuelvan */
+    animation: scrollCarousel 80s linear infinite; /* MODIFICADO: Aumentado la duración para más items */
+    will-change: transform; /* Optimización para la animación */
 }
 
-/* Ajustes para el texto dentro de las secciones para que se vea bien en las tarjetas */
-.accordion-content .filosofia-section h2,
-.accordion-content .prototipos-section h2,
-.accordion-content .testimonios-section h2 {
-    display: none; /* Oculta los títulos de sección duplicados dentro del contenido expandido */
+/* Estilos generales para los ítems del carrusel (por defecto para las imágenes de la galería) */
+.carousel-item {
+    flex-shrink: 0; /* Evita que los ítems se encojan */
+    width: 300px; /* Ancho base para las imágenes de la galería */
+    height: 225px; /* Altura base para las imágenes de la galería (proporción 4:3) */
+    margin-right: 20px; /* Espacio entre imágenes */
+    border-radius: 12px; /* Bordes redondeados */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Sombra para profundidad */
+    transition: transform 0.3s ease-in-out; /* Transición suave para el efecto de expansión */
+    cursor: pointer; /* Indica que es interactuable */
+    border: 3px solid transparent; /* Borde transparente por defecto */
+    position: relative; /* Necesario para posicionar el overlay */
+    overflow: hidden; /* Oculta el contenido que se desborda al escalar */
 }
 
-.accordion-content .prototipos-section p {
-    margin-bottom: 15px; /* Ajusta margen para que no haya doble margen */
-}
-.accordion-content .testimonios-section .testimonio-foto-placeholder {
-    margin-top: 0; /* Ajusta margen para que no haya doble margen */
-}
-/* CORREGIDO: Asegurar que el contenido del footer se muestre correctamente */
-.accordion-content .footer-section .footer-content,
-.accordion-content .footer-section .copyright {
-    display: block !important; /* Asegura que estos elementos no estén ocultos por alguna regla */
-    opacity: 1 !important; /* Asegura que sean completamente visibles */
-    /* Puedes añadir más ajustes de margen/padding si es necesario */
+/* Estilos para la imagen dentro del carousel-item (general) */
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
+    display: block; /* Elimina espacio extra debajo de la imagen */
 }
 
+/* Estilos específicos para los ítems de logotipos (SOBRESCRITOS para .carousel-item) */
+.carousel-item.logo-item {
+    width: 180px; /* Ancho más pequeño para los logotipos */
+    height: 180px; /* Altura igual para que sean cuadrados */
+    margin-right: 30px; /* Más espacio entre logos */
+    background-color: white; /* Fondo blanco para los logos */
+    display: flex; /* Para centrar el logo verticalmente */
+    align-items: center;
+    justify-content: center;
+    padding: 10px; /* Padding interno para el logo */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra más suave para logos */
+}
 
-/* Media Queries para las tarjetas de acordeón */
-@media (min-width: 768px) {
-    #accordion-container {
-        gap: 30px; /* Más espacio entre tarjetas en pantallas grandes */
+/* Estilos específicos para la imagen dentro de un logo-item */
+.carousel-item.logo-item img {
+    width: 80%; /* Hacer el logo un poco más pequeño dentro del contenedor */
+    height: 80%;
+    object-fit: contain; /* CRÍTICO: 'contain' para logos para que no se corten o distorsionen */
+}
+
+/* Estilos para el overlay de texto */
+.carousel-item-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo semitransparente oscuro, un poco más opaco */
+    display: flex;
+    flex-direction: column; /* Para texto y quizás un icono */
+    align-items: center;
+    justify-content: center;
+    opacity: 0; /* Inicialmente invisible */
+    transition: opacity 0.3s ease-in-out; /* Transición suave para la aparición */
+    pointer-events: none; /* Permite hacer clic en la imagen subyacente si es necesario */
+    padding: 10px; /* Padding para el texto del overlay */
+}
+
+.overlay-text {
+    color: white;
+    font-size: 1.2em; /* Tamaño de fuente ajustado para logos */
+    font-weight: bold; /* Negrita */
+    text-align: center;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* Sombra para mejor legibilidad */
+    font-family: 'Montserrat', sans-serif; /* Fuente de tu marca */
+    white-space: normal; /* Permite que el texto se envuelva */
+    line-height: 1.2;
+}
+
+/* Efecto de expansión y aparición del overlay al pasar el cursor */
+.carousel-item:hover {
+    transform: scale(1.2); /* Expansión del 20% */
+    border-color: var(--pa-arriba-orange-force); /* Borde de color de marca al hover */
+    z-index: 10; /* Asegura que la imagen expandida esté por encima */
+}
+
+.carousel-item:hover .carousel-item-overlay {
+    opacity: 1; /* Hace visible el overlay al pasar el cursor */
+}
+
+/* Animación de desplazamiento del carrusel */
+@keyframes scrollCarousel {
+    from {
+        transform: translateX(0);
     }
-    .accordion-header {
-        padding: 25px 35px;
-        font-size: 1.6em;
-    }
-    .accordion-header h2 {
-        font-size: 1.4em;
-    }
-    .accordion-icon {
-        font-size: 2em;
-    }
-    .accordion-content {
-        padding: 0 35px;
-    }
-    .accordion-card.expanded .accordion-content {
-        padding-top: 35px;
-        padding-bottom: 35px;
+    to {
+        transform: translateX(-50%); /* Se desplaza la mitad del track (el duplicado) */
     }
 }
 
-/* Animación de entrada para las tarjetas cuando se revela el contenedor */
-/* Esta animación ya está definida arriba en @keyframes fadeInScaleUp */
-
-/* Estilos para el encabezado de la sección Tienda */
-.shop-header i,
-.shop-header h2 {
-    color: #FF5C00; /* Este es un color "Tomate" vibrante, puedes ajustarlo si tienes un hex específico de tu marca */
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .carousel-item {
+        width: 250px; /* Ancho más pequeño en móviles */
+        height: 187.5px; /* Altura ajustada */
+        margin-right: 15px;
+    }
+    .carousel-track {
+        animation: scrollCarousel 60s linear infinite; /* Animación más rápida en móviles */
+    }
+    .overlay-text {
+        font-size: 1em; /* Tamaño de fuente ajustado para móviles */
+    }
+    .carousel-item.logo-item {
+        width: 120px; /* Ancho más pequeño en móviles */
+        height: 120px; /* Altura ajustada */
+        margin-right: 20px;
+    }
 }
 
-/* Clase para forzar el color naranja de la marca */
-.text-pa-arriba-orange-force {
-    color: var(--color-orange-accent);
-}
-
-.bg-pa-arriba-orange-force {
-    background-color: var(--color-orange-accent);
-}
-
-/* SOLUCIÓN FORZADA PARA .sticky-header-wrapper: Asegura que ocupe el ancho completo */
-.sticky-header-wrapper {
-    width: 100% !important; /* Fuerza el ancho al 100% */
-    max-width: 100% !important; /* Asegura que no haya un límite de ancho */
-    box-sizing: border-box !important; /* Asegura que el padding y el borde se incluyan en el ancho */
-    /* Si tiene un height fijo que lo esté limitando, también deberíamos forzarlo a auto. */
-    height: auto !important; /* Permite que la altura se ajuste al contenido */
-}
-
-/* Nueva clase para el subtítulo o párrafo de la tienda, con los mismos estilos de .prototipos-section p */
-.store-subtitle-paragraph {
-    color: var(--color-text-light); /* Color de texto blanco (tu variable personalizada) */
-    font-size: 14px; /* Tamaño de fuente */
-    font-weight: 300; /* Grosor de la fuente */
-    max-width: 800px; /* Ancho máximo */
-    margin: 0 auto 30px auto; /* Centrado y margen inferior */
-    line-height: 1.2; /* Altura de línea */
+@media (max-width: 480px) {
+    .carousel-item {
+        width: 200px; /* Ancho aún más pequeño en móviles muy pequeños */
+        height: 150px;
+        margin-right: 10px;
+    }
+    .carousel-track {
+        animation: scrollCarousel 60s linear infinite; /* Animación aún más rápida */
+    }
+    .overlay-text {
+        font-size: 0.9em; /* Tamaño de fuente ajustado para móviles pequeños */
+    }
+    .carousel-item.logo-item {
+        width: 100px; /* Ancho aún más pequeño en móviles muy pequeños */
+        height: 100px;
+        margin-right: 15px;
+    }
 }

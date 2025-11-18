@@ -1,60 +1,97 @@
-import os # Importa os para manejar rutas de archivos
+import os
+import logging
+from datetime import datetime
 from django.shortcuts import render
-from django.http import HttpResponse # Importa HttpResponse para servir contenido de texto
-from django.conf import settings # Importa settings para acceder a BASE_DIR
-
-# Importamos el modelo Post de la aplicación blog para obtener los artículos
+from django.http import HttpResponse
+from django.conf import settings
 from blog.models import Post
+from django.views.decorators.http import require_POST
 
-# Define la vista para la página principal (landing page)
+logger = logging.getLogger(__name__)
+
+# Página principal (landing page)
 def index(request):
-    """
-    Vista para la página principal que ahora también carga los últimos posts del blog.
-    """
-    # Obtener los 3 artículos de blog más recientes y publicados
-    # Asegúrate de que el campo 'is_published' y 'published_date' existan en tu modelo Post
-    latest_posts = Post.objects.filter(is_published=True).order_by('-published_date')[:3]
+    latest_posts = []
+    try:
+        latest_posts = Post.objects.filter(is_published=True).order_by('-published_date')[:3]
+    except Exception as e:
+        logger.error(f"Error al cargar los últimos posts del blog en la vista index: {e}")
 
-    # Crea un diccionario de contexto para pasar datos a la plantilla
-    context = {
-        'latest_posts': latest_posts # Pasamos los últimos posts a la plantilla
-    }
-    # Renderiza la plantilla 'core/index.html' con el contexto
+    context = {'latest_posts': latest_posts}
     return render(request, 'core/index.html', context)
 
-# Define la vista para la página de política de privacidad
+# Política de privacidad
 def privacy_policy(request):
-    """
-    Vista para la página de política de privacidad.
-    """
-    # Renderiza la plantilla 'core/privacy_policy.html' cuando se accede a la URL de política de privacidad
     return render(request, 'core/privacy_policy.html')
 
+# robots.txt con dominio forzado
 def robots_txt(request):
     """
-    Vista para servir el contenido del archivo robots.txt directamente.
-    Esto asegura que el archivo sea accesible en la raíz del dominio para los motores de búsqueda.
+    Sirve robots.txt apuntando al sitemap en tu dominio personalizado.
     """
-    # El contenido de robots.txt se define aquí directamente.
-    # Incluye la directiva Sitemap apuntando a la URL de tu sitemap.
-    return HttpResponse("User-agent: *\nAllow: /\n\nSitemap: https://pa-arriba-landing.onrender.com/sitemap.xml", content_type="text/plain")
+    base_url = getattr(settings, 'SITE_URL', 'https://pa-arriba.com').rstrip('/')
+    content = f"User-agent: *\nAllow: /\n\nSitemap: {base_url}/sitemap.xml"
+    return HttpResponse(content, content_type="text/plain")
 
+# sitemap.xml dinámico con dominio forzado
 def sitemap_xml(request):
     """
-    Vista para servir el archivo sitemap.xml estático.
-    Lee el contenido del archivo sitemap.xml desde la carpeta STATIC_ROOT
-    y lo devuelve con el Content-Type correcto.
+    Genera sitemap.xml dinámico usando el dominio configurado y tus posts publicados.
     """
-    # MODIFICADO: Construye la ruta absoluta al archivo sitemap.xml dentro de STATIC_ROOT.
-    # Aquí es donde collectstatic mueve el archivo en producción.
-    sitemap_path = os.path.join(settings.STATIC_ROOT, 'sitemap.xml')
+    host = request.get_host()
+    if 'onrender.com' in host:
+        base_url = 'https://pa-arriba.com'
+    else:
+        base_url = f'https://{host}'
+
+    static_urls = [
+        {"loc": f"{base_url}/", "lastmod": "2025-07-22", "changefreq": "daily", "priority": "1.0"},
+        {"loc": f"{base_url}/blog/", "lastmod": "2025-07-22", "changefreq": "daily", "priority": "0.8"},
+        {"loc": f"{base_url}/store/", "lastmod": "2025-07-22", "changefreq": "weekly", "priority": "0.7"},
+        {"loc": f"{base_url}/privacy-policy/", "lastmod": "2025-07-22", "changefreq": "monthly", "priority": "0.5"},
+    ]
+
+    # URLs de posts publicados
+    post_urls = []
     try:
-        # Abre y lee el contenido del archivo sitemap.xml
-        with open(sitemap_path, 'r') as f:
-            content = f.read()
-        # Devuelve el contenido como una respuesta HTTP con el tipo de contenido XML
-        return HttpResponse(content, content_type='application/xml')
-    except FileNotFoundError:
-        # En caso de que el archivo sitemap.xml no se encuentre
-        # Retorna un error 404.
-        return HttpResponse("Sitemap not found.", status=404, content_type="text/plain")
+        posts = Post.objects.filter(is_published=True).order_by('-published_date')
+        for p in posts:
+            lastmod = (p.published_date.date().isoformat()
+                       if hasattr(p, 'published_date') and p.published_date
+                       else datetime.utcnow().date().isoformat())
+            post_urls.append({
+                "loc": f"{base_url}/blog/{p.slug}/",
+                "lastmod": lastmod,
+                "changefreq": "monthly",
+                "priority": "0.9",
+            })
+    except Exception as e:
+        logger.error(f"Error al generar URLs de posts en sitemap: {e}")
+
+    # Construcción del XML
+    lines = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<!-- PA-ARRIBA SITEMAP V1 -->',  # ← Marca para confirmar que se ejecuta tu vista
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+    ]
+    for entry in static_urls + post_urls:
+        lines.extend([
+            '  <url>',
+            f'    <loc>{entry["loc"]}</loc>',
+            f'    <lastmod>{entry["lastmod"]}</lastmod>',
+            f'    <changefreq>{entry["changefreq"]}</changefreq>',
+            f'    <priority>{entry["priority"]}</priority>',
+            '  </url>'
+        ])
+    lines.append('</urlset>')
+    xml_content = "\n".join(lines)
+
+    return HttpResponse(xml_content, content_type='application/xml')
+
+@require_POST
+def diagnostico_submit(request):
+    """
+    Placeholder para recibir el POST del formulario del termómetro.
+    Integra aquí tu lógica (clasificación, envío a Google Sheets, etc.).
+    """
+    return HttpResponse('Formulario procesado correctamente.', status=200)

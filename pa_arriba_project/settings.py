@@ -10,35 +10,34 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
-import os # Necesario para os.environ.get y para construir rutas
+import os  # Necesario para os.environ.get y para construir rutas
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# MODIFICADO: Mejor práctica: obtener SECRET_KEY de una variable de entorno.
-# Usar un valor por defecto para desarrollo local si la variable no existe.
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-b5rp4(515x-@2el5=6_&7*7b#2yw1(=ju_9olo02m(4_lzssuq')
+SECRET_KEY = os.environ.get(
+    'DJANGO_SECRET_KEY',
+    'django-insecure-b5rp4(515x-@2el5=6_&7*7b#2yw1(=ju_9olo02m(4_lzssuq'
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# Usar variable de entorno: True solo en desarrollo local
-DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
+DEBUG = True
 
-# MODIFICADO: Configuración de ALLOWED_HOSTS para Render y desarrollo local
-# La URL de tu aplicación en Render: https://pa-arriba-landing.onrender.com
-ALLOWED_HOSTS = ['pa-arriba-landing.onrender.com', '127.0.0.1', 'localhost']
+# Configuración de ALLOWED_HOSTS para Render y dominio propio
+ALLOWED_HOSTS = ['pa-arriba.com', 'www.pa-arriba.com', '127.0.0.1', 'localhost']
 allowed_hosts_str = os.environ.get('DJANGO_ALLOWED_HOSTS')
 if allowed_hosts_str:
     ALLOWED_HOSTS.extend(allowed_hosts_str.split(','))
 
+# URL base del proyecto (usada en sitemap y robots.txt)
+SITE_URL = 'https://pa-arriba.com'
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -87,7 +86,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pa_arriba_project.wsgi.application'
 
-
 # Database
 DATABASES = {
     'default': {
@@ -96,15 +94,13 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
-    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',},
-    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',},
-    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',},
-    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
-
 
 # Internationalization
 LANGUAGE_CODE = 'es-ec'
@@ -112,24 +108,21 @@ TIME_ZONE = 'America/Guayaquil'
 USE_I18N = True
 USE_TZ = True
 
-
 # Static files
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'core', 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STORAGES = {
-    "default": {"BACKEND": "django.core.files.storage.FileSystemStorage",},
-    "staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",},
+    "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
+    "staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"},
 }
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 STATICFILES_IGNORE_PATTERNS = ['sitemaps/sitemap.xml']
 
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
