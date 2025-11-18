@@ -12,114 +12,99 @@ Diagnóstico Rápido de Negocios | Termómetro del Caos Emprendedor - Pa'Arriba
 {% block content %}
 <div class="container">
   <img src="{% static 'core/logo_pa_arriba.png' %}" alt="Logo Pa’Arriba" class="logo">
-<div class="banner-explicativo">
-  <h2>🧭 Diagnóstico Rápido de Negocios</h2>
-  <p>Responde 4 preguntas clave y descubre si tu negocio está en fase de <strong>CRECE</strong>, <strong>AVANZA</strong>, <strong>MEJORA</strong> o <strong>RE-EMPRENDE</strong>.</p>
-  <p>Este test te ayudará a identificar tu nivel de caos operativo y recibir orientación personalizada para avanzar.</p>
-</div>
-  <h1>Diagnóstico Rápido de Negocios</h1>
-  <div class="slogan">Crece · Avanza · Mejora · Re-emprende</div>
-  <div class="filosofia">
-    <p>Impulsamos la transformación digital de emprendedores empíricos y polifuncionales con soluciones accesibles, intuitivas y estratégicas que elevan la rentabilidad y la toma de decisiones.</p>
+
+  <div class="banner-explicativo">
+    <h2>🧭 Diagnóstico Rápido de Negocios</h2>
+    <p>Responde 4 preguntas clave y descubre si tu negocio está en fase de <strong>CRECE</strong>, <strong>AVANZA</strong>, <strong>MEJORA</strong> o <strong>RE-EMPRENDE</strong>.</p>
   </div>
 
-  <!-- Formulario principal -->
   <form method="post" action="{% url 'termometro:diagnostico_submit' %}" class="termometro-form" novalidate>
     {% csrf_token %}
 
-    <!-- Paso 1 -->
     <div class="wizard-step active" data-step="1" data-name="crece">
-      <h3>¿Sabes si tu negocio realmente está ganando dinero?</h3>
-      <p>Elige la opción que más se acerque a tu realidad:</p>
+      <h3 class="pregunta-principal">¿Sabes si tu negocio realmente está ganando dinero?</h3>
+      <p class="instruccion-principal">Elige la opción que más se acerque a tu realidad:</p>
       <div class="wizard-options">
-        <button type="button" data-value="Muy seguro" data-score="5">Muy seguro</button>
-        <button type="button" data-value="Tengo dudas" data-score="3">Tengo dudas</button>
-        <button type="button" data-value="No tengo idea" data-score="1">No tengo idea</button>
+        <button type="button" data-value="Muy seguro" data-score="5">Muy seguro (Tengo números claros)</button>
+        <button type="button" data-value="Tengo dudas" data-score="3">Tengo dudas (Lo calculo "a ojo")</button>
+        <button type="button" data-value="No tengo idea" data-score="1">No tengo idea (Me confundo con el dinero)</button>
       </div>
     </div>
 
-    <!-- Paso 2 -->
     <div class="wizard-step" data-step="2" data-name="avanza">
-      <h3>¿Tu negocio puede avanzar sin ti?</h3>
-      <p>Imagina que te tomas 7 días de vacaciones sin celular:</p>
+      <h3 class="pregunta-principal">¿Tu negocio puede avanzar sin ti?</h3>
+      <p class="instruccion-principal">Si te tomas 7 días de vacaciones sin celular:</p>
       <div class="wizard-options">
         <button type="button" data-value="Funcionaría sin problema" data-score="5">Funcionaría sin problema</button>
-        <button type="button" data-value="Se complicaría un poco" data-score="3">Se complicaría un poco</button>
-        <button type="button" data-value="Se paralizaría" data-score="1">Se paralizaría</button>
+        <button type="button" data-value="Se complicaría un poco" data-score="3">Se complicaría un poco (Me llamarían)</button>
+        <button type="button" data-value="Se paralizaría" data-score="1">Se paralizaría (El negocio depende de mí)</button>
       </div>
     </div>
 
-    <!-- Paso 3 -->
     <div class="wizard-step" data-step="3" data-name="mejora">
-      <h3>¿Cómo tomas decisiones en tu negocio?</h3>
-      <p>Selecciona lo que más refleja tu forma de decidir:</p>
+      <h3 class="pregunta-principal">¿Cómo tomas decisiones de inversión (ingredientes/personal)?</h3>
+      <p class="instruccion-principal">Te basas principalmente en:</p>
       <div class="wizard-options">
-        <button type="button" data-value="Datos y análisis" data-score="5">Datos y análisis</button>
-        <button type="button" data-value="Experiencia e intuición" data-score="3">Experiencia e intuición</button>
-        <button type="button" data-value="Lo que esté de moda" data-score="1">Lo que esté de moda</button>
+        <button type="button" data-value="Datos y análisis" data-score="5">Datos y análisis (Proyecciones)</button>
+        <button type="button" data-value="Experiencia e intuición" data-score="3">Experiencia e intuición (Lo que siento)</button>
+        <button type="button" data-value="Lo que esté de moda" data-score="1">Imitación (Lo que hace la competencia)</button>
       </div>
     </div>
 
-    <!-- Paso 4 -->
     <div class="wizard-step" data-step="4" data-name="reemprende">
-      <h3>¿Qué palabra define tu relación con la tecnología?</h3>
-      <p>Elige la opción que más te represente:</p>
+      <h3 class="pregunta-principal">¿Qué palabra define tu relación con la tecnología?</h3>
+      <p class="instruccion-principal">Sientes que la tecnología es:</p>
       <div class="wizard-options">
-        <button type="button" data-value="Aliada" data-score="5">Aliada</button>
-        <button type="button" data-value="Confusa" data-score="3">Confusa</button>
-        <button type="button" data-value="Amenazante" data-score="1">Amenazante</button>
+        <button type="button" data-value="Aliada" data-score="5">Aliada (Busco herramientas)</button>
+        <button type="button" data-value="Confusa" data-score="3">Confusa (Sé que la necesito pero no sé cuál)</button>
+        <button type="button" data-value="Amenazante" data-score="1">Amenazante (Es caro o difícil)</button>
       </div>
     </div>
 
-    <!-- Resumen intermedio -->
     <div class="summary-step" data-step="summary">
       <h3>📊 Tu diagnóstico inicial</h3>
       <p id="summaryText"></p>
       <p id="summaryScore"></p>
       <div class="cta">
-        <button type="button" id="goToStep5">Continuar y dejar mis datos</button>
+        <button type="button" id="goToStep5">Continuar para contactar a un experto</button>
       </div>
     </div>
 
-    <!-- Paso 5 -->
     <div class="wizard-step" data-step="5" data-name="captura">
-      <h3>Déjanos tus datos para ayudarte</h3>
+      <h3>Déjanos tus datos para agendar tu Asesoría con un Experto</h3>
       <div class="wizard-inputs">
-        <input type="text" name="nombre" placeholder="Tu nombre" required>
+        <input type="text" name="nombre" placeholder="Tu nombre completo" required>
         <input type="email" name="email" placeholder="Correo electrónico" required>
-        <input type="tel" name="whatsapp" placeholder="WhatsApp" required>
+        <input type="tel" name="whatsapp" placeholder="WhatsApp (Ej: +593...)" required>
         <select name="tipo_negocio" required>
           <option value="">Tipo de negocio</option>
           <option value="Comida o bebida">Comida o bebida</option>
           <option value="Servicios técnicos">Servicios técnicos</option>
           <option value="Venta de productos">Venta de productos</option>
+          <option value="Profesional Independiente">Profesional Independiente</option>
           <option value="Otro">Otro</option>
         </select>
       </div>
       <div class="cta">
-        <button type="submit">Enviar respuestas</button>
+        <button type="submit">Solicitar mi Asesoría Sin Costo</button>
       </div>
     </div>
 
     <div class="progress-bar"><div class="progress"></div></div>
   </form>
 
-  <!-- Mensaje de éxito -->
   <div class="success-message" id="successMessage">
-    ✅ ¡Respuestas enviadas con éxito! Gracias por participar en el Diagnóstico Rápido de Negocios.
+    ✅ ¡Enviando respuestas...!
   </div>
 
-  <!-- Modal de éxito -->
   <div id="successModal" class="modal">
     <div class="modal-content">
       <div class="modal-icon">✔️</div>
-      🎉 ¡Tus respuestas fueron recibidas con éxito!<br>
-      En instantes, uno de nuestros especialistas se pondrá en contacto contigo para ayudarte a transformar tu negocio.
-      <br><br>
-      <button id="closeModal">Cerrar ahora</button>
-      <a href="{% url 'core:index' %}" style="margin-top: 1rem; color: #FF5C00; display: block;">
-        Quiero seguir transformando mi negocio con Pa’Arriba
-      </a>
+      <h3>¡Respuestas recibidas!</h3>
+      <p>Tu diagnóstico ha sido generado exitosamente.</p>
+      <p>Un experto analizará tus resultados y te contactará para tu <strong>asesoría sin costo</strong>.</p>
+      <br>
+      <button id="closeModal">Entendido, volver al inicio</button>
     </div>
   </div>
 

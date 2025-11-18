@@ -1,50 +1,74 @@
 document.addEventListener('DOMContentLoaded', function () {
-  // Scope everything to the form to avoid collisions with other pages/components
   const form = document.querySelector('.termometro-form');
-  if (!form) return; // If the form isn't present, do nothing
+  if (!form) return;
 
-  const steps = form.querySelectorAll('.wizard-step');
+  // Referencias a elementos clave
+  const allWizardSteps = document.querySelectorAll('.wizard-step');
+  const summaryStep = document.querySelector('.summary-step');
   const progress = form.querySelector('.progress');
   const successModal = document.getElementById('successModal');
   const closeModalBtn = document.getElementById('closeModal');
-  const summaryStep = document.querySelector('.summary-step'); // summary lives outside .wizard-step
   const summaryText = document.getElementById('summaryText');
   const summaryScore = document.getElementById('summaryScore');
   const goToStep5Btn = document.getElementById('goToStep5');
+  const successMessage = document.getElementById('successMessage'); // Referencia al mensaje de carga
 
-  // Defensive checks
-  if (!steps.length || !progress || !summaryStep || !summaryText || !summaryScore) {
-    console.warn('Termómetro: faltan elementos requeridos en el DOM.');
-    return;
-  }
+  const totalQuestionSteps = 4; // Pasos de preguntas (1 a 4)
+  
+  // Variables de estado
+  let currentStep = 1; 
+  const answers = {};
+  const scores = {};
 
-  let currentStep = 0; // 0-based
-  let answers = [];
-  let scores = [];
+  // Función para mostrar un paso específico
+  function showStep(stepNumber) {
+    console.log(`Mostrando paso: ${stepNumber}`);
 
-  // Helper: show step and update progress
-  function showStep(index) {
-    steps.forEach((step, i) => {
-      step.classList.toggle('active', i === index);
-      if (i === index) step.style.animation = 'fadeSlideIn 1s ease forwards';
+    // 1. Ocultar TODO primero
+    allWizardSteps.forEach(step => {
+        step.classList.remove('active');
+        step.style.display = 'none'; // Forzamos ocultar
     });
+    if (summaryStep) {
+        summaryStep.classList.remove('active');
+        summaryStep.style.display = 'none';
+    }
 
-    // Hide summary unless explicitly asked
-    summaryStep.classList.remove('active');
-    summaryStep.style.display = 'none';
-
-    // Progress: 4 question steps; summary considered 80%, step 5 considered 100%
-    const pct = Math.min(((index + 1) / 4) * 100, 100);
-    progress.style.width = `${pct}%`;
+    // 2. Mostrar el paso correspondiente
+    if (stepNumber === 'summary') {
+        // Mostrar Resumen
+        if (summaryStep) {
+            summaryStep.style.display = 'block';
+            summaryStep.classList.add('active');
+            summaryStep.style.animation = 'fadeSlideIn 1s ease forwards';
+        }
+        // Barra de progreso al 80%
+        if (progress) progress.style.width = '80%';
+    } else {
+        // Mostrar paso numérico (1, 2, 3, 4, 5)
+        // Buscamos el paso con el data-step correspondiente
+        const stepToShow = document.querySelector(`.wizard-step[data-step="${stepNumber}"]`);
+        if (stepToShow) {
+            stepToShow.style.display = 'block';
+            stepToShow.classList.add('active');
+            stepToShow.style.animation = 'fadeSlideIn 1s ease forwards';
+        }
+        
+        // Actualizar barra de progreso
+        if (progress) {
+            const pct = Math.min((stepNumber / 5) * 100, 100);
+            progress.style.width = `${pct}%`;
+        }
+    }
+    currentStep = stepNumber;
   }
 
-  // Helper: show summary
-  function showSummary() {
-    const validScores = scores.slice(0, 4).filter(s => typeof s === 'number');
-    if (!validScores.length) return;
-
+  // Función para calcular y mostrar el resumen
+  function renderSummary() {
+    // Calcular puntaje promedio
+    const validScores = Object.values(scores);
     const totalScore = validScores.reduce((a, b) => a + b, 0);
-    const avgScore = totalScore / validScores.length;
+    const avgScore = validScores.length ? (totalScore / validScores.length) : 0;
 
     let mensajeUrgencia = '';
     let alertClass = '';
@@ -60,132 +84,142 @@ document.addEventListener('DOMContentLoaded', function () {
       alertClass = 'alert-red';
     }
 
+    // Actualizar textos del resumen
     summaryText.innerHTML = `
-      Respondiste: <br>
-      • Finanzas: ${answers[0] || 'N/A'} <br>
-      • Avance sin ti: ${answers[1] || 'N/A'} <br>
-      • Decisiones: ${answers[2] || 'N/A'} <br>
-      • Tecnología: ${answers[3] || 'N/A'}
+      <strong>Tus Respuestas:</strong><br>
+      1. Finanzas: ${answers['crece'] || '-'} <br>
+      2. Operación: ${answers['avanza'] || '-'} <br>
+      3. Decisiones: ${answers['mejora'] || '-'} <br>
+      4. Tecnología: ${answers['reemprende'] || '-'}
     `;
+
     summaryScore.innerHTML = `
       <div class="${alertClass}" style="margin-top: 1rem;">
         <strong>Puntaje promedio:</strong> ${avgScore.toFixed(1)} / 5 <br>${mensajeUrgencia}
       </div>
     `;
 
-    // Hide question steps
-    steps.forEach(step => step.classList.remove('active'));
-    // Show summary
-    summaryStep.classList.add('active');
-    summaryStep.style.display = 'block';
-    progress.style.width = '80%';
-    currentStep = 'summary';
+    showStep('summary');
   }
 
-  // Register clicks on options
-  form.querySelectorAll('.wizard-options button').forEach(button => {
-    button.addEventListener('click', () => {
-      const stepEl = button.closest('.wizard-step');
-      if (!stepEl) return;
-
-      // Use data-step if present, otherwise infer from DOM order
-      const ds = stepEl.getAttribute('data-step');
-      const stepIndex = ds ? parseInt(ds, 10) - 1 : Array.from(steps).indexOf(stepEl);
-      if (isNaN(stepIndex) || stepIndex < 0) return;
-
-      const fieldName = stepEl.getAttribute('data-name') || `step_${stepIndex + 1}`;
-      const value = button.getAttribute('data-value') || button.textContent.trim();
-      const score = parseInt(button.getAttribute('data-score') || '0', 10);
-
-      // Save answer and score
-      answers[stepIndex] = value;
-      scores[stepIndex] = score;
-
-      // Create/update hidden input
-      const existingInput = form.querySelector(`input[name='respuesta_${fieldName}']`);
-      if (existingInput) existingInput.remove();
-      const hidden = document.createElement('input');
-      hidden.type = 'hidden';
-      hidden.name = `respuesta_${fieldName}`;
-      hidden.value = value;
-      form.appendChild(hidden);
-
-      // Next step or summary
-      if (stepIndex < 3) {
-        currentStep = stepIndex + 1;
-        showStep(currentStep);
-      } else {
-        showSummary();
-      }
-    });
-  });
-
-  // Continue to step 5
-  if (goToStep5Btn) {
-    goToStep5Btn.addEventListener('click', () => {
-      summaryStep.classList.remove('active');
-      summaryStep.style.display = 'none';
-      // Step 5 is index 4 (data-step="5")
-      currentStep = 4;
-      showStep(currentStep);
-      progress.style.width = '100%';
-    });
-  }
-
-  // Submit with validation and modal
-  form.addEventListener('submit', (e) => {
+  // MANEJO DE CLICS EN OPCIONES
+  form.addEventListener('click', (e) => {
+    // Verificar si el clic fue en un botón de opción
+    const btn = e.target.closest('.wizard-options button');
+    if (!btn) return;
+    
+    // Prevenir comportamiento por defecto
     e.preventDefault();
 
-    const step5 = form.querySelector('.wizard-step[data-step="5"]');
-    const requiredFields = step5 ? step5.querySelectorAll('[required]') : [];
-    let valid = true;
-    requiredFields.forEach(f => {
-      if (!f.value || (f.tagName === 'SELECT' && f.value === '')) valid = false;
-    });
+    // Identificar en qué paso estamos
+    const stepEl = btn.closest('.wizard-step');
+    if (!stepEl) return;
 
-    const inputContainer = step5 ? step5.querySelector('.wizard-inputs') : null;
-    if (inputContainer) {
-      let errorDiv = document.getElementById('validationError');
-      if (!errorDiv) {
-        errorDiv = document.createElement('div');
-        errorDiv.id = 'validationError';
-        errorDiv.className = 'alert-red mt-4 mb-2';
-        errorDiv.style.fontWeight = 'normal';
-        errorDiv.style.marginTop = '1rem';
-        errorDiv.style.marginBottom = '1rem';
-        inputContainer.parentNode.insertBefore(errorDiv, inputContainer.nextSibling);
-      }
-      if (!valid) {
-        errorDiv.style.display = 'block';
-        errorDiv.textContent = '🛑 Por favor, completa todos tus datos antes de enviar.';
-        return;
-      } else {
-        errorDiv.style.display = 'none';
-      }
+    const stepNum = parseInt(stepEl.getAttribute('data-step'), 10);
+    const fieldName = stepEl.getAttribute('data-name');
+    
+    // Obtener datos del botón
+    const value = btn.getAttribute('data-value');
+    const score = parseInt(btn.getAttribute('data-score'), 10);
+
+    // Guardar datos
+    answers[fieldName] = value;
+    scores[fieldName] = score;
+
+    // Crear/Actualizar input oculto para el envío final
+    const inputName = `respuesta_${fieldName}`;
+    let hiddenInput = form.querySelector(`input[name="${inputName}"]`);
+    if (!hiddenInput) {
+        hiddenInput = document.createElement('input');
+        hiddenInput.type = 'hidden';
+        hiddenInput.name = inputName;
+        form.appendChild(hiddenInput);
     }
+    hiddenInput.value = value;
 
-    // Show success modal if present, otherwise submit directly
-    if (successModal) {
-      successModal.style.display = 'flex';
-      const icon = successModal.querySelector('.modal-icon');
-      if (icon) icon.style.animation = 'zoomIn 1s ease forwards';
-
-      if (closeModalBtn) {
-        closeModalBtn.onclick = () => {
-          successModal.style.display = 'none';
-          form.submit();
-        };
-      }
-
-      setTimeout(() => {
-        successModal.style.display = 'none';
-        form.submit();
-      }, 30000);
+    // Lógica de Avance
+    if (stepNum < totalQuestionSteps) {
+        // Si es pregunta 1, 2 o 3 -> Ir a la siguiente
+        showStep(stepNum + 1);
     } else {
-      form.submit();
+        // Si es la pregunta 4 -> Ir al resumen
+        renderSummary();
     }
   });
 
-  // Initialize
-  showStep(currentStep);
+  // Botón "Continuar" en el resumen
+  if (goToStep5Btn) {
+    goToStep5Btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        showStep(5); // Ir al paso de captura de datos
+    });
+  }
+
+  // ==========================================
+  // NUEVO MANEJO DEL ENVÍO (AJAX + MODAL)
+  // ==========================================
+  form.addEventListener('submit', function (e) {
+    e.preventDefault(); // Evita recargar la página
+
+    // Validación simple de campos del paso 5
+    const step5 = document.querySelector('.wizard-step[data-step="5"]');
+    const inputs = step5.querySelectorAll('input, select');
+    let valid = true;
+
+    inputs.forEach(input => {
+        if (!input.value) valid = false;
+    });
+
+    if (!valid) {
+        alert("Por favor, completa todos los campos de contacto.");
+        return;
+    }
+    
+    // Mostrar mensaje temporal "Enviando..." si existe en el HTML
+    if (successMessage) {
+        successMessage.style.display = 'block';
+        successMessage.classList.add('active');
+    }
+
+    // Enviar datos en segundo plano
+    const formData = new FormData(form);
+
+    fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+        }
+    })
+    .then(response => {
+        // Ocultar mensaje "Enviando..."
+        if (successMessage) successMessage.style.display = 'none';
+
+        if (response.ok) {
+            // ÉXITO: Mostrar el Modal
+            if (successModal) {
+                // Usamos 'flex' para que CSS centre el contenido
+                successModal.style.display = 'flex';
+            }
+        } else {
+            alert("Hubo un problema al guardar tu diagnóstico. Por favor intenta de nuevo.");
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        if (successMessage) successMessage.style.display = 'none';
+        alert("Error de conexión. Revisa tu internet.");
+    });
+  });
+
+  // Botón cerrar dentro del Modal
+  if (closeModalBtn) {
+      closeModalBtn.addEventListener('click', function() {
+          // Al cerrar, recargamos o enviamos al inicio
+          window.location.href = "/"; 
+      });
+  }
+
+  // Inicializar: Ocultar todo excepto el paso 1
+  showStep(1);
 });
