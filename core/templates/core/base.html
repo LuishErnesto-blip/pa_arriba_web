@@ -4,22 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="google-site-verification" content="bLr30UeuE-mStQrJ_qntqE6OLyZy0we6VLam8FwemFQ" />
+
     <title>{% block title %}Pa'arriba - ¡Tu Transformación Digital!{% endblock %}</title>
 
-    <!-- INICIO: OPTIMIZACIÓN SEO BÁSICA -->
-    <!-- Meta Descripción General: Describe el sitio a Google y a los usuarios. -->
     <meta name="description" content="Impulsa tu negocio con Pa’Arriba: Soluciones digitales accesibles y estratégicas para emprendedores empíricos. Crece, Avanza, Mejora y Re-emprende con resultados tangibles.">
-    <!-- Palabras Clave General: Refuerza los temas principales del sitio. -->
     <meta name="keywords" content="transformación digital, emprendedores, negocios, estrategia digital, rentabilidad, crecimiento empresarial, soluciones pymes, Pa’Arriba">
-    <!-- FIN: OPTIMIZACIÓN SEO BÁSICA -->
-
-    <!-- Favicon de Pa'arriba -->
     <link rel="icon" href="{% static 'core/logo_pa_arriba_fav_icon.png' %}" type="image/png">
-    <!-- Importación de la fuente Montserrat directamente en el HTML para evitar errores de Django -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap">
     <link rel="stylesheet" href="{% static 'core/style.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Tailwind CSS CDN para clases de utilidad -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     {% include 'core/meta_pixel.html' %} {# Meta Pixel #}
@@ -32,12 +27,9 @@
     {# El contenido único de cada página irá aquí #}
     {% endblock %}
 
-    <!-- Script de tsparticles -->
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
 
-    <!-- Audio para el sonido de la bombilla -->
     <audio id="bulbSound" src="{% static 'core/light_switch_on.mp3' %}" preload="auto"></audio>
-    <!-- Audio para el fondo musical espacial -->
     <audio id="spaceMusic" src="{% static 'core/space_ambience.wav' %}" preload="auto" loop></audio>
 
     <script src="{% static 'core/script.js' %}"></script> {# Nuestro JavaScript refactorizado #}
