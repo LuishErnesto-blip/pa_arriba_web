@@ -26,7 +26,8 @@ SECRET_KEY = os.environ.get(
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Ajuste seguro: en producción define DJANGO_DEBUG=False
+DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 # Configuración de ALLOWED_HOSTS para Render y dominio propio
 ALLOWED_HOSTS = ['pa-arriba.com', 'www.pa-arriba.com', '127.0.0.1', 'localhost']
@@ -120,6 +121,7 @@ STORAGES = {
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
+# Ignorar un sitemap estático si existiera en la carpeta de static
 STATICFILES_IGNORE_PATTERNS = ['sitemaps/sitemap.xml']
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
