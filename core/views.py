@@ -5,19 +5,34 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.conf import settings
 from blog.models import Post
+from store.models import Product  # <--- ¡IMPORTANTE! Traemos el modelo de Productos
 from django.views.decorators.http import require_POST
 
 logger = logging.getLogger(__name__)
 
 # Página principal (landing page)
 def index(request):
+    # 1. Cargar Blog
     latest_posts = []
     try:
         latest_posts = Post.objects.filter(is_published=True).order_by('-published_date')[:3]
     except Exception as e:
         logger.error(f"Error al cargar los últimos posts del blog en la vista index: {e}")
 
-    context = {'latest_posts': latest_posts}
+    # 2. Cargar Tienda (ESTO FALTABA)
+    products = []
+    try:
+        # Intentamos traer los productos. Usamos .all() para asegurar que traiga algo.
+        # Si tienes un campo 'is_active', podrías usar .filter(is_active=True)
+        products = Product.objects.all().order_by('-id')[:4] 
+    except Exception as e:
+        logger.error(f"Error al cargar productos en la vista index: {e}")
+
+    # 3. Empaquetar todo para la plantilla
+    context = {
+        'latest_posts': latest_posts,
+        'products': products  # <--- Aquí enviamos los productos a la mesa
+    }
     return render(request, 'core/index.html', context)
 
 # Política de privacidad
@@ -71,7 +86,7 @@ def sitemap_xml(request):
     # Construcción del XML
     lines = [
         '<?xml version="1.0" encoding="UTF-8"?>',
-        '<!-- PA-ARRIBA SITEMAP V1 -->',  # ← Marca para confirmar que se ejecuta tu vista
+        '<!-- PA-ARRIBA SITEMAP V1 -->',
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
     ]
     for entry in static_urls + post_urls:
@@ -92,6 +107,6 @@ def sitemap_xml(request):
 def diagnostico_submit(request):
     """
     Placeholder para recibir el POST del formulario del termómetro.
-    Integra aquí tu lógica (clasificación, envío a Google Sheets, etc.).
+    Integra aquí tu lógica si es necesario, aunque ya la manejas en termometro/views.py.
     """
     return HttpResponse('Formulario procesado correctamente.', status=200)
