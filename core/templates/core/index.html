@@ -1,31 +1,45 @@
 {% extends 'core/base.html' %}
-{% load static %} {# ¡NUEVA LÍNEA AÑADIDA AQUÍ! #}
+{% load static %}
+
 {% block title %}Pa'arriba - ¡Tu Transformación Digital!{% endblock %}
+
 {% block content %}
     <header class="hero-section">
-        <!-- Contenedor para el logo y la onda que se hará sticky -->
         <div class="sticky-header-wrapper">
             <div class="sticky-header-content">
                 <div class="logo-animado">
                     <img src="{% static 'core/logo_pa_arriba.png' %}" alt="Logo Pa'arriba" class="logo-image">
                 </div>
-                <!-- Contenedor para la onda de frecuencia debajo del logo -->
                 <div class="frequency-wave-container">
                     <div class="frequency-wave"></div>
                 </div>
             </div>
         </div>
+
         <h1>Pa'arriba: Crece, Avanza, Mejora, Re-emprende</h1>
         <p>Impulsando tu Transformación Digital y Evolución como Emprendedor</p>
-         {% include 'core/lightbulb_svg.html' %}
+        
+        <div class="interaction-zone" style="position: relative; display: flex; flex-direction: column; align-items: center;">
+            
+            {% include 'core/lightbulb_svg.html' %}
+
+            <div id="click-hint" class="click-hint-animation">
+                <span style="font-size: 2rem;">👆</span><br>
+                <span style="font-weight: bold; color: #FF5C00; background: rgba(255,255,255,0.8); padding: 5px 10px; border-radius: 10px;">
+                    ¡Haz Clic para Encender!
+                </span>
+            </div>
+
+        </div>
     </header>
-<main id="accordion-container">
-{% include 'core/filosofia_section.html' %}
-{% include 'core/prototipos_section.html' %}
-{% include 'core/blog_section.html' %}
-{% include 'core/testimonios_section.html' %}
-{% include 'store/store_section.html' %}
-{% include 'core/gallery_section.html' %} 
-{% include 'core/certifications_section.html' %} 
-</main>
+
+    <main id="accordion-container">
+        {% include 'core/filosofia_section.html' %}
+        {% include 'core/prototipos_section.html' %}
+        {% include 'core/blog_section.html' %}
+        {% include 'core/testimonios_section.html' %}
+        {% include 'store/store_section.html' %}
+        {% include 'core/gallery_section.html' %} 
+        {% include 'core/certifications_section.html' %} 
+    </main>
 {% endblock %}

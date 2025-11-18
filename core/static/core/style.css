@@ -1419,3 +1419,73 @@ body.sticky-header-active { /* Esta clase será añadida por JS cuando el header
         margin-right: 15px;
     }
 }
+
+
+
+
+
+
+/* =========================================
+   CORRECCIONES FINALES DE DISEÑO (V3 - Definitiva)
+   (Reemplaza el bloque anterior con este)
+   ========================================= */
+
+/* 1. FOOTER: Orden Nuclear para Color Negro */
+/* Usamos el asterisco * para decir: "A todo lo que esté dentro del footer" */
+footer, footer *, 
+.footer-section, .footer-section * {
+    color: #000000 !important; /* Negro puro obligatorio */
+    font-weight: 700 !important; /* Negrita para que se lea bien */
+}
+
+/* Excepción: Al pasar el mouse por enlaces, se ponen blancos */
+footer a:hover, .footer-section a:hover {
+    color: #ffffff !important;
+    text-decoration: underline;
+}
+
+/* 2. ZONA DE LA BOMBILLA */
+.interaction-zone {
+    position: relative; 
+    display: inline-block;
+    /* Añadimos margen arriba para que no tape el eslogan */
+    margin-top: 50px; 
+    /* Altura mínima para asegurar espacio */
+    min-height: 200px;
+}
+
+/* 3. ANIMACIÓN (UBICACIÓN CORREGIDA) */
+.click-hint-animation {
+    position: absolute;
+    /* CAMBIO CLAVE: Lo movemos DEBAJO del foco */
+    top: 110%; 
+    left: 50%;
+    transform: translateX(-50%); /* Solo centramos horizontalmente */
+    
+    z-index: 999;
+    pointer-events: none; 
+    text-align: center;
+    width: 250px; /* Un poco más ancho */
+    
+    animation: pulseEffect 1.5s infinite alternate;
+}
+
+.click-hint-animation span {
+    display: block;
+    /* Fondo blanco semitransparente para que se lea sobre cualquier fondo */
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    padding: 4px 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+@keyframes pulseEffect {
+    0% { transform: translateX(-50%) scale(1); }
+    100% { transform: translateX(-50%) scale(1.1); }
+}
+
+.hint-hidden {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transition: opacity 0.5s ease;
+}
