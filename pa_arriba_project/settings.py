@@ -153,3 +153,20 @@ CKEDITOR_CONFIGS = {
         'codeSnippet_theme': 'default',
     },
 }
+
+
+# =======================================================
+# CONFIGURACIÓN DE CORREO ELECTRÓNICO (GMAIL SMTP)
+# =======================================================
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+# Credenciales de tu cuenta
+# NOTA: Usar la contraseña de aplicación de 16 caracteres.
+# ESTOS DATOS SON PRIVADOS Y SÓLO USADOS POR DJANGO.
+EMAIL_HOST_USER = 'luis.bracerog06@gmail.com'
+EMAIL_HOST_PASSWORD = 'argllmaplpqxspfy' # <--- Tu contraseña de 16 caracteres sin espacios
+DEFAULT_FROM_EMAIL = 'luis.bracerog06@gmail.com'
+SERVER_EMAIL = 'luis.bracerog06@gmail.com' # Email usado por Django para notificaciones de error

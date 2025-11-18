@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect # Agregamos 'redirect' para redireccionar después del POST
+from django.shortcuts import render, redirect 
 from .models import TermometroRespuesta
-from django.urls import reverse # Importamos reverse, aunque usaremos el nombre de URL directamente
+from django.urls import reverse 
+from django.core.mail import send_mail # <--- [1] NUEVA IMPORTACIÓN
 
 # --------------------------------------------------------------------------------
 # LÓGICA DE CLASIFICACIÓN DEL TEST DE CAOS (se mantiene igual)
@@ -89,7 +90,41 @@ def diagnostico_submit(request):
         fase_final = fase_final,
     )
 
-    # 5. Redireccionar con mensaje de éxito (usaremos la sesión para pasar los datos)
+    # --- [2] BLOQUE DE NOTIFICACIÓN POR CORREO ELECTRÓNICO ---
+    subject = f"🚨 NUEVO DIAGNÓSTICO PA'ARRIBA: {fase_final} (Puntaje {puntaje_total}/16)"
+    message = (
+        f"¡Hola Luis Ernesto!\n\n"
+        f"Un nuevo emprendedor ha completado el Termómetro del Caos.\n"
+        f"---------------------------------------------------\n"
+        f"NOMBRE: {request.POST.get('nombre')}\n"
+        f"EMAIL: {request.POST.get('email')}\n"
+        f"WHATSAPP: {request.POST.get('whatsapp')}\n"
+        f"TIPO DE NEGOCIO: {request.POST.get('tipo_negocio')}\n"
+        f"---------------------------------------------------\n"
+        f"DIAGNÓSTICO INICIAL: {fase_final} (Urge contacto)\n"
+        f"PUNTAJE TOTAL: {puntaje_total}/16\n"
+        f"RESPUESTAS:\n"
+        f"  1. CRECE: {request.POST.get('respuesta_crece')}\n"
+        f"  2. AVANZA: {request.POST.get('respuesta_avanza')}\n"
+        f"  3. MEJORA: {request.POST.get('respuesta_mejora')}\n"
+        f"  4. RE-EMPRENDE: {request.POST.get('respuesta_reemprende')}\n"
+    )
+
+    try:
+        send_mail(
+            subject,
+            message,
+            None, # Usará el DEFAULT_FROM_EMAIL de settings.py
+            ['luis.bracerog06@gmail.com'], # Tu correo de recepción
+            fail_silently=False,
+        )
+    except Exception as e:
+        # En caso de que el correo falle (ej: contraseña incorrecta), no detiene el proceso de guardado.
+        print(f"Error al enviar la notificación: {e}")
+        pass
+    # ----------------------------------------------------------
+    
+    # 6. Redireccionar con mensaje de éxito (usaremos la sesión para pasar los datos)
     # Guardamos los resultados en la sesión antes de redirigir
     request.session["exito"] = True
     request.session["fase_final"] = fase_final
