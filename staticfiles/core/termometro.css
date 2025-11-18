@@ -1,0 +1,183 @@
+/* Fondo y tipografía base */
+body {
+  background-color: #f5f5f5;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Contenedor principal */
+.container {
+  max-width: 720px;
+  margin: 3rem auto;
+  background-color: #FF5C00;
+  padding: 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 0 32px rgba(0,0,0,0.08);
+  color: #000;
+}
+
+/* Logo con animaciones */
+.logo {
+  display: block;
+  margin: 0 auto 1rem;
+  max-width: 160px;
+  animation: vibrate 2s infinite alternate, laserGlow 3s infinite alternate;
+}
+@keyframes vibrate {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-1px); }
+  50% { transform: translateX(1px); }
+  75% { transform: translateX(-1px); }
+  100% { transform: translateX(0); }
+}
+@keyframes laserGlow {
+  from { filter: drop-shadow(0 0 4px #fff) drop-shadow(0 0 8px #00f); }
+  to { filter: drop-shadow(0 0 6px #fff) drop-shadow(0 0 12px #0ff); }
+}
+
+/* Título y efectos */
+h1 {
+  color: #fff;
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  animation: vibrate 1s infinite alternate, fadeInOut 3s infinite alternate;
+}
+@keyframes fadeInOut {
+  from { opacity: 0.7; }
+  to { opacity: 1; }
+}
+
+/* Slogan y filosofía */
+.slogan {
+  text-align: center;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+.filosofia {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Pasos del wizard */
+.wizard-step { display: none; }
+.wizard-step.active {
+  display: block;
+  animation: fadeSlideIn 1s ease forwards;
+}
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.wizard-step h3 { font-size: 1.2rem; color: #000; margin-bottom: 0.5rem; }
+.wizard-step p { font-weight: 500; margin-bottom: 1rem; color: #000; }
+
+/* Opciones y CTA */
+.wizard-options { display: grid; gap: 0.6rem; }
+.wizard-options button,
+.cta button {
+  display: block; width: 100%; padding: 1rem;
+  border: 2px solid #FF5C00; border-radius: 12px;
+  background: #fff; color: #000; font-weight: bold;
+  cursor: pointer; transition: background 0.25s ease, transform 0.1s ease;
+}
+.wizard-options button:hover,
+.cta button:hover { background: #f0f0f0; transform: translateY(-1px); }
+
+/* Inputs */
+.wizard-inputs input,
+.wizard-inputs select {
+  width: 100%; padding: 0.75rem; margin: 0.5rem 0;
+  border: 1px solid #ccc; border-radius: 10px;
+  font-size: 1rem; background-color: #fff; color: #000;
+}
+
+/* Progreso */
+.progress-bar { height: 6px; background: #eee; margin-top: 2rem; border-radius: 3px; overflow: hidden; }
+.progress { height: 100%; width: 0%; background: #000; transition: width 0.3s ease; }
+
+/* Mensaje de éxito */
+.success-message { display: none; margin-top: 2rem; padding: 1rem; background-color: #e6ffed; border: 1px solid #00a65a; border-radius: 10px; color: #006644; font-weight: 600; text-align: center; }
+.success-message.active { display: block; }
+
+/* Acciones */
+.actions { margin-top: 1rem; text-align: center; }
+.actions a { color: #fff; font-weight: 600; text-decoration: none; }
+.actions a:hover { text-decoration: underline; }
+
+/* Modal */
+.modal {
+  display: none; position: fixed; z-index: 999;
+  left: 0; top: 0; width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  justify-content: center; align-items: center;
+}
+.modal-content {
+  background: #fff; color: #000; padding: 2rem;
+  border-radius: 12px; text-align: center;
+  max-width: 500px; font-weight: bold;
+  animation: fadeInOut 2s ease-in-out infinite alternate;
+}
+.modal-icon {
+  font-size: 3rem; color: green;
+  animation: zoomIn 1s ease forwards;
+}
+@keyframes zoomIn {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.modal-content button {
+  margin-top: 1rem; padding: 0.5rem 1rem;
+  background: #FF5C00; color: #fff;
+  border: none; border-radius: 8px; cursor: pointer;
+}
+.modal-content button:hover { background: #ff7f3f; }
+
+/* Resumen intermedio */
+.summary-step {
+  display: none;
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-top: 1rem;
+  animation: fadeSlideIn 1s ease forwards;
+}
+.summary-step h3 { color: #000; margin-bottom: 1rem; }
+.summary-step p { margin: 0.5rem 0; }
+
+/* Alertas visuales */
+.alert-green {
+  background-color: #e6ffed;
+  border: 2px solid #00a65a;
+  color: #006644;
+  padding: 1rem;
+  border-radius: 10px;
+}
+.alert-yellow {
+  background-color: #fff9e5;
+  border: 2px solid #ffcc00;
+  color: #996600;
+  padding: 1rem;
+  border-radius: 10px;
+}
+.alert-red {
+  background-color: #ffe6e6;
+  border: 2px solid #cc0000;
+  color: #660000;
+  padding: 1rem;
+  border-radius: 10px;
+}
+.termometro-form h1 {
+  font-size: 3.2rem; /* Puedes subir hasta 3.2rem si quieres más impacto */
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #fff; /* Mantiene contraste sobre fondo naranja */
+}
