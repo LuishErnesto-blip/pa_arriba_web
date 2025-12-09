@@ -166,15 +166,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Show success modal if present, otherwise submit directly
     if (successModal) {
-      successModal.style.display = 'flex';
-
-      // *** AQUÍ INSERTAMOS EL CÓDIGO DE GOOGLE ADS ***
-      // Esto dispara la conversión AW-17785566071/du3NCKvupc4bEPfm6KBC
-      if (typeof gtag === 'function') {
-          gtag('event', 'conversion', {'send_to': 'AW-17785566071/du3NCKvupc4bEPfm6KBC'});
-      }
-      // ***********************************************
-      
+      successModal.style.display = 'flex';   
       const icon = successModal.querySelector('.modal-icon');
       if (icon) icon.style.animation = 'zoomIn 1s ease forwards';
 

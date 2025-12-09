@@ -200,6 +200,11 @@ document.addEventListener('DOMContentLoaded', function () {
             if (successModal) {
                 // Usamos 'flex' para que CSS centre el contenido
                 successModal.style.display = 'flex';
+                // *** GOOGLE ADS CONVERSION ***
+                if (typeof gtag === 'function') {
+                    gtag('event', 'conversion', {'send_to': 'AW-17785566071/du3NCKvupc4bEPfm6KBC'});
+                }
+                // *****************************
             }
         } else {
             alert("Hubo un problema al guardar tu diagnóstico. Por favor intenta de nuevo.");
