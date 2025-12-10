@@ -32,17 +32,20 @@ def enviar_mensaje_whatsapp(numero_destino, nombre_usuario, fase_final, puntaje)
     
     mensaje_texto = f"Hola {nombre_usuario} 👋 Soy el Asistente de Pa'arriba.\n\nRecibí tu diagnóstico del Termómetro del Caos.\n\n📊 *Tu Resultado:* {fase_final} (Puntaje: {puntaje}/16).\n\nEsto significa que tu negocio tiene oportunidades críticas de mejora. Como premio por tu interés, quiero regalarte 3 DÍAS de acceso total a nuestra App Oxígeno.\n\n¿Te interesa activarlo ahora?"
 
+# 3.2 Payload para PLANTILLA (Plan B: Prueba de Conectividad)
     payload = {
         "messaging_product": "whatsapp",
-        "recipient_type": "individual",
         "to": numero,
-        "type": "text",
-        "text": {
-            "preview_url": False,
-            "body": mensaje_texto
+        "type": "template",
+        "template": {
+            "name": "hello_world",
+            "language": {
+                "code": "en_US"
             }
         }
-      
+    }
+
+
     try:
         response = requests.post(url, headers=headers, data=json.dumps(payload))
         if response.status_code == 200:
