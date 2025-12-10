@@ -34,15 +34,15 @@ def enviar_mensaje_whatsapp(numero_destino, nombre_usuario, fase_final, puntaje)
 
     payload = {
         "messaging_product": "whatsapp",
+        "recipient_type": "individual",
         "to": numero,
-        "type": "template",
-        "template": {
-            "name": "hello_world",
-            "language": {
-                "code": "en_US"
+        "type": "text",
+        "text": {
+            "preview_url": False,
+            "body": mensaje_texto
             }
         }
-    }
+      
     try:
         response = requests.post(url, headers=headers, data=json.dumps(payload))
         if response.status_code == 200:
