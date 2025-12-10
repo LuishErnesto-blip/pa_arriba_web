@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import TermometroRespuesta
 from django.urls import reverse 
 from django.core.mail import send_mail 
-
+from .whatsapp_service import enviar_mensaje_whatsapp
 # --------------------------------------------------------------------------------
 # LÓGICA DE CLASIFICACIÓN DEL TEST DE CAOS (VERSION CORREGIDA)
 # --------------------------------------------------------------------------------
@@ -98,40 +98,41 @@ def diagnostico_submit(request):
         puntaje_caos = puntaje_total,
         fase_final = fase_final,
     )
-
-    # --- 5. NOTIFICACIÓN POR CORREO ELECTRÓNICO (CÓDIGO QUE YA FUNCIONA) ---
+    # --- 5. NOTIFICACIÓN POR CORREO ELECTRÓNICO ---
     subject = f"🚨 NUEVO DIAGNÓSTICO PA'ARRIBA: {fase_final} (Puntaje {puntaje_total}/16)"
     message = (
         f"¡Hola Luis Ernesto!\n\n"
         f"Un nuevo emprendedor ha completado el Termómetro del Caos.\n"
         f"---------------------------------------------------\n"
         f"NOMBRE: {request.POST.get('nombre')}\n"
-        f"EMAIL: {request.POST.get('email')}\n"
         f"WHATSAPP: {request.POST.get('whatsapp')}\n"
-        f"TIPO DE NEGOCIO: {request.POST.get('tipo_negocio')}\n"
-        f"---------------------------------------------------\n"
-        f"DIAGNÓSTICO INICIAL: {fase_final} (Urge contacto)\n"
-        f"PUNTAJE TOTAL: {puntaje_total}/16\n"
-        f"RESPUESTAS:\n"
-        f"  1. CRECE: {request.POST.get('respuesta_crece')}\n"
-        f"  2. AVANZA: {request.POST.get('respuesta_avanza')}\n"
-        f"  3. MEJORA: {request.POST.get('respuesta_mejora')}\n"
-        f"  4. RE-EMPRENDE: {request.POST.get('respuesta_reemprende')}\n"
+        f"DIAGNÓSTICO: {fase_final}\n"
     )
 
     try:
+        # Intento de envío de correo
         send_mail(
             subject,
             message,
-            None, # Usará el DEFAULT_FROM_EMAIL de settings.py
-            ['luis.bracerog06@gmail.com'], # Tu correo de recepción
+            None,
+            ['luis.bracerog06@gmail.com'],
             fail_silently=False,
         )
     except Exception as e:
-        # En caso de que el correo falle (ej: contraseña incorrecta), no detiene el proceso de guardado.
-        print(f"Error al enviar la notificación: {e}")
-        pass
-    
+        print(f"Error al enviar correo: {e}")
+
+    # --- 5.1. ENVÍO AUTOMÁTICO WHATSAPP (MÓDULO 4) ---
+    try:
+        # Llamada al servicio de WhatsApp
+        enviar_mensaje_whatsapp(
+            numero_destino=request.POST.get("whatsapp"),
+            nombre_usuario=request.POST.get("nombre"),
+            fase_final=fase_final,
+            puntaje=puntaje_total
+        )
+    except Exception as e:
+        print(f"Error al intentar enviar WhatsApp: {e}")
+
     # 6. Redireccionar con mensaje de éxito (usaremos la sesión para pasar los datos)
     # Guardamos los resultados en la sesión antes de redirigir
     request.session["exito"] = True
