@@ -18,7 +18,7 @@ def enviar_mensaje_whatsapp(numero_destino, nombre_usuario, fase_final, puntaje)
     # 2. Configuración de la API de Meta (Usaremos variables de entorno después)
     # Por ahora dejamos los placeholders para que tú pongas tus credenciales
     url = "https://graph.facebook.com/v17.0/922198437639839/messages"
-    token = "EAATz5PVndoYBQDBtEapITHRaI3GqZBfYBQvzmPCpVbKMMClLQ3C9OYwZBseOW3T9I0YNHNuy4OJs8iMEZAVGcZB4BAZAy1cMavxNFUEZCvfxqeThO19Ym1LwgtAwSI8w2MU79pVPTuAdhVP6x3WEv1RvtCCs91KAFsAXz56cvQF7PsZApECPhZCLSVpUe9Ejvsxbem6tQdsUVb8hSoQMBCUsTLXFGahuV1tUHwIsQUnSZCLm7AnaZBfiVCZBk8WMqBFqG2bW2EBytg4s7NB6mBM02VbrZCzCr5AEXIVTlhE9HwZDZD"
+    token = "EAATz5PVndoYBQGuzfp0JUzrecCi6b3neZBnfC7FNJhLZCHZASr80eR0ejAmdhsdEzFa4GZB4sMCnOJ5gRZAwpWCIDZCZB7iXKOPt3EAXWT4dIAGdaQb34FFScgIsZBc6wvLuXzBj9zAe5H4LGQgn1wT7PO9n9uwryCPGfuunXGLs7SlPpQARzybSQZA9ALbl5Np3XtRMP10vmCLEgCyKh3kRm7Dtog88vwJJqzv1wBynYIwG38Q9gHO8ofpNQcQYbR7mZAVWAG78ZBb3gA5wD0YQQ2GEAh1BwCkclEuU6qLAmYZD"
     
     headers = {
         "Authorization": f"Bearer {token}",
