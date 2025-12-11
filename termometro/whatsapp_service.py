@@ -32,19 +32,37 @@ def enviar_mensaje_whatsapp(numero_destino, nombre_usuario, fase_final, puntaje)
     
     mensaje_texto = f"Hola {nombre_usuario} 👋 Soy el Asistente de Pa'arriba.\n\nRecibí tu diagnóstico del Termómetro del Caos.\n\n📊 *Tu Resultado:* {fase_final} (Puntaje: {puntaje}/16).\n\nEsto significa que tu negocio tiene oportunidades críticas de mejora. Como premio por tu interés, quiero regalarte 3 DÍAS de acceso total a nuestra App Oxígeno.\n\n¿Te interesa activarlo ahora?"
 
-# 3.2 Payload para PLANTILLA (Plan B: Prueba de Conectividad)
+# 3.3 Payload FINAL: Plantilla 'resultado_diagnostico' con variables
     payload = {
         "messaging_product": "whatsapp",
         "to": numero,
         "type": "template",
         "template": {
-            "name": "hello_world",
+            "name": "resultado_diagnostico",
             "language": {
-                "code": "en_US"
-            }
+                "code": "es"  # OJO: En tu captura dice Spanish (ECU). Si falla con "es", prueba "es_LA"
+            },
+            "components": [
+                {
+                    "type": "body",
+                    "parameters": [
+                        {
+                            "type": "text",
+                            "text": nombre_usuario  # Variable {{1}}
+                        },
+                        {
+                            "type": "text",
+                            "text": fase_final      # Variable {{2}}
+                        },
+                        {
+                            "type": "text",
+                            "text": str(puntaje)    # Variable {{3}}
+                        }
+                    ]
+                }
+            ]
         }
     }
-
 
     try:
         response = requests.post(url, headers=headers, data=json.dumps(payload))
