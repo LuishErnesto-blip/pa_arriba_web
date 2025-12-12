@@ -8,7 +8,7 @@ Simulador Financiero | Oxígeno App
 {% block extra_head %}
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-    /* --- ESTILOS NEON TECH --- */
+    /* --- ESTILOS NEON TECH V2 --- */
     :root {
         --neon-orange: #FF6B00;
         --neon-blue: #00F0FF; 
@@ -18,7 +18,6 @@ Simulador Financiero | Oxígeno App
         --text-main: #ffffff;
     }
 
-    /* Forzamos el contenedor para que ignore estilos heredados del base.html */
     .simulador-wrapper {
         font-family: 'Inter', sans-serif;
         background: radial-gradient(circle at center, #1a1f2c 0%, #000000 100%);
@@ -26,36 +25,36 @@ Simulador Financiero | Oxígeno App
         display: flex;
         flex-direction: column;
         align-items: center;
-        min-height: 90vh; /* Ocupa buena pantalla */
+        min-height: 90vh;
         padding: 20px 10px;
         position: relative;
         overflow: hidden;
     }
 
-    /* TARJETAS DE INSTRUCCIÓN (Tipo Banner) */
+    /* INSTRUCCIONES */
     .instruction-card {
         background: var(--glass-bg);
         border: 1px solid var(--glass-border);
         padding: 15px 20px;
         border-radius: 12px;
         backdrop-filter: blur(10px);
-        margin-bottom: 30px;
+        margin-bottom: 20px;
         text-align: center;
         max-width: 90%;
         box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        z-index: 100;
     }
 
     .instruction-step {
-        font-size: 0.8rem;
+        font-size: 0.7rem;
         text-transform: uppercase;
         letter-spacing: 2px;
         color: #888;
-        margin-bottom: 5px;
         font-weight: 800;
     }
 
     .instruction-text {
-        font-size: 1.1rem;
+        font-size: 1rem;
         font-weight: 600;
         line-height: 1.4;
     }
@@ -65,24 +64,24 @@ Simulador Financiero | Oxígeno App
     /* ÁREA DEL JUEGO */
     .game-stage {
         position: relative;
-        width: 320px;
-        height: 400px;
-        margin-bottom: 20px;
+        width: 320px; /* Ancho fijo para control preciso */
+        height: 420px;
+        margin-bottom: 10px;
     }
 
-    /* BOTELLA MODERNIZADA */
+    /* BOTELLA MEJORADA */
     .bottle-tech {
         position: absolute;
         top: 0;
-        right: 20px;
-        width: 90px;
-        height: 140px;
+        right: 10px; /* Movido un poco más a la derecha */
+        width: 80px;
+        height: 130px;
         background: rgba(255, 255, 255, 0.1);
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        border-radius: 16px;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        border-radius: 12px;
         cursor: pointer;
-        z-index: 10;
-        transition: all 0.2s ease;
+        z-index: 20;
+        transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         box-shadow: 0 0 15px rgba(255, 107, 0, 0.1);
         display: flex;
         justify-content: center;
@@ -105,44 +104,58 @@ Simulador Financiero | Oxígeno App
         font-weight: 800;
         color: white;
         text-shadow: 0 2px 4px black;
-        font-size: 0.9rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
+        font-size: 0.8rem;
+        transform: rotate(-90deg); /* Texto vertical más moderno */
     }
 
-    /* CHORRO LUMINOSO */
+    /* CHORRO (Alineado matemáticamente) */
     .stream-tech {
         position: absolute;
-        top: 135px;
-        right: 60px;
-        width: 8px;
+        top: 110px; /* Sale de la boca de la botella al girar */
+        right: 85px; /* Ajuste preciso para caer al centro */
+        width: 10px;
         height: 0;
         background: var(--neon-orange);
-        box-shadow: 0 0 10px var(--neon-orange);
+        box-shadow: 0 0 15px var(--neon-orange);
         z-index: 5;
-        border-radius: 0 0 4px 4px;
+        border-radius: 0 0 5px 5px;
         transition: height 0.1s;
     }
 
-    /* CAJA FUERTE / VASO */
+    /* CAJA / RECIPIENTE CÓNICO */
     .vault-container {
         position: absolute;
-        bottom: 40px;
+        bottom: 50px;
         left: 50%;
         transform: translateX(-50%);
-        width: 140px;
-        height: 180px;
+        width: 160px;
+        height: 160px;
     }
 
-    .vault-glass {
+    /* Forma de Trapecio (Vaso/Tolva) usando clip-path */
+    .vault-shape {
         width: 100%;
         height: 100%;
+        background: rgba(255, 255, 255, 0.05);
         border: 2px solid rgba(255, 255, 255, 0.3);
-        border-top: none;
-        background: rgba(0, 0, 0, 0.3);
-        border-radius: 0 0 20px 20px;
+        border-top: none; 
+        /* Hacemos que parezca un vaso cónico */
+        clip-path: polygon(0 0, 100% 0, 85% 100%, 15% 100%);
         position: relative;
-        overflow: hidden;
+        backdrop-filter: blur(5px);
+    }
+
+    /* Borde visual brillante para el vaso (clip-path recorta bordes, así que usamos un truco) */
+    .vault-border-fix {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        clip-path: polygon(0 0, 100% 0, 85% 100%, 15% 100%);
+        box-shadow: inset 0 -5px 10px rgba(255, 255, 255, 0.1);
+        pointer-events: none;
+        z-index: 15;
     }
 
     .vault-liquid {
@@ -154,43 +167,60 @@ Simulador Financiero | Oxígeno App
         background: var(--neon-orange);
         transition: height 0.1s linear;
         opacity: 0.9;
-        box-shadow: 0 0 20px var(--neon-orange);
+        box-shadow: 0 0 30px var(--neon-orange);
     }
 
-    .vault-label {
+    /* ETIQUETA LATERAL (Para no estorbar) */
+    .vault-label-side {
         position: absolute;
-        top: -30px;
-        width: 100%;
-        text-align: center;
-        font-size: 0.8rem;
+        top: 50%;
+        right: -90px; /* Flotando a la derecha */
+        width: 80px;
+        text-align: left;
+        font-size: 0.7rem;
         color: #aaa;
-        letter-spacing: 1px;
         font-weight: 600;
+        border-left: 1px solid #aaa;
+        padding-left: 5px;
     }
 
-    /* FUGAS ROJAS */
+    /* ICONO DE CANDADO (Visual de Seguridad) */
+    .lock-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 2rem;
+        opacity: 0.5;
+        z-index: 16;
+    }
+
+    /* FUGAS */
     .leaks-tech {
         position: absolute;
-        bottom: -50px;
-        width: 100%;
+        bottom: -60px; /* Más abajo */
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60%; /* Solo salen del centro (fondo del vaso) */
         display: flex;
         justify-content: center;
-        gap: 20px;
+        gap: 15px;
         opacity: 0;
         transition: opacity 0.3s;
     }
 
     .leak-drop {
-        width: 4px;
-        height: 40px;
+        width: 5px;
+        height: 50px;
         background: var(--neon-red);
         box-shadow: 0 0 10px var(--neon-red);
-        animation: dropAnim 0.4s infinite linear;
+        animation: dropAnim 0.3s infinite linear;
+        border-radius: 4px;
     }
 
     @keyframes dropAnim {
         0% { transform: translateY(0); opacity: 1; }
-        100% { transform: translateY(20px); opacity: 0; }
+        100% { transform: translateY(30px); opacity: 0; }
     }
 
     /* ESCUDO OXÍGENO */
@@ -200,21 +230,12 @@ Simulador Financiero | Oxígeno App
         left: 0;
         width: 100%;
         height: 0;
-        background: linear-gradient(to top, var(--neon-blue), #0056D2);
-        box-shadow: 0 0 25px var(--neon-blue);
+        background: linear-gradient(to top, var(--neon-blue), rgba(0, 86, 210, 0.8));
         display: flex;
         align-items: center;
         justify-content: center;
-        z-index: 20;
+        z-index: 14;
         transition: height 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    .shield-text {
-        font-size: 0.7rem;
-        font-weight: 800;
-        color: #000;
-        text-transform: uppercase;
-        display: none; /* Se muestra al activarse */
     }
 
     /* CONTROLES */
@@ -234,19 +255,19 @@ Simulador Financiero | Oxígeno App
         text-transform: uppercase;
         cursor: pointer;
         margin-bottom: 15px;
-        transition: transform 0.1s, box-shadow 0.2s;
+        transition: transform 0.1s;
         display: flex;
         justify-content: center;
         align-items: center;
         gap: 10px;
+        color: white;
     }
 
     .btn-orange {
         background: var(--neon-orange);
-        color: white;
         box-shadow: 0 0 20px rgba(255, 107, 0, 0.4);
     }
-    .btn-orange:active { transform: scale(0.98); }
+    .btn-orange:active { transform: scale(0.96); }
 
     .btn-blue {
         background: var(--neon-blue);
@@ -258,7 +279,6 @@ Simulador Financiero | Oxígeno App
 
     .btn-whatsapp {
         background: #25D366;
-        color: white;
         box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
         display: none;
         text-decoration: none;
@@ -270,21 +290,33 @@ Simulador Financiero | Oxígeno App
         100% { box-shadow: 0 0 0 0 rgba(0, 240, 255, 0); }
     }
 
-    /* TEXTOS DE DOLOR FLOTANTES */
+    /* --- ANIMACIÓN MEJORADA DE DOLOR (ZOOM) --- */
     .pain-float {
         position: absolute;
         color: var(--neon-red);
-        font-weight: 800;
-        font-size: 0.9rem;
-        text-shadow: 0 0 5px black;
+        font-weight: 900;
+        font-size: 1rem;
+        text-shadow: 0 0 8px black;
         pointer-events: none;
-        animation: floatUp 1.5s forwards;
+        animation: floatZoomUp 1.8s forwards; /* Más tiempo */
         white-space: nowrap;
+        text-transform: uppercase;
+        z-index: 50;
     }
 
-    @keyframes floatUp {
-        0% { transform: translateY(0) scale(1); opacity: 1; }
-        100% { transform: translateY(-60px) scale(1.2); opacity: 0; }
+    @keyframes floatZoomUp {
+        0% { 
+            transform: translateY(0) scale(0.5); 
+            opacity: 0; 
+        }
+        20% {
+            transform: translateY(-20px) scale(1.2); /* Zoom agresivo */
+            opacity: 1;
+        }
+        100% { 
+            transform: translateY(-120px) scale(1.5); /* Sube mucho más */
+            opacity: 0; 
+        }
     }
 
 </style>
@@ -296,7 +328,7 @@ Simulador Financiero | Oxígeno App
     <div class="instruction-card" id="instructionCard">
         <div class="instruction-step">PASO 1</div>
         <div class="instruction-text">
-            Mantén presionado el botón <span class="highlight">NARANJA</span> para ingresar ventas a tu caja.
+            Mantén presionado el botón <span class="highlight">NARANJA</span> para ingresar dinero.
         </div>
     </div>
 
@@ -309,17 +341,20 @@ Simulador Financiero | Oxígeno App
         <div class="stream-tech" id="stream"></div>
 
         <div class="vault-container">
-            <div class="vault-label">TU CAJA REGISTRADORA</div>
-            <div class="vault-glass">
+            <div class="vault-label-side">TU CAJA<br>REGISTRADORA</div>
+            
+            <div class="vault-shape">
+                <div class="lock-icon" id="lockIcon">🔓</div>
+                
                 <div class="vault-liquid" id="glassLiquid"></div>
-                <div class="shield-plate" id="shield">
-                    <span class="shield-text">ESCUDO ACTIVO</span>
-                </div>
+                <div class="shield-plate" id="shield"></div>
             </div>
+            <div class="vault-border-fix"></div>
+
             <div class="leaks-tech" id="leaks">
                 <div class="leak-drop"></div>
-                <div class="leak-drop" style="animation-delay: 0.1s"></div>
-                <div class="leak-drop" style="animation-delay: 0.2s"></div>
+                <div class="leak-drop" style="animation-delay: 0.15s"></div>
+                <div class="leak-drop" style="animation-delay: 0.3s"></div>
             </div>
         </div>
 
@@ -327,11 +362,11 @@ Simulador Financiero | Oxígeno App
 
     <div class="controls-area">
         <button class="btn-action btn-orange" id="btnPour">
-            <span>👇 MANTÉN PARA VENDER</span>
+            <span>👇 MANTÉN PRESIONADO</span>
         </button>
 
         <button class="btn-action btn-blue" id="btnFix">
-            <span>🛡️ ACTIVAR OXÍGENO APP</span>
+            <span>🛡️ TAPAR FUGAS AHORA</span>
         </button>
 
         <a href="https://wa.me/593000000000?text=Vi%20sus%20fugas%20y%20quiero%20la%20auditoria" class="btn-action btn-whatsapp" id="btnWhatsapp">
@@ -353,7 +388,7 @@ Simulador Financiero | Oxígeno App
         const glassLiquid = document.getElementById('glassLiquid');
         const leaks = document.getElementById('leaks');
         const shield = document.getElementById('shield');
-        const shieldText = document.querySelector('.shield-text');
+        const lockIcon = document.getElementById('lockIcon');
         const gameStage = document.querySelector('.game-stage');
 
         let isPouring = false;
@@ -380,27 +415,27 @@ Simulador Financiero | Oxígeno App
             if (isPouring || liquidLevel >= 100) return;
             isPouring = true;
 
-            // Girar botella
-            bottle.style.transform = 'rotate(-45deg) translate(-10px, 10px)';
+            // Girar botella (Menos agresivo para alinear mejor)
+            bottle.style.transform = 'rotate(-60deg) translate(-10px, 20px)';
             
             setTimeout(() => {
                 if(isPouring) stream.style.height = '160px'; // Sale chorro
-            }, 100);
+            }, 150);
 
             fillInterval = setInterval(() => {
                 if(!isPouring) return;
 
                 if (!isFixed) {
                     // --- MODO ROTO (Dolor) ---
-                    if (liquidLevel < 35) {
+                    if (liquidLevel < 30) {
                         liquidLevel += 1.5;
                     } else {
-                        // Fluctuación frustrante
-                        liquidLevel = 30 + Math.random() * 5; 
-                        spawnPainText(); // Textos rojos
+                        // Fluctuación
+                        liquidLevel = 25 + Math.random() * 5; 
+                        spawnPainText(); // Textos
                     }
                     glassLiquid.style.height = liquidLevel + '%';
-                    leaks.style.opacity = 1; // Se ven fugas
+                    leaks.style.opacity = 1;
                     
                 } else {
                     // --- MODO OXÍGENO (Éxito) ---
@@ -410,7 +445,7 @@ Simulador Financiero | Oxígeno App
 
                     if (liquidLevel >= 100) winGame();
                 }
-            }, 50);
+            }, 40);
         }
 
         function stopPour() {
@@ -433,7 +468,7 @@ Simulador Financiero | Oxígeno App
         function drainGlass() {
             let drainInt = setInterval(() => {
                 if (liquidLevel > 0 && !isPouring && !isFixed) {
-                    liquidLevel -= 3; // Baja rápido
+                    liquidLevel -= 3; 
                     glassLiquid.style.height = liquidLevel + '%';
                 } else {
                     clearInterval(drainInt);
@@ -443,27 +478,27 @@ Simulador Financiero | Oxígeno App
         }
 
         function spawnPainText() {
-            const words = ["ROBO HORMIGA", "DESPERDICIO", "MAL COSTEO", "SIN CONTROL"];
+            const words = ["ROBO HORMIGA", "DESPERDICIO", "SIN CONTROL", "CAOS"];
             const word = words[Math.floor(Math.random() * words.length)];
             
             const el = document.createElement('div');
             el.className = 'pain-float';
             el.innerText = word;
             
-            // Posición aleatoria
-            const randomX = Math.random() * 100;
+            // Posición aleatoria centrada
+            const randomX = 20 + Math.random() * 60; 
             el.style.left = randomX + '%';
-            el.style.bottom = '50px';
+            el.style.bottom = '80px'; // Empieza más arriba
             
             gameStage.appendChild(el);
-            setTimeout(() => el.remove(), 1500);
+            setTimeout(() => el.remove(), 2000);
         }
 
         function checkFrustration() {
-            if (attempts >= 1) { // A la primera o segunda frustración
-                updateInstruction("PASO 2", "¡Tus ganancias se escapan! Necesitas tapar las fugas ahora.", true);
+            if (attempts >= 1) {
+                updateInstruction("PASO 2", "¡Tu dinero se evapora! <br>Cierra las fugas ahora.", true);
                 btnPour.style.display = 'none';
-                btnFix.style.display = 'flex'; // Botón azul
+                btnFix.style.display = 'flex';
             }
         }
 
@@ -472,14 +507,16 @@ Simulador Financiero | Oxígeno App
             e.preventDefault();
             isFixed = true;
             
-            // Animación Escudo
-            shield.style.height = '40px';
-            setTimeout(() => { shieldText.style.display = 'block'; }, 300);
+            // Animación Escudo y Candado
+            shield.style.height = '100%'; // Llena todo el fondo de azul tenue
+            lockIcon.innerText = "🔒"; // Candado cerrado
+            lockIcon.style.opacity = "1";
+            lockIcon.style.textShadow = "0 0 20px var(--neon-blue)";
 
-            // Cambiar instrucciones
-            updateInstruction("PASO 3", "Sistema blindado. Ahora intenta llenar tu caja de nuevo.", false);
+            // Instrucciones
+            updateInstruction("PASO 3", "Caja Blindada. <br>Intenta vender de nuevo.", false);
+            instructionCard.querySelector('.instruction-text').style.color = "var(--neon-blue)";
             
-            // Resetear botones
             btnFix.style.display = 'none';
             btnPour.style.display = 'flex';
             btnPour.querySelector('span').innerText = "💰 LLENAR CAJA AHORA";
@@ -492,12 +529,11 @@ Simulador Financiero | Oxígeno App
             btnPour.style.display = 'none';
             
             // Feedback final
-            updateInstruction("¡FELICIDADES!", "Con Oxígeno, lo que vendes se queda en tu bolsillo.", false);
+            updateInstruction("¡LOGRADO!", "Con Oxígeno, tu esfuerzo rinde frutos.", false);
             instructionCard.querySelector('.instruction-text').style.color = '#25D366';
             
-            // Líquido verde
             glassLiquid.style.background = "#25D366";
-            glassLiquid.style.boxShadow = "0 0 20px #25D366";
+            glassLiquid.style.boxShadow = "0 0 30px #25D366";
 
             btnWhatsapp.style.display = 'flex';
         }
@@ -508,6 +544,7 @@ Simulador Financiero | Oxígeno App
             if (isError) {
                 instructionCard.style.border = "1px solid var(--neon-red)";
                 instructionCard.style.boxShadow = "0 0 15px rgba(255, 0, 85, 0.3)";
+                instructionCard.querySelector('.instruction-text').style.color = "var(--neon-red)";
             } else {
                 instructionCard.style.border = "1px solid var(--glass-border)";
                 instructionCard.style.boxShadow = "none";
