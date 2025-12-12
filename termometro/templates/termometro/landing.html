@@ -2,374 +2,409 @@
 {% load static %}
 
 {% block title %}
-Diagnóstico: Fugas de Dinero | Oxígeno App
+Simulador Financiero | Oxígeno App
 {% endblock %}
 
 {% block extra_head %}
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
+    /* --- ESTILOS NEON TECH --- */
     :root {
-        --brand-orange: #FF6B00;
-        --brand-blue: #0056D2;
-        --text-color: #202124;
+        --neon-orange: #FF6B00;
+        --neon-blue: #00F0FF; 
+        --neon-red: #FF0055;
+        --glass-bg: rgba(255, 255, 255, 0.05);
+        --glass-border: rgba(255, 255, 255, 0.2);
+        --text-main: #ffffff;
     }
 
-    /* Contenedor principal ajustado para Django */
-    .game-wrapper {
-        font-family: 'Poppins', sans-serif;
+    /* Forzamos el contenedor para que ignore estilos heredados del base.html */
+    .simulador-wrapper {
+        font-family: 'Inter', sans-serif;
+        background: radial-gradient(circle at center, #1a1f2c 0%, #000000 100%);
+        color: var(--text-main);
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 20px 0;
-        min-height: 80vh; /* Altura mínima para lucir en escritorio */
+        min-height: 90vh; /* Ocupa buena pantalla */
+        padding: 20px 10px;
+        position: relative;
         overflow: hidden;
     }
 
-    .game-header {
+    /* TARJETAS DE INSTRUCCIÓN (Tipo Banner) */
+    .instruction-card {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        padding: 15px 20px;
+        border-radius: 12px;
+        backdrop-filter: blur(10px);
+        margin-bottom: 30px;
         text-align: center;
-        margin-bottom: 20px;
+        max-width: 90%;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.5);
     }
 
-    .game-header h2 {
-        font-size: 1.8rem;
-        color: var(--text-color);
+    .instruction-step {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: #888;
         margin-bottom: 5px;
-    }
-
-    .game-header span {
-        color: var(--brand-orange);
         font-weight: 800;
     }
 
-    .subtitle {
-        color: #666;
-        font-size: 0.9rem;
-    }
-
-    /* --- ÁREA DEL JUEGO --- */
-    .game-area {
-        position: relative;
-        width: 100%;
-        max-width: 350px; /* Ancho controlado para móviles */
-        height: 450px;
-        margin-bottom: 80px; /* Espacio para botones flotantes */
-        user-select: none;
-    }
-
-    /* BOTELLA */
-    .bottle-container {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        width: 80px;
-        height: 120px;
-        cursor: pointer;
-        z-index: 10;
-        transition: transform 0.2s ease-out;
+    .instruction-text {
+        font-size: 1.1rem;
+        font-weight: 600;
+        line-height: 1.4;
     }
     
-    .bottle {
-        width: 100%;
-        height: 100%;
-        background: rgba(255, 255, 255, 0.9);
-        border: 2px solid #333;
-        border-radius: 8px 8px 30px 30px;
+    .highlight { color: var(--neon-orange); text-shadow: 0 0 10px rgba(255, 107, 0, 0.5); }
+
+    /* ÁREA DEL JUEGO */
+    .game-stage {
         position: relative;
+        width: 320px;
+        height: 400px;
+        margin-bottom: 20px;
+    }
+
+    /* BOTELLA MODERNIZADA */
+    .bottle-tech {
+        position: absolute;
+        top: 0;
+        right: 20px;
+        width: 90px;
+        height: 140px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 16px;
+        cursor: pointer;
+        z-index: 10;
+        transition: all 0.2s ease;
+        box-shadow: 0 0 15px rgba(255, 107, 0, 0.1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
         overflow: hidden;
     }
 
-    .liquid-inside {
+    .bottle-liquid {
         position: absolute;
         bottom: 0;
         width: 100%;
-        height: 80%;
-        background: var(--brand-orange);
+        height: 90%;
+        background: linear-gradient(to top, var(--neon-orange), #ff9e00);
+        box-shadow: 0 0 20px var(--neon-orange);
     }
 
-    .label-bottle {
+    .bottle-label {
         position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-weight: bold;
-        color: #fff;
-        font-size: 0.7rem;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        z-index: 2;
+        font-weight: 800;
+        color: white;
+        text-shadow: 0 2px 4px black;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
     }
 
-    /* CHORRO */
-    .stream {
+    /* CHORRO LUMINOSO */
+    .stream-tech {
         position: absolute;
-        top: 120px; /* Justo bajo la botella */
-        right: 45px; /* Alineado a la boca */
-        width: 10px;
+        top: 135px;
+        right: 60px;
+        width: 8px;
         height: 0;
-        background: var(--brand-orange);
+        background: var(--neon-orange);
+        box-shadow: 0 0 10px var(--neon-orange);
         z-index: 5;
+        border-radius: 0 0 4px 4px;
         transition: height 0.1s;
     }
 
-    /* VASO / CAJA */
-    .glass-container {
+    /* CAJA FUERTE / VASO */
+    .vault-container {
         position: absolute;
-        bottom: 50px;
+        bottom: 40px;
         left: 50%;
         transform: translateX(-50%);
-        width: 120px;
-        height: 160px;
+        width: 140px;
+        height: 180px;
     }
 
-    .glass {
+    .vault-glass {
         width: 100%;
         height: 100%;
-        border-left: 3px solid #333;
-        border-right: 3px solid #333;
-        border-bottom: 3px solid #333;
-        border-radius: 0 0 15px 15px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-top: none;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 0 0 20px 20px;
         position: relative;
         overflow: hidden;
     }
 
-    .glass-liquid {
+    .vault-liquid {
         position: absolute;
         bottom: 0;
         left: 0;
         width: 100%;
         height: 0%;
-        background: var(--brand-orange);
+        background: var(--neon-orange);
         transition: height 0.1s linear;
         opacity: 0.9;
+        box-shadow: 0 0 20px var(--neon-orange);
     }
 
-    .glass-label {
+    .vault-label {
         position: absolute;
-        top: -25px;
+        top: -30px;
         width: 100%;
         text-align: center;
+        font-size: 0.8rem;
+        color: #aaa;
+        letter-spacing: 1px;
         font-weight: 600;
-        color: #333;
-        font-size: 0.9rem;
     }
 
-    /* FUGAS */
-    .leaks-visual {
+    /* FUGAS ROJAS */
+    .leaks-tech {
         position: absolute;
-        bottom: -40px;
+        bottom: -50px;
         width: 100%;
         display: flex;
         justify-content: center;
-        gap: 15px;
+        gap: 20px;
         opacity: 0;
         transition: opacity 0.3s;
     }
-    
-    .leak-stream {
-        width: 6px;
-        height: 50px;
-        background: var(--brand-orange);
-        border-radius: 4px;
-        animation: flowLeak 0.5s infinite linear;
+
+    .leak-drop {
+        width: 4px;
+        height: 40px;
+        background: var(--neon-red);
+        box-shadow: 0 0 10px var(--neon-red);
+        animation: dropAnim 0.4s infinite linear;
     }
 
-    @keyframes flowLeak {
+    @keyframes dropAnim {
         0% { transform: translateY(0); opacity: 1; }
-        100% { transform: translateY(15px); opacity: 0; }
+        100% { transform: translateY(20px); opacity: 0; }
     }
 
-    /* TAPÓN OXÍGENO */
-    .oxigeno-patch {
+    /* ESCUDO OXÍGENO */
+    .shield-plate {
         position: absolute;
         bottom: 0;
         left: 0;
         width: 100%;
         height: 0;
-        background: var(--brand-blue);
-        transition: height 0.5s ease;
+        background: linear-gradient(to top, var(--neon-blue), #0056D2);
+        box-shadow: 0 0 25px var(--neon-blue);
         display: flex;
         align-items: center;
         justify-content: center;
-        color: white;
-        font-weight: 700;
-        font-size: 0.7rem;
         z-index: 20;
+        transition: height 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    /* UI CONTROLS */
-    .ui-controls {
+    .shield-text {
+        font-size: 0.7rem;
+        font-weight: 800;
+        color: #000;
+        text-transform: uppercase;
+        display: none; /* Se muestra al activarse */
+    }
+
+    /* CONTROLES */
+    .controls-area {
         width: 100%;
-        max-width: 400px;
-        text-align: center;
-        padding: 0 20px;
+        max-width: 350px;
+        z-index: 100;
     }
 
-    .status-msg {
-        font-weight: 600;
-        margin-bottom: 15px;
-        min-height: 40px;
-        color: #333;
-    }
-
-    .btn-game {
+    .btn-action {
         width: 100%;
-        padding: 15px;
+        padding: 18px;
         border: none;
-        border-radius: 50px;
+        border-radius: 12px;
         font-size: 1rem;
         font-weight: 800;
-        cursor: pointer;
         text-transform: uppercase;
-        margin-bottom: 10px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        transition: transform 0.1s;
+        cursor: pointer;
+        margin-bottom: 15px;
+        transition: transform 0.1s, box-shadow 0.2s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
     }
 
-    .btn-pour {
-        background-color: var(--brand-orange);
+    .btn-orange {
+        background: var(--neon-orange);
         color: white;
+        box-shadow: 0 0 20px rgba(255, 107, 0, 0.4);
     }
-    .btn-pour:active { transform: scale(0.98); }
+    .btn-orange:active { transform: scale(0.98); }
 
-    .btn-fix {
-        background-color: var(--brand-blue);
-        color: white;
-        display: none; /* Oculto inicio */
-        animation: pulse 1.5s infinite;
+    .btn-blue {
+        background: var(--neon-blue);
+        color: #000;
+        box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
+        display: none;
+        animation: pulseBlue 1.5s infinite;
     }
 
     .btn-whatsapp {
-        background-color: #25D366;
+        background: #25D366;
         color: white;
-        display: none; /* Oculto inicio */
+        box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
+        display: none;
         text-decoration: none;
     }
 
-    @keyframes pulse {
-        0% { box-shadow: 0 0 0 0 rgba(0, 86, 210, 0.4); }
-        70% { box-shadow: 0 0 0 10px rgba(0, 86, 210, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(0, 86, 210, 0); }
+    @keyframes pulseBlue {
+        0% { box-shadow: 0 0 0 0 rgba(0, 240, 255, 0.4); }
+        70% { box-shadow: 0 0 0 15px rgba(0, 240, 255, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(0, 240, 255, 0); }
     }
 
-    /* Pain Text Flotante */
-    .pain-text {
+    /* TEXTOS DE DOLOR FLOTANTES */
+    .pain-float {
         position: absolute;
-        color: #D32F2F;
+        color: var(--neon-red);
         font-weight: 800;
-        font-size: 0.8rem;
+        font-size: 0.9rem;
+        text-shadow: 0 0 5px black;
         pointer-events: none;
-        animation: floatUp 1s forwards;
+        animation: floatUp 1.5s forwards;
         white-space: nowrap;
     }
 
     @keyframes floatUp {
-        0% { transform: translateY(0); opacity: 1; }
-        100% { transform: translateY(-40px); opacity: 0; }
+        0% { transform: translateY(0) scale(1); opacity: 1; }
+        100% { transform: translateY(-60px) scale(1.2); opacity: 0; }
     }
+
 </style>
 {% endblock %}
 
 {% block content %}
-<div class="game-wrapper">
-    
-    <div class="game-header">
-        <h2>¿Tu Negocio se <br><span>Desangra?</span></h2>
-        <p class="subtitle">Mantén presionado "VERTIR" e intenta llenar la caja.</p>
-    </div>
+<div class="simulador-wrapper">
 
-    <div class="game-area" id="gameArea">
-        <div class="bottle-container" id="bottle">
-            <div class="bottle">
-                <div class="liquid-inside"></div>
-                <div class="label-bottle">VENTAS</div>
-            </div>
-        </div>
-        <div class="stream" id="stream"></div>
-
-        <div class="glass-container">
-            <div class="glass-label">TU CAJA</div>
-            <div class="glass">
-                <div class="glass-liquid" id="glassLiquid"></div>
-                <div class="oxigeno-patch" id="patch">ESCUDO OXÍGENO</div>
-            </div>
-            <div class="leaks-visual" id="leaks">
-                <div class="leak-stream"></div>
-                <div class="leak-stream" style="animation-delay: 0.2s"></div>
-            </div>
+    <div class="instruction-card" id="instructionCard">
+        <div class="instruction-step">PASO 1</div>
+        <div class="instruction-text">
+            Mantén presionado el botón <span class="highlight">NARANJA</span> para ingresar ventas a tu caja.
         </div>
     </div>
 
-    <div class="ui-controls">
-        <div class="status-msg" id="statusMsg">Presiona el botón para llenar...</div>
+    <div class="game-stage">
         
-        <button class="btn-game btn-pour" id="btnPour">🫗 MANTÉN PARA VERTIR</button>
-        
-        <button class="btn-game btn-fix" id="btnFix">🛡️ ACTIVAR OXÍGENO APP</button>
-        
-        <a href="https://wa.me/593997277796?text=Hola%20Pa'Arriba,%20hice%20el%20simulador%20de%20fugas%20y%20necesito%20ayuda" class="btn-game btn-whatsapp" id="btnWhatsapp">
-            📲 QUIERO MI AUDITORÍA GRATIS
+        <div class="bottle-tech" id="bottle">
+            <div class="bottle-liquid"></div>
+            <div class="bottle-label">VENTAS</div>
+        </div>
+        <div class="stream-tech" id="stream"></div>
+
+        <div class="vault-container">
+            <div class="vault-label">TU CAJA REGISTRADORA</div>
+            <div class="vault-glass">
+                <div class="vault-liquid" id="glassLiquid"></div>
+                <div class="shield-plate" id="shield">
+                    <span class="shield-text">ESCUDO ACTIVO</span>
+                </div>
+            </div>
+            <div class="leaks-tech" id="leaks">
+                <div class="leak-drop"></div>
+                <div class="leak-drop" style="animation-delay: 0.1s"></div>
+                <div class="leak-drop" style="animation-delay: 0.2s"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="controls-area">
+        <button class="btn-action btn-orange" id="btnPour">
+            <span>👇 MANTÉN PARA VENDER</span>
+        </button>
+
+        <button class="btn-action btn-blue" id="btnFix">
+            <span>🛡️ ACTIVAR OXÍGENO APP</span>
+        </button>
+
+        <a href="https://wa.me/593000000000?text=Vi%20sus%20fugas%20y%20quiero%20la%20auditoria" class="btn-action btn-whatsapp" id="btnWhatsapp">
+            <span>📲 SOLICITAR AUDITORÍA</span>
         </a>
     </div>
 
 </div>
-{% endblock %}
 
-{% block extra_js %}
 <script>
     document.addEventListener('DOMContentLoaded', () => {
+        // Referencias
         const btnPour = document.getElementById('btnPour');
         const btnFix = document.getElementById('btnFix');
         const btnWhatsapp = document.getElementById('btnWhatsapp');
+        const instructionCard = document.getElementById('instructionCard');
         const bottle = document.getElementById('bottle');
         const stream = document.getElementById('stream');
         const glassLiquid = document.getElementById('glassLiquid');
         const leaks = document.getElementById('leaks');
-        const statusMsg = document.getElementById('statusMsg');
-        const patch = document.getElementById('patch');
-        const gameArea = document.getElementById('gameArea');
+        const shield = document.getElementById('shield');
+        const shieldText = document.querySelector('.shield-text');
+        const gameStage = document.querySelector('.game-stage');
 
         let isPouring = false;
         let isFixed = false;
         let liquidLevel = 0;
-        let attempts = 0;
         let fillInterval;
+        let attempts = 0;
 
-        // EVENTOS (Soporte Mouse y Touch)
-        btnPour.addEventListener('mousedown', startPour);
-        btnPour.addEventListener('touchstart', (e) => { e.preventDefault(); startPour(); });
-        
-        btnPour.addEventListener('mouseup', stopPour);
-        btnPour.addEventListener('touchend', (e) => { e.preventDefault(); stopPour(); });
-        btnPour.addEventListener('mouseleave', stopPour);
+        // Eventos Touch y Mouse
+        const startEvents = ['mousedown', 'touchstart'];
+        const endEvents = ['mouseup', 'touchend', 'mouseleave'];
 
-        // LÓGICA DE JUEGO
+        startEvents.forEach(evt => btnPour.addEventListener(evt, (e) => {
+            if(e.cancelable) e.preventDefault();
+            startPour();
+        }));
+
+        endEvents.forEach(evt => btnPour.addEventListener(evt, (e) => {
+            if(e.cancelable) e.preventDefault();
+            stopPour();
+        }));
+
         function startPour() {
-            if (liquidLevel >= 100 || isPouring) return;
+            if (isPouring || liquidLevel >= 100) return;
             isPouring = true;
 
-            // Animar botella
-            bottle.style.transform = 'rotate(-45deg)';
+            // Girar botella
+            bottle.style.transform = 'rotate(-45deg) translate(-10px, 10px)';
             
-            // Retraso ligero para el chorro
             setTimeout(() => {
-                if(isPouring) stream.style.height = '180px';
+                if(isPouring) stream.style.height = '160px'; // Sale chorro
             }, 100);
 
             fillInterval = setInterval(() => {
                 if(!isPouring) return;
 
                 if (!isFixed) {
-                    // MODO ROTO (FRUSTRANTE)
-                    if (liquidLevel < 30) {
-                        liquidLevel += 1;
-                        glassLiquid.style.height = liquidLevel + '%';
+                    // --- MODO ROTO (Dolor) ---
+                    if (liquidLevel < 35) {
+                        liquidLevel += 1.5;
                     } else {
-                        // Rebote frustrante
-                        liquidLevel = 25 + Math.random() * 5;
-                        glassLiquid.style.height = liquidLevel + '%';
-                        showPainText(); // Muestra "Robo Hormiga"
+                        // Fluctuación frustrante
+                        liquidLevel = 30 + Math.random() * 5; 
+                        spawnPainText(); // Textos rojos
                     }
-                    leaks.style.opacity = 1; // Se ven las fugas
+                    glassLiquid.style.height = liquidLevel + '%';
+                    leaks.style.opacity = 1; // Se ven fugas
+                    
                 } else {
-                    // MODO ARREGLADO (EXITO)
-                    liquidLevel += 2; // Sube más rápido
+                    // --- MODO OXÍGENO (Éxito) ---
+                    liquidLevel += 2.5;
                     glassLiquid.style.height = liquidLevel + '%';
                     leaks.style.opacity = 0;
 
@@ -383,11 +418,11 @@ Diagnóstico: Fugas de Dinero | Oxígeno App
             isPouring = false;
             clearInterval(fillInterval);
 
-            // Resetear botella y chorro
+            // Reset visual
             bottle.style.transform = 'rotate(0deg)';
             stream.style.height = '0';
 
-            // Si no está arreglado, se vacía
+            // Drenar si no está arreglado
             if (!isFixed && liquidLevel < 100) {
                 drainGlass();
                 attempts++;
@@ -398,7 +433,7 @@ Diagnóstico: Fugas de Dinero | Oxígeno App
         function drainGlass() {
             let drainInt = setInterval(() => {
                 if (liquidLevel > 0 && !isPouring && !isFixed) {
-                    liquidLevel -= 2;
+                    liquidLevel -= 3; // Baja rápido
                     glassLiquid.style.height = liquidLevel + '%';
                 } else {
                     clearInterval(drainInt);
@@ -407,56 +442,76 @@ Diagnóstico: Fugas de Dinero | Oxígeno App
             }, 30);
         }
 
-        function showPainText() {
-            const pains = ["💸 Robo Hormiga", "📉 Desperdicio", "🚫 Sin Control", "🍳 Costos Altos"];
-            const text = pains[Math.floor(Math.random() * pains.length)];
+        function spawnPainText() {
+            const words = ["ROBO HORMIGA", "DESPERDICIO", "MAL COSTEO", "SIN CONTROL"];
+            const word = words[Math.floor(Math.random() * words.length)];
             
             const el = document.createElement('div');
-            el.className = 'pain-text';
-            el.innerText = text;
-            // Posición aleatoria sobre el vaso
-            el.style.left = (50 + (Math.random() * 40 - 20)) + '%';
-            el.style.bottom = '120px';
+            el.className = 'pain-float';
+            el.innerText = word;
             
-            gameArea.appendChild(el);
-            setTimeout(() => el.remove(), 1000);
+            // Posición aleatoria
+            const randomX = Math.random() * 100;
+            el.style.left = randomX + '%';
+            el.style.bottom = '50px';
+            
+            gameStage.appendChild(el);
+            setTimeout(() => el.remove(), 1500);
         }
 
         function checkFrustration() {
-            if (attempts >= 2) {
-                statusMsg.innerHTML = "¡IMPOSIBLE! Tus ganancias se escapan.<br>Necesitas un sistema.";
-                statusMsg.style.color = "#D32F2F";
+            if (attempts >= 1) { // A la primera o segunda frustración
+                updateInstruction("PASO 2", "¡Tus ganancias se escapan! Necesitas tapar las fugas ahora.", true);
                 btnPour.style.display = 'none';
-                btnFix.style.display = 'block'; // Aparece botón de solución
-            } else {
-                statusMsg.innerText = "¡Se está regando! Intenta de nuevo...";
+                btnFix.style.display = 'flex'; // Botón azul
             }
         }
 
-        // ACTIVAR OXÍGENO
-        btnFix.addEventListener('click', () => {
+        // --- SOLUCIÓN ---
+        btnFix.addEventListener('click', (e) => {
+            e.preventDefault();
             isFixed = true;
-            patch.style.height = '35px'; // Sube el tapón
-            statusMsg.innerHTML = "SISTEMA BLINDADO.<br>Ahora sí, llena tu caja.";
-            statusMsg.style.color = "var(--brand-blue)";
             
+            // Animación Escudo
+            shield.style.height = '40px';
+            setTimeout(() => { shieldText.style.display = 'block'; }, 300);
+
+            // Cambiar instrucciones
+            updateInstruction("PASO 3", "Sistema blindado. Ahora intenta llenar tu caja de nuevo.", false);
+            
+            // Resetear botones
             btnFix.style.display = 'none';
-            btnPour.style.display = 'block';
-            btnPour.innerText = "💰 LLENAR CAJA AHORA";
+            btnPour.style.display = 'flex';
+            btnPour.querySelector('span').innerText = "💰 LLENAR CAJA AHORA";
             
-            attempts = 0; // Reinicia para que jueguen a ganar
+            attempts = 0;
         });
 
         function winGame() {
             stopPour();
             btnPour.style.display = 'none';
-            statusMsg.innerHTML = "¡OBJETIVO LOGRADO! <br>Oxígeno Automatiza tu Éxito.";
-            statusMsg.style.color = "#25D366";
             
-            // Cambiar color líquido a verde
-            glassLiquid.style.backgroundColor = "#25D366";
+            // Feedback final
+            updateInstruction("¡FELICIDADES!", "Con Oxígeno, lo que vendes se queda en tu bolsillo.", false);
+            instructionCard.querySelector('.instruction-text').style.color = '#25D366';
             
-            btnWhatsapp.style.display = 'inline-block'; // Call to Action final
+            // Líquido verde
+            glassLiquid.style.background = "#25D366";
+            glassLiquid.style.boxShadow = "0 0 20px #25D366";
+
+            btnWhatsapp.style.display = 'flex';
+        }
+
+        function updateInstruction(step, text, isError) {
+            instructionCard.querySelector('.instruction-step').innerText = step;
+            instructionCard.querySelector('.instruction-text').innerHTML = text;
+            if (isError) {
+                instructionCard.style.border = "1px solid var(--neon-red)";
+                instructionCard.style.boxShadow = "0 0 15px rgba(255, 0, 85, 0.3)";
+            } else {
+                instructionCard.style.border = "1px solid var(--glass-border)";
+                instructionCard.style.boxShadow = "none";
+            }
         }
     });
 </script>
