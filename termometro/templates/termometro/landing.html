@@ -2,554 +2,191 @@
 {% load static %}
 
 {% block title %}
-Simulador Financiero | Oxígeno App
+Control Total: Oxígeno App
 {% endblock %}
 
 {% block extra_head %}
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
 <style>
-    /* --- ESTILOS NEON TECH V2 --- */
     :root {
-        --neon-orange: #FF6B00;
-        --neon-blue: #00F0FF; 
-        --neon-red: #FF0055;
-        --glass-bg: rgba(255, 255, 255, 0.05);
-        --glass-border: rgba(255, 255, 255, 0.2);
-        --text-main: #ffffff;
+        --brand-orange: #FF6B00;
+        --brand-blue: #0056D2;
+        --dark-bg: #0F172A;
+        --text-white: #ffffff;
+        --text-gray: #94A3B8;
     }
 
-    .simulador-wrapper {
+    /* Layout VSL (Video Sales Letter) */
+    .vsl-wrapper {
         font-family: 'Inter', sans-serif;
-        background: radial-gradient(circle at center, #1a1f2c 0%, #000000 100%);
-        color: var(--text-main);
+        background-color: var(--dark-bg);
+        color: var(--text-white);
+        min-height: 100vh;
         display: flex;
         flex-direction: column;
         align-items: center;
-        min-height: 90vh;
-        padding: 20px 10px;
-        position: relative;
-        overflow: hidden;
+        padding: 40px 20px;
     }
 
-    /* INSTRUCCIONES */
-    .instruction-card {
-        background: var(--glass-bg);
-        border: 1px solid var(--glass-border);
-        padding: 15px 20px;
-        border-radius: 12px;
-        backdrop-filter: blur(10px);
-        margin-bottom: 20px;
+    /* 1. TITULAR */
+    .headline-box {
         text-align: center;
-        max-width: 90%;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-        z-index: 100;
+        max-width: 800px;
+        margin-bottom: 30px;
     }
 
-    .instruction-step {
-        font-size: 0.7rem;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        color: #888;
-        font-weight: 800;
-    }
-
-    .instruction-text {
-        font-size: 1rem;
-        font-weight: 600;
-        line-height: 1.4;
-    }
-    
-    .highlight { color: var(--neon-orange); text-shadow: 0 0 10px rgba(255, 107, 0, 0.5); }
-
-    /* ÁREA DEL JUEGO */
-    .game-stage {
-        position: relative;
-        width: 320px; /* Ancho fijo para control preciso */
-        height: 420px;
+    .headline-box h1 {
+        font-size: 1.8rem; /* Tamaño móvil seguro */
+        line-height: 1.2;
         margin-bottom: 10px;
-    }
-
-    /* BOTELLA MEJORADA */
-    .bottle-tech {
-        position: absolute;
-        top: 0;
-        right: 10px; /* Movido un poco más a la derecha */
-        width: 80px;
-        height: 130px;
-        background: rgba(255, 255, 255, 0.1);
-        border: 2px solid rgba(255, 255, 255, 0.4);
-        border-radius: 12px;
-        cursor: pointer;
-        z-index: 20;
-        transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        box-shadow: 0 0 15px rgba(255, 107, 0, 0.1);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-    }
-
-    .bottle-liquid {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        height: 90%;
-        background: linear-gradient(to top, var(--neon-orange), #ff9e00);
-        box-shadow: 0 0 20px var(--neon-orange);
-    }
-
-    .bottle-label {
-        position: absolute;
-        z-index: 2;
-        font-weight: 800;
-        color: white;
-        text-shadow: 0 2px 4px black;
-        font-size: 0.8rem;
-        transform: rotate(-90deg); /* Texto vertical más moderno */
-    }
-
-    /* CHORRO (Alineado matemáticamente) */
-    .stream-tech {
-        position: absolute;
-        top: 110px; /* Sale de la boca de la botella al girar */
-        right: 85px; /* Ajuste preciso para caer al centro */
-        width: 10px;
-        height: 0;
-        background: var(--neon-orange);
-        box-shadow: 0 0 15px var(--neon-orange);
-        z-index: 5;
-        border-radius: 0 0 5px 5px;
-        transition: height 0.1s;
-    }
-
-    /* CAJA / RECIPIENTE CÓNICO */
-    .vault-container {
-        position: absolute;
-        bottom: 50px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 160px;
-        height: 160px;
-    }
-
-    /* Forma de Trapecio (Vaso/Tolva) usando clip-path */
-    .vault-shape {
-        width: 100%;
-        height: 100%;
-        background: rgba(255, 255, 255, 0.05);
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        border-top: none; 
-        /* Hacemos que parezca un vaso cónico */
-        clip-path: polygon(0 0, 100% 0, 85% 100%, 15% 100%);
-        position: relative;
-        backdrop-filter: blur(5px);
-    }
-
-    /* Borde visual brillante para el vaso (clip-path recorta bordes, así que usamos un truco) */
-    .vault-border-fix {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        clip-path: polygon(0 0, 100% 0, 85% 100%, 15% 100%);
-        box-shadow: inset 0 -5px 10px rgba(255, 255, 255, 0.1);
-        pointer-events: none;
-        z-index: 15;
-    }
-
-    .vault-liquid {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 0%;
-        background: var(--neon-orange);
-        transition: height 0.1s linear;
-        opacity: 0.9;
-        box-shadow: 0 0 30px var(--neon-orange);
-    }
-
-    /* ETIQUETA LATERAL (Para no estorbar) */
-    .vault-label-side {
-        position: absolute;
-        top: 50%;
-        right: -90px; /* Flotando a la derecha */
-        width: 80px;
-        text-align: left;
-        font-size: 0.7rem;
-        color: #aaa;
-        font-weight: 600;
-        border-left: 1px solid #aaa;
-        padding-left: 5px;
-    }
-
-    /* ICONO DE CANDADO (Visual de Seguridad) */
-    .lock-icon {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 2rem;
-        opacity: 0.5;
-        z-index: 16;
-    }
-
-    /* FUGAS */
-    .leaks-tech {
-        position: absolute;
-        bottom: -60px; /* Más abajo */
-        left: 50%;
-        transform: translateX(-50%);
-        width: 60%; /* Solo salen del centro (fondo del vaso) */
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-        opacity: 0;
-        transition: opacity 0.3s;
-    }
-
-    .leak-drop {
-        width: 5px;
-        height: 50px;
-        background: var(--neon-red);
-        box-shadow: 0 0 10px var(--neon-red);
-        animation: dropAnim 0.3s infinite linear;
-        border-radius: 4px;
-    }
-
-    @keyframes dropAnim {
-        0% { transform: translateY(0); opacity: 1; }
-        100% { transform: translateY(30px); opacity: 0; }
-    }
-
-    /* ESCUDO OXÍGENO */
-    .shield-plate {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 0;
-        background: linear-gradient(to top, var(--neon-blue), rgba(0, 86, 210, 0.8));
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 14;
-        transition: height 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    /* CONTROLES */
-    .controls-area {
-        width: 100%;
-        max-width: 350px;
-        z-index: 100;
-    }
-
-    .btn-action {
-        width: 100%;
-        padding: 18px;
-        border: none;
-        border-radius: 12px;
-        font-size: 1rem;
-        font-weight: 800;
-        text-transform: uppercase;
-        cursor: pointer;
-        margin-bottom: 15px;
-        transition: transform 0.1s;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        color: white;
-    }
-
-    .btn-orange {
-        background: var(--neon-orange);
-        box-shadow: 0 0 20px rgba(255, 107, 0, 0.4);
-    }
-    .btn-orange:active { transform: scale(0.96); }
-
-    .btn-blue {
-        background: var(--neon-blue);
-        color: #000;
-        box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
-        display: none;
-        animation: pulseBlue 1.5s infinite;
-    }
-
-    .btn-whatsapp {
-        background: #25D366;
-        box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
-        display: none;
-        text-decoration: none;
-    }
-
-    @keyframes pulseBlue {
-        0% { box-shadow: 0 0 0 0 rgba(0, 240, 255, 0.4); }
-        70% { box-shadow: 0 0 0 15px rgba(0, 240, 255, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(0, 240, 255, 0); }
-    }
-
-    /* --- ANIMACIÓN MEJORADA DE DOLOR (ZOOM) --- */
-    .pain-float {
-        position: absolute;
-        color: var(--neon-red);
         font-weight: 900;
+    }
+
+    .highlight-red {
+        color: #FF4D4D;
+        text-decoration: underline;
+        text-decoration-color: rgba(255, 77, 77, 0.3);
+    }
+
+    .sub-headline {
         font-size: 1rem;
-        text-shadow: 0 0 8px black;
-        pointer-events: none;
-        animation: floatZoomUp 1.8s forwards; /* Más tiempo */
-        white-space: nowrap;
+        color: var(--text-gray);
+        font-weight: 400;
+    }
+
+    /* 2. VIDEO HÉROE */
+    .video-container {
+        width: 100%;
+        max-width: 800px;
+        background: #000;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        margin-bottom: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .video-element {
+        width: 100%;
+        display: block;
+        max-height: 80vh; /* Para que no ocupe toda la pantalla en vertical */
+    }
+
+    /* 3. BENEFICIOS */
+    .benefits-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 15px;
+        width: 100%;
+        max-width: 600px;
+        margin-bottom: 40px;
+    }
+
+    .benefit-item {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 15px;
+        border-radius: 8px;
+        border-left: 4px solid var(--brand-orange);
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .benefit-icon { font-size: 1.5rem; line-height: 1; }
+    
+    .benefit-text strong {
+        color: var(--brand-orange);
+        display: block;
+        font-size: 0.95rem;
+        margin-bottom: 2px;
+    }
+    .benefit-text p {
+        margin: 0;
+        font-size: 0.85rem;
+        color: #ccc;
+    }
+
+    /* 4. CTA */
+    .cta-area {
+        width: 100%;
+        max-width: 500px;
+        text-align: center;
+        padding-bottom: 40px;
+    }
+
+    .cta-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        background: linear-gradient(135deg, var(--brand-blue), #0044AA);
+        color: white;
+        font-weight: 900;
+        font-size: 1.1rem;
+        padding: 18px;
+        border-radius: 50px;
+        text-decoration: none;
+        box-shadow: 0 0 20px rgba(0, 86, 210, 0.5);
+        transition: transform 0.2s;
         text-transform: uppercase;
-        z-index: 50;
     }
 
-    @keyframes floatZoomUp {
-        0% { 
-            transform: translateY(0) scale(0.5); 
-            opacity: 0; 
-        }
-        20% {
-            transform: translateY(-20px) scale(1.2); /* Zoom agresivo */
-            opacity: 1;
-        }
-        100% { 
-            transform: translateY(-120px) scale(1.5); /* Sube mucho más */
-            opacity: 0; 
-        }
-    }
+    .cta-button:active { transform: scale(0.98); }
 
+    /* Media Query PC */
+    @media (min-width: 768px) {
+        .headline-box h1 { font-size: 2.5rem; }
+        .benefits-grid { grid-template-columns: 1fr 1fr 1fr; }
+        .benefit-item { flex-direction: column; text-align: center; border-left: none; border-top: 4px solid var(--brand-orange); }
+    }
 </style>
 {% endblock %}
 
 {% block content %}
-<div class="simulador-wrapper">
+<div class="vsl-wrapper">
 
-    <div class="instruction-card" id="instructionCard">
-        <div class="instruction-step">PASO 1</div>
-        <div class="instruction-text">
-            Mantén presionado el botón <span class="highlight">NARANJA</span> para ingresar dinero.
+    <div class="headline-box">
+        <h1>Mira cómo <span class="highlight-red">detener el robo hormiga</span> en 2 minutos.</h1>
+        <p class="sub-headline">Sistema automático de control para restaurantes y food trucks.</p>
+    </div>
+
+    <div class="video-container">
+        <video class="video-element" controls playsinline poster="{% static 'core/logo_pa_arriba.png' %}">
+            <source src="{% static 'core/demo_oxigeno.mp4' %}" type="video/mp4">
+            Tu navegador no soporta video.
+        </video>
+    </div>
+
+    <div class="benefits-grid">
+        <div class="benefit-item">
+            <div class="benefit-icon">👮</div>
+            <div class="benefit-text">
+                <strong>Adiós Fugas de Dinero</strong>
+                <p>El inventario se descuenta solo con cada venta. Nada se pierde.</p>
+            </div>
+        </div>
+        <div class="benefit-item">
+            <div class="benefit-icon">⚡</div>
+            <div class="benefit-text">
+                <strong>Receta Estándar</strong>
+                <p>Controla tus porciones exactas para que siempre ganes lo mismo.</p>
+            </div>
+        </div>
+        <div class="benefit-item">
+            <div class="benefit-icon">📲</div>
+            <div class="benefit-text">
+                <strong>Desde tu Celular</strong>
+                <p>Monitorea tu cocina en tiempo real sin estar ahí presente.</p>
+            </div>
         </div>
     </div>
 
-    <div class="game-stage">
-        
-        <div class="bottle-tech" id="bottle">
-            <div class="bottle-liquid"></div>
-            <div class="bottle-label">VENTAS</div>
-        </div>
-        <div class="stream-tech" id="stream"></div>
-
-        <div class="vault-container">
-            <div class="vault-label-side">TU CAJA<br>REGISTRADORA</div>
-            
-            <div class="vault-shape">
-                <div class="lock-icon" id="lockIcon">🔓</div>
-                
-                <div class="vault-liquid" id="glassLiquid"></div>
-                <div class="shield-plate" id="shield"></div>
-            </div>
-            <div class="vault-border-fix"></div>
-
-            <div class="leaks-tech" id="leaks">
-                <div class="leak-drop"></div>
-                <div class="leak-drop" style="animation-delay: 0.15s"></div>
-                <div class="leak-drop" style="animation-delay: 0.3s"></div>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="controls-area">
-        <button class="btn-action btn-orange" id="btnPour">
-            <span>👇 MANTÉN PRESIONADO</span>
-        </button>
-
-        <button class="btn-action btn-blue" id="btnFix">
-            <span>🛡️ TAPAR FUGAS AHORA</span>
-        </button>
-
-        <a href="https://wa.me/593000000000?text=Vi%20sus%20fugas%20y%20quiero%20la%20auditoria" class="btn-action btn-whatsapp" id="btnWhatsapp">
-            <span>📲 SOLICITAR AUDITORÍA</span>
+    <div class="cta-area">
+        <a href="https://wa.me/593000000000?text=Vi%20el%20video%20y%20quiero%20probar%20Oxigeno" class="cta-button">
+            👉 SOLICITAR DEMO GRATIS
         </a>
+        <p style="margin-top: 15px; font-size: 0.8rem; color: #666;">🔒 Prueba de 4 días sin compromiso.</p>
     </div>
 
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // Referencias
-        const btnPour = document.getElementById('btnPour');
-        const btnFix = document.getElementById('btnFix');
-        const btnWhatsapp = document.getElementById('btnWhatsapp');
-        const instructionCard = document.getElementById('instructionCard');
-        const bottle = document.getElementById('bottle');
-        const stream = document.getElementById('stream');
-        const glassLiquid = document.getElementById('glassLiquid');
-        const leaks = document.getElementById('leaks');
-        const shield = document.getElementById('shield');
-        const lockIcon = document.getElementById('lockIcon');
-        const gameStage = document.querySelector('.game-stage');
-
-        let isPouring = false;
-        let isFixed = false;
-        let liquidLevel = 0;
-        let fillInterval;
-        let attempts = 0;
-
-        // Eventos Touch y Mouse
-        const startEvents = ['mousedown', 'touchstart'];
-        const endEvents = ['mouseup', 'touchend', 'mouseleave'];
-
-        startEvents.forEach(evt => btnPour.addEventListener(evt, (e) => {
-            if(e.cancelable) e.preventDefault();
-            startPour();
-        }));
-
-        endEvents.forEach(evt => btnPour.addEventListener(evt, (e) => {
-            if(e.cancelable) e.preventDefault();
-            stopPour();
-        }));
-
-        function startPour() {
-            if (isPouring || liquidLevel >= 100) return;
-            isPouring = true;
-
-            // Girar botella (Menos agresivo para alinear mejor)
-            bottle.style.transform = 'rotate(-60deg) translate(-10px, 20px)';
-            
-            setTimeout(() => {
-                if(isPouring) stream.style.height = '160px'; // Sale chorro
-            }, 150);
-
-            fillInterval = setInterval(() => {
-                if(!isPouring) return;
-
-                if (!isFixed) {
-                    // --- MODO ROTO (Dolor) ---
-                    if (liquidLevel < 30) {
-                        liquidLevel += 1.5;
-                    } else {
-                        // Fluctuación
-                        liquidLevel = 25 + Math.random() * 5; 
-                        spawnPainText(); // Textos
-                    }
-                    glassLiquid.style.height = liquidLevel + '%';
-                    leaks.style.opacity = 1;
-                    
-                } else {
-                    // --- MODO OXÍGENO (Éxito) ---
-                    liquidLevel += 2.5;
-                    glassLiquid.style.height = liquidLevel + '%';
-                    leaks.style.opacity = 0;
-
-                    if (liquidLevel >= 100) winGame();
-                }
-            }, 40);
-        }
-
-        function stopPour() {
-            if(!isPouring) return;
-            isPouring = false;
-            clearInterval(fillInterval);
-
-            // Reset visual
-            bottle.style.transform = 'rotate(0deg)';
-            stream.style.height = '0';
-
-            // Drenar si no está arreglado
-            if (!isFixed && liquidLevel < 100) {
-                drainGlass();
-                attempts++;
-                checkFrustration();
-            }
-        }
-
-        function drainGlass() {
-            let drainInt = setInterval(() => {
-                if (liquidLevel > 0 && !isPouring && !isFixed) {
-                    liquidLevel -= 3; 
-                    glassLiquid.style.height = liquidLevel + '%';
-                } else {
-                    clearInterval(drainInt);
-                    leaks.style.opacity = 0;
-                }
-            }, 30);
-        }
-
-        function spawnPainText() {
-            const words = ["ROBO HORMIGA", "DESPERDICIO", "SIN CONTROL", "CAOS"];
-            const word = words[Math.floor(Math.random() * words.length)];
-            
-            const el = document.createElement('div');
-            el.className = 'pain-float';
-            el.innerText = word;
-            
-            // Posición aleatoria centrada
-            const randomX = 20 + Math.random() * 60; 
-            el.style.left = randomX + '%';
-            el.style.bottom = '80px'; // Empieza más arriba
-            
-            gameStage.appendChild(el);
-            setTimeout(() => el.remove(), 2000);
-        }
-
-        function checkFrustration() {
-            if (attempts >= 1) {
-                updateInstruction("PASO 2", "¡Tu dinero se evapora! <br>Cierra las fugas ahora.", true);
-                btnPour.style.display = 'none';
-                btnFix.style.display = 'flex';
-            }
-        }
-
-        // --- SOLUCIÓN ---
-        btnFix.addEventListener('click', (e) => {
-            e.preventDefault();
-            isFixed = true;
-            
-            // Animación Escudo y Candado
-            shield.style.height = '100%'; // Llena todo el fondo de azul tenue
-            lockIcon.innerText = "🔒"; // Candado cerrado
-            lockIcon.style.opacity = "1";
-            lockIcon.style.textShadow = "0 0 20px var(--neon-blue)";
-
-            // Instrucciones
-            updateInstruction("PASO 3", "Caja Blindada. <br>Intenta vender de nuevo.", false);
-            instructionCard.querySelector('.instruction-text').style.color = "var(--neon-blue)";
-            
-            btnFix.style.display = 'none';
-            btnPour.style.display = 'flex';
-            btnPour.querySelector('span').innerText = "💰 LLENAR CAJA AHORA";
-            
-            attempts = 0;
-        });
-
-        function winGame() {
-            stopPour();
-            btnPour.style.display = 'none';
-            
-            // Feedback final
-            updateInstruction("¡LOGRADO!", "Con Oxígeno, tu esfuerzo rinde frutos.", false);
-            instructionCard.querySelector('.instruction-text').style.color = '#25D366';
-            
-            glassLiquid.style.background = "#25D366";
-            glassLiquid.style.boxShadow = "0 0 30px #25D366";
-
-            btnWhatsapp.style.display = 'flex';
-        }
-
-        function updateInstruction(step, text, isError) {
-            instructionCard.querySelector('.instruction-step').innerText = step;
-            instructionCard.querySelector('.instruction-text').innerHTML = text;
-            if (isError) {
-                instructionCard.style.border = "1px solid var(--neon-red)";
-                instructionCard.style.boxShadow = "0 0 15px rgba(255, 0, 85, 0.3)";
-                instructionCard.querySelector('.instruction-text').style.color = "var(--neon-red)";
-            } else {
-                instructionCard.style.border = "1px solid var(--glass-border)";
-                instructionCard.style.boxShadow = "none";
-            }
-        }
-    });
-</script>
 {% endblock %}
