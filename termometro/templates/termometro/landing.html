@@ -2,118 +2,462 @@
 {% load static %}
 
 {% block title %}
-Diagnóstico Rápido de Negocios | Termómetro del Caos Emprendedor - Pa'Arriba
+Diagnóstico: Fugas de Dinero | Oxígeno App
 {% endblock %}
 
 {% block extra_head %}
-<link rel="stylesheet" href="{% static 'core/termometro.css' %}">
+<style>
+    :root {
+        --brand-orange: #FF6B00;
+        --brand-blue: #0056D2;
+        --text-color: #202124;
+    }
+
+    /* Contenedor principal ajustado para Django */
+    .game-wrapper {
+        font-family: 'Poppins', sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
+        min-height: 80vh; /* Altura mínima para lucir en escritorio */
+        overflow: hidden;
+    }
+
+    .game-header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .game-header h2 {
+        font-size: 1.8rem;
+        color: var(--text-color);
+        margin-bottom: 5px;
+    }
+
+    .game-header span {
+        color: var(--brand-orange);
+        font-weight: 800;
+    }
+
+    .subtitle {
+        color: #666;
+        font-size: 0.9rem;
+    }
+
+    /* --- ÁREA DEL JUEGO --- */
+    .game-area {
+        position: relative;
+        width: 100%;
+        max-width: 350px; /* Ancho controlado para móviles */
+        height: 450px;
+        margin-bottom: 80px; /* Espacio para botones flotantes */
+        user-select: none;
+    }
+
+    /* BOTELLA */
+    .bottle-container {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 80px;
+        height: 120px;
+        cursor: pointer;
+        z-index: 10;
+        transition: transform 0.2s ease-out;
+    }
+    
+    .bottle {
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.9);
+        border: 2px solid #333;
+        border-radius: 8px 8px 30px 30px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .liquid-inside {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 80%;
+        background: var(--brand-orange);
+    }
+
+    .label-bottle {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-weight: bold;
+        color: #fff;
+        font-size: 0.7rem;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+
+    /* CHORRO */
+    .stream {
+        position: absolute;
+        top: 120px; /* Justo bajo la botella */
+        right: 45px; /* Alineado a la boca */
+        width: 10px;
+        height: 0;
+        background: var(--brand-orange);
+        z-index: 5;
+        transition: height 0.1s;
+    }
+
+    /* VASO / CAJA */
+    .glass-container {
+        position: absolute;
+        bottom: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 120px;
+        height: 160px;
+    }
+
+    .glass {
+        width: 100%;
+        height: 100%;
+        border-left: 3px solid #333;
+        border-right: 3px solid #333;
+        border-bottom: 3px solid #333;
+        border-radius: 0 0 15px 15px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .glass-liquid {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 0%;
+        background: var(--brand-orange);
+        transition: height 0.1s linear;
+        opacity: 0.9;
+    }
+
+    .glass-label {
+        position: absolute;
+        top: -25px;
+        width: 100%;
+        text-align: center;
+        font-weight: 600;
+        color: #333;
+        font-size: 0.9rem;
+    }
+
+    /* FUGAS */
+    .leaks-visual {
+        position: absolute;
+        bottom: -40px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+    
+    .leak-stream {
+        width: 6px;
+        height: 50px;
+        background: var(--brand-orange);
+        border-radius: 4px;
+        animation: flowLeak 0.5s infinite linear;
+    }
+
+    @keyframes flowLeak {
+        0% { transform: translateY(0); opacity: 1; }
+        100% { transform: translateY(15px); opacity: 0; }
+    }
+
+    /* TAPÓN OXÍGENO */
+    .oxigeno-patch {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 0;
+        background: var(--brand-blue);
+        transition: height 0.5s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 700;
+        font-size: 0.7rem;
+        z-index: 20;
+    }
+
+    /* UI CONTROLS */
+    .ui-controls {
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+        padding: 0 20px;
+    }
+
+    .status-msg {
+        font-weight: 600;
+        margin-bottom: 15px;
+        min-height: 40px;
+        color: #333;
+    }
+
+    .btn-game {
+        width: 100%;
+        padding: 15px;
+        border: none;
+        border-radius: 50px;
+        font-size: 1rem;
+        font-weight: 800;
+        cursor: pointer;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transition: transform 0.1s;
+    }
+
+    .btn-pour {
+        background-color: var(--brand-orange);
+        color: white;
+    }
+    .btn-pour:active { transform: scale(0.98); }
+
+    .btn-fix {
+        background-color: var(--brand-blue);
+        color: white;
+        display: none; /* Oculto inicio */
+        animation: pulse 1.5s infinite;
+    }
+
+    .btn-whatsapp {
+        background-color: #25D366;
+        color: white;
+        display: none; /* Oculto inicio */
+        text-decoration: none;
+    }
+
+    @keyframes pulse {
+        0% { box-shadow: 0 0 0 0 rgba(0, 86, 210, 0.4); }
+        70% { box-shadow: 0 0 0 10px rgba(0, 86, 210, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(0, 86, 210, 0); }
+    }
+
+    /* Pain Text Flotante */
+    .pain-text {
+        position: absolute;
+        color: #D32F2F;
+        font-weight: 800;
+        font-size: 0.8rem;
+        pointer-events: none;
+        animation: floatUp 1s forwards;
+        white-space: nowrap;
+    }
+
+    @keyframes floatUp {
+        0% { transform: translateY(0); opacity: 1; }
+        100% { transform: translateY(-40px); opacity: 0; }
+    }
+</style>
 {% endblock %}
 
 {% block content %}
-<div class="container">
-  <img src="{% static 'core/logo_pa_arriba.png' %}" alt="Logo Pa’Arriba" class="logo">
-
-  <div class="banner-explicativo">
-    <h2>🧭 Diagnóstico Rápido de Negocios</h2>
-    <p>Responde 4 preguntas clave y descubre si tu negocio está en fase de <strong>CRECE</strong>, <strong>AVANZA</strong>, <strong>MEJORA</strong> o <strong>RE-EMPRENDE</strong>.</p>
-  </div>
-
-  <form method="post" action="{% url 'termometro:diagnostico_submit' %}" class="termometro-form" novalidate>
-    {% csrf_token %}
-
-    <div class="wizard-step active" data-step="1" data-name="crece">
-      <h3 class="pregunta-principal">¿Sabes si tu negocio realmente está ganando dinero?</h3>
-      <p class="instruccion-principal">Elige la opción que más se acerque a tu realidad:</p>
-      <div class="wizard-options">
-        <button type="button" data-value="Muy seguro" data-score="5">Muy seguro (Tengo números claros)</button>
-        <button type="button" data-value="Tengo dudas" data-score="3">Tengo dudas (Lo calculo "a ojo")</button>
-        <button type="button" data-value="No tengo idea" data-score="1">No tengo idea (Me confundo con el dinero)</button>
-      </div>
+<div class="game-wrapper">
+    
+    <div class="game-header">
+        <h2>¿Tu Negocio se <br><span>Desangra?</span></h2>
+        <p class="subtitle">Mantén presionado "VERTIR" e intenta llenar la caja.</p>
     </div>
 
-    <div class="wizard-step" data-step="2" data-name="avanza">
-      <h3 class="pregunta-principal">¿Tu negocio puede avanzar sin ti?</h3>
-      <p class="instruccion-principal">Si te tomas 7 días de vacaciones sin celular:</p>
-      <div class="wizard-options">
-        <button type="button" data-value="Funcionaría sin problema" data-score="5">Funcionaría sin problema</button>
-        <button type="button" data-value="Se complicaría un poco" data-score="3">Se complicaría un poco (Me llamarían)</button>
-        <button type="button" data-value="Se paralizaría" data-score="1">Se paralizaría (El negocio depende de mí)</button>
-      </div>
+    <div class="game-area" id="gameArea">
+        <div class="bottle-container" id="bottle">
+            <div class="bottle">
+                <div class="liquid-inside"></div>
+                <div class="label-bottle">VENTAS</div>
+            </div>
+        </div>
+        <div class="stream" id="stream"></div>
+
+        <div class="glass-container">
+            <div class="glass-label">TU CAJA</div>
+            <div class="glass">
+                <div class="glass-liquid" id="glassLiquid"></div>
+                <div class="oxigeno-patch" id="patch">ESCUDO OXÍGENO</div>
+            </div>
+            <div class="leaks-visual" id="leaks">
+                <div class="leak-stream"></div>
+                <div class="leak-stream" style="animation-delay: 0.2s"></div>
+            </div>
+        </div>
     </div>
 
-    <div class="wizard-step" data-step="3" data-name="mejora">
-      <h3 class="pregunta-principal">¿Cómo tomas decisiones de inversión (ingredientes/personal)?</h3>
-      <p class="instruccion-principal">Te basas principalmente en:</p>
-      <div class="wizard-options">
-        <button type="button" data-value="Datos y análisis" data-score="5">Datos y análisis (Proyecciones)</button>
-        <button type="button" data-value="Experiencia e intuición" data-score="3">Experiencia e intuición (Lo que siento)</button>
-        <button type="button" data-value="Lo que esté de moda" data-score="1">Imitación (Lo que hace la competencia)</button>
-      </div>
+    <div class="ui-controls">
+        <div class="status-msg" id="statusMsg">Presiona el botón para llenar...</div>
+        
+        <button class="btn-game btn-pour" id="btnPour">🫗 MANTÉN PARA VERTIR</button>
+        
+        <button class="btn-game btn-fix" id="btnFix">🛡️ ACTIVAR OXÍGENO APP</button>
+        
+        <a href="https://wa.me/593997277796?text=Hola%20Pa'Arriba,%20hice%20el%20simulador%20de%20fugas%20y%20necesito%20ayuda" class="btn-game btn-whatsapp" id="btnWhatsapp">
+            📲 QUIERO MI AUDITORÍA GRATIS
+        </a>
     </div>
 
-    <div class="wizard-step" data-step="4" data-name="reemprende">
-      <h3 class="pregunta-principal">¿Qué palabra define tu relación con la tecnología?</h3>
-      <p class="instruccion-principal">Sientes que la tecnología es:</p>
-      <div class="wizard-options">
-        <button type="button" data-value="Aliada" data-score="5">Aliada (Busco herramientas)</button>
-        <button type="button" data-value="Confusa" data-score="3">Confusa (Sé que la necesito pero no sé cuál)</button>
-        <button type="button" data-value="Amenazante" data-score="1">Amenazante (Es caro o difícil)</button>
-      </div>
-    </div>
-
-    <div class="summary-step" data-step="summary">
-      <h3>📊 Tu diagnóstico inicial</h3>
-      <p id="summaryText"></p>
-      <p id="summaryScore"></p>
-      <div class="cta">
-        <button type="button" id="goToStep5">Continuar para contactar a un experto</button>
-      </div>
-    </div>
-
-    <div class="wizard-step" data-step="5" data-name="captura">
-      <h3>Déjanos tus datos para agendar tu Asesoría con un Experto</h3>
-      <div class="wizard-inputs">
-        <input type="text" name="nombre" placeholder="Tu nombre completo" required>
-        <input type="email" name="email" placeholder="Correo electrónico" required>
-        <input type="tel" name="whatsapp" placeholder="WhatsApp (Ej: +593...)" required>
-        <select name="tipo_negocio" required>
-          <option value="">Tipo de negocio</option>
-          <option value="Comida o bebida">Comida o bebida</option>
-          <option value="Servicios técnicos">Servicios técnicos</option>
-          <option value="Venta de productos">Venta de productos</option>
-          <option value="Profesional Independiente">Profesional Independiente</option>
-          <option value="Otro">Otro</option>
-        </select>
-      </div>
-      <div class="cta">
-        <button type="submit">Solicitar mi Asesoría Sin Costo</button>
-      </div>
-    </div>
-
-    <div class="progress-bar"><div class="progress"></div></div>
-  </form>
-
-  <div class="success-message" id="successMessage">
-    ✅ ¡Enviando respuestas...!
-  </div>
-
-  <div id="successModal" class="modal">
-    <div class="modal-content">
-      <div class="modal-icon">✔️</div>
-      <h3>¡Respuestas recibidas!</h3>
-      <p>Tu diagnóstico ha sido generado exitosamente.</p>
-      <p>Un experto analizará tus resultados y te contactará para tu <strong>asesoría sin costo</strong>.</p>
-      <br>
-      <button id="closeModal">Entendido, volver al inicio</button>
-    </div>
-  </div>
-
-  <div class="actions">
-    <a href="{% url 'core:index' %}">🔁 Volver al inicio</a>
-  </div>
 </div>
 {% endblock %}
 
 {% block extra_js %}
-<script src="{% static 'core/termometro.js' %}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const btnPour = document.getElementById('btnPour');
+        const btnFix = document.getElementById('btnFix');
+        const btnWhatsapp = document.getElementById('btnWhatsapp');
+        const bottle = document.getElementById('bottle');
+        const stream = document.getElementById('stream');
+        const glassLiquid = document.getElementById('glassLiquid');
+        const leaks = document.getElementById('leaks');
+        const statusMsg = document.getElementById('statusMsg');
+        const patch = document.getElementById('patch');
+        const gameArea = document.getElementById('gameArea');
+
+        let isPouring = false;
+        let isFixed = false;
+        let liquidLevel = 0;
+        let attempts = 0;
+        let fillInterval;
+
+        // EVENTOS (Soporte Mouse y Touch)
+        btnPour.addEventListener('mousedown', startPour);
+        btnPour.addEventListener('touchstart', (e) => { e.preventDefault(); startPour(); });
+        
+        btnPour.addEventListener('mouseup', stopPour);
+        btnPour.addEventListener('touchend', (e) => { e.preventDefault(); stopPour(); });
+        btnPour.addEventListener('mouseleave', stopPour);
+
+        // LÓGICA DE JUEGO
+        function startPour() {
+            if (liquidLevel >= 100 || isPouring) return;
+            isPouring = true;
+
+            // Animar botella
+            bottle.style.transform = 'rotate(-45deg)';
+            
+            // Retraso ligero para el chorro
+            setTimeout(() => {
+                if(isPouring) stream.style.height = '180px';
+            }, 100);
+
+            fillInterval = setInterval(() => {
+                if(!isPouring) return;
+
+                if (!isFixed) {
+                    // MODO ROTO (FRUSTRANTE)
+                    if (liquidLevel < 30) {
+                        liquidLevel += 1;
+                        glassLiquid.style.height = liquidLevel + '%';
+                    } else {
+                        // Rebote frustrante
+                        liquidLevel = 25 + Math.random() * 5;
+                        glassLiquid.style.height = liquidLevel + '%';
+                        showPainText(); // Muestra "Robo Hormiga"
+                    }
+                    leaks.style.opacity = 1; // Se ven las fugas
+                } else {
+                    // MODO ARREGLADO (EXITO)
+                    liquidLevel += 2; // Sube más rápido
+                    glassLiquid.style.height = liquidLevel + '%';
+                    leaks.style.opacity = 0;
+
+                    if (liquidLevel >= 100) winGame();
+                }
+            }, 50);
+        }
+
+        function stopPour() {
+            if(!isPouring) return;
+            isPouring = false;
+            clearInterval(fillInterval);
+
+            // Resetear botella y chorro
+            bottle.style.transform = 'rotate(0deg)';
+            stream.style.height = '0';
+
+            // Si no está arreglado, se vacía
+            if (!isFixed && liquidLevel < 100) {
+                drainGlass();
+                attempts++;
+                checkFrustration();
+            }
+        }
+
+        function drainGlass() {
+            let drainInt = setInterval(() => {
+                if (liquidLevel > 0 && !isPouring && !isFixed) {
+                    liquidLevel -= 2;
+                    glassLiquid.style.height = liquidLevel + '%';
+                } else {
+                    clearInterval(drainInt);
+                    leaks.style.opacity = 0;
+                }
+            }, 30);
+        }
+
+        function showPainText() {
+            const pains = ["💸 Robo Hormiga", "📉 Desperdicio", "🚫 Sin Control", "🍳 Costos Altos"];
+            const text = pains[Math.floor(Math.random() * pains.length)];
+            
+            const el = document.createElement('div');
+            el.className = 'pain-text';
+            el.innerText = text;
+            // Posición aleatoria sobre el vaso
+            el.style.left = (50 + (Math.random() * 40 - 20)) + '%';
+            el.style.bottom = '120px';
+            
+            gameArea.appendChild(el);
+            setTimeout(() => el.remove(), 1000);
+        }
+
+        function checkFrustration() {
+            if (attempts >= 2) {
+                statusMsg.innerHTML = "¡IMPOSIBLE! Tus ganancias se escapan.<br>Necesitas un sistema.";
+                statusMsg.style.color = "#D32F2F";
+                btnPour.style.display = 'none';
+                btnFix.style.display = 'block'; // Aparece botón de solución
+            } else {
+                statusMsg.innerText = "¡Se está regando! Intenta de nuevo...";
+            }
+        }
+
+        // ACTIVAR OXÍGENO
+        btnFix.addEventListener('click', () => {
+            isFixed = true;
+            patch.style.height = '35px'; // Sube el tapón
+            statusMsg.innerHTML = "SISTEMA BLINDADO.<br>Ahora sí, llena tu caja.";
+            statusMsg.style.color = "var(--brand-blue)";
+            
+            btnFix.style.display = 'none';
+            btnPour.style.display = 'block';
+            btnPour.innerText = "💰 LLENAR CAJA AHORA";
+            
+            attempts = 0; // Reinicia para que jueguen a ganar
+        });
+
+        function winGame() {
+            stopPour();
+            btnPour.style.display = 'none';
+            statusMsg.innerHTML = "¡OBJETIVO LOGRADO! <br>Oxígeno Automatiza tu Éxito.";
+            statusMsg.style.color = "#25D366";
+            
+            // Cambiar color líquido a verde
+            glassLiquid.style.backgroundColor = "#25D366";
+            
+            btnWhatsapp.style.display = 'inline-block'; // Call to Action final
+        }
+    });
+</script>
 {% endblock %}
