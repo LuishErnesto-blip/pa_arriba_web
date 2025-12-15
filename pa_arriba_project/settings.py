@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 import os  # Necesario para os.environ.get y para construir rutas
 from pathlib import Path
+import dj_database_url # <--- ¡ESTA LÍNEA ES LA NUEVA!
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -88,11 +89,14 @@ TEMPLATES = [
 WSGI_APPLICATION = 'pa_arriba_project.wsgi.application'
 
 # Database
+import dj_database_url # NECESARIO PARA LA CONEXION A POSTGRES
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        # Por defecto, si no hay DATABASE_URL (estás en tu PC), usa SQLite.
+        default='sqlite:///' + str(BASE_DIR / 'db.sqlite3'),
+        conn_max_age=600  # Mantener la conexión activa por 10 minutos
+    )
 }
 
 # Password validation
