@@ -2,183 +2,333 @@
 {% load static %}
 
 {% block title %}
-Demo: Control Total con Oxígeno
+Diagnóstico: Riesgo de Robo Hormiga
 {% endblock %}
 
 {% block extra_head %}
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
     :root {
         --brand-orange: #FF6B00;
         --brand-blue: #0056D2;
-        --dark-bg: #0F172A;
+        --dark-bg: #0F172A; /* Azul noche profundo */
+        --card-bg: #1E293B;
         --text-white: #ffffff;
         --text-gray: #94A3B8;
     }
 
-    /* Layout VSL Vertical */
-    .vsl-wrapper {
-        font-family: 'Inter', sans-serif;
+    body {
         background-color: var(--dark-bg);
-        color: var(--text-white);
+        font-family: 'Inter', sans-serif;
+        margin: 0;
+        overflow-x: hidden;
+    }
+
+    /* CONTENEDOR CENTRAL TIPO APP */
+    .quiz-wrapper {
         min-height: 100vh;
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
         padding: 20px;
-    }
-
-    /* 1. TITULAR COMPACTO */
-    .headline-box {
-        text-align: center;
-        max-width: 600px;
-        margin-bottom: 20px;
-    }
-
-    .headline-box h1 {
-        font-size: 1.6rem;
-        line-height: 1.2;
-        margin-bottom: 10px;
-        font-weight: 900;
-    }
-
-    /* ANIMACIÓN FLASH / PARPADEO */
-    .highlight-red { 
-        color: #FF4D4D;
-        animation: flashText 1.5s infinite ease-in-out;
-        font-weight: 900;
-        text-transform: uppercase;
-    }
-
-    @keyframes flashText {
-        0%, 100% { opacity: 1; text-shadow: 0 0 10px rgba(255, 77, 77, 0.5); }
-        50% { opacity: 0.4; text-shadow: none; }
-    }
-
-    /* 2. VIDEO HÉROE (VERTICAL) */
-    .video-frame-mobile {
-        width: 100%;
-        max-width: 360px;
-        aspect-ratio: 9 / 16;
-        background: #000;
-        border-radius: 20px;
-        overflow: hidden;
-        box-shadow: 0 0 30px rgba(0, 86, 210, 0.3);
-        border: 4px solid #1e293b;
-        margin-bottom: 30px;
+        color: var(--text-white);
         position: relative;
     }
 
-    .video-element {
+    /* BARRA DE PROGRESO (Estilo Netflix) */
+    .progress-container {
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
+        height: 6px;
+        background: rgba(255,255,255,0.1);
+        z-index: 10;
+    }
+    .progress-bar {
         height: 100%;
-        object-fit: cover;
+        background: var(--brand-orange);
+        width: 0%;
+        transition: width 0.4s ease;
+        box-shadow: 0 0 10px rgba(255, 107, 0, 0.7);
+    }
+
+    /* TARJETAS DE PASOS */
+    .step-card {
+        display: none; /* Se ocultan por defecto */
+        width: 100%;
+        max-width: 500px;
+        animation: fadeUp 0.5s ease forwards;
+        text-align: center;
+    }
+    
+    .step-card.active {
         display: block;
     }
 
-    /* 3. BENEFICIOS (KEYWORDS) */
-    .benefits-list {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
+    @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* TIPOGRAFÍA */
+    h1 {
+        font-size: 2rem;
+        font-weight: 800;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+        letter-spacing: -1px;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 25px;
+        color: #E2E8F0;
+    }
+
+    p.subtitle {
+        color: var(--text-gray);
+        font-size: 1rem;
+        margin-bottom: 30px;
+        line-height: 1.5;
+    }
+
+    /* BOTONES DE OPCIÓN (TIPO TYPEFORM) */
+    .option-btn {
+        display: block;
         width: 100%;
-        max-width: 400px;
+        background: var(--card-bg);
+        border: 2px solid rgba(255,255,255,0.05);
+        color: white;
+        padding: 20px;
+        margin-bottom: 15px;
+        border-radius: 12px;
+        font-size: 1.1rem;
+        text-align: left;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        position: relative;
+    }
+
+    .option-btn:hover, .option-btn:active {
+        border-color: var(--brand-orange);
+        background: rgba(255, 107, 0, 0.1);
+        transform: scale(1.02);
+    }
+
+    .option-btn span {
+        font-weight: 600;
+    }
+
+    /* BOTÓN CTA FINAL */
+    .cta-final {
+        background: linear-gradient(135deg, #FF6B00 0%, #FF4500 100%);
+        color: white;
+        padding: 20px 40px;
+        border-radius: 50px;
+        font-size: 1.2rem;
+        font-weight: 800;
+        text-decoration: none;
+        display: inline-block;
+        box-shadow: 0 10px 30px rgba(255, 69, 0, 0.4);
+        animation: pulse 2s infinite;
+        border: none;
+        margin-top: 20px;
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 107, 0, 0.7); }
+        70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(255, 107, 0, 0); }
+        100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 107, 0, 0); }
+    }
+
+    /* RESULTADO */
+    .result-box {
+        background: rgba(255, 77, 77, 0.1);
+        border: 2px solid #FF4D4D;
+        padding: 20px;
+        border-radius: 15px;
         margin-bottom: 30px;
     }
 
-    .benefit-item {
-        background: rgba(255, 255, 255, 0.05);
-        padding: 12px 15px;
-        border-radius: 10px;
-        border-left: 4px solid var(--brand-orange);
-        display: flex;
-        align-items: center;
-        gap: 15px;
-    }
-
-    .benefit-icon { font-size: 1.4rem; }
-    
-    .benefit-text strong {
-        color: var(--brand-orange);
-        display: block;
-        font-size: 0.9rem;
-        margin-bottom: 3px;
-        text-transform: uppercase; /* Para que parezca más Keyword */
-    }
-    .benefit-text p {
-        margin: 0;
-        font-size: 0.8rem;
-        color: #ccc;
-    }
-
-    /* 4. CTA */
-    .cta-area {
-        width: 100%;
-        max-width: 400px;
-        text-align: center;
-    }
-
-    .cta-button {
-        display: block;
-        width: 100%;
-        background: linear-gradient(135deg, var(--brand-blue), #0044AA);
-        color: white;
+    .risk-label {
+        color: #FF4D4D;
         font-weight: 900;
-        font-size: 1rem;
-        padding: 18px;
-        border-radius: 50px;
-        text-decoration: none;
-        box-shadow: 0 0 20px rgba(0, 86, 210, 0.5);
+        font-size: 1.8rem;
         text-transform: uppercase;
-        letter-spacing: 1px;
+        margin: 0;
     }
+    
+    .loading-spinner {
+        border: 4px solid rgba(255,255,255,0.1);
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border-left-color: var(--brand-orange);
+        animation: spin 1s linear infinite;
+        margin: 20px auto;
+    }
+
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
 </style>
 {% endblock %}
 
 {% block content %}
-<div class="vsl-wrapper">
 
-    <div class="headline-box">
-        <h1>Detén el <span class="highlight-red">Robo Hormiga</span> en 2 minutos.</h1>
-        <p style="color: #94A3B8; font-size: 0.9rem;">Mira cómo funciona el sistema automático.</p>
+<div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+</div>
+
+<div class="quiz-wrapper">
+
+    <div class="step-card active" id="step-0">
+        <h1 style="font-size: 2.2rem;">¿Tu restaurante pierde dinero y no sabes dónde? 🛑</h1>
+        <p class="subtitle">El 80% de las pérdidas en Ecuador son por "Robo Hormiga" y mal inventario. <br><br>Haz este diagnóstico de 30 segundos y descúbrelo.</p>
+        <button class="cta-final" onclick="nextStep(1)" style="animation: none;">INICIAR DIAGNÓSTICO 👉</button>
+        <p style="margin-top: 20px; font-size: 0.8rem; opacity: 0.6;">🔒 100% Confidencial</p>
     </div>
 
-    <div class="video-frame-mobile">
-        <video class="video-element" controls playsinline poster="{% static 'core/logo_pa_arriba.png' %}">
-            <source src="{% static 'core/demo_oxigeno.mp4' %}" type="video/mp4">
-            <p style="padding: 20px; text-align: center;">
-                <a href="{% static 'core/demo_oxigeno.mp4' %}" style="color: var(--brand-orange);">Ver video aquí</a>
-            </p>
-        </video>
+    <div class="step-card" id="step-1">
+        <h2>1. ¿Cómo controlas tu inventario hoy?</h2>
+        <button class="option-btn" onclick="nextStep(2, 'Papel/Cuaderno', 'metodo')">A. Cuaderno / Papel 📝</button>
+        <button class="option-btn" onclick="nextStep(2, 'Excel', 'metodo')">B. Excel / Hojas de cálculo 📉</button>
+        <button class="option-btn" onclick="nextStep(2, 'POS Viejo', 'metodo')">C. Sistema POS antiguo 💻</button>
+        <button class="option-btn" onclick="nextStep(2, 'Nada', 'metodo')">D. No llevo control 🙈</button>
     </div>
 
-    <div class="benefits-list">
-        <div class="benefit-item">
-            <div class="benefit-icon">📉</div>
-            <div class="benefit-text">
-                <strong>Control de Inventarios</strong>
-                <p>El stock se descuenta solo al vender. Cero errores.</p>
-            </div>
+    <div class="step-card" id="step-2">
+        <h2>2. ¿Cada cuánto cuadra tu inventario físico con lo que "debería haber"?</h2>
+        <button class="option-btn" onclick="nextStep(3, 'Casi nunca', 'frecuencia')">A. Casi nunca cuadra ❌</button>
+        <button class="option-btn" onclick="nextStep(3, 'Solo fin de mes', 'frecuencia')">B. Solo a fin de mes</button>
+        <button class="option-btn" onclick="nextStep(3, 'No hago fisico', 'frecuencia')">C. No hago inventario físico</button>
+        <button class="option-btn" onclick="nextStep(3, 'Siempre cuadra', 'frecuencia')">D. Siempre cuadra perfecto ✅</button>
+    </div>
+
+    <div class="step-card" id="step-3">
+        <h2>3. ¿Sabes el costo exacto de cada plato hoy?</h2>
+        <button class="option-btn" onclick="nextStep('processing', 'Al ojo', 'recetas')">A. Al ojo / Cálculo mental 🧠</button>
+        <button class="option-btn" onclick="nextStep('processing', 'Desactualizado', 'recetas')">B. Tengo costos de hace meses</button>
+        <button class="option-btn" onclick="nextStep('processing', 'Actualizado', 'recetas')">C. Sí, actualizado al centavo</button>
+    </div>
+
+    <div class="step-card" id="step-processing">
+        <h2>Analizando tus respuestas...</h2>
+        <div class="loading-spinner"></div>
+        <p class="subtitle">Calculando riesgo de fuga de capital...</p>
+    </div>
+
+    <div class="step-card" id="step-result">
+        <div class="result-box">
+            <p style="margin:0; font-size:0.9rem;">RESULTADO DEL DIAGNÓSTICO:</p>
+            <h1 class="risk-label">⚠️ RIESGO ALTO</h1>
+            <p style="color: #fff; margin-top: 10px;">Tu método actual te está costando entre <strong>$300 y $800</strong> mensuales en fugas silenciosas.</p>
         </div>
-        <div class="benefit-item">
-            <div class="benefit-icon">🥘</div>
-            <div class="benefit-text">
-                <strong>Administración Restaurante</strong>
-                <p>Calcula costos y recetas automáticamente.</p>
-            </div>
-        </div>
+        
+        <p class="subtitle" style="margin-bottom: 20px;">
+            No necesitas contratar guardias. Necesitas un sistema que descuente el inventario automáticamente.
+        </p>
+
+        <a 
+            id="whatsappBtn"
+            href="#" 
+            class="cta-final"
+            onclick="fbq('track', 'Lead');" 
+            target="_blank"
+        >
+            SOLUCIONAR AHORA 💬
+        </a>
+        <p style="margin-top: 15px; font-size: 0.8rem; color: #94A3B8;">Instalación remota en todo Ecuador • Prueba Gratis</p>
     </div>
 
-<div class="cta-area">
-<a 
-    href="https://wa.me/593997277796?text=Hola,%20vi%20el%20video%20y%20quiero%20probar%20Oxigeno" 
-    class="cta-button"
-    target="_blank"
-    onclick="fbq('track', 'Lead');"
->
-    👉 PROBAR GRATIS
-</a>
-    <p style="margin-top: 10px; font-size: 0.7rem; color: #666;">Sin tarjeta de crédito • 4 días de prueba</p>
-    </div>
-</div> {% endblock %}
+</div>
+
+<script>
+    // Variables para guardar las respuestas del usuario
+    let userAnswers = {
+        metodo: '',
+        frecuencia: '',
+        recetas: ''
+    };
+
+    function nextStep(stepNumber, answerText, category) {
+        // 1. Guardar la respuesta si se envió
+        if (category && answerText) {
+            userAnswers[category] = answerText;
+        }
+
+        // 2. Ocultar todos los pasos
+        const allSteps = document.querySelectorAll('.step-card');
+        allSteps.forEach(step => step.classList.remove('active'));
+
+        // 3. Mostrar el paso actual o el procesando
+        if (stepNumber === 'processing') {
+            showProcessing();
+        } else {
+            const nextStepDiv = document.getElementById('step-' + stepNumber);
+            if (nextStepDiv) {
+                nextStepDiv.classList.add('active');
+            }
+        }
+
+        // 4. Actualizar barra de progreso visual
+        let progress = 0;
+        if (typeof stepNumber === 'number') {
+            progress = (stepNumber / 3) * 100;
+        }
+        document.getElementById('progressBar').style.width = progress + '%';
+    }
+
+    function showProcessing() {
+        // Mostrar pantalla de carga
+        const processingDiv = document.getElementById('step-processing');
+        if (processingDiv) {
+            processingDiv.classList.add('active');
+        }
+        document.getElementById('progressBar').style.width = '90%';
+
+        // Generar el Link de WhatsApp con los datos recopilados
+        generateWhatsAppLink();
+
+        // Esperar 2.5 segundos de "Análisis" para tensión
+        setTimeout(() => {
+            if (processingDiv) processingDiv.classList.remove('active');
+            
+            const resultDiv = document.getElementById('step-result');
+            if (resultDiv) resultDiv.classList.add('active');
+            
+            document.getElementById('progressBar').style.width = '100%';
+            
+            // Pixel Event (Opcional ViewContent del resultado)
+            if (typeof fbq === 'function') {
+                fbq('track', 'ViewContent', {content_name: 'Quiz Result High Risk'});
+            }
+        }, 2500);
+    }
+
+    function generateWhatsAppLink() {
+        // Tu número
+        const phone = "593997277796";
+        
+        // Construir el mensaje con los datos del usuario
+        // Usamos %0A para saltos de línea en la URL
+        let text = `🚨 *DIAGNÓSTICO RIESGO ALTO* 🚨%0A`;
+        text += `Hola, hice el test y necesito ayuda:%0A`;
+        text += `-----------------------%0A`;
+        text += `📝 *Control:* ${userAnswers.metodo || 'No especificado'}%0A`;
+        text += `📅 *Inventario:* ${userAnswers.frecuencia || 'No especificado'}%0A`;
+        text += `🧠 *Costos:* ${userAnswers.recetas || 'No especificado'}%0A`;
+        text += `-----------------------%0A`;
+        text += `Quiero probar Oxígeno para solucionar esto.`;
+
+        // Asignar al botón
+        const btn = document.getElementById('whatsappBtn');
+        if (btn) {
+            btn.href = `https://wa.me/${phone}?text=${text}`;
+        }
+    }
+</script>
+
+{% endblock %}
