@@ -1,42 +1,44 @@
-{% extends 'base.html' %} {# Extiende tu plantilla base principal #}
-{% load static %} {# Carga la etiqueta 'static' para usar archivos estáticos #}
+{% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Blog de Pa'arriba{% endblock %} {# Título específico para esta página #}
+{% block title %}Blog de Pa'arriba{% endblock %}
 
 {% block content %}
-<main class="container mx-auto px-4 py-8 mt-20"> {# Ajusta el margen superior para el sticky header #}
+<main class="container mx-auto px-4 py-8 mt-20">
     {# Contenedor para el botón de regreso a la landing #}
-    <div class="text-center mb-8"> {# Margen inferior para separar del título del blog #}
-        {# MODIFICADO: Apunta a la URL de la landing page CON el anclaje #blog-card #}
+    <div class="text-center mb-8">
         <a href="{% url 'core:index' %}#blog-card" class="inline-block bg-pa-arriba-blue-dark text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors duration-300">
             ← Volver a Pa'arriba
         </a>
     </div>
 
     <h1 class="text-4xl font-extrabold text-center text-pa-arriba-blue-dark mb-10">Nuestro Blog</h1>
-    <p class="text-center text-white mb-12 max-w-2xl mx-auto"> {# Color de texto ya corregido a blanco #}
+    
+    {# CORRECCIÓN DE VISIBILIDAD: Se cambió text-white a text-gray-600 para asegurar contraste si el fondo es claro #}
+    <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
         Explora nuestros artículos sobre emprendimiento, transformación digital y estrategias para llevar tu negocio Pa'arriba.
     </p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {% for post in blogs %} {# Itera sobre la lista de blogs que viene de la vista #}
+        {% for post in blogs %}
         <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105">
-            {% if post.image %} {# Muestra la imagen si existe #}
-            <img src="{{ post.image.url }}" alt="{{ post.image_alt_text|default:post.title }}" class="w-full h-48 object-cover">
+            {% if post.image %}
+            <img src="{% static 'core/gallery_images/' %}{{ post.image.name|cut:'blog_images/' }}" alt="{{ post.image_alt_text|default:post.title }}" class="w-full h-48 object-cover">
             {% else %}
-            {# Placeholder si no hay imagen, puedes usar una imagen por defecto o un color #}
+            {# Placeholder si no hay imagen #}
             <div class="w-full h-48 bg-gray-200 flex items-center justify-center text-gray-500">
                 <i class="fas fa-image text-6xl"></i>
             </div>
             {% endif %}
+            
             <div class="p-6">
                 <h2 class="text-xl font-bold text-gray-900 mb-2">{{ post.title }}</h2>
-                <p class="text-gray-700 text-sm mb-4">{{ post.meta_description|truncatechars:100 }}</p> {# Muestra la meta descripción o un extracto #}
+                <p class="text-gray-700 text-sm mb-4">{{ post.meta_description|truncatechars:100 }}</p>
                 <p class="text-xs text-gray-500 mb-4">Publicado el: {{ post.published_date|date:"d M Y" }} por {{ post.author }}</p>
                 <a href="{% url 'blog:post_detail' slug=post.slug %}" class="inline-block bg-pa-arriba-orange-force text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors duration-300" style="background-color: var(--pa-arriba-orange-force); color: var(--color-text-light);">Leer Más</a>
             </div>
         </div>
-        {% empty %} {# Si no hay blogs publicados #}
+        {% empty %}
         <p class="col-span-full text-center text-gray-600">Aún no hay artículos de blog publicados. ¡Vuelve pronto!</p>
         {% endfor %}
     </div>
