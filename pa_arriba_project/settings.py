@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'store',
     'blog',
     'ckeditor',
+    'import_export',  # <--- AÑADE ESTA LÍNEA AQUÍ
     'termometro',  # ← NUEVA APP que acabas de crear
 ]
 

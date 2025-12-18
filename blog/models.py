@@ -70,3 +70,40 @@ class Post(models.Model):
         ordering = ['-published_date']
         verbose_name = "Artículo de Blog"
         verbose_name_plural = "Artículos de Blog"
+
+class Prospecto(models.Model):
+    ESTADOS = [
+        ('frio', '❄️ Frío'),
+        ('caliente', '🔥 Caliente'),
+        ('demo', '🎥 Demo Enviada'),
+        ('seguimiento', '📞 Próximo Contacto'),
+        ('cerrado', '✅ Cliente Ganado'),
+    ]
+
+    nombre_dueño = models.CharField(max_length=100, verbose_name="Nombre del Dueño")
+    nombre_negocio = models.CharField(max_length=100, verbose_name="Nombre del Negocio")
+    telefono = models.CharField(max_length=20, verbose_name="WhatsApp/Teléfono")
+    ubicacion = models.CharField(max_length=200, blank=True, null=True, verbose_name="Dirección o Ubicación")
+    correo = models.EmailField(blank=True, null=True, verbose_name="Correo Electrónico")
+    
+    que_usa_hoy = models.CharField(max_length=100, blank=True, null=True, verbose_name="¿Qué usa hoy?")
+    estado = models.CharField(max_length=20, choices=ESTADOS, default='frio', verbose_name="Estado del Prospecto")
+    
+    # Seguimiento y Acuerdos
+    fecha_ultima_llamada = models.DateField(blank=True, null=True, verbose_name="Última Llamada")
+    acuerdo_1 = models.TextField(blank=True, null=True, verbose_name="Acuerdo 1")
+    fecha_acuerdo_2 = models.DateField(blank=True, null=True, verbose_name="Fecha Acuerdo 2")
+    acuerdo_2 = models.TextField(blank=True, null=True, verbose_name="Acuerdo 2")
+    fecha_acuerdo_3 = models.DateField(blank=True, null=True, verbose_name="Fecha Acuerdo 3")
+    acuerdo_3 = models.TextField(blank=True, null=True, verbose_name="Acuerdo 3")
+
+    notas_generales = models.TextField(blank=True, null=True, verbose_name="Notas Generales")
+    fecha_registro = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.nombre_negocio} - {self.nombre_dueño}"
+
+    class Meta:
+        verbose_name = "Prospecto CRM"
+        verbose_name_plural = "Prospectos CRM"
+        ordering = ['-fecha_registro']
