@@ -35,6 +35,9 @@ def index(request):
     }
     return render(request, 'core/index.html', context)
 
+def asesorias_gastronomicas(request):
+    return render(request, 'core/asesorias_gastronomicas.html')
+
 # Política de privacidad
 def privacy_policy(request):
     return render(request, 'core/privacy_policy.html')

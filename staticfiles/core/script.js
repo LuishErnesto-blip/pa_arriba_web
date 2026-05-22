@@ -827,3 +827,38 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log("No hash or stored ID found. Page will load in default state (bombilla apagada).");
     }
 });
+
+
+
+
+
+// =========================================
+// LÓGICA DE LA PISTA VISUAL (Nov 2025)
+// =========================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Buscamos el contenedor de la pista (el letrero que acabamos de crear)
+    const clickHint = document.getElementById('click-hint');
+    // Buscamos la zona de interacción o el SVG del foco
+    // Nota: Usamos un selector amplio para asegurar que agarre el clic en la zona
+    const interactionZone = document.querySelector('.interaction-zone');
+    const lightbulbSvg = document.getElementById('lightbulb-svg'); // Si tu SVG tiene este ID
+
+    function hideHint() {
+        if (clickHint) {
+            clickHint.classList.add('hint-hidden');
+        }
+    }
+
+    // Si el usuario hace clic en el letrero, en la zona o en el foco, ocultamos la pista
+    if (clickHint) {
+        clickHint.addEventListener('click', hideHint);
+    }
+    if (interactionZone) {
+        interactionZone.addEventListener('click', hideHint);
+    }
+    // Por si acaso el clic cae directo en el SVG
+    if (lightbulbSvg) {
+        lightbulbSvg.addEventListener('click', hideHint);
+    }
+});

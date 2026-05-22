@@ -12,13 +12,20 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 import os  # Necesario para os.environ.get y para construir rutas
 from pathlib import Path
-import dj_database_url # <--- ¡ESTA LÍNEA ES LA NUEVA!
+
+try:
+    import dj_database_url  # NECESARIO PARA LA CONEXION A POSTGRES (NO USADO POR AHORA)
+except ModuleNotFoundError:
+    dj_database_url = None
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
+
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get(
@@ -26,18 +33,37 @@ SECRET_KEY = os.environ.get(
     'django-insecure-b5rp4(515x-@2el5=6_&7*7b#2yw1(=ju_9olo02m(4_lzssuq'
 )
 
+
 # SECURITY WARNING: don't run with debug turned on in production!
 # Ajuste seguro: en producción define DJANGO_DEBUG=False
-DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
+DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
+# --- CONFIGURACIÓN DE SEGURIDAD PARA HOSTS ---
+ALLOWED_HOSTS = [
+    ".run.app",
+    "pa-arriba.com",
+    "www.pa-arriba.com",
+    "127.0.0.1",
+    "localhost",
+    "0.0.0.0",
+]
+# ---------------------------------------------
 
-# Configuración de ALLOWED_HOSTS para Render y dominio propio
-ALLOWED_HOSTS = ['pa-arriba.com', 'www.pa-arriba.com', '127.0.0.1', 'localhost']
-allowed_hosts_str = os.environ.get('DJANGO_ALLOWED_HOSTS')
-if allowed_hosts_str:
-    ALLOWED_HOSTS.extend(allowed_hosts_str.split(','))
+
+
+
+# -------------------------------------------------------
+# CSRF (necesario en Cloud Run con proxy)
+# -------------------------------------------------------
+CSRF_TRUSTED_ORIGINS = [
+    "https://pa-arriba.com",
+    "https://www.pa-arriba.com",
+    "https://*.run.app",
+]
+
 
 # URL base del proyecto (usada en sitemap y robots.txt)
 SITE_URL = 'https://pa-arriba.com'
+
 
 # Application definition
 INSTALLED_APPS = [
@@ -47,17 +73,20 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'core',
     'store',
     'blog',
     'ckeditor',
-    'import_export',  # <--- AÑADE ESTA LÍNEA AQUÍ
-    'termometro',  # ← NUEVA APP que acabas de crear
+    'import_export',
+    'termometro',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -66,7 +95,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
 ROOT_URLCONF = 'pa_arriba_project.urls'
+
 
 TEMPLATES = [
     {
@@ -87,18 +118,32 @@ TEMPLATES = [
     },
 ]
 
+
 WSGI_APPLICATION = 'pa_arriba_project.wsgi.application'
 
-# Database
-import dj_database_url # NECESARIO PARA LA CONEXION A POSTGRES
 
-DATABASES = {
-    'default': dj_database_url.config(
-        # Por defecto, si no hay DATABASE_URL (estás en tu PC), usa SQLite.
-        default='sqlite:///' + str(BASE_DIR / 'db.sqlite3'),
-        conn_max_age=600  # Mantener la conexión activa por 10 minutos
-    )
-}
+# -------------------------------------------------------
+# Database
+# -------------------------------------------------------
+# BASE DE DATOS FORZADA A SQLITE
+# NO se usa Postgres
+# NO se lee DATABASE_URL
+# NO se intenta conexión remota
+if dj_database_url:
+    DATABASES = {
+        'default': dj_database_url.config(
+            default='sqlite:///' + str(BASE_DIR / 'db.sqlite3'),
+            conn_max_age=600
+        )
+    }
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
+
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
@@ -108,33 +153,44 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
+
 # Internationalization
 LANGUAGE_CODE = 'es-ec'
+
 TIME_ZONE = 'America/Guayaquil'
+
 USE_I18N = True
 USE_TZ = True
 
+
 # Static files
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'core', 'static')]
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'core', 'static'),
+]
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STORAGES = {
     "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
-    "staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"},
+    "staticfiles": {"BACKEND": "whitenoise.storage.CompressedStaticFilesStorage"},
 }
 
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Ignorar un sitemap estático si existiera en la carpeta de static
 STATICFILES_IGNORE_PATTERNS = ['sitemaps/sitemap.xml']
 
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+
 CKEDITOR_UPLOAD_PATH = 'uploads/'
+
 
 CKEDITOR_CONFIGS = {
     'default': {
@@ -153,8 +209,8 @@ CKEDITOR_CONFIGS = {
         'pasteFromWordRemoveFontStyles': False,
         'pasteFromWordRemoveStyles': False,
         'forcePasteAsPlainText': False,
-        'enterMode': 1,  # CKEDITOR.ENTER_P
-        'shiftEnterMode': 2,  # CKEDITOR.ENTER_BR
+        'enterMode': 1,       # CKEDITOR.ENTER_P
+        'shiftEnterMode': 2, # CKEDITOR.ENTER_BR
         'codeSnippet_theme': 'default',
     },
 }
@@ -168,10 +224,37 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-# Credenciales de tu cuenta
-# NOTA: Usar la contraseña de aplicación de 16 caracteres.
-# ESTOS DATOS SON PRIVADOS Y SÓLO USADOS POR DJANGO.
 EMAIL_HOST_USER = 'luis.bracerog06@gmail.com'
-EMAIL_HOST_PASSWORD = 'argllmaplpqxspfy' # <--- Tu contraseña de 16 caracteres sin espacios
+EMAIL_HOST_PASSWORD = 'argllmaplpqxspfy'
 DEFAULT_FROM_EMAIL = 'luis.bracerog06@gmail.com'
-SERVER_EMAIL = 'luis.bracerog06@gmail.com' # Email usado por Django para notificaciones de error
+SERVER_EMAIL = 'luis.bracerog06@gmail.com'
+
+
+# =======================================================
+# Cloud Run / Google Frontend
+# =======================================================
+USE_X_FORWARDED_HOST = False
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+print("=== DJANGO RUNTIME SETTINGS AUDIT ===")
+print(f"DEBUG = {DEBUG}")
+print(f"ALLOWED_HOSTS = {ALLOWED_HOSTS}")
+print("====================================")
+
+
+# =======================================================
+# LOGGING FORZADO PARA DIAGNÓSTICO EN CLOUD RUN
+# =======================================================
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "ERROR",
+    },
+}

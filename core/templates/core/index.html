@@ -1,7 +1,7 @@
 {% extends 'core/base.html' %}
 {% load static %}
 
-{% block title %}Pa'arriba - ¡Tu Transformación Digital!{% endblock %}
+{% block title %}Pa'Arriba-¡Costos,ventas,inventarios!{% endblock %}
 
 {% block content %}
     <header class="hero-section">
@@ -16,24 +16,26 @@
             </div>
         </div>
 
-        <h1>Pa'arriba: Crece, Avanza, Mejora, Re-emprende</h1>
-        <p>Impulsando tu Transformación Digital y Evolución como Emprendedor</p>
+        <h1>Sistemas y soluciones para negocios gastronómicos en Ecuador</h1>
+        <p>Controla costos, ventas e inventario, automatiza tu operación y accede a capacitación práctica para ordenar tu negocio de comida.</p>
         
-        <div class="interaction-zone" style="position: relative; display: flex; flex-direction: column; align-items: center;">
-            
-            {% include 'core/lightbulb_svg.html' %}
+<div class="interaction-zone" style="display: none;">
+    
+    {% include 'core/lightbulb_svg.html' %}
 
-            <div id="click-hint" class="click-hint-animation">
-                <span style="font-size: 2rem;">👆</span><br>
-                <span style="font-weight: bold; color: #FF5C00; background: rgba(255,255,255,0.8); padding: 5px 10px; border-radius: 10px;">
-                    ¡Haz Clic para Encender!
-                </span>
-            </div>
+    <div id="click-hint" class="click-hint-animation">
+        <span style="font-size: 2rem;">👆</span><br>
+        <span style="font-weight: bold; color: #FF5C00; background: rgba(255,255,255,0.8); padding: 5px 10px; border-radius: 10px;">
+            ¡Haz Clic para Encender!
+        </span>
+    </div>
 
-        </div>
+</div>
     </header>
 
-    <main id="accordion-container">
+<main id="accordion-container" class="revealed">
+        {% include 'core/oxigeno_section.html' %}
+        {% include 'core/asesorias_section.html' %}
         {% include 'core/filosofia_section.html' %}
         {% include 'core/prototipos_section.html' %}
         {% include 'core/blog_section.html' %}
