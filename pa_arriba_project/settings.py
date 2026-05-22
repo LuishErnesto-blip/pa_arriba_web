@@ -125,14 +125,14 @@ WSGI_APPLICATION = 'pa_arriba_project.wsgi.application'
 # -------------------------------------------------------
 # Database
 # -------------------------------------------------------
-# BASE DE DATOS FORZADA A SQLITE
-# NO se usa Postgres
-# NO se lee DATABASE_URL
-# NO se intenta conexión remota
-if dj_database_url:
+# PostgreSQL en produccion (DATABASE_URL via env var)
+# SQLite como fallback local
+DATABASE_URL = os.environ.get('DATABASE_URL')
+
+if DATABASE_URL:
     DATABASES = {
         'default': dj_database_url.config(
-            default='sqlite:///' + str(BASE_DIR / 'db.sqlite3'),
+            default=DATABASE_URL,
             conn_max_age=600
         )
     }
