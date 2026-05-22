@@ -26,4 +26,4 @@ COPY . /app/
 EXPOSE 8080
 
 # Comando de arranque
-CMD ["sh", "-c", "python manage.py migrate && python manage.py loaddata data_export.json && gunicorn pa_arriba_project.wsgi:application --bind 0.0.0.0:8080"]
+CMD ["sh", "-c", "python manage.py migrate --run-syncdb && gunicorn pa_arriba_project.wsgi:application --bind 0.0.0.0:8080"]
