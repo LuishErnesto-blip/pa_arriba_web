@@ -22,6 +22,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copiar el proyecto
 COPY . /app/
 
+# Recopilar archivos estaticos
+RUN python manage.py collectstatic --noinput
+
 # Puerto que usa Cloud Run
 EXPOSE 8080
 
