@@ -1,187 +1,77 @@
 <script type="application/ld+json">
 {
-    "@context": "https://schema.org/",
-    "@graph": [
-        {
-            "@type": "Product",
-            "name": "Kit SEO para Negocios Locales",
-            "image": "https://pa-arriba-landing.onrender.com/static/core/gallery_images/kit-seo.jpg", {# URL de imagen real #}
-            "url": "https://pa-arriba-landing.onrender.com/store/", {# URL representativa del producto #}
-            "description": "Haz que tu negocio aparezca en Google y en búsquedas locales sin ser experto en SEO. Este kit incluye auditoría, palabras clave estratégicas y seguimiento práctico.",
-            "sku": "h1",
-            "brand": { "@type": "Brand", "name": "Pa'Arriba" },
-            "offers": {
-                "@type": "Offer",
-                "priceCurrency": "USD",
-                "price": "49.99",
-                "availability": "https://schema.org/InStock"
+  "@context": "https://schema.org/",
+  "@graph": [
+    {
+      "@type": "Product",
+      "name": "Oxígeno App — Software de Gestión para Restaurantes Ecuador",
+      "image": "https://pa-arriba.com/static/core/logo_pa_arriba.png",
+      "url": "https://pa-arriba.com/",
+      "description": "Software de gestión gastronómica para restaurantes pequeños y medianos en Ecuador. Controla food cost, inventario, ventas y facturación electrónica SRI desde una sola herramienta.",
+      "sku": "oxigeno-mensual",
+      "brand": { "@type": "Brand", "name": "Pa'Arriba" },
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "USD",
+        "price": "19.99",
+        "priceValidUntil": "2026-12-31",
+        "availability": "https://schema.org/InStock",
+        "url": "https://pa-arriba.com/",
+        "shippingDetails": {
+          "@type": "OfferShippingDetails",
+          "shippingRate": {
+            "@type": "MonetaryAmount",
+            "value": "0",
+            "currency": "USD"
+          },
+          "shippingDestination": {
+            "@type": "DefinedRegion",
+            "addressCountry": "EC"
+          },
+          "deliveryTime": {
+            "@type": "ShippingDeliveryTime",
+            "handlingTime": {
+              "@type": "QuantitativeValue",
+              "minValue": 0,
+              "maxValue": 0,
+              "unitCode": "DAY"
+            },
+            "transitTime": {
+              "@type": "QuantitativeValue",
+              "minValue": 0,
+              "maxValue": 0,
+              "unitCode": "DAY"
             }
+          }
         },
-        {
-            "@type": "Product",
-            "name": "Apps y Webs para Proyectos Pequeños",
-            "image": "https://pa-arriba-landing.onrender.com/static/core/gallery_images/apps-webs.jpg", {# URL de imagen real #}
-            "url": "https://pa-arriba-landing.onrender.com/store/", {# URL representativa del producto #}
-            "description": "Soluciones digitales personalizadas desde $9.99 para organizar, comunicar y ejecutar tareas en pequeños negocios o emprendimientos. Precio según funcionalidad.",
-            "sku": "h2",
-            "brand": { "@type": "Brand", "name": "Pa'Arriba" },
-            "offers": {
-                "@type": "Offer",
-                "priceCurrency": "USD",
-                "price": "9.99",
-                "availability": "https://schema.org/InStock"
-            }
-        },
-        {
-            "@type": "Product",
-            "name": "App de Email Marketing para Emprendedores",
-            "image": "https://pa-arriba-landing.onrender.com/static/core/gallery_images/email-marketing-app.jpg", {# URL de imagen real #}
-            "url": "https://pa-arriba-landing.onrender.com/store/", {# URL representativa del producto #}
-            "description": "Automatiza tus campañas de correo, conecta con tus clientes y vende sin complicarte. Especialmente diseñada para emprendedores con tiempo limitado.",
-            "sku": "h3",
-            "brand": { "@type": "Brand", "name": "Pa'Arriba" },
-            "offers": {
-                "@type": "Offer",
-                "priceCurrency": "USD",
-                "price": "29.99",
-                "availability": "https://schema.org/InStock"
-            }
-        },
-        {
-            "@type": "Product",
-            "name": "Curso a Domicilio de Marketing Digital (20h)",
-            "image": "https://pa-arriba-landing.onrender.com/static/core/gallery_images/curso-marketing.jpg", {# URL de imagen real #}
-            "url": "https://pa-arriba-landing.onrender.com/store/", {# URL representativa del producto #}
-            "description": "Aprende a vender en redes, buscadores y por contenido desde cero. Este curso presencial está diseñado para emprendedores autodidactas que quieren dominar el marketing sin complicarse.",
-            "sku": "c1",
-            "brand": { "@type": "Brand", "name": "Pa'Arriba" },
-            "offers": {
-                "@type": "Offer",
-                "priceCurrency": "USD",
-                "price": "200.00",
-                "availability": "https://schema.org/InStock"
-            }
-        },
-        {
-            "@type": "Product",
-            "name": "Certificación en Control de Costos para Emprendedores",
-            "image": "https://pa-arriba-landing.onrender.com/static/core/gallery_images/control-costos.jpg", {# URL de imagen real #}
-            "url": "https://pa-arriba-landing.onrender.com/store/", {# URL representativa del producto #}
-            "description": "Aprende a calcular correctamente el precio de venta de tus productos y servicios. Este curso te da la claridad financiera que tu negocio necesita para crecer con rentabilidad.",
-            "sku": "c2",
-            "brand": { "@type": "Brand", "name": "Pa'Arriba" },
-            "offers": {
-                "@type": "Offer",
-                "priceCurrency": "USD",
-                "price": "29.99",
-                "availability": "https://schema.org/InStock"
-            }
-        },
-        {
-            "@type": "Product",
-            "name": "Crea tu Web sin Programar y Vende Online (15h)",
-            "image": "https://pa-arriba-landing.onrender.com/static/core/gallery_images/crea-tu-web.jpg", {# URL de imagen real #}
-            "url": "https://pa-arriba-landing.onrender.com/store/", {# URL representativa del producto #}
-            "description": "Diseña tu sitio web y activa tu canal de ventas online sin saber código. Te guiamos paso a paso para que lances tu plataforma digital en sólo 15 horas.",
-            "sku": "c3",
-            "brand": { "@type": "Brand", "name": "Pa'Arriba" },
-            "offers": {
-                "@type": "Offer",
-                "priceCurrency": "USD",
-                "price": "150.00",
-                "availability": "https://schema.org/InStock"
-            }
-        },
-        {
-            "@type": "Product",
-            "name": "Consultoría Estratégica Personalizada (1h)",
-            "image": "https://pa-arriba-landing.onrender.com/static/core/gallery_images/consultoria.jpg", {# URL de imagen real #}
-            "url": "https://pa-arriba-landing.onrender.com/store/", {# URL representativa del producto #}
-            "description": "En esta sesión 1:1 descubrimos oportunidades, aclaramos bloqueos y trazamos acciones rentables para tu negocio. Ideal para emprendedores en fase de reinvención.",
-            "sku": "s1",
-            "brand": { "@type": "Brand", "name": "Pa'Arriba" },
-            "offers": {
-                "@type": "Offer",
-                "priceCurrency": "USD",
-                "price": "9.50",
-                "availability": "https://schema.org/InStock"
-            }
-        },
-        {
-            "@type": "Product",
-            "name": "Auditoría SEO con Recomendaciones Prácticas",
-            "image": "https://pa-arriba-landing.onrender.com/static/core/gallery_images/auditoria-seo.jpg", {# URL de imagen real #}
-            "url": "https://pa-arriba-landing.onrender.com/store/", {# URL representativa del producto #}
-            "description": "Revisamos tu sitio y te entregamos un plan para posicionarte mejor en buscadores. Te decimos qué mejorar y cómo hacerlo, sin tecnicismos.",
-            "sku": "s2",
-            "brand": { "@type": "Brand", "name": "Pa'Arriba" },
-            "offers": {
-                "@type": "Offer",
-                "priceCurrency": "USD",
-                "price": "36.00",
-                "availability": "https://schema.org/InStock"
-            }
-        },
-        {
-            "@type": "Product",
-            "name": "Mentoría Semanal de Marketing Digital (10h)",
-            "image": "https://pa-arriba-landing.onrender.com/static/core/gallery_images/mentoria-marketing.jpg", {# URL de imagen real #}
-            "url": "https://pa-arriba-landing.onrender.com/store/", {# URL representativa del producto #}
-            "description": "Durante la semana, te guiamos en campañas reales, ajustes de estrategia, y generación de resultados concretos. Trabajo intensivo para negocios que quieren crecer cada semana.",
-            "sku": "s3",
-            "brand": { "@type": "Brand", "name": "Pa'Arriba" },
-            "offers": {
-                "@type": "Offer",
-                "priceCurrency": "USD",
-                "price": "60.00",
-                "availability": "https://schema.org/InStock"
-            }
-        },
-        {
-            "@type": "Product",
-            "name": "Plantillas Profesionales para Redes Sociales",
-            "image": "https://pa-arriba-landing.onrender.com/static/core/gallery_images/plantillas-rrss.jpg", {# URL de imagen real #}
-            "url": "https://pa-arriba-landing.onrender.com/store/", {# URL representativa del producto #}
-            "description": "Diseños modernos y editables listos para tus publicaciones en Instagram, Facebook y TikTok. Ideal para emprendedores que quieren ahorrar tiempo sin perder calidad.",
-            "sku": "p1",
-            "brand": { "@type": "Brand", "name": "Pa'Arriba" },
-            "offers": {
-                "@type": "Offer",
-                "priceCurrency": "USD",
-                "price": "4.99",
-                "availability": "https://schema.org/InStock"
-            }
-        },
-        {
-            "@type": "Product",
-            "name": "Guía Editable para tu Plan de Negocios",
-            "image": "https://pa-arriba-landing.onrender.com/static/core/gallery_images/guia-negocios.jpg", {# URL de imagen real #}
-            "url": "https://pa-arriba-landing.onrender.com/store/", {# URL representativa del producto #}
-            "description": "Completa esta guía con tus datos y define tu idea, tus costos, tus proyecciones y tu modelo. Ideal para negocios nuevos o en rediseño.",
-            "sku": "p2",
-            "brand": { "@type": "Brand", "name": "Pa'Arriba" },
-            "offers": {
-                "@type": "Offer",
-                "priceCurrency": "USD",
-                "price": "9.99",
-                "availability": "https://schema.org/InStock"
-            }
-        },
-        {
-            "@type": "Product",
-            "name": "Kit Gráfico para Emprendedores",
-            "image": "https://pa-arriba-landing.onrender.com/static/core/gallery_images/kit-grafico.jpg", {# URL de imagen real #}
-            "url": "https://pa-arriba-landing.onrender.com/store/", {# URL representativa del producto #}
-            "description": "Recursos visuales editables que incluyen iconos, banners, fondos y mockups para redes sociales, presentaciones y páginas web. Profesionaliza tu imagen sin pagar diseño gráfico.",
-            "sku": "p3",
-            "brand": { "@type": "Brand", "name": "Pa'Arriba" },
-            "offers": {
-                "@type": "Offer",
-                "priceCurrency": "USD",
-                "price": "4.99",
-                "availability": "https://schema.org/InStock"
-            }
+        "hasMerchantReturnPolicy": {
+          "@type": "MerchantReturnPolicy",
+          "applicableCountry": "EC",
+          "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
+          "merchantReturnLink": "https://pa-arriba.com/privacy-policy/"
         }
-    ]
+      },
+      "review": {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Cliente Oxígeno App"
+        },
+        "reviewBody": "Controlo los costos e inventario de mi restaurante desde el celular. Me ahorra horas de trabajo cada semana."
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "4",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    }
+  ]
 }
 </script>
