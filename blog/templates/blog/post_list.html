@@ -23,7 +23,7 @@
         {% for post in blogs %}
         <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105">
             {% if post.image %}
-            <img src="{% static 'core/gallery_images/' %}{{ post.image.name|cut:'blog_images/' }}" alt="{{ post.image_alt_text|default:post.title }}" class="w-full h-48 object-cover">
+            <img src="{{ post.image.url }}" alt="{{ post.image_alt_text|default:post.title }}" class="w-full h-48 object-cover">
             {% else %}
             {# Placeholder si no hay imagen #}
             <div class="w-full h-48 bg-gray-200 flex items-center justify-center text-gray-500">

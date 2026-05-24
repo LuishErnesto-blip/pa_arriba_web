@@ -1,0 +1,8 @@
+﻿with open('blog/templates/blog/post_list.html', 'rb') as f:
+    content = f.read()
+old = b'<img src="{% static \'core/gallery_images/\' %}{{ post.image.name|cut:\'blog_images/\' }}" alt="{{ post.image_alt_text|default:post.title }}" class="w-full h-48 object-cover">'
+new_val = b'<img src="{{ post.image.url }}" alt="{{ post.image_alt_text|default:post.title }}" class="w-full h-48 object-cover">'
+result = content.replace(old, new_val)
+print('Cambio aplicado:', old in content and old not in result)
+with open('blog/templates/blog/post_list.html', 'wb') as f:
+    f.write(result)
