@@ -351,7 +351,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # CAMBIO FECHA:2026-05-23|MOTIVO: Redirigir uploads a GCS para persistencia en Cloud Run
 GS_BUCKET_NAME = os.environ.get("GS_BUCKET_NAME", "paarriba-media-ec")
-GS_DEFAULT_ACL = "publicRead"
+GS_DEFAULT_ACL = None
 GS_QUERYSTRING_AUTH = False
 GS_FILE_OVERWRITE = False
 
