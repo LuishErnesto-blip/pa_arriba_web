@@ -20,7 +20,7 @@
                 <div class="blog-preview-card bg-white p-4 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:scale-105 cursor-pointer flex flex-col items-center text-center border border-gray-200">
                     {% if post.image %}
                     {# MODIFICADO: Ruta de la imagen del blog para que cargue desde la carpeta static/core/gallery_images #}
-                    <img src="{% static 'core/gallery_images/' %}{{ post.image.name|cut:'blog_images/' }}" alt="{{ post.image_alt_text|default:post.title }}" class="w-full h-32 object-cover rounded-lg mb-3">
+                    <img src="{{ post.image.url }}" alt="{{ post.image_alt_text|default:post.title }}" class="w-full h-32 object-cover rounded-lg mb-3">
                     {% else %}
                     <div class="w-full h-32 bg-gray-200 flex items-center justify-center text-gray-500 rounded-lg mb-3">
                         <i class="fas fa-newspaper text-5xl"></i>

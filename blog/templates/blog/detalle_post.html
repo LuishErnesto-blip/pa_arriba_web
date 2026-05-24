@@ -9,7 +9,7 @@
 <main class="container mx-auto px-4 py-8 mt-20">
     <article class="bg-white rounded-lg shadow-lg overflow-hidden p-6 md:p-8 lg:p-10 max-w-4xl mx-auto">
         {% if post.image %}
-        <img src="{% static 'core/gallery_images/' %}{{ post.image.name|cut:'blog_images/' }}" alt="{{ post.image_alt_text|default:post.title }}" class="w-full h-auto object-cover rounded-lg mb-8 shadow-md">
+        <img src="{{ post.image.url }}" alt="{{ post.image_alt_text|default:post.title }}" class="w-full h-auto object-cover rounded-lg mb-8 shadow-md">
         {% endif %}
 
         <header class="mb-8">
