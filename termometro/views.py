@@ -135,9 +135,13 @@ def diagnostico_submit(request):
 
     # 6. Redireccionar con mensaje de éxito (usaremos la sesión para pasar los datos)
     # Guardamos los resultados en la sesión antes de redirigir
-    request.session["exito"] = True
-    request.session["fase_final"] = fase_final
-    request.session["puntaje_caos"] = puntaje_total
-
-    # Redirigimos de vuelta a la vista de la landing para mostrar el mensaje de éxito
-    return redirect('termometro:diagnostico')
+    nombre = request.POST.get('nombre', '')
+    whatsapp_msg = f'Hola, soy {nombre}. Completé el diagnóstico Pa Arriba y mi resultado es {fase_final} (puntaje {puntaje_total}/16). Quiero saber cómo mejorar mi negocio.'
+    import urllib.parse
+    return render(request, 'termometro/resultado.html', {
+        'fase_final': fase_final,
+        'puntaje_caos': puntaje_total,
+        'nombre': nombre,
+        'whatsapp': request.POST.get('whatsapp'),
+        'whatsapp_message': urllib.parse.quote(whatsapp_msg),
+    })

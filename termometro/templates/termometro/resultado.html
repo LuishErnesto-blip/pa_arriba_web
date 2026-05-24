@@ -1,0 +1,49 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Tu Diagnóstico - Pa'Arriba{% endblock %}
+
+{% block extra_head %}
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+    :root { --brand-orange: #FF6B00; --dark-bg: #0F172A; --card-bg: #1E293B; --text-gray: #94A3B8; }
+    body { background-color: var(--dark-bg); font-family: 'Inter', sans-serif; margin: 0; }
+    .result-wrapper { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 30px 20px; color: #fff; text-align: center; }
+    .result-box { background: rgba(255,77,77,0.1); border: 2px solid #FF4D4D; padding: 30px; border-radius: 15px; margin-bottom: 30px; max-width: 500px; width: 100%; }
+    .risk-label { color: #FF4D4D; font-weight: 900; font-size: 2rem; text-transform: uppercase; margin: 10px 0; }
+    .cta-final { background: linear-gradient(135deg, #FF6B00 0%, #FF4500 100%); color: white; padding: 20px 40px; border-radius: 50px; font-size: 1.2rem; font-weight: 800; text-decoration: none; display: inline-block; box-shadow: 0 10px 30px rgba(255,69,0,0.4); animation: pulse 2s infinite; border: none; margin-top: 20px; }
+    @keyframes pulse { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,107,0,0.7); } 70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(255,107,0,0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,107,0,0); } }
+    h1 { font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; }
+    p { color: var(--text-gray); line-height: 1.6; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="result-wrapper">
+    <div class="result-box">
+        <p style="margin:0;font-size:0.9rem;color:#94A3B8;">RESULTADO DEL DIAGNÓSTICO:</p>
+        {% if fase_final == 'RE-EMPRENDE' %}
+            <h1 class="risk-label">🚨 RIESGO ALTO</h1>
+            <p style="color:#fff;margin-top:10px;">Tu negocio está en zona crítica. Estás perdiendo entre <strong> y </strong> mensuales en fugas silenciosas.</p>
+        {% elif fase_final == 'MEJORA' %}
+            <h1 class="risk-label">⚠️ RIESGO MODERADO</h1>
+            <p style="color:#fff;margin-top:10px;">Hay puntos de fuga en tu negocio que puedes corregir ahora antes de que crezcan.</p>
+        {% elif fase_final == 'AVANZA' %}
+            <h1 style="color:#F59E0B;font-weight:900;font-size:2rem;text-transform:uppercase;margin:10px 0;">📈 AVANZA</h1>
+            <p style="color:#fff;margin-top:10px;">Vas bien, pero aún hay oportunidades de optimización que podrían aumentar tu rentabilidad.</p>
+        {% else %}
+            <h1 style="color:#10B981;font-weight:900;font-size:2rem;text-transform:uppercase;margin:10px 0;">✅ CRECES</h1>
+            <p style="color:#fff;margin-top:10px;">Tu negocio tiene bases sólidas. Un sistema profesional puede llevarte al siguiente nivel.</p>
+        {% endif %}
+        <p style="margin-top:15px;font-size:0.9rem;color:#94A3B8;">Puntaje: {{ puntaje_caos }}/16</p>
+    </div>
+
+    <h2 style="font-size:1.4rem;font-weight:700;margin-bottom:15px;">Hola {{ nombre }}, un experto puede ayudarte ahora</h2>
+    <p style="max-width:400px;margin-bottom:5px;">No necesitas contratar guardias. Necesitas un sistema que descuente el inventario automáticamente.</p>
+
+    <a href="https://wa.me/593997277796?text={{ whatsapp_message }}" class="cta-final" onclick="fbq('track','Lead');gtag('event','conversion',{'send_to':'AW-4924359601'});" target="_blank">
+        💬 HABLAR CON UN EXPERTO AHORA
+    </a>
+    <p style="margin-top:15px;font-size:0.8rem;color:#94A3B8;">Instalación remota en todo Ecuador • Prueba Gratis</p>
+</div>
+{% endblock %}
