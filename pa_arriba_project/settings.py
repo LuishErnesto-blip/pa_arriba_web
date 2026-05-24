@@ -350,10 +350,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 # CAMBIO FECHA:2026-05-23|MOTIVO: Redirigir uploads a GCS para persistencia en Cloud Run
-GCS_BUCKET_NAME = os.environ.get("GCS_BUCKET_NAME", "paarriba-media-ec")
-GCS_DEFAULT_ACL = "publicRead"
-GCS_QUERYSTRING_AUTH = False
-GCS_FILE_OVERWRITE = False
+GS_BUCKET_NAME = os.environ.get("GS_BUCKET_NAME", "paarriba-media-ec")
+GS_DEFAULT_ACL = "publicRead"
+GS_QUERYSTRING_AUTH = False
+GS_FILE_OVERWRITE = False
 
 STORAGES = {
     "default": {"BACKEND": "storages.backends.gcloud.GoogleCloudStorage"},
