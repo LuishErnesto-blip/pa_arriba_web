@@ -1,0 +1,23 @@
+[
+{
+  "model": "blog.prospecto",
+  "pk": 1,
+  "fields": {
+    "nombre_dueño": "LEAD DE PRUEBA",
+    "nombre_negocio": "PRUEBA A",
+    "telefono": "0984954386",
+    "ubicacion": "Pedro Vicente Maldonado Y Adelaida Velasco",
+    "correo": "prueba@lead.com",
+    "que_usa_hoy": "cuaderno",
+    "estado": "demo",
+    "fecha_ultima_llamada": "2025-12-18",
+    "acuerdo_1": "se envia el demo indica que se lo llame en 30 dias",
+    "fecha_acuerdo_2": null,
+    "acuerdo_2": "",
+    "fecha_acuerdo_3": null,
+    "acuerdo_3": "",
+    "notas_generales": "",
+    "fecha_registro": "2025-12-18T14:54:41.290Z"
+  }
+}
+]

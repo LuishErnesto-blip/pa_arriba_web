@@ -1,0 +1,733 @@
+[
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 1,
+  "fields": {
+    "nombre": "",
+    "email": "",
+    "whatsapp": "",
+    "tipo_negocio": "",
+    "crece": "Muy seguro",
+    "avanza": "Funcionaría sin problema",
+    "mejora": "Datos y análisis",
+    "reemprende": "Aliada",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-17T03:34:52.134Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 2,
+  "fields": {
+    "nombre": "",
+    "email": "",
+    "whatsapp": "",
+    "tipo_negocio": "",
+    "crece": "Muy seguro",
+    "avanza": "Funcionaría sin problema",
+    "mejora": "Datos y análisis",
+    "reemprende": "Aliada",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-17T03:39:43.739Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 3,
+  "fields": {
+    "nombre": "",
+    "email": "",
+    "whatsapp": "",
+    "tipo_negocio": "",
+    "crece": "Muy seguro",
+    "avanza": "Funcionaría sin problema",
+    "mejora": "Datos y análisis",
+    "reemprende": "Aliada",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-17T03:45:05.743Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 4,
+  "fields": {
+    "nombre": "",
+    "email": "",
+    "whatsapp": "",
+    "tipo_negocio": "",
+    "crece": "Tengo dudas",
+    "avanza": "Se complicaría un poco",
+    "mejora": "Experiencia e intuición",
+    "reemprende": "Confusa",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-17T03:45:19.075Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 5,
+  "fields": {
+    "nombre": "",
+    "email": "",
+    "whatsapp": "",
+    "tipo_negocio": "",
+    "crece": "Tengo dudas",
+    "avanza": "Se complicaría un poco",
+    "mejora": "Experiencia e intuición",
+    "reemprende": "Confusa",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-17T03:51:47.491Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 6,
+  "fields": {
+    "nombre": "",
+    "email": "",
+    "whatsapp": "",
+    "tipo_negocio": "",
+    "crece": "Muy seguro",
+    "avanza": "Funcionaría sin problema",
+    "mejora": "Datos y análisis",
+    "reemprende": "Aliada",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-17T03:52:05.106Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 7,
+  "fields": {
+    "nombre": "",
+    "email": "",
+    "whatsapp": "",
+    "tipo_negocio": "",
+    "crece": "Muy seguro",
+    "avanza": "Funcionaría sin problema",
+    "mejora": "Datos y análisis",
+    "reemprende": "Aliada",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-17T03:58:16.584Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 8,
+  "fields": {
+    "nombre": "",
+    "email": "",
+    "whatsapp": "",
+    "tipo_negocio": "",
+    "crece": "Muy seguro",
+    "avanza": "Funcionaría sin problema",
+    "mejora": "Datos y análisis",
+    "reemprende": "Aliada",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-17T03:58:31.997Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 9,
+  "fields": {
+    "nombre": "",
+    "email": "",
+    "whatsapp": "",
+    "tipo_negocio": "",
+    "crece": "Muy seguro",
+    "avanza": "Funcionaría sin problema",
+    "mejora": "Datos y análisis",
+    "reemprende": "Aliada",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-17T03:59:18.065Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 10,
+  "fields": {
+    "nombre": "",
+    "email": "",
+    "whatsapp": "",
+    "tipo_negocio": "",
+    "crece": "Muy seguro",
+    "avanza": "Funcionaría sin problema",
+    "mejora": "Datos y análisis",
+    "reemprende": "Aliada",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-17T03:59:33.947Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 11,
+  "fields": {
+    "nombre": "",
+    "email": "",
+    "whatsapp": "",
+    "tipo_negocio": "",
+    "crece": "Muy seguro",
+    "avanza": "Funcionaría sin problema",
+    "mejora": "Datos y análisis",
+    "reemprende": "Aliada",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-17T13:00:35.578Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 12,
+  "fields": {
+    "nombre": "",
+    "email": "",
+    "whatsapp": "",
+    "tipo_negocio": "",
+    "crece": "Tengo dudas",
+    "avanza": "Se complicaría un poco",
+    "mejora": "Experiencia e intuición",
+    "reemprende": "Confusa",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-17T13:01:25.898Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 13,
+  "fields": {
+    "nombre": "",
+    "email": "",
+    "whatsapp": "",
+    "tipo_negocio": "",
+    "crece": "Muy seguro",
+    "avanza": "Funcionaría sin problema",
+    "mejora": "Datos y análisis",
+    "reemprende": "Aliada",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-17T13:08:00.954Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 14,
+  "fields": {
+    "nombre": "",
+    "email": "",
+    "whatsapp": "",
+    "tipo_negocio": "",
+    "crece": "Muy seguro",
+    "avanza": "Funcionaría sin problema",
+    "mejora": "Datos y análisis",
+    "reemprende": "Aliada",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-17T13:18:17.156Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 15,
+  "fields": {
+    "nombre": "",
+    "email": "",
+    "whatsapp": "",
+    "tipo_negocio": "",
+    "crece": "Muy seguro",
+    "avanza": "Funcionaría sin problema",
+    "mejora": "Datos y análisis",
+    "reemprende": "Aliada",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-17T13:18:47.910Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 16,
+  "fields": {
+    "nombre": "",
+    "email": "",
+    "whatsapp": "",
+    "tipo_negocio": "",
+    "crece": "Muy seguro",
+    "avanza": "Funcionaría sin problema",
+    "mejora": "Datos y análisis",
+    "reemprende": "Aliada",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-17T13:27:31.972Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 17,
+  "fields": {
+    "nombre": "",
+    "email": "",
+    "whatsapp": "",
+    "tipo_negocio": "",
+    "crece": "Muy seguro",
+    "avanza": "Funcionaría sin problema",
+    "mejora": "Datos y análisis",
+    "reemprende": "Aliada",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-17T14:35:04.905Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 18,
+  "fields": {
+    "nombre": "",
+    "email": "",
+    "whatsapp": "",
+    "tipo_negocio": "",
+    "crece": "Muy seguro",
+    "avanza": "Funcionaría sin problema",
+    "mejora": "Datos y análisis",
+    "reemprende": "Aliada",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-17T14:44:43.630Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 19,
+  "fields": {
+    "nombre": "",
+    "email": "",
+    "whatsapp": "",
+    "tipo_negocio": "",
+    "crece": "Muy seguro",
+    "avanza": "Funcionaría sin problema",
+    "mejora": "Datos y análisis",
+    "reemprende": "Aliada",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-17T14:44:47.997Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 20,
+  "fields": {
+    "nombre": "",
+    "email": "",
+    "whatsapp": "",
+    "tipo_negocio": "",
+    "crece": "Muy seguro",
+    "avanza": "Funcionaría sin problema",
+    "mejora": "Datos y análisis",
+    "reemprende": "Aliada",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-17T14:54:35.463Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 21,
+  "fields": {
+    "nombre": "prueba 2",
+    "email": "luiserzav@gmail.com",
+    "whatsapp": "+59363284601",
+    "tipo_negocio": "Venta de productos",
+    "crece": "Muy seguro",
+    "avanza": "Funcionaría sin problema",
+    "mejora": "Experiencia e intuición",
+    "reemprende": "Confusa",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-17T14:55:03.857Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 22,
+  "fields": {
+    "nombre": "prueba 2",
+    "email": "luiserzav@gmail.com",
+    "whatsapp": "+59363284601",
+    "tipo_negocio": "Venta de productos",
+    "crece": "Muy seguro",
+    "avanza": "Funcionaría sin problema",
+    "mejora": "Experiencia e intuición",
+    "reemprende": "Confusa",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-17T15:09:31.456Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 23,
+  "fields": {
+    "nombre": "ELTHON JHON",
+    "email": "ELTON@PRUEBA.COM",
+    "whatsapp": "+59363284601",
+    "tipo_negocio": "Comida o bebida",
+    "crece": "Muy seguro",
+    "avanza": "Funcionaría sin problema",
+    "mejora": "Datos y análisis",
+    "reemprende": "Aliada",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-17T15:10:04.396Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 24,
+  "fields": {
+    "nombre": "ELTHON JHON",
+    "email": "ELTON@PRUEBA.COM",
+    "whatsapp": "+59363284601",
+    "tipo_negocio": "Comida o bebida",
+    "crece": "Muy seguro",
+    "avanza": "Funcionaría sin problema",
+    "mejora": "Datos y análisis",
+    "reemprende": "Aliada",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-17T15:37:06.351Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 25,
+  "fields": {
+    "nombre": "BILL GATES",
+    "email": "BILL@EC.COM",
+    "whatsapp": "+59363284601",
+    "tipo_negocio": "Servicios técnicos",
+    "crece": "Tengo dudas",
+    "avanza": "Se paralizaría",
+    "mejora": "Lo que esté de moda",
+    "reemprende": "Amenazante",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-17T15:38:02.179Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 26,
+  "fields": {
+    "nombre": "BILL GATES",
+    "email": "BILL@EC.COM",
+    "whatsapp": "+59363284601",
+    "tipo_negocio": "Servicios técnicos",
+    "crece": "Tengo dudas",
+    "avanza": "Se paralizaría",
+    "mejora": "Lo que esté de moda",
+    "reemprende": "Amenazante",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-17T15:50:47.006Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 27,
+  "fields": {
+    "nombre": "ELON MUSK",
+    "email": "ELON@GMAIL.COM",
+    "whatsapp": "+59363284601",
+    "tipo_negocio": "Servicios técnicos",
+    "crece": "Tengo dudas",
+    "avanza": "Se paralizaría",
+    "mejora": "Lo que esté de moda",
+    "reemprende": "Amenazante",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-17T15:52:02.313Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 28,
+  "fields": {
+    "nombre": "ELON MUSK",
+    "email": "ELON@GMAIL.COM",
+    "whatsapp": "+59363284601",
+    "tipo_negocio": "Servicios técnicos",
+    "crece": "Tengo dudas",
+    "avanza": "Se paralizaría",
+    "mejora": "Lo que esté de moda",
+    "reemprende": "Amenazante",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-17T16:05:40.677Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 29,
+  "fields": {
+    "nombre": "MARCK ZUQUEMBERG",
+    "email": "MARK@GMAIL.COM",
+    "whatsapp": "+59363284601",
+    "tipo_negocio": "Comida o bebida",
+    "crece": "Muy seguro",
+    "avanza": "Funcionaría sin problema",
+    "mejora": "Datos y análisis",
+    "reemprende": "Aliada",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-17T16:06:51.672Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 30,
+  "fields": {
+    "nombre": "MARCK ZUQUEMBERG",
+    "email": "MARK@GMAIL.COM",
+    "whatsapp": "+59363284601",
+    "tipo_negocio": "Comida o bebida",
+    "crece": "Muy seguro",
+    "avanza": "Funcionaría sin problema",
+    "mejora": "Datos y análisis",
+    "reemprende": "Aliada",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-17T18:05:13.336Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 31,
+  "fields": {
+    "nombre": "prueba 2",
+    "email": "luis.bracerog06@gmail.com",
+    "whatsapp": "+59363284601",
+    "tipo_negocio": "Comida o bebida",
+    "crece": "Muy seguro",
+    "avanza": "Funcionaría sin problema",
+    "mejora": "Datos y análisis",
+    "reemprende": "Aliada",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-17T18:05:56.215Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 32,
+  "fields": {
+    "nombre": "prueba 2",
+    "email": "luis.bracerog06@gmail.com",
+    "whatsapp": "+59363284601",
+    "tipo_negocio": "Comida o bebida",
+    "crece": "Muy seguro",
+    "avanza": "Funcionaría sin problema",
+    "mejora": "Datos y análisis",
+    "reemprende": "Aliada",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-17T18:05:59.322Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 33,
+  "fields": {
+    "nombre": "lucas modri",
+    "email": "lm@gmail.com",
+    "whatsapp": "+59363284601",
+    "tipo_negocio": "Comida o bebida",
+    "crece": "No tengo idea",
+    "avanza": "Se paralizaría",
+    "mejora": "Lo que esté de moda",
+    "reemprende": "Amenazante",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-17T18:07:12.516Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 34,
+  "fields": {
+    "nombre": "moises julio",
+    "email": "mj@gmail.com",
+    "whatsapp": "+59363284601",
+    "tipo_negocio": "Venta de productos",
+    "crece": "Muy seguro",
+    "avanza": "Funcionaría sin problema",
+    "mejora": "Datos y análisis",
+    "reemprende": "Aliada",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-17T18:08:16.380Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 35,
+  "fields": {
+    "nombre": "pervis",
+    "email": "p@hotmail.com",
+    "whatsapp": "+59363284601",
+    "tipo_negocio": "Comida o bebida",
+    "crece": "Muy seguro",
+    "avanza": "Funcionaría sin problema",
+    "mejora": "Datos y análisis",
+    "reemprende": "Aliada",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-17T18:25:12.744Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 36,
+  "fields": {
+    "nombre": "raul reyes",
+    "email": "luis.bracerog06@gmail.com",
+    "whatsapp": "+59363284601",
+    "tipo_negocio": "Servicios técnicos",
+    "crece": "Muy seguro",
+    "avanza": "Funcionaría sin problema",
+    "mejora": "Datos y análisis",
+    "reemprende": "Aliada",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-17T22:02:14.960Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 37,
+  "fields": {
+    "nombre": "fercho",
+    "email": "luis.bracerog06@gmail.com",
+    "whatsapp": "+59363284601",
+    "tipo_negocio": "Servicios técnicos",
+    "crece": "No tengo idea",
+    "avanza": "Se paralizaría",
+    "mejora": "Lo que esté de moda",
+    "reemprende": "Amenazante",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-17T22:05:43.688Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 38,
+  "fields": {
+    "nombre": "caca",
+    "email": "luis.bracerog06@gmail.com",
+    "whatsapp": "+59363284601",
+    "tipo_negocio": "Otro",
+    "crece": "Tengo dudas",
+    "avanza": "Se complicaría un poco",
+    "mejora": "Experiencia e intuición",
+    "reemprende": "Confusa",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-18T14:40:51.123Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 39,
+  "fields": {
+    "nombre": "sabiño",
+    "email": "luis.bracerog06@gmail.com",
+    "whatsapp": "+59363284601",
+    "tipo_negocio": "Otro",
+    "crece": "Muy seguro",
+    "avanza": "Funcionaría sin problema",
+    "mejora": "Datos y análisis",
+    "reemprende": "Aliada",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-18T14:56:12.779Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 40,
+  "fields": {
+    "nombre": "prueba 2",
+    "email": "luis.bracerog06@gmail.com",
+    "whatsapp": "+59363284601",
+    "tipo_negocio": "Comida o bebida",
+    "crece": "No tengo idea",
+    "avanza": "Se paralizaría",
+    "mejora": "Lo que esté de moda",
+    "reemprende": "Amenazante",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-18T14:57:36.235Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 41,
+  "fields": {
+    "nombre": "BILL GATES",
+    "email": "luiserzav@gmail.com",
+    "whatsapp": "+59363284601",
+    "tipo_negocio": "Otro",
+    "crece": "Muy seguro",
+    "avanza": "Funcionaría sin problema",
+    "mejora": "Datos y análisis",
+    "reemprende": "Aliada",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-18T15:01:51.387Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 42,
+  "fields": {
+    "nombre": "selena 45",
+    "email": "luis.bracerog06@gmail.com",
+    "whatsapp": "+59363284601",
+    "tipo_negocio": "Otro",
+    "crece": "Muy seguro",
+    "avanza": "Funcionaría sin problema",
+    "mejora": "Datos y análisis",
+    "reemprende": "Aliada",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-18T15:33:58.811Z"
+  }
+},
+{
+  "model": "termometro.termometrorespuesta",
+  "pk": 43,
+  "fields": {
+    "nombre": "prueba mil",
+    "email": "luiserzav@gmail.com",
+    "whatsapp": "+59363284601",
+    "tipo_negocio": "Comida o bebida",
+    "crece": "Muy seguro",
+    "avanza": "Funcionaría sin problema",
+    "mejora": "Datos y análisis",
+    "reemprende": "Aliada",
+    "puntaje_caos": 0,
+    "fase_final": "RE-EMPRENDE",
+    "fecha": "2025-11-18T18:18:10.368Z"
+  }
+}
+]

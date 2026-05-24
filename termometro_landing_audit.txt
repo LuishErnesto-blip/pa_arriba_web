@@ -1,0 +1,334 @@
+﻿{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}
+DiagnÃ³stico: Riesgo de Robo Hormiga
+{% endblock %}
+
+{% block extra_head %}
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --brand-orange: #FF6B00;
+        --brand-blue: #0056D2;
+        --dark-bg: #0F172A; /* Azul noche profundo */
+        --card-bg: #1E293B;
+        --text-white: #ffffff;
+        --text-gray: #94A3B8;
+    }
+
+    body {
+        background-color: var(--dark-bg);
+        font-family: 'Inter', sans-serif;
+        margin: 0;
+        overflow-x: hidden;
+    }
+
+    /* CONTENEDOR CENTRAL TIPO APP */
+    .quiz-wrapper {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        color: var(--text-white);
+        position: relative;
+    }
+
+    /* BARRA DE PROGRESO (Estilo Netflix) */
+    .progress-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 6px;
+        background: rgba(255,255,255,0.1);
+        z-index: 10;
+    }
+    .progress-bar {
+        height: 100%;
+        background: var(--brand-orange);
+        width: 0%;
+        transition: width 0.4s ease;
+        box-shadow: 0 0 10px rgba(255, 107, 0, 0.7);
+    }
+
+    /* TARJETAS DE PASOS */
+    .step-card {
+        display: none; /* Se ocultan por defecto */
+        width: 100%;
+        max-width: 500px;
+        animation: fadeUp 0.5s ease forwards;
+        text-align: center;
+    }
+    
+    .step-card.active {
+        display: block;
+    }
+
+    @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* TIPOGRAFÃA */
+    h1 {
+        font-size: 2rem;
+        font-weight: 800;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+        letter-spacing: -1px;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 25px;
+        color: #E2E8F0;
+    }
+
+    p.subtitle {
+        color: var(--text-gray);
+        font-size: 1rem;
+        margin-bottom: 30px;
+        line-height: 1.5;
+    }
+
+    /* BOTONES DE OPCIÃ“N (TIPO TYPEFORM) */
+    .option-btn {
+        display: block;
+        width: 100%;
+        background: var(--card-bg);
+        border: 2px solid rgba(255,255,255,0.05);
+        color: white;
+        padding: 20px;
+        margin-bottom: 15px;
+        border-radius: 12px;
+        font-size: 1.1rem;
+        text-align: left;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        position: relative;
+    }
+
+    .option-btn:hover, .option-btn:active {
+        border-color: var(--brand-orange);
+        background: rgba(255, 107, 0, 0.1);
+        transform: scale(1.02);
+    }
+
+    .option-btn span {
+        font-weight: 600;
+    }
+
+    /* BOTÃ“N CTA FINAL */
+    .cta-final {
+        background: linear-gradient(135deg, #FF6B00 0%, #FF4500 100%);
+        color: white;
+        padding: 20px 40px;
+        border-radius: 50px;
+        font-size: 1.2rem;
+        font-weight: 800;
+        text-decoration: none;
+        display: inline-block;
+        box-shadow: 0 10px 30px rgba(255, 69, 0, 0.4);
+        animation: pulse 2s infinite;
+        border: none;
+        margin-top: 20px;
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 107, 0, 0.7); }
+        70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(255, 107, 0, 0); }
+        100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 107, 0, 0); }
+    }
+
+    /* RESULTADO */
+    .result-box {
+        background: rgba(255, 77, 77, 0.1);
+        border: 2px solid #FF4D4D;
+        padding: 20px;
+        border-radius: 15px;
+        margin-bottom: 30px;
+    }
+
+    .risk-label {
+        color: #FF4D4D;
+        font-weight: 900;
+        font-size: 1.8rem;
+        text-transform: uppercase;
+        margin: 0;
+    }
+    
+    .loading-spinner {
+        border: 4px solid rgba(255,255,255,0.1);
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border-left-color: var(--brand-orange);
+        animation: spin 1s linear infinite;
+        margin: 20px auto;
+    }
+
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+</div>
+
+<div class="quiz-wrapper">
+
+    <div class="step-card active" id="step-0">
+        <h1 style="font-size: 2.2rem;">Â¿Tu restaurante pierde dinero y no sabes dÃ³nde? ðŸ›‘</h1>
+        <p class="subtitle">El 80% de las pÃ©rdidas en Ecuador son por "Robo Hormiga" y mal inventario. <br><br>Haz este diagnÃ³stico de 30 segundos y descÃºbrelo.</p>
+        <button class="cta-final" onclick="nextStep(1)" style="animation: none;">INICIAR DIAGNÃ“STICO ðŸ‘‰</button>
+        <p style="margin-top: 20px; font-size: 0.8rem; opacity: 0.6;">ðŸ”’ 100% Confidencial</p>
+    </div>
+
+    <div class="step-card" id="step-1">
+        <h2>1. Â¿CÃ³mo controlas tu inventario hoy?</h2>
+        <button class="option-btn" onclick="nextStep(2, 'Papel/Cuaderno', 'metodo')">A. Cuaderno / Papel ðŸ“</button>
+        <button class="option-btn" onclick="nextStep(2, 'Excel', 'metodo')">B. Excel / Hojas de cÃ¡lculo ðŸ“‰</button>
+        <button class="option-btn" onclick="nextStep(2, 'POS Viejo', 'metodo')">C. Sistema POS antiguo ðŸ’»</button>
+        <button class="option-btn" onclick="nextStep(2, 'Nada', 'metodo')">D. No llevo control ðŸ™ˆ</button>
+    </div>
+
+    <div class="step-card" id="step-2">
+        <h2>2. Â¿Cada cuÃ¡nto cuadra tu inventario fÃ­sico con lo que "deberÃ­a haber"?</h2>
+        <button class="option-btn" onclick="nextStep(3, 'Casi nunca', 'frecuencia')">A. Casi nunca cuadra âŒ</button>
+        <button class="option-btn" onclick="nextStep(3, 'Solo fin de mes', 'frecuencia')">B. Solo a fin de mes</button>
+        <button class="option-btn" onclick="nextStep(3, 'No hago fisico', 'frecuencia')">C. No hago inventario fÃ­sico</button>
+        <button class="option-btn" onclick="nextStep(3, 'Siempre cuadra', 'frecuencia')">D. Siempre cuadra perfecto âœ…</button>
+    </div>
+
+    <div class="step-card" id="step-3">
+        <h2>3. Â¿Sabes el costo exacto de cada plato hoy?</h2>
+        <button class="option-btn" onclick="nextStep('processing', 'Al ojo', 'recetas')">A. Al ojo / CÃ¡lculo mental ðŸ§ </button>
+        <button class="option-btn" onclick="nextStep('processing', 'Desactualizado', 'recetas')">B. Tengo costos de hace meses</button>
+        <button class="option-btn" onclick="nextStep('processing', 'Actualizado', 'recetas')">C. SÃ­, actualizado al centavo</button>
+    </div>
+
+    <div class="step-card" id="step-processing">
+        <h2>Analizando tus respuestas...</h2>
+        <div class="loading-spinner"></div>
+        <p class="subtitle">Calculando riesgo de fuga de capital...</p>
+    </div>
+
+    <div class="step-card" id="step-result">
+        <div class="result-box">
+            <p style="margin:0; font-size:0.9rem;">RESULTADO DEL DIAGNÃ“STICO:</p>
+            <h1 class="risk-label">âš ï¸ RIESGO ALTO</h1>
+            <p style="color: #fff; margin-top: 10px;">Tu mÃ©todo actual te estÃ¡ costando entre <strong>$300 y $800</strong> mensuales en fugas silenciosas.</p>
+        </div>
+        
+        <p class="subtitle" style="margin-bottom: 20px;">
+            No necesitas contratar guardias. Necesitas un sistema que descuente el inventario automÃ¡ticamente.
+        </p>
+
+        <a 
+            id="whatsappBtn"
+            href="#" 
+            class="cta-final"
+            onclick="fbq('track', 'Lead');gtag('event', 'conversion', {'send_to': 'AW-4924359601'});" 
+            target="_blank"
+        >
+            SOLUCIONAR AHORA ðŸ’¬
+        </a>
+        <p style="margin-top: 15px; font-size: 0.8rem; color: #94A3B8;">InstalaciÃ³n remota en todo Ecuador â€¢ Prueba Gratis</p>
+    </div>
+
+</div>
+
+<script>
+    // Variables para guardar las respuestas del usuario
+    let userAnswers = {
+        metodo: '',
+        frecuencia: '',
+        recetas: ''
+    };
+
+    function nextStep(stepNumber, answerText, category) {
+        // 1. Guardar la respuesta si se enviÃ³
+        if (category && answerText) {
+            userAnswers[category] = answerText;
+        }
+
+        // 2. Ocultar todos los pasos
+        const allSteps = document.querySelectorAll('.step-card');
+        allSteps.forEach(step => step.classList.remove('active'));
+
+        // 3. Mostrar el paso actual o el procesando
+        if (stepNumber === 'processing') {
+            showProcessing();
+        } else {
+            const nextStepDiv = document.getElementById('step-' + stepNumber);
+            if (nextStepDiv) {
+                nextStepDiv.classList.add('active');
+            }
+        }
+
+        // 4. Actualizar barra de progreso visual
+        let progress = 0;
+        if (typeof stepNumber === 'number') {
+            progress = (stepNumber / 3) * 100;
+        }
+        document.getElementById('progressBar').style.width = progress + '%';
+    }
+
+    function showProcessing() {
+        // Mostrar pantalla de carga
+        const processingDiv = document.getElementById('step-processing');
+        if (processingDiv) {
+            processingDiv.classList.add('active');
+        }
+        document.getElementById('progressBar').style.width = '90%';
+
+        // Generar el Link de WhatsApp con los datos recopilados
+        generateWhatsAppLink();
+
+        // Esperar 2.5 segundos de "AnÃ¡lisis" para tensiÃ³n
+        setTimeout(() => {
+            if (processingDiv) processingDiv.classList.remove('active');
+            
+            const resultDiv = document.getElementById('step-result');
+            if (resultDiv) resultDiv.classList.add('active');
+            
+            document.getElementById('progressBar').style.width = '100%';
+            
+            // Pixel Event (Opcional ViewContent del resultado)
+            if (typeof fbq === 'function') {
+                fbq('track', 'ViewContent', {content_name: 'Quiz Result High Risk'});
+            }
+        }, 2500);
+    }
+
+    function generateWhatsAppLink() {
+        // Tu nÃºmero
+        const phone = "593997277796";
+        
+        // Construir el mensaje con los datos del usuario
+        // Usamos %0A para saltos de lÃ­nea en la URL
+        let text = `ðŸš¨ *DIAGNÃ“STICO RIESGO ALTO* ðŸš¨%0A`;
+        text += `Hola, hice el test y necesito ayuda:%0A`;
+        text += `-----------------------%0A`;
+        text += `ðŸ“ *Control:* ${userAnswers.metodo || 'No especificado'}%0A`;
+        text += `ðŸ“… *Inventario:* ${userAnswers.frecuencia || 'No especificado'}%0A`;
+        text += `ðŸ§  *Costos:* ${userAnswers.recetas || 'No especificado'}%0A`;
+        text += `-----------------------%0A`;
+        text += `Quiero probar OxÃ­geno para solucionar esto.`;
+
+        // Asignar al botÃ³n
+        const btn = document.getElementById('whatsappBtn');
+        if (btn) {
+            btn.href = `https://wa.me/${phone}?text=${text}`;
+        }
+    }
+</script>
+
+{% endblock %}
