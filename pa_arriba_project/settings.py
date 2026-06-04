@@ -157,6 +157,7 @@ INSTALLED_APPS = [
     'store',
 
     'blog',
+    'marketing',
 
     'ckeditor',
 
