@@ -1,43 +1,35 @@
-{% load static %} {# NUEVO: Carga la etiqueta 'static' para usar archivos estáticos #}
+<section class="py-20 bg-gray-50 px-5">
+    <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-black text-gray-900 mb-6">Nuestra forma de ver los negocios gastronómicos</h2>
+            <p class="text-xl text-gray-600">
+                No creemos en la "transformación digital" por moda. Creemos en la rentabilidad como el único indicador de éxito.
+            </p>
+        </div>
 
-<!-- Tarjeta para la sección de Filosofía -->
-<div class="accordion-card filosofia-card" data-section-id="filosofia" id="filosofia-card"> {# MODIFICADO: Añadido id="filosofia-card" #}
-    <div class="accordion-header">
-        <h2 class="text-3xl font-extrabold flex items-center text-pa-arriba-blue-dark">
-            <i class="fas fa-lightbulb text-4xl mr-3"></i> {# Icono de Font Awesome para la bombilla #}
-            Nuestra Filosofía
-        </h2>
-        <span class="accordion-icon">+</span>
-    </div>
-    <div class="accordion-content rounded-b-xl">
-        <section class="filosofia-section">
-            <!-- Contenedor para partículas -->
-            <div id="tsparticles" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;">
-                <!-- El canvas para las partículas será creado y gestionado por el script -->
-                <canvas id="particlesCanvas"></canvas>
+        <div class="grid md:grid-cols-2 gap-10">
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                <h3 class="text-2xl font-black text-gray-900 mb-4">El Problema de la Intuición</h3>
+                <p class="text-gray-700 leading-relaxed">
+                    La mayoría de restaurantes cierran no porque cocinen mal, sino porque administran con suposiciones. Si no mides el gramaje, si no costeas tu receta y si no entiendes tu margen real, estás trabajando para el dueño del local y el proveedor, pero no para ti.
+                </p>
             </div>
-            <div class="content-box">
-                <h3>Misión</h3>
-                <p>Ser el motor que impulse la transformación digital de emprendedores, proporcionando soluciones innovadoras y personalizadas que les permitan crecer, avanzar, mejorar y re-emprender en un entorno digital en constante evolución.</p>
-                <h3>Visión</h3>
-                <p>Ser líderes reconocidos en el ecosistema emprendedor digital, inspirando y capacitando a millones de emprendedores para alcanzar su máximo potencial, innovando constantemente y adaptándonos a las necesidades del mercado.</p>
-                <h3>Valores</h3>
-                <ul>
-                    <li><strong>1. Innovación:</strong> Cada solución debe ser original y disruptiva, no solo funcional.</li>
-                    <li><strong>2. Accesibilidad:</strong> La tecnología debe ser fácil de usar, sin barreras técnicas.</li>
-                    <li><strong>3. Confianza:</strong> El usuario debe sentir seguridad y claridad al tomar decisiones.</li>
-                    <li><strong>3. Confianza:</strong> El usuario debe sentir seguridad y claridad al tomar decisiones.</li>
-                    <li><strong>4. Crecimiento estratégico:</strong> No solo resolvemos problemas, sino que impulsamos negocios a largo plazo.</li>
-                    <li><strong>5. Enfoque en resultados:</strong> Cada herramienta debe impactar directamente la rentabilidad y sostenibilidad del negocio.</li>
-                </ul>
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                <h3 class="text-2xl font-black text-gray-900 mb-4">Nuestro Compromiso</h3>
+                <p class="text-gray-700 leading-relaxed">
+                    En PA' ARRIBA, nuestro único objetivo es que al final del mes el dinero en tu caja sea el resultado de una gestión eficiente y no de la suerte. No vendemos "soluciones", vendemos el control absoluto de tu operación.
+                </p>
             </div>
-            <div class="golden-circle">
-                <h3>Nuestro Propósito se basa en el Círculo Dorado: ¿Por qué? ¿Cómo? ¿Qué?</h3>
-            </div>
-        </section>
-        <!-- Botón de colapsar al final de la tarjeta -->
-        <div class="flex justify-center mt-4">
-            <span class="accordion-icon accordion-footer-collapse-btn cursor-pointer text-4xl leading-none">&minus;</span>
+        </div>
+
+        <div class="mt-16 bg-orange-600 rounded-2xl p-10 text-white text-center">
+            <h3 class="text-2xl font-bold mb-4">Lo que nos guía:</h3>
+            <ul class="text-lg space-y-4 max-w-2xl mx-auto">
+                <li><strong>Claridad sobre complejidad:</strong> Si no puedes medirlo, no puedes mejorarlo.</li>
+                <li><strong>El método antes que la app:</strong> La tecnología solo sirve para blindar un proceso que ya funciona.</li>
+                <li><strong>Rentabilidad real:</strong> Si un plato no genera utilidad, debe optimizarse o desaparecer.</li>
+                <li><strong>Acción sobre teoría:</strong> Menos informes largos, más decisiones operativas inmediatas.</li>
+            </ul>
         </div>
     </div>
-</div>
+</section>

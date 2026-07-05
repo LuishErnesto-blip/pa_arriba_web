@@ -1,0 +1,328 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="bg-slate-900 min-h-screen pt-12 pb-24 px-4 flex flex-col items-center justify-start">
+
+    <!-- Encabezado de Autoridad -->
+    <div class="max-w-4xl mx-auto text-center mb-12">
+        <span class="text-orange-500 font-bold uppercase tracking-wider text-xs block mb-3">Ecosistema de Soluciones · PA' ARRIBA®</span>
+        <h1 class="text-3xl md:text-5xl font-black text-white tracking-tight mb-4">
+            Deja de calcular tus precios al ojo y <span class="text-orange-500">protege la ganancia</span> de tu negocio
+        </h1>
+        <p class="text-sm md:text-base text-gray-300 max-w-2xl mx-auto leading-relaxed">
+            Explora nuestro catálogo especializado para dueños de restaurantes, asaderos, picanterías y cafeterías. Aquí encontrarás desde <strong>plantillas y matrices en Excel listas para descargar</strong>, hasta <strong>servicios de auditoría avanzada y sistemas de control</strong> diseñados para eliminar las fugas de dinero en tu cocina y asegurar tu utilidad diaria.
+        </p>
+    </div>
+    
+    <!-- Contenedor del Hub Metodológico -->
+    <div class="bg-white rounded-3xl shadow-2xl max-w-6xl w-full p-6 md:p-10 border border-gray-100 mb-12">
+        
+        <!-- VISTA 1: Selector de Categorías -->
+        <div id="category-grid" class="block">
+            <h3 class="text-xl md:text-2xl font-black text-gray-800 text-center mb-8 tracking-tight">
+                ¿Cuál es el punto ciego que está drenando tu utilidad hoy?
+            </h3>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 w-full">
+                <!-- Financiera -->
+                <div class="bg-gray-50 p-5 rounded-2xl border border-gray-200/60 hover:border-orange-500/40 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col items-center text-center group" onclick="filterSolutions('financiera')">
+                    <div class="text-3xl mb-3 text-orange-500 bg-orange-50 w-12 h-12 flex items-center justify-center rounded-full"><i class="fas fa-balance-scale"></i></div>
+                    <h4 class="text-sm font-bold text-gray-800 mb-1">Análisis Financiero</h4>
+                    <span class="text-[10px] text-orange-600 font-bold uppercase tracking-wider mb-2 block">Control de Caja</span>
+                    <p class="text-gray-500 text-[11px] leading-relaxed">"Vendo mucho pero no sé cuánto gano." Control de flujos y cajas continuas.</p>
+                </div>
+                <!-- Costos -->
+                <div class="bg-gray-50 p-5 rounded-2xl border border-gray-200/60 hover:border-orange-500/40 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col items-center text-center group" onclick="filterSolutions('costos')">
+                    <div class="text-3xl mb-3 text-orange-500 bg-orange-50 w-12 h-12 flex items-center justify-center rounded-full"><i class="fas fa-calculator"></i></div>
+                    <h4 class="text-sm font-bold text-gray-800 mb-1">Costos y Recetas</h4>
+                    <span class="text-[10px] text-orange-600 font-bold uppercase tracking-wider mb-2 block">Gestión de Costos</span>
+                    <p class="text-gray-500 text-[11px] leading-relaxed">"No sé cuánto cuesta producir mis platos." Costeo de fórmulas estándar.</p>
+                </div>
+                <!-- Operación -->
+                <div class="bg-gray-50 p-5 rounded-2xl border border-gray-200/60 hover:border-orange-500/40 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col items-center text-center group" onclick="filterSolutions('operacion')">
+                    <div class="text-3xl mb-3 text-orange-500 bg-orange-50 w-12 h-12 flex items-center justify-center rounded-full"><i class="fas fa-boxes"></i></div>
+                    <h4 class="text-sm font-bold text-gray-800 mb-1">Mermas e Inventario</h4>
+                    <span class="text-[10px] text-orange-600 font-bold uppercase tracking-wider mb-2 block">Control de Almacén</span>
+                    <p class="text-gray-500 text-[11px] leading-relaxed">"Descontrol en existencias físicas." Desfases ocultos en almacenamiento.</p>
+                </div>
+                <!-- Estrategia -->
+                <div class="bg-gray-50 p-5 rounded-2xl border border-gray-200/60 hover:border-orange-500/40 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col items-center text-center group" onclick="filterSolutions('estrategia')">
+                    <div class="text-3xl mb-3 text-orange-500 bg-orange-50 w-12 h-12 flex items-center justify-center rounded-full"><i class="fas fa-chart-line"></i></div>
+                    <h4 class="text-sm font-bold text-gray-800 mb-1">Ingeniería de Menú</h4>
+                    <span class="text-[10px] text-orange-600 font-bold uppercase tracking-wider mb-2 block">Estrategia Comercial</span>
+                    <p class="text-gray-500 text-[11px] leading-relaxed">"Mi negocio se siente estancado." Análisis de popularidad y rentabilidad.</p>
+                </div>
+                <!-- NUEVA CATEGORÍA: Recursos Descargables (Para posicionamiento SEO en Google) -->
+                <div class="bg-gray-50 p-5 rounded-2xl border border-gray-200/60 hover:border-orange-500/40 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col items-center text-center group" onclick="filterSolutions('descargables')">
+                    <div class="text-3xl mb-3 text-orange-500 bg-orange-50 w-12 h-12 flex items-center justify-center rounded-full"><i class="fas fa-file-excel"></i></div>
+                    <h4 class="text-sm font-bold text-gray-800 mb-1">Plantillas y Guías</h4>
+                    <span class="text-[10px] text-orange-600 font-bold uppercase tracking-wider mb-2 block">Recursos de Gestión</span>
+                    <p class="text-gray-500 text-[11px] leading-relaxed">Matrices Excel gratuitas, calculadoras de costos y libros digitales listos.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- VISTA 2: Listado de Activos -->
+        <div id="product-listing-accordion" class="hidden">
+            <div class="flex flex-col items-center mb-8">
+                <h3 id="product-listing-title" class="text-2xl font-black text-gray-800 tracking-tight">Portafolio de Soluciones</h3>
+                <div class="h-1 w-16 bg-orange-500 rounded mt-2"></div>
+            </div>
+            
+            <div id="products-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+                
+                <!-- --- FINANCIERA --- -->
+                <div class="product-card bg-gray-50 p-6 rounded-2xl border border-gray-200 flex flex-col justify-between text-left transition-all duration-200 hover:border-orange-500/20 hover:shadow-md hidden" data-internal="financiera">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="text-2xl text-orange-500 bg-orange-50/80 w-10 h-10 flex items-center justify-center rounded-xl"><i class="fas fa-money-bill-wave"></i></span>
+                            <span class="text-[9px] bg-orange-50 text-orange-600 font-mono px-2.5 py-0.5 rounded-full font-bold tracking-wide">Control de Caja</span>
+                        </div>
+                        <h4 class="text-base font-black text-gray-800 mb-1.5 leading-tight">Auditoría Ciega de Cajas y Turnos</h4>
+                        <p class="text-red-600 text-xs font-semibold italic mb-3">"Siento que el dinero se esfuma entre turnos."</p>
+                    </div>
+                    <button onclick="openModal('sol-01')" class="mt-4 w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-2.5 rounded-xl text-xs transition-colors tracking-wide shadow-sm">Ver Detalles</button>
+                </div>
+                <div class="product-card bg-gray-50 p-6 rounded-2xl border border-gray-200 flex flex-col justify-between text-left transition-all duration-200 hover:border-orange-500/20 hover:shadow-md hidden" data-internal="financiera">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="text-2xl text-orange-500 bg-orange-50/80 w-10 h-10 flex items-center justify-center rounded-xl"><i class="fas fa-chart-line"></i></span>
+                            <span class="text-[9px] bg-orange-50 text-orange-600 font-mono px-2.5 py-0.5 rounded-full font-bold tracking-wide">Control de Caja</span>
+                        </div>
+                        <h4 class="text-base font-black text-gray-800 mb-1.5 leading-tight">Cálculo de Punto de Equilibrio Diario</h4>
+                        <p class="text-red-600 text-xs font-semibold italic mb-3">"Vendo bastante todos los días pero no veo ganancias."</p>
+                    </div>
+                    <button onclick="openModal('sol-02')" class="mt-4 w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-2.5 rounded-xl text-xs transition-colors tracking-wide shadow-sm">Ver Detalles</button>
+                </div>
+
+                <!-- --- COSTOS --- -->
+                <div class="product-card bg-gray-50 p-6 rounded-2xl border border-gray-200 flex flex-col justify-between text-left transition-all duration-200 hover:border-orange-500/20 hover:shadow-md hidden" data-internal="costos">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="text-2xl text-orange-500 bg-orange-50/80 w-10 h-10 flex items-center justify-center rounded-xl"><i class="fas fa-utensils"></i></span>
+                            <span class="text-[9px] bg-orange-50 text-orange-600 font-mono px-2.5 py-0.5 rounded-full font-bold tracking-wide">Gestión de Costos</span>
+                        </div>
+                        <h4 class="text-base font-black text-gray-800 mb-1.5 leading-tight">Cálculo de Recetas y Costo por Plato</h4>
+                        <p class="text-red-600 text-xs font-semibold italic mb-3">"Pongo los precios al ojo y no sé cuánto cuesta producir un plato."</p>
+                    </div>
+                    <button onclick="openModal('sol-03')" class="mt-4 w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-2.5 rounded-xl text-xs transition-colors tracking-wide shadow-sm">Ver Detalles</button>
+                </div>
+
+                <!-- --- OPERACIÓN --- -->
+                <div class="product-card bg-gray-50 p-6 rounded-2xl border border-gray-200 flex flex-col justify-between text-left transition-all duration-200 hover:border-orange-500/20 hover:shadow-md hidden" data-internal="operacion">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="text-2xl text-orange-500 bg-orange-50/80 w-10 h-10 flex items-center justify-center rounded-xl"><i class="fas fa-trash-alt"></i></span>
+                            <span class="text-[9px] bg-orange-50 text-orange-600 font-mono px-2.5 py-0.5 rounded-full font-bold tracking-wide">Control de Almacén</span>
+                        </div>
+                        <h4 class="text-base font-black text-gray-800 mb-1.5 leading-tight">Sistema de Registro Diario de Mermas</h4>
+                        <p class="text-red-600 text-xs font-semibold italic mb-3">"Mucho producto se bota a la basura por mala manipulación."</p>
+                    </div>
+                    <button onclick="openModal('sol-05')" class="mt-4 w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-2.5 rounded-xl text-xs transition-colors tracking-wide shadow-sm">Ver Detalles</button>
+                </div>
+
+                <!-- --- ESTRATEGIA --- -->
+                <div class="product-card bg-gray-50 p-6 rounded-2xl border border-gray-200 flex flex-col justify-between text-left transition-all duration-200 hover:border-orange-500/20 hover:shadow-md hidden" data-internal="estrategia">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="text-2xl text-orange-500 bg-orange-50/80 w-10 h-10 flex items-center justify-center rounded-xl"><i class="fas fa-laptop-code"></i></span>
+                            <span class="text-[9px] bg-orange-50 text-orange-600 font-mono px-2.5 py-0.5 rounded-full font-bold tracking-wide">Estrategia Comercial</span>
+                        </div>
+                        <h4 class="text-base font-black text-gray-800 mb-1.5 leading-tight">Diagnóstico de Automatización Digital</h4>
+                        <p class="text-red-600 text-xs font-semibold italic mb-3">"Mi operación es lenta, manual y dependiente de cuadernos."</p>
+                    </div>
+                    <button onclick="openModal('sol-06')" class="mt-4 w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-2.5 rounded-xl text-xs transition-colors tracking-wide shadow-sm">Ver Detalles</button>
+                </div>
+
+                <!-- --- NUEVOS DESCARGABLES (5 Recursos para posicionar en Google) --- -->
+                <div class="product-card bg-gray-50 p-6 rounded-2xl border border-gray-200 flex flex-col justify-between text-left transition-all duration-200 hover:border-orange-500/20 hover:shadow-md hidden" data-internal="descargables">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="text-2xl text-orange-500 bg-orange-50/80 w-10 h-10 flex items-center justify-center rounded-xl"><i class="fas fa-file-excel"></i></span>
+                            <span class="text-[9px] bg-orange-50 text-orange-600 font-mono px-2.5 py-0.5 rounded-full font-bold tracking-wide">Matriz de Control</span>
+                        </div>
+                        <h4 class="text-base font-black text-gray-800 mb-1.5 leading-tight">Plantilla Excel para Control de Inventario y Bodega</h4>
+                        <p class="text-red-600 text-xs font-semibold italic mb-3">"Busco una forma simple en Excel para registrar ingresos y salidas."</p>
+                    </div>
+                    <button onclick="openModal('sol-d1')" class="mt-4 w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-2.5 rounded-xl text-xs transition-colors tracking-wide shadow-sm">Descargar Plantilla</button>
+                </div>
+                <div class="product-card bg-gray-50 p-6 rounded-2xl border border-gray-200 flex flex-col justify-between text-left transition-all duration-200 hover:border-orange-500/20 hover:shadow-md hidden" data-internal="descargables">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="text-2xl text-orange-500 bg-orange-50/80 w-10 h-10 flex items-center justify-center rounded-xl"><i class="fas fa-calculator"></i></span>
+                            <span class="text-[9px] bg-orange-50 text-orange-600 font-mono px-2.5 py-0.5 rounded-full font-bold tracking-wide">Calculadora Recetas</span>
+                        </div>
+                        <h4 class="text-base font-black text-gray-800 mb-1.5 leading-tight">Calculadora Gratuita de Costo de Platos y Recetas</h4>
+                        <p class="text-red-600 text-xs font-semibold italic mb-3">"Quiero calcular mis costos en Excel de forma automatizada."</p>
+                    </div>
+                    <button onclick="openModal('sol-d2')" class="mt-4 w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-2.5 rounded-xl text-xs transition-colors tracking-wide shadow-sm">Descargar Calculadora</button>
+                </div>
+                <div class="product-card bg-gray-50 p-6 rounded-2xl border border-gray-200 flex flex-col justify-between text-left transition-all duration-200 hover:border-orange-500/20 hover:shadow-md hidden" data-internal="descargables">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="text-2xl text-orange-500 bg-orange-50/80 w-10 h-10 flex items-center justify-center rounded-xl"><i class="fas fa-book"></i></span>
+                            <span class="text-[9px] bg-orange-50 text-orange-600 font-mono px-2.5 py-0.5 rounded-full font-bold tracking-wide">Libro Digital</span>
+                        </div>
+                        <h4 class="text-base font-black text-gray-800 mb-1.5 leading-tight">Guía de Gestión: Cómo Evitar Robos Hormiga en Cocina</h4>
+                        <p class="text-red-600 text-xs font-semibold italic mb-3">"Quiero aprender tácticas para que no se pierdan insumos."</p>
+                    </div>
+                    <button onclick="openModal('sol-d3')" class="mt-4 w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-2.5 rounded-xl text-xs transition-colors tracking-wide shadow-sm">Descargar Libro</button>
+                </div>
+                <div class="product-card bg-gray-50 p-6 rounded-2xl border border-gray-200 flex flex-col justify-between text-left transition-all duration-200 hover:border-orange-500/20 hover:shadow-md hidden" data-internal="descargables">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="text-2xl text-orange-500 bg-orange-50/80 w-10 h-10 flex items-center justify-center rounded-xl"><i class="fas fa-table"></i></span>
+                            <span class="text-[9px] bg-orange-50 text-orange-600 font-mono px-2.5 py-0.5 rounded-full font-bold tracking-wide">Formato de Caja</span>
+                        </div>
+                        <h4 class="text-base font-black text-gray-800 mb-1.5 leading-tight">Formato Automatizado de Cuadre de Caja Diario</h4>
+                        <p class="text-red-600 text-xs font-semibold italic mb-3">"Necesito un Excel limpio para que mis cajeros rindan cuentas."</p>
+                    </div>
+                    <button onclick="openModal('sol-d4')" class="mt-4 w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-2.5 rounded-xl text-xs transition-colors tracking-wide shadow-sm">Descargar Formato</button>
+                </div>
+                <div class="product-card bg-gray-50 p-6 rounded-2xl border border-gray-200 flex flex-col justify-between text-left transition-all duration-200 hover:border-orange-500/20 hover:shadow-md hidden" data-internal="descargables">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="text-2xl text-orange-500 bg-orange-50/80 w-10 h-10 flex items-center justify-center rounded-xl"><i class="fas fa-chart-bar"></i></span>
+                            <span class="text-[9px] bg-orange-50 text-orange-600 font-mono px-2.5 py-0.5 rounded-full font-bold tracking-wide">Matriz de Menú</span>
+                        </div>
+                        <h4 class="text-base font-black text-gray-800 mb-1.5 leading-tight">Matriz de Ingeniería de Menú en Excel</h4>
+                        <p class="text-red-600 text-xs font-semibold italic mb-3">"Busco estructurar la popularidad y margen de mis platos."</p>
+                    </div>
+                    <button onclick="openModal('sol-d5')" class="mt-4 w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-2.5 rounded-xl text-xs transition-colors tracking-wide shadow-sm">Descargar Matriz</button>
+                </div>
+
+            </div>
+            
+            <button onclick="resetFilter()" class="mt-10 bg-slate-100 hover:bg-slate-200 text-slate-700 px-6 py-3 rounded-xl w-full font-bold text-sm transition-colors duration-200">
+                ← Volver a las Categorías Principales
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal Inbound Fijo (Limpiado de vocabulario técnico) -->
+<div id="product-detail-modal" class="fixed inset-0 bg-black/70 hidden items-center justify-center p-4 z-50">
+    <div class="bg-white rounded-3xl shadow-2xl p-6 md:p-8 w-full max-w-lg relative border border-gray-100">
+        <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-2xl font-bold">&times;</button>
+        
+        <div class="text-left">
+            <div class="flex items-center gap-3 mb-4">
+                <div id="modal-icon" class="text-4xl bg-orange-50 p-3 rounded-2xl text-orange-500 flex items-center justify-center w-16 h-16"></div>
+                <div>
+                    <h3 id="modal-product-name" class="text-xl font-black text-gray-800 leading-tight"></h3>
+                </div>
+            </div>
+
+            <div class="space-y-4 my-6">
+                <div class="bg-red-50/60 p-3.5 rounded-xl border border-red-100/40">
+                    <span class="text-[10px] font-black text-red-600 block mb-1 tracking-wider uppercase">EL PROBLEMA DETECTADO:</span>
+                    <p id="modal-pain" class="text-gray-700 text-xs font-semibold italic"></p>
+                </div>
+
+                <div class="bg-green-50/60 p-3.5 rounded-xl border border-green-100/40">
+                    <span class="text-[10px] font-black text-green-700 block mb-1 tracking-wider uppercase">CÓMO TE TRANSFORMA ESTA SOLUCIÓN:</span>
+                    <p id="modal-result" class="text-gray-700 text-xs font-medium"></p>
+                </div>
+
+                <div class="bg-gray-50 p-3.5 rounded-xl border border-gray-200/60">
+                    <span class="text-[10px] font-black text-slate-500 block mb-1 tracking-wider uppercase">PLAN DE IMPLEMENTACIÓN OPERATIVO:</span>
+                    <p id="modal-description" class="text-gray-600 text-xs leading-relaxed"></p>
+                </div>
+
+                <div>
+                    <span class="text-[10px] font-black text-gray-400 block mb-2 tracking-wider uppercase">MÓDULOS DEL SISTEMA COMPATIBLES (OXÍGENO):</span>
+                    <div id="modal-modules" class="flex flex-wrap gap-1.5"></div>
+                </div>
+            </div>
+
+            <button id="buy-now-btn" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3.5 rounded-xl shadow-xl shadow-orange-500/20 text-sm transition-all duration-200 tracking-wide"></button>
+        </div>
+    </div>
+</div>
+
+<script>
+const knowledgeHub = [
+    { id: 'sol-01', name: 'Auditoría Ciega de Cajas y Turnos', icon: 'fas fa-money-bill-wave', internalCategory: 'financiera', pain: 'Siento que el dinero se esfuma entre turnos.', result: 'Detén descuadres instalando un sistema de arqueos ciegos donde el cajero no sabe cuánto debería haber.', description: 'Estructura operativa de control para cajeros y administradores, diseñada para erradicar descuadres y blindar tu dinero al cierre.', cta: 'Solicitar Diagnóstico de Caja', oxygenModules: ['Finanzas', 'Dashboard'] },
+    { id: 'sol-02', name: 'Cálculo de Punto de Equilibrio Diario', icon: 'fas fa-chart-line', internalCategory: 'financiera', pain: 'Vendo bastante todos los días pero no veo ganancias.', result: 'Identifica el día y la hora exacta en la que tu restaurante cubre costos y empieza a ganar dinero neto.', description: 'Matriz técnica de desglose para costos fijos, variables y cálculo del umbral de rentabilidad real de la operación.', cta: 'Calcular mi Punto de Equilibrio', oxygenModules: ['Finanzas'] },
+    { id: 'sol-03', name: 'Cálculo de Recetas y Costo por Plato', icon: 'fas fa-utensils', internalCategory: 'costos', pain: 'Pongo los precios al ojo y no sé cuánto cuesta producir un plato.', result: 'Conoce el costo exacto gramo a gramo de tus preparaciones fijando precios con márgenes de ganancia reales.', description: 'Estandarización absoluta de recetas base, rendimiento de mermas e insumos críticos para controlar tu costo real.', cta: 'Estandarizar mis Costos', oxygenModules: ['Recetas', 'Inventarios'] },
+    { id: 'sol-05', name: 'Sistema de Registro Diario de Mermas', icon: 'fas fa-trash-alt', internalCategory: 'operacion', pain: 'Mucho producto se bota a la basura por mala manipulación.', result: 'Reduce el desperdicio de materia prima hasta identificar los puntos ciegos de pérdida en producción.', description: 'Sistema de bitácoras operativas para registrar bajas por desecho, errores de comandas o fallas de almacenamiento.', cta: 'Detener Desperdicios', oxygenModules: ['Inventarios', 'Compras'] },
+    { id: 'sol-06', name: 'Diagnóstico de Automatización Digital', icon: 'fas fa-laptop-code', internalCategory: 'estrategia', pain: 'Mi operación es lenta, manual y dependiente de cuadernos.', result: 'Interconecta tus comandas, salones y deliveries con la descarga automática de insumos en bodega en tiempo real.', description: 'Diseño de la arquitectura e infraestructura digital para migrar tu negocio a un modelo automatizado basado en software.', cta: 'Agendar Diagnóstico Digital', oxygenModules: ['Flota', 'Multitenant'] },
+    
+    // Datos internos de la nueva categoría descargable (Indexación Invisible de Keywords en Google)
+    { id: 'sol-d1', name: 'Plantilla Excel para Control de Inventario y Bodega', icon: 'fas fa-file-excel', internalCategory: 'descargables', pain: 'Busco una forma simple en Excel para registrar ingresos y salidas.', result: 'Controla las existencias físicas de tus ingredientes desde una hoja automatizada sin perder información.', description: 'Recurso descargable gratuito: matriz en Excel estructurada para el conteo de insumos, stock mínimo y alertas de reposición.', cta: 'Descargar Plantilla Gratis', oxygenModules: ['Inventarios'] },
+    { id: 'sol-d2', name: 'Calculadora Gratuita de Costo de Platos y Recetas', icon: 'fas fa-calculator', internalCategory: 'descargables', pain: 'Quiero calcular mis costos en Excel de forma automatizada.', result: 'Evita fijar precios al ojo; introduce tus insumos y obtén el costo exacto por porción.', description: 'Matriz avanzada de costeo de recetas en Excel lista para usar, con cálculo integrado de mermas gastronómicas.', cta: 'Descargar Calculadora de Costos', oxygenModules: ['Recetas'] },
+    { id: 'sol-d3', name: 'Guía de Gestión: Cómo Evitar Robos Hormiga en Cocina', icon: 'fas fa-book', internalCategory: 'descargables', pain: 'Quiero aprender tácticas para que no se pierdan insumos.', result: 'Aplica auditorías internas rápidas y protocolos de almacén bajo llave para blindar tu materia prima.', description: 'Ebook digital de distribución gratuita con las mejores prácticas operativas para dueños de restaurantes.', cta: 'Descargar Libro de Gestión', oxygenModules: ['Inventarios', 'Dashboard'] },
+    { id: 'sol-d4', name: 'Formato Automatizado de Cuadre de Caja Diario', icon: 'fas fa-table', internalCategory: 'descargables', pain: 'Necesito un Excel limpio para que mis cajeros rindan cuentas.', result: 'Erradica los descuadres de dinero al cierre de los turnos de la mañana y la noche.', description: 'Formato Excel programado para el cuadre exacto de efectivo, vouchers de tarjetas, transferencias y deliveries.', cta: 'Descargar Formato de Caja', oxygenModules: ['Finanzas'] },
+    { id: 'sol-d5', name: 'Matriz de Ingeniería de Menú en Excel', icon: 'fas fa-chart-bar', internalCategory: 'descargables', pain: 'Busco estructurar la popularidad y margen de mis platos.', result: 'Clasifica visualmente tus platos estrella para optimizar las ganancias de tu carta.', description: 'Herramienta analítica descargable para ingresar tus ventas mensuales y calcular márgenes de contribución.', cta: 'Descargar Matriz de Menú', oxygenModules: ['Recetas', 'Compras'] }
+];
+
+function filterSolutions(category) {
+    var catGrid = document.getElementById('category-grid');
+    var accordion = document.getElementById('product-listing-accordion');
+    
+    if (!catGrid || !accordion) return;
+    
+    var cards = document.querySelectorAll('.product-card');
+    cards.forEach(function(card) {
+        card.classList.add('hidden');
+    });
+    
+    var matches = document.querySelectorAll('.product-card[data-internal="' + category + '"]');
+    matches.forEach(function(card) {
+        card.classList.remove('hidden');
+    });
+    
+    catGrid.classList.add('hidden');
+    accordion.classList.remove('hidden');
+}
+
+function resetFilter() {
+    var catGrid = document.getElementById('category-grid');
+    var accordion = document.getElementById('product-listing-accordion');
+    if (catGrid) catGrid.classList.remove('hidden');
+    if (accordion) accordion.classList.add('hidden');
+}
+
+function openModal(id) {
+    var s = knowledgeHub.find(function(item) { 
+        return item.id === id; 
+    });
+    if (!s) return;
+    
+    document.getElementById('modal-icon').innerHTML = '<i class="' + s.icon + '"></i>';
+    document.getElementById('modal-product-name').textContent = s.name;
+    document.getElementById('modal-pain').textContent = '"' + s.pain + '"';
+    document.getElementById('modal-result').textContent = s.result;
+    document.getElementById('modal-description').textContent = s.description;
+    
+    var div = document.getElementById('modal-modules');
+    div.innerHTML = '';
+    s.oxygenModules.forEach(function(m) { 
+        div.innerHTML += '<span class="bg-orange-100 text-orange-700 font-bold text-[10px] px-2.5 py-1 rounded-lg border border-orange-200/30">' + m + '</span>'; 
+    });
+    
+    var btn = document.getElementById('buy-now-btn');
+    btn.textContent = s.cta;
+    btn.onclick = function() { 
+        var msg = 'Hola PA ARRIBA, solicito informacion sobre: ' + s.name;
+        window.open('https://wa.me/593997277796?text=' + encodeURIComponent(msg), '_blank'); 
+    };
+    
+    var modal = document.getElementById('product-detail-modal');
+    if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+    }
+}
+
+function closeModal() {
+    var modal = document.getElementById('product-detail-modal');
+    if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    }
+}
+</script>
+{% endblock %}
