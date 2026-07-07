@@ -1,35 +1,60 @@
-<section class="py-20 bg-gray-50 px-5">
-    <div class="max-w-4xl mx-auto">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-black text-gray-900 mb-6">Nuestra forma de ver los negocios gastronómicos</h2>
-            <p class="text-xl text-gray-600">
-                No creemos en la "transformación digital" por moda. Creemos en la rentabilidad como el único indicador de éxito.
-            </p>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-10">
-            <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
-                <h3 class="text-2xl font-black text-gray-900 mb-4">El Problema de la Intuición</h3>
-                <p class="text-gray-700 leading-relaxed">
-                    La mayoría de restaurantes cierran no porque cocinen mal, sino porque administran con suposiciones. Si no mides el gramaje, si no costeas tu receta y si no entiendes tu margen real, estás trabajando para el dueño del local y el proveedor, pero no para ti.
-                </p>
-            </div>
-            <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
-                <h3 class="text-2xl font-black text-gray-900 mb-4">Nuestro Compromiso</h3>
-                <p class="text-gray-700 leading-relaxed">
-                    En PA' ARRIBA, nuestro único objetivo es que al final del mes el dinero en tu caja sea el resultado de una gestión eficiente y no de la suerte. No vendemos "soluciones", vendemos el control absoluto de tu operación.
-                </p>
-            </div>
-        </div>
-
-        <div class="mt-16 bg-orange-600 rounded-2xl p-10 text-white text-center">
-            <h3 class="text-2xl font-bold mb-4">Lo que nos guía:</h3>
-            <ul class="text-lg space-y-4 max-w-2xl mx-auto">
-                <li><strong>Claridad sobre complejidad:</strong> Si no puedes medirlo, no puedes mejorarlo.</li>
-                <li><strong>El método antes que la app:</strong> La tecnología solo sirve para blindar un proceso que ya funciona.</li>
-                <li><strong>Rentabilidad real:</strong> Si un plato no genera utilidad, debe optimizarse o desaparecer.</li>
-                <li><strong>Acción sobre teoría:</strong> Menos informes largos, más decisiones operativas inmediatas.</li>
-            </ul>
-        </div>
+﻿{% load static %}
+<div class="accordion-card filosofia-card" data-section-id="filosofia" id="filosofia-card">
+    <div class="accordion-header">
+        <h2 class="text-3xl font-extrabold flex items-center text-pa-arriba-blue-dark">
+            <i class="fas fa-chart-line text-4xl mr-3"></i>
+            Nuestra forma de ver los negocios gastronómicos
+        </h2>
+        <span class="accordion-icon">+</span>
     </div>
-</section>
+    <div class="accordion-content rounded-b-xl">
+        <section class="filosofia-section p-6">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-10">
+                    <p class="text-xl text-gray-600">
+                        No creemos en la "transformación digital" por moda. Creemos en la rentabilidad como el único indicador de éxito.
+                    </p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 shadow-md">
+                        <h3 class="text-2xl font-black text-gray-900 mb-4">El Problema de la Intuición</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            La mayoría de restaurantes cierran no porque cocinen mal, sino porque administran con suposiciones. Si no mides el gramaje, si no costeas tu receta y si no entiendes tu margen real, estás trabajando para el dueño del local y el proveedor, pero no para ti.
+                        </p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 shadow-md">
+                        <h3 class="text-2xl font-black text-gray-900 mb-4">Nuestro Compromiso</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            En PA' ARRIBA, nuestro único objetivo es que al final del mes el dinero en tu caja sea el resultado de una gestión eficiente y no de la suerte. No vendemos "soluciones", vendemos el control absoluto de tu operación.
+                        </p>
+                    </div>
+                </div>
+                <div class="mt-8 bg-orange-600 rounded-xl p-8 text-white text-center shadow-md">
+                    <h3 class="text-2xl font-bold mb-4">Lo que nos guía:</h3>
+                    <ul class="text-lg space-y-4 max-w-xl mx-auto text-left list-disc list-inside">
+                        <li><strong>Claridad sobre complejidad:</strong> Si no puedes medirlo, no puedes mejorarlo.</li>
+                        <li><strong>El método antes que la app:</strong> La tecnología solo sirve para blindar un proceso que ya funciona.</li>
+                        <li><strong>Rentabilidad real:</strong> Si un plato no genera utilidad, debe optimizarse o desaparecer.</li>
+                        <li><strong>Acción sobre teoría:</strong> Menos informes largos, más decisiones operativas inmediatas.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="flex justify-center mt-8">
+                <span class="accordion-icon accordion-footer-collapse-btn cursor-pointer text-4xl leading-none">&minus;</span>
+            </div>
+        </section>
+    </div>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Service",
+  "name": "Consultoría y Rentabilidad Gastronómica PA' ARRIBA",
+  "description": "No creemos en la transformación digital por moda. Creemos en la rentabilidad absoluta mediante el control de costos y gestión eficiente para restaurantes en Ecuador.",
+  "provider": {
+    "@type": "Organization",
+    "name": "Pa'Arriba"
+  }
+}
+</script>
