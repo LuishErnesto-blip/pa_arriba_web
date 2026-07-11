@@ -19,3 +19,4 @@ CMD ["sh", "-c", "python manage.py migrate --noinput && gunicorn pa_arriba_proje
 # fix-dashboard-1780672822
 # fix-dashboard-btn-1780673363
 # force-1780673363
+# rebuild-1783767030
