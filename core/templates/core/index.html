@@ -59,14 +59,12 @@
 
     {% include 'core/prototipos_section.html' %}
 
-    <div class="text-center py-20">
-        <a href="{% url 'blog:post_list' %}"
-           class="bg-pa-arriba-blue-dark text-white px-10 py-5 rounded-xl text-2xl font-bold hover:bg-blue-900 transition-all shadow-xl">
-
-            Aprender más en nuestro Blog
-
+<section class="accordion-card">
+        <a href="{% url 'blog:post_list' %}" class="accordion-header direct-link-header" onclick="event.stopImmediatePropagation();" style="text-decoration: none; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <h2><i class="fas fa-blog"></i> Aprende con Nuestro Blog</h2>
+            <span class="accordion-icon">→</span>
         </a>
-    </div>
+    </section>
 
     {% include 'core/testimonios_section.html' %}
 
