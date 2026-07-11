@@ -1,4 +1,4 @@
-﻿﻿# Imagen base oficial de Python
+# Imagen base oficial de Python
 FROM python:3.12-slim
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
