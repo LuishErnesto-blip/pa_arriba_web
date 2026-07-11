@@ -7,14 +7,14 @@ from ckeditor.fields import RichTextField
 
 class Post(models.Model):
     title = models.CharField(max_length=200, verbose_name="Título del Artículo")
-    meta_description = models.CharField(max_length=160, blank=True, null=True)
+    meta_description = models.CharField(max_length=160, blank=True, null=True, help_text="Máx 160 caracteres. Aparece en Google debajo del título. Incluir keyword principal.")
     content = RichTextField(blank=True, null=True, verbose_name="Contenido del Artículo")
     published_date = models.DateTimeField(default=timezone.now, verbose_name="Fecha de Publicación")
     author = models.CharField(max_length=100, default="Pa´Arriba Equipo", verbose_name="Autor")
     slug = models.SlugField(unique=True, blank=True, null=True, max_length=200)
     image = models.ImageField(upload_to='blog_images/', blank=True, null=True)
-    image_alt_text = models.CharField(max_length=255, blank=True, null=True)
-    keywords = models.CharField(max_length=255, blank=True, null=True)
+    image_alt_text = models.CharField(max_length=255, blank=True, null=True, help_text="Describir la imagen para SEO. Ej: Tabla de costeo de seco de pollo con precios Ecuador 2026")
+    keywords = models.CharField(max_length=500, blank=True, null=True, help_text="Separar por comas. Ej: costeo de recetas Ecuador, food cost, recetas estándar. Se usa en meta keywords y JSON-LD.")
     is_published = models.BooleanField(default=False, verbose_name="Publicado")
 
     def save(self, *args, **kwargs):
