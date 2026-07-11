@@ -19,29 +19,73 @@ def privacy_policy(request):
     return render(request, 'core/privacy_policy.html')
 
 def robots_txt(request):
+    """
+    🟢[CAMBIO] FECHA:2026-07-10|MOTIVO: robots.txt mejorado — bloquea admin/ckeditor/store, declara sitemap
+    """
     base_url = getattr(settings, 'SITE_URL', 'https://pa-arriba.com').rstrip('/')
-    content = f"User-agent: *\nAllow: /\n\nSitemap: {base_url}/sitemap.xml"
-    return HttpResponse(content, content_type="text/plain")
+    lines = [
+        "User-agent: *",
+        "Allow: /",
+        "",
+        "# Bloquear rutas administrativas y privadas",
+        "Disallow: /admin/",
+        "Disallow: /ckeditor/",
+        "Disallow: /store/",
+        "",
+        "# Sitemap",
+        f"Sitemap: {base_url}/sitemap.xml",
+    ]
+    return HttpResponse("\n".join(lines), content_type="text/plain; charset=utf-8")
+
 
 def sitemap_xml(request):
-    host = request.get_host()
-    base_url = 'https://pa-arriba.com' if 'onrender.com' in host else f'https://{host}'
+    """
+    🟢[CAMBIO] FECHA:2026-07-10|MOTIVO: sitemap.xml actualizado — agrega 3 landings SEO + mantiene blog dinámico
+    """
+    base_url = getattr(settings, 'SITE_URL', 'https://pa-arriba.com').rstrip('/')
+
     static_urls = [
-        {"loc": f"{base_url}/", "lastmod": "2025-07-22", "changefreq": "daily", "priority": "1.0"},
-        {"loc": f"{base_url}/blog/", "lastmod": "2025-07-22", "changefreq": "daily", "priority": "0.8"},
-        {"loc": f"{base_url}/store/", "lastmod": "2025-07-22", "changefreq": "weekly", "priority": "0.7"},
-        {"loc": f"{base_url}/privacy-policy/", "lastmod": "2025-07-22", "changefreq": "monthly", "priority": "0.5"},
+        {"loc": f"{base_url}/",                        "lastmod": "2026-07-10", "changefreq": "weekly",  "priority": "1.0"},
+        {"loc": f"{base_url}/asesorias-gastronomicas/", "lastmod": "2026-07-10", "changefreq": "monthly", "priority": "0.9"},
+        {"loc": f"{base_url}/metodo/",                  "lastmod": "2026-07-10", "changefreq": "monthly", "priority": "0.9"},
+        {"loc": f"{base_url}/rentabilidad/",            "lastmod": "2026-07-10", "changefreq": "monthly", "priority": "0.9"},
+        {"loc": f"{base_url}/sri/",                     "lastmod": "2026-07-10", "changefreq": "monthly", "priority": "0.7"},
+        {"loc": f"{base_url}/oxigeno-app/",             "lastmod": "2026-07-10", "changefreq": "monthly", "priority": "0.7"},
+        {"loc": f"{base_url}/diagnostico/",             "lastmod": "2026-07-10", "changefreq": "monthly", "priority": "0.6"},
+        {"loc": f"{base_url}/blog/",                    "lastmod": "2026-07-10", "changefreq": "weekly",  "priority": "0.5"},
+        {"loc": f"{base_url}/privacy-policy/",          "lastmod": "2026-07-10", "changefreq": "yearly",  "priority": "0.2"},
     ]
+
     post_urls = []
-    posts = Post.objects.filter(is_published=True).order_by('-published_date')
-    for p in posts:
-        lastmod = p.published_date.date().isoformat() if p.published_date else datetime.utcnow().date().isoformat()
-        post_urls.append({"loc": f"{base_url}/blog/{p.slug}/", "lastmod": lastmod, "changefreq": "monthly", "priority": "0.9"})
-    lines = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+    try:
+        posts = Post.objects.filter(is_published=True).order_by('-published_date')
+        for p in posts:
+            lastmod = p.published_date.date().isoformat() if p.published_date else datetime.utcnow().date().isoformat()
+            post_urls.append({
+                "loc": f"{base_url}/blog/{p.slug}/",
+                "lastmod": lastmod,
+                "changefreq": "monthly",
+                "priority": "0.8"
+            })
+    except Exception:
+        pass
+
+    lines = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+    ]
     for entry in static_urls + post_urls:
-        lines.extend(['  <url>', f'    <loc>{entry["loc"]}</loc>', f'    <lastmod>{entry["lastmod"]}</lastmod>', f'    <changefreq>{entry["changefreq"]}</changefreq>', f'    <priority>{entry["priority"]}</priority>', '  </url>'])
+        lines.extend([
+            '  <url>',
+            f'    <loc>{entry["loc"]}</loc>',
+            f'    <lastmod>{entry["lastmod"]}</lastmod>',
+            f'    <changefreq>{entry["changefreq"]}</changefreq>',
+            f'    <priority>{entry["priority"]}</priority>',
+            '  </url>'
+        ])
     lines.append('</urlset>')
-    return HttpResponse("\n".join(lines), content_type='application/xml')
+
+    return HttpResponse("\n".join(lines), content_type='application/xml; charset=utf-8')
 
 @require_POST
 def diagnostico_submit(request):

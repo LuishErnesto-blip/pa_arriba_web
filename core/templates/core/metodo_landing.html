@@ -1,9 +1,83 @@
+{# 🟢[CAMBIO] FECHA:2026-07-10|MOTIVO: SEO — meta_keywords, OG tags, JSON-LD con HowTo+FAQPage, FAQ section, links internos #}
 {% extends 'core/base.html' %}
 
 {% block title %}Metodología PA' ARRIBA: Control y Rentabilidad en Restaurantes{% endblock %}
 
 {% block meta_description %}
 ¿Tu restaurante vende pero no ves la ganancia? Aplicamos una metodología basada en costos reales, ingeniería de menú y gestión operativa para devolverte el control.
+{% endblock %}
+
+{# 🟢[NUEVO] FECHA:2026-07-10|MOTIVO: Faltaba bloque meta_keywords en esta landing #}
+{% block meta_keywords %}ingeniería de menú, costeo de recetas Ecuador, punto de equilibrio restaurante, estandarización de recetas, food cost restaurantes, control de mermas cocina, metodología restaurantes, consultoría gastronómica Ecuador, consultoría gastronómica Quito, indicadores KPI restaurante{% endblock %}
+
+{# 🟢[NUEVO] FECHA:2026-07-10|MOTIVO: Open Graph específico para compartir en redes #}
+{% block og_title %}Metodología PA' ARRIBA — De la Intuición a la Rentabilidad Real{% endblock %}
+{% block og_description %}Tu restaurante no necesita más software. Necesita un sistema de gestión. Conoce la metodología que aplicamos directamente sobre la operación de tu negocio.{% endblock %}
+
+{# 🟢[NUEVO] FECHA:2026-07-10|MOTIVO: JSON-LD Schema — LocalBusiness + HowTo + FAQPage para rich results #}
+{% block extra_head %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://pa-arriba.com/#negocio",
+      "name": "PA' ARRIBA — Consultoría Gastronómica",
+      "url": "https://pa-arriba.com",
+      "telephone": "+593997277796",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Quito",
+        "addressRegion": "Pichincha",
+        "addressCountry": "EC"
+      },
+      "areaServed": {"@type": "Country", "name": "Ecuador"},
+      "priceRange": "$$"
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://pa-arriba.com/metodo/#metodologia",
+      "name": "Metodología PA' ARRIBA para restaurantes rentables",
+      "description": "Sistema de gestión gastronómica aplicado directamente en la operación del restaurante para pasar de la intuición a la rentabilidad real.",
+      "step": [
+        {"@type": "HowToStep", "position": 1, "name": "Diagnóstico operativo", "text": "Auditoría completa del menú, proveedores, procesos de compra y producción para identificar dónde se pierde dinero."},
+        {"@type": "HowToStep", "position": 2, "name": "Ingeniería de menú", "text": "Análisis del rendimiento real de la carta. Eliminamos lo que resta rentabilidad y potenciamos los productos estrella."},
+        {"@type": "HowToStep", "position": 3, "name": "Costeo y estandarización de recetas", "text": "Estandarizamos gramaje y costo real de cada plato con precios de mercado ecuatoriano."},
+        {"@type": "HowToStep", "position": 4, "name": "Control de inventarios", "text": "Diseñamos procesos para evitar robo hormiga, merma excesiva y sobrestock."},
+        {"@type": "HowToStep", "position": 5, "name": "Indicadores KPI", "text": "Transformamos datos de cocina en métricas financieras para decisiones basadas en información."},
+        {"@type": "HowToStep", "position": 6, "name": "Automatización con Oxígeno App", "text": "Cuando el método está firme, implementamos tecnología para automatizar el control y blindar el sistema."}
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://pa-arriba.com/metodo/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es la ingeniería de menú?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Es el proceso de analizar cada plato de tu carta considerando su costo real de producción, su popularidad y su margen de ganancia. Permite identificar qué platos son rentables, cuáles debes reformular y cuáles conviene eliminar."}
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué es el punto de equilibrio de un restaurante?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Es la cantidad mínima que necesitas vender cada día o cada mes para cubrir todos tus costos fijos y variables. Sin conocer tu punto de equilibrio, no sabes si estás ganando o perdiendo dinero."}
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto debería ser el food cost ideal?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Depende del tipo de negocio, pero generalmente un food cost saludable está entre el 28% y 35% del precio de venta. Lo importante no es el porcentaje genérico sino conocer el costo real de TUS recetas con TUS proveedores."}
+        },
+        {
+          "@type": "Question",
+          "name": "¿La metodología funciona para negocios pequeños?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Sí. Fue diseñada específicamente para micro y pequeñas empresas gastronómicas en Ecuador: asaderos, cafeterías, cevicherías, hamburgueserías y restaurantes de comida tradicional."}
+        }
+      ]
+    }
+  ]
+}
+</script>
 {% endblock %}
 
 {% block content %}
@@ -26,6 +100,8 @@
                class="inline-block bg-orange-600 hover:bg-orange-700 px-10 py-5 rounded-xl font-bold text-xl shadow-xl transition">
                 Hablemos de rentabilidad
             </a>
+            {# 🟢[NUEVO] FECHA:2026-07-10|MOTIVO: Contexto de CTA para reducir fricción #}
+            <p class="text-sm text-gray-500 mt-3">Diagnóstico gratis de 20 minutos por WhatsApp · Horario: 16:00 a 20:00</p>
         </div>
     </div>
 </section>
@@ -86,17 +162,65 @@
     </div>
 </section>
 
+{# 🟢[NUEVO] FECHA:2026-07-10|MOTIVO: Sección FAQ con preguntas frecuentes sobre metodología para rich results #}
+<section class="py-16 bg-white px-5">
+    <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-black text-gray-900 text-center mb-10">Preguntas frecuentes sobre la metodología</h2>
+
+        <div class="space-y-4">
+            <details class="border-b border-gray-200 pb-4" open>
+                <summary class="font-bold text-lg cursor-pointer hover:text-orange-600 transition">¿Qué es la ingeniería de menú?</summary>
+                <p class="text-gray-600 mt-3">Es el proceso de analizar cada plato de tu carta considerando su costo real de producción, su popularidad y su margen de ganancia. Permite identificar qué platos son rentables, cuáles debes reformular y cuáles conviene eliminar.</p>
+            </details>
+
+            <details class="border-b border-gray-200 pb-4">
+                <summary class="font-bold text-lg cursor-pointer hover:text-orange-600 transition">¿Qué es el punto de equilibrio de un restaurante?</summary>
+                <p class="text-gray-600 mt-3">Es la cantidad mínima que necesitas vender cada día o cada mes para cubrir todos tus costos fijos y variables. Sin conocer tu punto de equilibrio, no sabes si estás ganando o perdiendo dinero.</p>
+            </details>
+
+            <details class="border-b border-gray-200 pb-4">
+                <summary class="font-bold text-lg cursor-pointer hover:text-orange-600 transition">¿Cuánto debería ser el food cost ideal?</summary>
+                <p class="text-gray-600 mt-3">Depende del tipo de negocio, pero generalmente un food cost saludable está entre el 28% y 35% del precio de venta. Lo importante no es el porcentaje genérico sino conocer el costo real de TUS recetas con TUS proveedores.</p>
+            </details>
+
+            <details class="border-b border-gray-200 pb-4">
+                <summary class="font-bold text-lg cursor-pointer hover:text-orange-600 transition">¿La metodología funciona para negocios pequeños?</summary>
+                <p class="text-gray-600 mt-3">Sí. Fue diseñada específicamente para micro y pequeñas empresas gastronómicas en Ecuador: asaderos, cafeterías, cevicherías, hamburgueserías y restaurantes de comida tradicional.</p>
+            </details>
+        </div>
+    </div>
+</section>
+
 <section class="py-20 bg-white px-5 text-center">
     <div class="max-w-4xl mx-auto">
         <h2 class="text-4xl font-black text-gray-900 mb-8">¿Listo para dejar de adivinar?</h2>
         <p class="text-xl text-gray-700 leading-relaxed mb-10">
-            Agenda un diagnóstico inicial. Analizaremos tu modelo actual y te diremos exactamente dónde estamos perdiendo dinero.
+            Agenda un diagnóstico inicial. Analizaremos tu modelo actual y te diremos exactamente dónde se está perdiendo dinero.
         </p>
-        <a href="https://wa.me/593997277796?text=Hola%20PA%20ARRIBA,%20necesito%20un%20diagnóstico%20de%20mi%20restaurante."
+        <a href="https://wa.me/593997277796?text=Hola%20PA%20ARRIBA,%20quiero%20un%20diagnóstico%20gratis%20de%20mi%20restaurante."
            target="_blank" rel="noopener noreferrer"
            class="inline-block bg-orange-600 hover:bg-orange-700 px-10 py-5 rounded-xl font-bold text-xl shadow-xl transition">
-            Solicitar diagnóstico operativo
+            Diagnóstico gratis por WhatsApp
         </a>
+        {# 🟢[NUEVO] FECHA:2026-07-10|MOTIVO: Contexto de CTA #}
+        <p class="text-sm text-gray-500 mt-3">20 minutos · Sin compromiso · Horario: 16:00 a 20:00</p>
+    </div>
+</section>
+
+{# 🟢[NUEVO] FECHA:2026-07-10|MOTIVO: Enlaces internos entre landings para distribución de link juice #}
+<section class="py-12 px-5 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold text-center text-gray-800 mb-8">Profundiza en lo que hacemos</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <a href="{% url 'core:asesorias_gastronomicas' %}" class="block p-6 bg-white rounded-xl shadow hover:shadow-lg transition border border-gray-100">
+                <h3 class="font-bold text-lg text-gray-900 mb-2">Consultoría gastronómica →</h3>
+                <p class="text-gray-600">20 horas presenciales de trabajo directo: costeo de recetas, ingeniería de menú, estandarización y automatización.</p>
+            </a>
+            <a href="{% url 'core:rentabilidad_landing' %}" class="block p-6 bg-white rounded-xl shadow hover:shadow-lg transition border border-gray-100">
+                <h3 class="font-bold text-lg text-gray-900 mb-2">Rentabilidad para restaurantes →</h3>
+                <p class="text-gray-600">Descubre dónde se está perdiendo la utilidad y cómo recuperarla con costeo real y procesos claros.</p>
+            </a>
+        </div>
     </div>
 </section>
 

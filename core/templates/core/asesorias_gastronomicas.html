@@ -1,3 +1,4 @@
+{# 🟢[CAMBIO] FECHA:2026-07-10|MOTIVO: SEO — OG tags, JSON-LD movido a extra_head y enriquecido con LocalBusiness+FAQPage, FAQ section, links internos, alt text mejorado #}
 {% extends 'core/base.html' %}
 {% load static %}
 
@@ -8,7 +9,104 @@ Consultoría gastronómica para restaurantes y cafeterías en Ecuador. Descubre 
 {% endblock %}
 
 {% block meta_keywords %}
-consultoría gastronómica Ecuador, asesoría para restaurantes, rentabilidad restaurante, food cost, recetas estándar, ingeniería de menú, costos gastronómicos, consultor gastronómico, restaurantes Ecuador
+consultoría gastronómica Ecuador, consultoría gastronómica Quito, asesoría para restaurantes, asesoría gastronómica restaurantes, rentabilidad restaurante, food cost restaurantes, recetas estándar, ingeniería de menú, costos gastronómicos, consultor gastronómico, costeo de recetas Ecuador, control de mermas cocina, estandarización de recetas, restaurantes Ecuador
+{% endblock %}
+
+{# 🟢[NUEVO] FECHA:2026-07-10|MOTIVO: Open Graph específico para compartir en redes #}
+{% block og_title %}Consultoría Gastronómica para Restaurantes en Ecuador | PA' ARRIBA{% endblock %}
+{% block og_description %}¿Vendes mucho pero no sabes cuánto ganas? Consultoría presencial de 20 horas para restaurantes y cafeterías. Diagnóstico gratis por WhatsApp.{% endblock %}
+
+{# 🟢[NUEVO] FECHA:2026-07-10|MOTIVO: JSON-LD movido aquí desde el fondo del template + enriquecido con LocalBusiness y FAQPage #}
+{% block extra_head %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://pa-arriba.com/#negocio",
+      "name": "PA' ARRIBA — Consultoría Gastronómica",
+      "description": "Consultora especializada en rentabilidad gastronómica para restaurantes y cafeterías en Ecuador.",
+      "url": "https://pa-arriba.com",
+      "telephone": "+593997277796",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Quito",
+        "addressRegion": "Pichincha",
+        "addressCountry": "EC"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Ecuador"
+      },
+      "priceRange": "$$",
+      "openingHours": "Mo-Sa 16:00-20:00"
+    },
+    {
+      "@type": "Service",
+      "@id": "https://pa-arriba.com/asesorias-gastronomicas/#servicio",
+      "name": "Asesorías Gastronómicas para Restaurantes Ecuador",
+      "url": "https://pa-arriba.com/asesorias-gastronomicas/",
+      "description": "Acompañamiento práctico para dueños de restaurantes en Ecuador. Recetas estándar, control de costos, ingeniería de menú y orden operativo para cafeterías, asaderos, cevicherías y restaurantes pequeños.",
+      "provider": { "@id": "https://pa-arriba.com/#negocio" },
+      "serviceType": "Consultoría Gastronómica",
+      "areaServed": {
+        "@type": "Country",
+        "name": "Ecuador"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "300",
+        "priceCurrency": "USD",
+        "description": "Consultoría presencial de 20 horas en 3 días dentro de Quito. Fuera de Quito, el cliente cubre movilización.",
+        "availability": "https://schema.org/InStock"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Servicios de Asesoría Gastronómica",
+        "itemListElement": [
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Recetas Estándar para Restaurantes", "description": "Estandarización de preparaciones para trabajar con más consistencia y control en cocina."}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Control de Costos Gastronómicos", "description": "Calcula el food cost de tus platos y toma decisiones con números reales."}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Ingeniería de Menú", "description": "Organiza tu carta para vender mejor y mejorar la rentabilidad de tu restaurante."}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Orden Operativo", "description": "Mejora procesos de cocina, compras, producción y control interno de tu negocio gastronómico."}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Capacitación para Dueños de Restaurantes", "description": "Formación práctica para dueños de negocios gastronómicos sin formación culinaria profesional."}}
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://pa-arriba.com/asesorias-gastronomicas/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cuánto dura la consultoría gastronómica?",
+          "acceptedAnswer": {"@type": "Answer", "text": "La consultoría es presencial, dura 20 horas distribuidas en 3 días de trabajo directo sobre tu restaurante o cafetería."}
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto cuesta la consultoría?",
+          "acceptedAnswer": {"@type": "Answer", "text": "$300 dentro de Quito. Fuera de Quito, el cliente cubre los costos de movilización."}
+        },
+        {
+          "@type": "Question",
+          "name": "¿Para qué tipo de negocios es esta asesoría?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Para cafeterías, asaderos, cevicherías, negocios de empanadas, papipollos, pequeños restaurantes, dark kitchens y emprendimientos gastronómicos que necesitan ordenarse para crecer."}
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo sé si necesito una consultoría gastronómica?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Si no sabes cuánto te cuesta producir cada plato, si tus precios están puestos al ojo, si tu inventario nunca cuadra o si vendes mucho pero al final del mes no ves la ganancia, necesitas una consultoría. Ofrecemos un diagnóstico gratuito de 20 minutos por WhatsApp para evaluarlo."}
+        },
+        {
+          "@type": "Question",
+          "name": "¿Es solo para restaurantes en Quito?",
+          "acceptedAnswer": {"@type": "Answer", "text": "No. Trabajamos con negocios gastronómicos en todo Ecuador. Dentro de Quito el precio es $300; fuera de Quito, el cliente cubre movilización."}
+        }
+      ]
+    }
+  ]
+}
+</script>
 {% endblock %}
 
 {% block content %}
@@ -26,9 +124,11 @@ Si no sabes cuánto ganas realmente, trabajas con recetas al ojo o tu inventario
         </p>
 
         <div style="margin-top: 32px;">
-            <a href="https://wa.me/593997277796?text=Me%20interesan%20las%20asesor%C3%ADas" class="cta-button" target="_blank" rel="noopener noreferrer">
-                Me interesan las asesorías
+            <a href="https://wa.me/593997277796?text=Hola%20PA%20ARRIBA,%20quiero%20un%20diagnóstico%20gratis%20de%20mi%20restaurante." class="cta-button" target="_blank" rel="noopener noreferrer">
+                Diagnóstico gratis por WhatsApp
             </a>
+            {# 🟢[NUEVO] FECHA:2026-07-10|MOTIVO: Contexto de CTA para reducir fricción #}
+            <p style="font-size: 0.85rem; color: #999; margin-top: 10px;">20 minutos · Sin compromiso · Horario: 16:00 a 20:00</p>
         </div>
     </div>
 
@@ -155,24 +255,58 @@ Cuando el modelo funciona, Oxígeno App automatiza el control diario.
 
 <div class="asesorias-banner-wrapper">
     <div class="asesorias-banner-track">
-        <img src="{% static 'core/img/asesorias/asesoria-1.jpg' %}" alt="Asesoría gastronómica 1">
-        <img src="{% static 'core/img/asesorias/asesoria-2.JPG' %}" alt="Asesoría gastronómica 2">
-        <img src="{% static 'core/img/asesorias/asesoria-3.JPG' %}" alt="Asesoría gastronómica 3">
-        <img src="{% static 'core/img/asesorias/asesoria-4.JPG' %}" alt="Asesoría gastronómica 4">
-        <img src="{% static 'core/img/asesorias/asesoria-5.png' %}" alt="Asesoría gastronómica 5">
-        <img src="{% static 'core/img/asesorias/asesoria-6.JPG' %}" alt="Asesoría gastronómica 6">
+        {# 🟢[CAMBIO] FECHA:2026-07-10|MOTIVO: Alt text descriptivo para SEO de imágenes #}
+        <img src="{% static 'core/img/asesorias/asesoria-1.jpg' %}" alt="Consultor gastronómico revisando recetas estándar con dueño de restaurante en Ecuador">
+        <img src="{% static 'core/img/asesorias/asesoria-2.JPG' %}" alt="Auditoría de costos en cocina de restaurante ecuatoriano">
+        <img src="{% static 'core/img/asesorias/asesoria-3.JPG' %}" alt="Capacitación en ingeniería de menú para equipo de cocina">
+        <img src="{% static 'core/img/asesorias/asesoria-4.JPG' %}" alt="Control de inventario y gramajes en asesoría gastronómica presencial">
+        <img src="{% static 'core/img/asesorias/asesoria-5.png' %}" alt="Estandarización de procesos de producción en restaurante">
+        <img src="{% static 'core/img/asesorias/asesoria-6.JPG' %}" alt="Implementación de Oxígeno App en negocio gastronómico">
 
-        <img src="{% static 'core/img/asesorias/asesoria-1.jpg' %}" alt="Asesoría gastronómica 1 duplicada">
-        <img src="{% static 'core/img/asesorias/asesoria-2.JPG' %}" alt="Asesoría gastronómica 2 duplicada">
-        <img src="{% static 'core/img/asesorias/asesoria-3.JPG' %}" alt="Asesoría gastronómica 3 duplicada">
-        <img src="{% static 'core/img/asesorias/asesoria-4.JPG' %}" alt="Asesoría gastronómica 4 duplicada">
-        <img src="{% static 'core/img/asesorias/asesoria-5.png' %}" alt="Asesoría gastronómica 5 duplicada">
-        <img src="{% static 'core/img/asesorias/asesoria-6.JPG' %}" alt="Asesoría gastronómica 6 duplicada">
+        <img src="{% static 'core/img/asesorias/asesoria-1.jpg' %}" alt="Consultoría gastronómica PA ARRIBA en restaurante" aria-hidden="true">
+        <img src="{% static 'core/img/asesorias/asesoria-2.JPG' %}" alt="Asesoría de costos gastronómicos" aria-hidden="true">
+        <img src="{% static 'core/img/asesorias/asesoria-3.JPG' %}" alt="Capacitación gastronómica" aria-hidden="true">
+        <img src="{% static 'core/img/asesorias/asesoria-4.JPG' %}" alt="Control de inventario gastronómico" aria-hidden="true">
+        <img src="{% static 'core/img/asesorias/asesoria-5.png' %}" alt="Estandarización gastronómica" aria-hidden="true">
+        <img src="{% static 'core/img/asesorias/asesoria-6.JPG' %}" alt="Oxígeno App implementación" aria-hidden="true">
     </div>
 </div>
     </div>
 
 </section>
+
+{# 🟢[NUEVO] FECHA:2026-07-10|MOTIVO: Sección FAQ con schema FAQPage para rich results en Google #}
+<section style="width: 100%; max-width: 1050px; margin: 0 auto 35px auto; padding: 0 20px;">
+    <div style="background: linear-gradient(135deg, #1a1a2e, #2E2E2E); border-radius: 14px; padding: 30px;">
+        <h2 style="margin-top: 0; text-align: center;">Preguntas frecuentes</h2>
+
+        <details style="border-bottom: 1px solid rgba(255,255,255,0.12); padding: 14px 0;" open>
+            <summary style="font-weight: bold; font-size: 1.05rem; cursor: pointer;">¿Cuánto dura la consultoría gastronómica?</summary>
+            <p style="margin-top: 10px; color: #ccc;">La consultoría es presencial, dura 20 horas distribuidas en 3 días de trabajo directo sobre tu restaurante o cafetería.</p>
+        </details>
+
+        <details style="border-bottom: 1px solid rgba(255,255,255,0.12); padding: 14px 0;">
+            <summary style="font-weight: bold; font-size: 1.05rem; cursor: pointer;">¿Cuánto cuesta la consultoría?</summary>
+            <p style="margin-top: 10px; color: #ccc;">$300 dentro de Quito. Fuera de Quito, el cliente cubre los costos de movilización.</p>
+        </details>
+
+        <details style="border-bottom: 1px solid rgba(255,255,255,0.12); padding: 14px 0;">
+            <summary style="font-weight: bold; font-size: 1.05rem; cursor: pointer;">¿Para qué tipo de negocios es esta asesoría?</summary>
+            <p style="margin-top: 10px; color: #ccc;">Para cafeterías, asaderos, cevicherías, negocios de empanadas, papipollos, pequeños restaurantes, dark kitchens y emprendimientos gastronómicos que necesitan ordenarse para crecer.</p>
+        </details>
+
+        <details style="border-bottom: 1px solid rgba(255,255,255,0.12); padding: 14px 0;">
+            <summary style="font-weight: bold; font-size: 1.05rem; cursor: pointer;">¿Cómo sé si necesito una consultoría gastronómica?</summary>
+            <p style="margin-top: 10px; color: #ccc;">Si no sabes cuánto te cuesta producir cada plato, si tus precios están puestos al ojo, si tu inventario nunca cuadra o si vendes mucho pero al final del mes no ves la ganancia, necesitas una consultoría. Ofrecemos un diagnóstico gratuito de 20 minutos por WhatsApp para evaluarlo.</p>
+        </details>
+
+        <details style="padding: 14px 0;">
+            <summary style="font-weight: bold; font-size: 1.05rem; cursor: pointer;">¿Es solo para restaurantes en Quito?</summary>
+            <p style="margin-top: 10px; color: #ccc;">No. Trabajamos con negocios gastronómicos en todo Ecuador. Dentro de Quito el precio es $300; fuera de Quito, el cliente cubre movilización.</p>
+        </details>
+    </div>
+</section>
+
 <section style="width: 100%; max-width: 1050px; margin: 0 auto 60px auto; padding: 0 20px;">
     <div style="background: linear-gradient(135deg, #FF5C00, #FF8C42); color: #000; border-radius: 16px; padding: 34px; text-align: center;">
         <h2 style="margin-top: 0; color: #000;">Si todavía no sabes cuánto dinero gana realmente tu restaurante, empecemos por descubrirlo.</h2>
@@ -181,75 +315,27 @@ Cuando el modelo funciona, Oxígeno App automatiza el control diario.
             tu operación y cómo puedes mejorarlo con apoyo práctico.
         </p>
 
-        <a href="https://wa.me/593997277796?text=Me%20interesan%20las%20asesor%C3%ADas" class="cta-button" target="_blank" rel="noopener noreferrer" style="background:#000 !important; color:#fff !important; box-shadow:none !important;">
-            Me interesan las asesorías
+        <a href="https://wa.me/593997277796?text=Hola%20PA%20ARRIBA,%20quiero%20un%20diagnóstico%20gratis%20de%20mi%20restaurante." class="cta-button" target="_blank" rel="noopener noreferrer" style="background:#000 !important; color:#fff !important; box-shadow:none !important;">
+            Diagnóstico gratis por WhatsApp
+        </a>
+        {# 🟢[NUEVO] FECHA:2026-07-10|MOTIVO: Contexto de CTA #}
+        <p style="font-size: 0.85rem; color: rgba(0,0,0,0.6); margin-top: 10px;">20 minutos · Sin compromiso · Horario: 16:00 a 20:00</p>
+    </div>
+</section>
+
+{# 🟢[NUEVO] FECHA:2026-07-10|MOTIVO: Enlaces internos entre landings para distribución de link juice #}
+<section style="width: 100%; max-width: 1050px; margin: 0 auto 35px auto; padding: 0 20px;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px;">
+        <a href="{% url 'core:metodo_landing' %}" style="display: block; padding: 22px; background: linear-gradient(135deg, #2E2E2E, #3E3E3E); border-radius: 14px; text-decoration: none; color: #fff; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+            <h3 style="margin: 0 0 8px 0; color: #FF5C00;">Nuestra metodología →</h3>
+            <p style="margin: 0; color: #ccc; font-size: 0.95rem;">El sistema de gestión que aplicamos directamente sobre la operación de tu restaurante.</p>
+        </a>
+        <a href="{% url 'core:rentabilidad_landing' %}" style="display: block; padding: 22px; background: linear-gradient(135deg, #2E2E2E, #3E3E3E); border-radius: 14px; text-decoration: none; color: #fff; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+            <h3 style="margin: 0 0 8px 0; color: #FF5C00;">Rentabilidad para restaurantes →</h3>
+            <p style="margin: 0; color: #ccc; font-size: 0.95rem;">Descubre dónde se pierde la utilidad y cómo recuperarla con costeo real.</p>
         </a>
     </div>
 </section>
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org/",
-  "@type": "Service",
-  "name": "Asesorías Gastronómicas para Restaurantes Ecuador",
-  "url": "https://pa-arriba.com/asesorias-gastronomicas/",
-  "description": "Acompañamiento práctico para dueños de restaurantes en Ecuador. Recetas estándar, control de costos, ingeniería de menú y orden operativo para cafeterías, asaderos, cevicherías y restaurantes pequeños.",
-  "provider": {
-    "@type": "Organization",
-    "name": "Pa'Arriba",
-    "url": "https://pa-arriba.com"
-  },
-  "areaServed": {
-    "@type": "Country",
-    "name": "Ecuador"
-  },
-  "serviceType": "Consultoría Gastronómica",
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "Servicios de Asesoría Gastronómica",
-    "itemListElement": [
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Recetas Estándar para Restaurantes",
-          "description": "Estandarización de preparaciones para trabajar con más consistencia y control en cocina."
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Control de Costos Gastronómicos",
-          "description": "Calcula el food cost de tus platos y toma decisiones con números reales."
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Ingeniería de Menú",
-          "description": "Organiza tu carta para vender mejor y mejorar la rentabilidad de tu restaurante."
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Orden Operativo",
-          "description": "Mejora procesos de cocina, compras, producción y control interno de tu negocio gastronómico."
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Capacitación para Dueños de Restaurantes",
-          "description": "Formación práctica para dueños de negocios gastronómicos sin formación culinaria profesional."
-        }
-      }
-    ]
-  }
-}
-</script>
+{# 🟢[CAMBIO] FECHA:2026-07-10|MOTIVO: JSON-LD movido a bloque extra_head para que quede en <head> — eliminado de aquí #}
 {% endblock %}

@@ -1,0 +1,255 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Consultoría Gastronómica para Restaurantes | Aumenta la Rentabilidad | PA' ARRIBA{% endblock %}
+
+{% block meta_description %}
+Consultoría gastronómica para restaurantes y cafeterías en Ecuador. Descubre por qué no sabes cuánto ganas realmente y aprende a controlar costos, recetas, inventarios y rentabilidad mediante una metodología especializada.
+{% endblock %}
+
+{% block meta_keywords %}
+consultoría gastronómica Ecuador, asesoría para restaurantes, rentabilidad restaurante, food cost, recetas estándar, ingeniería de menú, costos gastronómicos, consultor gastronómico, restaurantes Ecuador
+{% endblock %}
+
+{% block content %}
+<section class="hero-section" style="max-width: 1100px; padding-bottom: 70px;">
+
+    <div style="width: 100%; max-width: 950px; margin: 0 auto; text-align: center;">
+        <h1>Ayudamos a restaurantes y cafeterías a ganar más dinero mediante consultoría gastronómica especializada.</h1>
+
+        <p style="max-width: 850px; margin: 20px auto 0 auto; font-size: 1.08rem; line-height: 1.7;">
+La mayoría de los restaurantes no tienen un problema de ventas.
+
+Tienen un problema de rentabilidad.
+
+Si no sabes cuánto ganas realmente, trabajas con recetas al ojo o tu inventario nunca coincide, te ayudamos a recuperar el control mediante una metodología aplicada directamente sobre la operación de tu negocio.
+        </p>
+
+        <div style="margin-top: 32px;">
+            <a href="https://wa.me/593997277796?text=Me%20interesan%20las%20asesor%C3%ADas" class="cta-button" target="_blank" rel="noopener noreferrer">
+                Me interesan las asesorías
+            </a>
+        </div>
+    </div>
+
+</section>
+
+<section style="width: 100%; max-width: 1050px; margin: 0 auto 35px auto; padding: 0 20px;">
+    <div style="background: linear-gradient(135deg, #2E2E2E, #3E3E3E); border-radius: 14px; padding: 30px;">
+        <h2 style="margin-top: 0;">¿Por qué muchos restaurantes venden mucho pero ganan poco?</h2>
+
+        <div style="display: grid; grid-template-columns: 1fr; gap: 18px; margin-top: 25px;">
+            <div style="padding: 18px; border-radius: 10px; background: rgba(255,255,255,0.06);">
+                <h3 style="margin-top: 0;">• No sabes cuánto te cuesta realmente cada plato</h3>
+                <p style="margin-bottom: 0;">Vendes, cobras y compras, pero no tienes claridad real sobre tu costo ni tu margen.</p>
+            </div>
+
+            <div style="padding: 18px; border-radius: 10px; background: rgba(255,255,255,0.06);">
+                <h3 style="margin-top: 0;">• Tu cocina depende de la memoria o de la experiencia de una sola persona</h3>
+                <p style="margin-bottom: 0;">Cuando alguien falta, cambia el sabor, cambia la porción o cambia el resultado.</p>
+            </div>
+
+            <div style="padding: 18px; border-radius: 10px; background: rgba(255,255,255,0.06);">
+                <h3 style="margin-top: 0;">• Compras sin control y se te va dinero en desperdicio, faltantes o desorden</h3>
+                <p style="margin-bottom: 0;">No siempre el problema es vender poco. A veces el problema es operar sin control.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section style="width: 100%; max-width: 1050px; margin: 0 auto 35px auto; padding: 0 20px;">
+    <div style="background: linear-gradient(135deg, #0D47A1, #1565C0); border-radius: 14px; padding: 30px;">
+        <h2 style="margin-top: 0;">¿Qué transforma nuestra consultoría gastronómica?</h2>
+
+        <div style="display: grid; grid-template-columns: 1fr; gap: 18px; margin-top: 25px;">
+            <div style="padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.12);">
+                <h3 style="margin: 0 0 8px 0;">• Recetas estándar</h3>
+                <p style="margin: 0;">Para que tus preparaciones tengan orden, consistencia y control de porciones.</p>
+            </div>
+
+            <div style="padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.12);">
+                <h3 style="margin: 0 0 8px 0;">• Control de costos</h3>
+                <p style="margin: 0;">Para que entiendas mejor el costo real de tus productos y fijes precios con más criterio.</p>
+            </div>
+
+            <div style="padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.12);">
+                <h3 style="margin: 0 0 8px 0;">• Ingeniería de menú</h3>
+                <p style="margin: 0;">Para revisar qué vendes, qué te deja ganancia y qué conviene ajustar.</p>
+            </div>
+
+            <div style="padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.12);">
+                <h3 style="margin: 0 0 8px 0;">• Orden operativo</h3>
+                <p style="margin: 0;">Para mejorar cocina, compras, producción, inventario y control interno.</p>
+            </div>
+
+            <div style="padding-bottom: 0;">
+                <h3 style="margin: 0 0 8px 0;">• Capacitación para dueños</h3>
+                <p style="margin: 0;">Con lenguaje claro, práctico y pensado para quienes no vienen de formación culinaria profesional.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section style="width: 100%; max-width: 1050px; margin: 0 auto 35px auto; padding: 0 20px;">
+    <div style="background: linear-gradient(135deg, #212121, #2E2E2E); border-radius: 14px; padding: 30px;">
+        <h2 style="margin-top: 0;">¿Para quién es esta asesoría?</h2>
+
+        <p style="line-height: 1.7;">
+            Esta asesoría está pensada para cafeterías, asaderos, cevicherías, negocios de empanadas, papipollos,
+            pequeños restaurantes, dark kitchens y emprendimientos gastronómicos que necesitan ordenarse mejor
+            para operar con más claridad y crecer con base.
+        </p>
+    </div>
+</section>
+
+<section style="width: 100%; max-width: 1050px; margin: 0 auto 35px auto; padding: 0 20px;">
+    <div style="background: linear-gradient(135deg, #3A3A3A, #4A4A4A); border-radius: 14px; padding: 30px;">
+        <h2 style="margin-top: 0;">Cómo trabajamos</h2>
+
+        <div style="display: grid; grid-template-columns: 1fr; gap: 18px; margin-top: 25px;">
+            <div>
+                <h3 style="margin: 0 0 8px 0;">1. Revisamos tu situación actual</h3>
+                <p style="margin: 0;">Identificamos dónde está el desorden, la fuga de dinero o la falta de control.</p>
+            </div>
+
+            <div>
+                <h3 style="margin: 18px 0 8px 0;">2. Priorizamos lo que más te conviene corregir</h3>
+                <p style="margin: 0;">No se trata de hacer todo al mismo tiempo, sino de atacar primero lo más importante.</p>
+            </div>
+
+            <div>
+                <h3 style="margin: 18px 0 8px 0;">3. Te ayudamos a implementar</h3>
+                <p style="margin: 0;">Buscamos que el cambio no quede en teoría, sino que se convierta en una mejora operativa real.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+
+<h2>
+
+¿Por qué nuestra consultoría es diferente?
+
+</h2>
+
+<p>
+
+No llegamos con una plantilla.
+
+Analizamos cómo funciona realmente tu restaurante.
+
+Cada negocio tiene procesos, costos, clientes y operaciones diferentes.
+
+Nuestra metodología identifica dónde se pierde la utilidad antes de recomendar cualquier herramienta tecnológica.
+
+Cuando el modelo funciona, Oxígeno App automatiza el control diario.
+
+</p>
+
+</section>
+
+<section style="width: 100%; max-width: 1050px; margin: 0 auto 35px auto; padding: 0 20px;">
+    <div style="background: rgba(255,255,255,0.05); border-radius: 14px; padding: 30px; overflow: hidden;">
+        <h2 style="margin-top: 0; text-align: center;">Experiencia real en operación y acompañamiento gastronómico</h2>
+
+<div class="asesorias-banner-wrapper">
+    <div class="asesorias-banner-track">
+        <img src="{% static 'core/img/asesorias/asesoria-1.jpg' %}" alt="Asesoría gastronómica 1">
+        <img src="{% static 'core/img/asesorias/asesoria-2.JPG' %}" alt="Asesoría gastronómica 2">
+        <img src="{% static 'core/img/asesorias/asesoria-3.JPG' %}" alt="Asesoría gastronómica 3">
+        <img src="{% static 'core/img/asesorias/asesoria-4.JPG' %}" alt="Asesoría gastronómica 4">
+        <img src="{% static 'core/img/asesorias/asesoria-5.png' %}" alt="Asesoría gastronómica 5">
+        <img src="{% static 'core/img/asesorias/asesoria-6.JPG' %}" alt="Asesoría gastronómica 6">
+
+        <img src="{% static 'core/img/asesorias/asesoria-1.jpg' %}" alt="Asesoría gastronómica 1 duplicada">
+        <img src="{% static 'core/img/asesorias/asesoria-2.JPG' %}" alt="Asesoría gastronómica 2 duplicada">
+        <img src="{% static 'core/img/asesorias/asesoria-3.JPG' %}" alt="Asesoría gastronómica 3 duplicada">
+        <img src="{% static 'core/img/asesorias/asesoria-4.JPG' %}" alt="Asesoría gastronómica 4 duplicada">
+        <img src="{% static 'core/img/asesorias/asesoria-5.png' %}" alt="Asesoría gastronómica 5 duplicada">
+        <img src="{% static 'core/img/asesorias/asesoria-6.JPG' %}" alt="Asesoría gastronómica 6 duplicada">
+    </div>
+</div>
+    </div>
+
+</section>
+<section style="width: 100%; max-width: 1050px; margin: 0 auto 60px auto; padding: 0 20px;">
+    <div style="background: linear-gradient(135deg, #FF5C00, #FF8C42); color: #000; border-radius: 16px; padding: 34px; text-align: center;">
+        <h2 style="margin-top: 0; color: #000;">Si todavía no sabes cuánto dinero gana realmente tu restaurante, empecemos por descubrirlo.</h2>
+        <p style="max-width: 760px; margin: 0 auto 25px auto; color: #000; line-height: 1.7;">
+            Escríbenos y conversemos sobre tu negocio. Te ayudamos a identificar lo que hoy está frenando
+            tu operación y cómo puedes mejorarlo con apoyo práctico.
+        </p>
+
+        <a href="https://wa.me/593997277796?text=Me%20interesan%20las%20asesor%C3%ADas" class="cta-button" target="_blank" rel="noopener noreferrer" style="background:#000 !important; color:#fff !important; box-shadow:none !important;">
+            Me interesan las asesorías
+        </a>
+    </div>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Service",
+  "name": "Asesorías Gastronómicas para Restaurantes Ecuador",
+  "url": "https://pa-arriba.com/asesorias-gastronomicas/",
+  "description": "Acompañamiento práctico para dueños de restaurantes en Ecuador. Recetas estándar, control de costos, ingeniería de menú y orden operativo para cafeterías, asaderos, cevicherías y restaurantes pequeños.",
+  "provider": {
+    "@type": "Organization",
+    "name": "Pa'Arriba",
+    "url": "https://pa-arriba.com"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "Ecuador"
+  },
+  "serviceType": "Consultoría Gastronómica",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Servicios de Asesoría Gastronómica",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Recetas Estándar para Restaurantes",
+          "description": "Estandarización de preparaciones para trabajar con más consistencia y control en cocina."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Control de Costos Gastronómicos",
+          "description": "Calcula el food cost de tus platos y toma decisiones con números reales."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Ingeniería de Menú",
+          "description": "Organiza tu carta para vender mejor y mejorar la rentabilidad de tu restaurante."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Orden Operativo",
+          "description": "Mejora procesos de cocina, compras, producción y control interno de tu negocio gastronómico."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Capacitación para Dueños de Restaurantes",
+          "description": "Formación práctica para dueños de negocios gastronómicos sin formación culinaria profesional."
+        }
+      }
+    ]
+  }
+}
+</script>
+{% endblock %}

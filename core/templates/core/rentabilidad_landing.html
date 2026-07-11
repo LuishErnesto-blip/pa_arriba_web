@@ -1,8 +1,80 @@
+{# 🟢[CAMBIO] FECHA:2026-07-10|MOTIVO: SEO — OG tags, JSON-LD con Service+FAQPage, FAQ section, links internos #}
 {% extends 'core/base.html' %}
 
 {% block title %}Consultoría para aumentar la rentabilidad de restaurantes y cafeterías | PA' ARRIBA{% endblock %}
 {% block meta_description %}Ayudamos a restaurantes y cafeterías a descubrir dónde se está perdiendo la utilidad, controlar costos, estandarizar recetas y aumentar la rentabilidad mediante consultoría especializada y tecnología propia.{% endblock %}
-{% block meta_keywords %}rentabilidad restaurantes Ecuador, consultoría gastronómica, costos restaurante, recetas estándar, food cost, ingeniería de menú, utilidad restaurante{% endblock %}
+{% block meta_keywords %}rentabilidad restaurantes Ecuador, cómo hacer rentable un restaurante, punto de equilibrio restaurante, consultoría gastronómica, costos restaurante, recetas estándar, food cost restaurantes, ingeniería de menú, control de mermas cocina, utilidad restaurante, consultoría gastronómica Quito{% endblock %}
+
+{# 🟢[NUEVO] FECHA:2026-07-10|MOTIVO: Open Graph específico para compartir en redes #}
+{% block og_title %}¿No sabes cuánto gana realmente tu restaurante? | PA' ARRIBA{% endblock %}
+{% block og_description %}Ayudamos a restaurantes y cafeterías a descubrir dónde se pierde la utilidad y a recuperarla con costeo real, ingeniería de menú y procesos claros.{% endblock %}
+
+{# 🟢[NUEVO] FECHA:2026-07-10|MOTIVO: JSON-LD Schema — LocalBusiness + Service + FAQPage para rich results #}
+{% block extra_head %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://pa-arriba.com/#negocio",
+      "name": "PA' ARRIBA — Consultoría Gastronómica",
+      "url": "https://pa-arriba.com",
+      "telephone": "+593997277796",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Quito",
+        "addressRegion": "Pichincha",
+        "addressCountry": "EC"
+      },
+      "areaServed": {"@type": "Country", "name": "Ecuador"},
+      "priceRange": "$$"
+    },
+    {
+      "@type": "Service",
+      "@id": "https://pa-arriba.com/rentabilidad/#servicio",
+      "name": "Consultoría de Rentabilidad para Restaurantes",
+      "description": "Consultoría especializada para descubrir dónde se pierde la utilidad en restaurantes y cafeterías. Incluye costeo de recetas, ingeniería de menú, punto de equilibrio y automatización.",
+      "provider": { "@id": "https://pa-arriba.com/#negocio" },
+      "serviceType": "Consultoría de rentabilidad gastronómica",
+      "areaServed": {"@type": "Country", "name": "Ecuador"},
+      "offers": {
+        "@type": "Offer",
+        "price": "300",
+        "priceCurrency": "USD",
+        "description": "Consultoría presencial de 20 horas dentro de Quito."
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://pa-arriba.com/rentabilidad/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo sé si mi restaurante es rentable?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Un restaurante es rentable cuando sus ventas cubren todos los costos (fijos + variables) y dejan un margen de utilidad. Si no conoces el costo real de cada plato ni tu punto de equilibrio, no puedes saberlo con certeza."}
+        },
+        {
+          "@type": "Question",
+          "name": "¿Por qué mi restaurante vende mucho pero no gano?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Las causas más comunes: precios calculados al ojo sin conocer el costo real, mermas no controladas, porciones sin estandarizar, inventario que no cuadra y gastos operativos ocultos. La solución empieza por costear cada receta con exactitud."}
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué es el food cost y por qué importa?",
+          "acceptedAnswer": {"@type": "Answer", "text": "El food cost es el porcentaje del precio de venta que se destina al costo de los ingredientes. Controlarlo es fundamental porque cada punto porcentual que bajes en food cost va directamente a tu utilidad."}
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto debería ganar un restaurante?",
+          "acceptedAnswer": {"@type": "Answer", "text": "La utilidad neta varía según el tipo de negocio, pero un restaurante bien gestionado debería apuntar a un margen neto de entre 10% y 20%. El primer paso para lograrlo es conocer tu punto de equilibrio y tu costo real por plato."}
+        }
+      ]
+    }
+  ]
+}
+</script>
+{% endblock %}
 
 {% block content %}
 
@@ -24,16 +96,18 @@
 
         <div class="flex flex-col sm:flex-row justify-center gap-4">
 
-            <a href="https://wa.me/593997277796?text=Hola%20PA%20ARRIBA,%20quiero%20conocer%20la%20rentabilidad%20real%20de%20mi%20restaurante."
+            <a href="https://wa.me/593997277796?text=Hola%20PA%20ARRIBA,%20quiero%20un%20diagnóstico%20gratis%20de%20mi%20restaurante."
                target="_blank"
                rel="noopener noreferrer"
                class="bg-orange-600 hover:bg-orange-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg transition duration-300 text-lg">
 
-                📈 Quiero conocer la rentabilidad de mi restaurante
+                Diagnóstico gratis por WhatsApp
 
             </a>
 
         </div>
+        {# 🟢[NUEVO] FECHA:2026-07-10|MOTIVO: Contexto de CTA para reducir fricción #}
+        <p class="text-sm text-gray-500 mt-3">20 minutos · Sin compromiso · Horario: 16:00 a 20:00</p>
 
     </div>
 
@@ -155,6 +229,35 @@
 
 </section>
 
+{# 🟢[NUEVO] FECHA:2026-07-10|MOTIVO: Sección FAQ con preguntas frecuentes sobre rentabilidad para rich results #}
+<section class="py-16 px-4 bg-white text-gray-900">
+    <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-black text-center mb-10">Preguntas frecuentes sobre rentabilidad</h2>
+
+        <div class="space-y-4">
+            <details class="border-b border-gray-200 pb-4" open>
+                <summary class="font-bold text-lg cursor-pointer hover:text-orange-600 transition">¿Cómo sé si mi restaurante es rentable?</summary>
+                <p class="text-gray-600 mt-3">Un restaurante es rentable cuando sus ventas cubren todos los costos (fijos + variables) y dejan un margen de utilidad. Si no conoces el costo real de cada plato ni tu punto de equilibrio, no puedes saberlo con certeza.</p>
+            </details>
+
+            <details class="border-b border-gray-200 pb-4">
+                <summary class="font-bold text-lg cursor-pointer hover:text-orange-600 transition">¿Por qué mi restaurante vende mucho pero no gano?</summary>
+                <p class="text-gray-600 mt-3">Las causas más comunes: precios calculados al ojo sin conocer el costo real, mermas no controladas, porciones sin estandarizar, inventario que no cuadra y gastos operativos ocultos. La solución empieza por costear cada receta con exactitud.</p>
+            </details>
+
+            <details class="border-b border-gray-200 pb-4">
+                <summary class="font-bold text-lg cursor-pointer hover:text-orange-600 transition">¿Qué es el food cost y por qué importa?</summary>
+                <p class="text-gray-600 mt-3">El food cost es el porcentaje del precio de venta que se destina al costo de los ingredientes. Controlarlo es fundamental porque cada punto porcentual que bajes en food cost va directamente a tu utilidad.</p>
+            </details>
+
+            <details class="border-b border-gray-200 pb-4">
+                <summary class="font-bold text-lg cursor-pointer hover:text-orange-600 transition">¿Cuánto debería ganar un restaurante?</summary>
+                <p class="text-gray-600 mt-3">La utilidad neta varía según el tipo de negocio, pero un restaurante bien gestionado debería apuntar a un margen neto de entre 10% y 20%. El primer paso es conocer tu punto de equilibrio y tu costo real por plato.</p>
+            </details>
+        </div>
+    </div>
+</section>
+
 <section class="py-16 px-4 bg-slate-900 text-white text-center">
 
     <div class="max-w-4xl mx-auto">
@@ -171,17 +274,36 @@
 
         </p>
 
-        <a href="https://wa.me/593997277796?text=Hola%20PA%20ARRIBA,%20quiero%20agendar%20un%20diagnóstico%20de%20rentabilidad."
+        <a href="https://wa.me/593997277796?text=Hola%20PA%20ARRIBA,%20quiero%20un%20diagnóstico%20gratis%20de%20mi%20restaurante."
            target="_blank"
            rel="noopener noreferrer"
            class="inline-block bg-orange-600 hover:bg-orange-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg transition duration-300 text-lg">
 
-            📅 Agendar diagnóstico de rentabilidad
+            Diagnóstico gratis por WhatsApp
 
         </a>
+        {# 🟢[NUEVO] FECHA:2026-07-10|MOTIVO: Contexto de CTA #}
+        <p class="text-sm text-gray-500 mt-3">20 minutos · Sin compromiso · Horario: 16:00 a 20:00</p>
 
     </div>
 
+</section>
+
+{# 🟢[NUEVO] FECHA:2026-07-10|MOTIVO: Enlaces internos entre landings para distribución de link juice #}
+<section class="py-12 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold text-center text-gray-800 mb-8">Conoce más sobre cómo trabajamos</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <a href="{% url 'core:asesorias_gastronomicas' %}" class="block p-6 bg-white rounded-xl shadow hover:shadow-lg transition border border-gray-100">
+                <h3 class="font-bold text-lg text-gray-900 mb-2">Consultoría gastronómica →</h3>
+                <p class="text-gray-600">20 horas presenciales de trabajo directo: costeo de recetas, ingeniería de menú, estandarización y automatización con Oxígeno App.</p>
+            </a>
+            <a href="{% url 'core:metodo_landing' %}" class="block p-6 bg-white rounded-xl shadow hover:shadow-lg transition border border-gray-100">
+                <h3 class="font-bold text-lg text-gray-900 mb-2">Nuestra metodología →</h3>
+                <p class="text-gray-600">Las 6 pilares del sistema PA' ARRIBA para pasar de la intuición a la rentabilidad real en tu restaurante.</p>
+            </a>
+        </div>
+    </div>
 </section>
 
 {% endblock %}
