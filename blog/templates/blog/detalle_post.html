@@ -1,9 +1,51 @@
+{# 🟢[CAMBIO] FECHA:2026-07-11|MOTIVO: SEO — JSON-LD BlogPosting, OG tags, links internos a landings #}
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}{{ post.title }} - Blog Pa'arriba{% endblock %}
+{% block title %}{{ post.title }} | Blog Pa'Arriba{% endblock %}
 {% block meta_description %}{{ post.meta_description }}{% endblock %}
 {% block meta_keywords %}{{ post.keywords }}{% endblock %}
+
+{# 🟢[NUEVO] FECHA:2026-07-11|MOTIVO: Open Graph específico por artículo #}
+{% block og_title %}{{ post.title }} | Blog Pa'Arriba{% endblock %}
+{% block og_description %}{{ post.meta_description }}{% endblock %}
+{% if post.image %}
+{% block og_image %}{{ post.image.url }}{% endblock %}
+{% endif %}
+
+{# 🟢[NUEVO] FECHA:2026-07-11|MOTIVO: JSON-LD BlogPosting para rich results en Google #}
+{% block extra_head %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ post.title|escapejs }}",
+  "description": "{{ post.meta_description|escapejs }}",
+  {% if post.image %}"image": "{{ post.image.url }}",{% endif %}
+  "datePublished": "{{ post.published_date|date:'Y-m-d' }}",
+  "dateModified": "{{ post.published_date|date:'Y-m-d' }}",
+  "author": {
+    "@type": "Organization",
+    "name": "{{ post.author|escapejs }}",
+    "url": "https://pa-arriba.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "PA' ARRIBA",
+    "url": "https://pa-arriba.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://pa-arriba.com{% static 'core/logo_pa_arriba.png' %}"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://pa-arriba.com/blog/{{ post.slug }}/"
+  },
+  "keywords": "{{ post.keywords|escapejs }}"
+}
+</script>
+{% endblock %}
 
 {% block content %}
 <main class="container mx-auto px-4 py-8 mt-20">
@@ -33,23 +75,39 @@
             </a>
         </div>
     </article>
+
+    {# 🟢[NUEVO] FECHA:2026-07-11|MOTIVO: Links internos a landings desde cada artículo de blog #}
+    <section class="max-w-4xl mx-auto mt-12">
+        <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">¿Quieres mejorar la rentabilidad de tu restaurante?</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <a href="{% url 'core:asesorias_gastronomicas' %}" class="block p-5 bg-white rounded-xl shadow hover:shadow-lg transition border border-gray-100">
+                <h3 class="font-bold text-gray-900 mb-2">Consultoría gastronómica →</h3>
+                <p class="text-gray-600 text-sm">20 horas presenciales de trabajo directo sobre tu restaurante.</p>
+            </a>
+            <a href="{% url 'core:metodo_landing' %}" class="block p-5 bg-white rounded-xl shadow hover:shadow-lg transition border border-gray-100">
+                <h3 class="font-bold text-gray-900 mb-2">Nuestra metodología →</h3>
+                <p class="text-gray-600 text-sm">El sistema para pasar de la intuición a la rentabilidad real.</p>
+            </a>
+            <a href="{% url 'core:rentabilidad_landing' %}" class="block p-5 bg-white rounded-xl shadow hover:shadow-lg transition border border-gray-100">
+                <h3 class="font-bold text-gray-900 mb-2">Rentabilidad →</h3>
+                <p class="text-gray-600 text-sm">Descubre dónde se pierde la utilidad de tu negocio.</p>
+            </a>
+        </div>
+    </section>
 </main>
 
 <style>
-    /* Fuerza espacio entre párrafos */
     .blog-content p {
-        margin-bottom: 1.5rem; /* Espacio debajo de cada párrafo */
+        margin-bottom: 1.5rem;
         font-size: 1.1rem;
     }
-    /* Fuerza espacio y tamaño en los títulos H2 */
     .blog-content h2 {
         font-size: 1.8rem;
         font-weight: 800;
-        color: #1a202c; /* Gris oscuro */
+        color: #1a202c;
         margin-top: 2.5rem;
         margin-bottom: 1rem;
     }
-    /* Estilo para las listas */
     .blog-content ul {
         list-style-type: disc;
         margin-left: 1.5rem;
