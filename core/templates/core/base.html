@@ -40,6 +40,7 @@
     {% block extra_head %}{% endblock %} {# Para CSS o meta tags específicos de una página #}
 </head>
 <body>
+    {% include "core/site_nav.html" %}
     {% block content %}
     {# El contenido único de cada página irá aquí #}
     {% endblock %}

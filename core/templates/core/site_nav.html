@@ -1,0 +1,15 @@
+{% load static %}
+<nav class="site-nav">
+    <a href="{% url 'core:index' %}" class="site-nav-logo">
+        <img src="{% static 'core/logo_pa_arriba.png' %}" alt="Pa'Arriba">
+    </a>
+    <div class="site-nav-links">
+        <a href="{% url 'core:index' %}">Inicio</a>
+        <a href="{% url 'core:asesorias_gastronomicas' %}">Asesoría</a>
+        <a href="{% url 'core:metodo_landing' %}">Método</a>
+        <a href="{% url 'core:rentabilidad_landing' %}">Rentabilidad</a>
+        <a href="{% url 'core:oxigeno_app_landing' %}">Oxígeno App</a>
+        <a href="{% url 'core:sri_landing' %}">Facturación SRI</a>
+        <a href="{% url 'blog:post_list' %}">Blog</a>
+    </div>
+</nav>
