@@ -10,7 +10,6 @@ let accordionContainer;
 let bulbSvg;
 let bulbSound;
 let spaceMusic;
-let tsParticlesInitialized = false; // Nueva bandera para tsParticles
 
 // Variables para la Tienda
 let categoryGrid;
@@ -222,11 +221,6 @@ function toggleAccordionCard(event) {
         if (currentContentInnerWrapper) {
             currentContentInnerWrapper.style.display = 'block';
         }
-        // MODIFICADO: Solo inicializar tsParticles si no se ha inicializado antes
-        if (card.dataset.sectionId === 'filosofia' && !tsParticlesInitialized) {
-            initializeTsParticles();
-            tsParticlesInitialized = true; // Establecer la bandera a true
-        }
         if (content && currentContentInnerWrapper) content.style.maxHeight = currentContentInnerWrapper.scrollHeight + 'px';
         if (icon) icon.textContent = '-'; // Icono a '-'
         card.querySelectorAll('.prototipo-video').forEach(video => {
@@ -294,48 +288,6 @@ function toggleProductListingAccordion(expand = false) {
     }
 }
 
-/**
- * Inicializa la librería tsParticles en el contenedor especificado.
- */
-function initializeTsParticles() {
-    const tsparticlesContainer = document.getElementById("tsparticles");
-    if (window.tsParticles && tsparticlesContainer) {
-        tsParticles.load("tsparticles", {
-            fullScreen: { enable: false },
-            fpsLimit: 60,
-            particles: {
-                number: {
-                    value: 40,
-                    density: { enable: true, area: 800 }
-                },
-                color: { value: "#FFD700" },
-                opacity: 0.15, // MODIFICADO: Valor de opacidad directo
-                size: { value: 4, random: true },
-                move: {
-                    enable: true,
-                    speed: 1,
-                    direction: "none",
-                    outModes: { default: "bounce" }
-                }
-            },
-            interactivity: {
-                events: { onHover: { enable: false } },
-                modes: {
-                    grab: { distance: 400, links: { opacity: 1 } },
-                    bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 },
-                    repulse: { distance: 200, duration: 0.4 },
-                    push: { quantity: 4 },
-                    remove: { quantity: 2 }
-                }
-            },
-            detectRetina: true
-        }).then(() => {
-            console.log("tsParticles inicializado exitosamente.");
-        }).catch(e => console.error("Error al inicializar tsParticles:", e));
-    } else {
-        console.error("tsParticles no está disponible o el contenedor no existe al intentar inicializar.");
-    }
-}
 
 /**
  * Maneja el clic en el botón "Comprar Ahora" del modal de productos.
