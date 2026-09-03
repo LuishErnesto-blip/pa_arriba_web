@@ -35,7 +35,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     {% include 'core/meta_pixel.html' %} {# Meta Pixel #}
-    {% include 'product_schema.html' %} {# Schema.org JSON-LD #}
+    {% block product_schema %}{% endblock %} {# Schema.org JSON-LD — solo se activa en páginas de producto real #}
 
     {% block extra_head %}{% endblock %} {# Para CSS o meta tags específicos de una página #}
 </head>
