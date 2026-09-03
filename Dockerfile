@@ -1,4 +1,21 @@
-# Imagen base oficial de Python
+# ============================================
+# ETAPA 1 — Genera el CSS de Tailwind (temporal, se descarta al final)
+# ============================================
+FROM node:20-slim AS tailwind-builder
+WORKDIR /build
+COPY package.json package-lock.json* ./
+RUN npm install
+COPY tailwind.config.js ./
+COPY core/static/core/src/input.css ./core/static/core/src/input.css
+COPY core/templates ./core/templates
+COPY blog/templates ./blog/templates
+COPY store/templates ./store/templates
+COPY termometro/templates ./termometro/templates
+RUN npx tailwindcss -i ./core/static/core/src/input.css -o ./core/static/core/tailwind_build.css --minify
+
+# ============================================
+# ETAPA 2 — Imagen final de producción (Python, igual que antes)
+# ============================================
 FROM python:3.12-slim
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
@@ -8,6 +25,7 @@ COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 ARG CACHE_BUST=1783772096
 COPY . /app/
+COPY --from=tailwind-builder /build/core/static/core/tailwind_build.css /app/core/static/core/tailwind_build.css
 RUN python manage.py collectstatic --noinput
 EXPOSE 8080
 CMD ["sh", "-c", "python manage.py migrate --noinput && gunicorn pa_arriba_project.wsgi:application --bind 0.0.0.0:8080"]

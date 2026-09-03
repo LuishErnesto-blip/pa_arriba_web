@@ -30,9 +30,9 @@
     <meta property="og:type" content="website" />
     <link rel="icon" href="{% static 'core/favicon_solid.png' %}" type="image/png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap">
+    <link rel="stylesheet" href="{% static 'core/tailwind_build.css' %}">
     <link rel="stylesheet" href="{% static 'core/style.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://cdn.tailwindcss.com"></script>
 
     {% include 'core/meta_pixel.html' %} {# Meta Pixel #}
     {% block product_schema %}{% endblock %} {# Schema.org JSON-LD — solo se activa en páginas de producto real #}
