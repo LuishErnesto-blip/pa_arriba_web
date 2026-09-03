@@ -1766,8 +1766,10 @@ footer a:hover, .footer-section a:hover {
     gap: 12px;
     padding: 14px 20px;
     background-color: var(--color-background-dark, #1a1a1a);
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 1000;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
@@ -1805,5 +1807,15 @@ footer a:hover, .footer-section a:hover {
     }
     .site-nav-logo img {
         height: 36px;
+    }
+}
+
+/* Compensa el nav fijo para que el contenido no quede tapado debajo */
+body {
+    padding-top: 90px;
+}
+@media (max-width: 640px) {
+    body {
+        padding-top: 130px;
     }
 }
