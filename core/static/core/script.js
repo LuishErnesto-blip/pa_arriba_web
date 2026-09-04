@@ -602,7 +602,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setupAccordionCards();
     setupStoreLogic();
     setupStickyHeader();
-    setupMusicToggle();
     setupWhatsAppButton();
     setupFooterAccordion(); // Esta función ahora tiene la comprobación interna
     console.log("Setup functions called.");
