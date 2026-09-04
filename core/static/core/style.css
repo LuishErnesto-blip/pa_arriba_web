@@ -168,9 +168,7 @@ body {
 /* Ocultar el texto principal y la bombilla cuando el header es sticky */
 .sticky-header-content.is-sticky ~ h1,
 .sticky-header-content.is-sticky ~ p,
-.sticky-header-content.is-sticky ~ .lightbulb-container {
-    display: none;
-}
+
 /* --- FIN NUEVO: Contenedor para el logo y la onda que se hará sticky --- */
 
 .hero-section h1 {
@@ -563,11 +561,7 @@ body {
         top: 300px; /* Ajuste vertical para tabletas si es necesario */
         width: 100%;
     }
-    .lightbulb-container {
-        width: 70px;
-        height: 161px; /* Ajuste de altura para tabletas (70px * 2.3) */
-        bottom: 0; /* Ancla el contenedor a la parte inferior de hero-section */
-    }
+
 
     .prototipos-grid {
         grid-template-columns: 1fr 1fr; /* 2 columnas en tabletas */
@@ -598,11 +592,7 @@ body {
         top: 300px; /* Ajuste vertical para escritorios si es necesario */
         width: 100%;
     }
-    .lightbulb-container {
-        width: 80px;
-        height: 192px; /* Ajuste de altura para escritorios (80px * 2.3) */
-        bottom: 0; /* Ancla el contenedor a la parte inferior de hero-section */
-    }
+
 
     .prototipos-grid {
         grid-template-columns: 1fr 1fr 1fr 1fr; /* 4 columnas en escritorio */
@@ -856,11 +846,7 @@ body.sticky-header-active { /* Esta clase será añadida por JS cuando el header
         right: 60px; /* Alineado con el padding derecho de hero-section en escritorios */
         top: 150px; /* Ajuste vertical para escritorios */
     }
-    .lightbulb-container {
-        width: 80px;
-        height: 192px; /* Ajuste de altura para escritorios (80px * 2.3) */
-        bottom: 0; /* Ancla el contenedor a la parte inferior de hero-section */
-    }
+
 
     .prototipos-grid {
         grid-template-columns: 1fr 1fr 1fr 1fr; /* 4 columnas en escritorio */
@@ -990,13 +976,9 @@ body.sticky-header-active { /* Esta clase será añadida por JS cuando el header
 }
 
 
-.bulb-svg {
-    transition: transform 0.2s ease;
-}
 
-.bulb-svg:active {
-    transform: scale(0.95) rotate(-2deg);
-}
+
+
 
 .footer-content a,
 .social-links a {
@@ -1021,7 +1003,6 @@ body.sticky-header-active { /* Esta clase será añadida por JS cuando el header
     width: 100%;
 }
 
-.lightbulb-container,
 .testimonio-item,
 .prototipo-item,
 .footer-content a,
@@ -1139,47 +1120,17 @@ body.sticky-header-active { /* Esta clase será añadida por JS cuando el header
 }
 
 /* Estilos para la bombilla y la cadena */
-.lightbulb-container {
-    position: absolute; /* Posicionamiento absoluto dentro de hero-section */
-    bottom: 0; /* Ancla el contenedor a la parte inferior de hero-section */
-    left: 50%;
-    transform: translateX(-50%); /* Centrar horizontalmente */
-    width: 60px; /* Ancho del contenedor */
-    height: 144px; /* Alto del contenedor (60px * 2.3) para el SVG */
-    z-index: 10001; /* Asegurar que esté por encima de todo */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start; /* Alinea el SVG al inicio (arriba) del contenedor */
-    cursor: pointer;
-    animation: swingChain 2s ease-in-out infinite alternate; /* Aplicamos la animación aquí */
-}
+
 
 /* Clase para ocultar la bombilla (si se usa en JS, aunque no la estamos usando activamente ahora) */
-.lightbulb-container.hidden-bulb {
-    opacity: 0;
-    pointer-events: none; /* Deshabilita clics cuando está oculta */
-    transform: translate(-50%, -50px); /* Opcional: moverla un poco hacia arriba al ocultar */
-}
+
 
 /* Estilos del SVG de la bombilla */
-.bulb-svg {
-    width: 100%;
-    height: 100%;
-    overflow: visible; /* Permitir que el glow se extienda */
-}
 
-.bulb-glass {
-    fill: #FFFFFF; /* Color del vidrio de la bombilla apagada */
-    stroke: #888;
-    stroke-width: 2;
-    transition: fill 0.5s ease-out;
-}
 
-.bulb-svg.on .bulb-glass {
-    fill: #fff6d2 !important; /* Color del vidrio de la bombilla encendida */
-    stroke: #ffdc73 !important; /* Añadido !important */
-}
+
+
+
 
 .glass-reflection {
     fill: #ffffff;
@@ -1208,18 +1159,11 @@ body.sticky-header-active { /* Esta clase será añadida por JS cuando el header
 }
 
 /* Círculo de luz (apagado por defecto) */
-.bulb-glow {
-    fill: yellow;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    filter: blur(10px);
-}
+
 
 /* Clase activa para encender */
 /* Ahora el selector es más específico y coincide con el JS */
-.bulb-svg.on .bulb-glow {
-    opacity: 0.4 !important; /* Añadido !important */
-}
+
 
 /* Animación de balanceo para la bombilla y la cadena (aplicada al contenedor) */
 @keyframes swingChain {
