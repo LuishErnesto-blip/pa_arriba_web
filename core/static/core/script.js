@@ -7,9 +7,6 @@
 
 // --- 1. Variables Globales (Declaradas aquí, inicializadas en DOMContentLoaded) ---
 let accordionContainer;
-let bulbSvg;
-let bulbSound;
-let spaceMusic;
 
 // Variables para la Tienda
 let categoryGrid;
@@ -61,21 +58,6 @@ const products = [
 
 // --- 3. Funciones Principales y de Utilidad ---
 
-/**
- * Función para revelar las secciones del acordeón y encender la bombilla.
- * NO expande ninguna tarjeta específica.
- */
-const revealSections = () => {
-    console.log("revealSections called.");
-    if (!accordionContainer || !bulbSvg) {
-        console.error("Elementos CRÍTICOS (bulbSvg o accordionContainer) para revealSections no encontrados. No se puede continuar.");
-        return;
-    }
-    accordionContainer.classList.add('revealed');
-    bulbSvg.classList.add('on');
-    document.body.classList.add('sticky-header-active'); // Asegura el padding para el sticky header
-    console.log("Sections revealed and bulb is ON.");
-};
 
 /**
  * Función para colapsar todas las tarjetas de acordeón.
@@ -102,63 +84,6 @@ const collapseAllAccordions = () => {
 };
 
 
-/**
- * Alterna el estado visual de la bombilla y revela/oculta el contenedor principal de acordeones.
- * También controla la reproducción del sonido de la bombilla y la música de fondo.
- */
-function toggleBulb() {
-    console.log("toggleBulb called.");
-    if (!bulbSvg || !accordionContainer) {
-        console.error("Elementos CRÍTICOS (bulbSvg o accordionContainer) para toggleBulb no encontrados. No se puede continuar.");
-        console.log("accordionContainer (dentro de toggleBulb):", accordionContainer);
-        console.log("bulbSvg (dentro de toggleBulb):", bulbSvg);
-        return;
-    }
-
-    // Si la bombilla está apagada y se hace clic, encenderla y revelar secciones
-    if (!bulbSvg.classList.contains('on')) {
-        revealSections();
-        // Al encender la bombilla, aseguramos que todas las tarjetas estén colapsadas
-        collapseAllAccordions();
-        sessionStorage.removeItem('expandedAccordionId'); // Limpiar cualquier estado previo
-        // Opcional: limpiar el hash de la URL si no viene de una navegación específica
-        if (window.location.hash) {
-            history.replaceState(null, document.title, window.location.pathname + window.location.search);
-        }
-    } else {
-        // Si la bombilla está encendida y se hace clic, apagarla y ocultar secciones
-        bulbSvg.classList.remove('on');
-        accordionContainer.classList.remove('revealed');
-        document.body.classList.remove('sticky-header-active');
-        collapseAllAccordions(); // Colapsar todo al apagar la bombilla
-        sessionStorage.removeItem('expandedAccordionId'); // Limpiar estado
-        if (window.location.hash) {
-            history.replaceState(null, document.title, window.location.pathname + window.location.search);
-        }
-    }
-
-    console.log("bulbSvg classes after toggle:", bulbSvg.classList);
-    console.log("accordionContainer classes after toggle:", accordionContainer.classList);
-
-    if (bulbSound) {
-        bulbSound.currentTime = 0;
-        bulbSound.play().catch(e => console.error("Error al reproducir sonido de bombilla:", e));
-    } else {
-        console.warn("WARNING: bulbSound no está disponible, el sonido de la bombilla no se reproducirá.");
-    }
-
-    if (spaceMusic) {
-        if (accordionContainer.classList.contains('revealed')) {
-            spaceMusic.volume = 0.035;
-            spaceMusic.play().catch(e => console.error("Error al reproducir música espacial:", e));
-        } else {
-            spaceMusic.pause();
-            spaceMusic.currentTime = 0;
-        }
-    } else {
-        console.warn("WARNING: spaceMusic no está disponible, la música de fondo no se reproducirá.");
-    }
-}
 
 /**
  * Abre WhatsApp con un mensaje predefinido para prototipos.
@@ -492,24 +417,6 @@ function setupAccordionCards() {
 }
 
 /**
- * Configura el event listener para el botón de alternar música de fondo.
- */
-function setupMusicToggle() {
-    const musicToggleButton = document.getElementById('musicToggleButton');
-    if (musicToggleButton) {
-        musicToggleButton.addEventListener('click', () => {
-            if (spaceMusic) {
-                if (spaceMusic.paused) {
-                    spaceMusic.play().catch(e => console.error("Error al reproducir música:", e));
-                } else {
-                    spaceMusic.pause();
-                }
-            }
-        });
-    }
-}
-
-/**
  * Configura el event listener para el botón principal de WhatsApp (si existe).
  */
 function setupWhatsAppButton() {
@@ -586,18 +493,6 @@ function setupStickyHeader() {
 }
 
 /**
- * Configura el event listener para la bombilla que revela las secciones principales.
- */
-function setupBulbToggle() {
-    const lightbulbContainer = document.querySelector('.lightbulb-container');
-    if (lightbulbContainer) {
-        lightbulbContainer.addEventListener('click', toggleBulb);
-    } else {
-        console.error("lightbulb-container no encontrado para setupBulbToggle.");
-    }
-}
-
-/**
  * Configura el footer colapsable.
  */
 function setupFooterAccordion() {
@@ -623,18 +518,6 @@ document.addEventListener('DOMContentLoaded', () => {
     accordionContainer = document.getElementById('accordion-container');
     console.log("accordionContainer:", accordionContainer); // Log para verificar
     if (!accordionContainer) console.error("ERROR: #accordion-container no encontrado.");
-
-    bulbSvg = document.querySelector('.bulb-svg');
-    console.log("bulbSvg:", bulbSvg); // Log para verificar
-    if (!bulbSvg) console.error("ERROR: .bulb-svg no encontrado.");
-
-    bulbSound = document.getElementById('bulbSound');
-    console.log("bulbSound:", bulbSound); // Log para verificar
-    if (!bulbSound) console.warn("WARNING: #bulbSound (audio element) no encontrado. El sonido de la bombilla no funcionará.");
-
-    spaceMusic = document.getElementById('spaceMusic');
-    console.log("spaceMusic:", spaceMusic); // Log para verificar
-    if (!spaceMusic) console.warn("WARNING: #spaceMusic (audio element) no encontrado. La música de fondo no funcionará.");
 
     categoryGrid = document.getElementById('category-grid');
     console.log("categoryGrid:", categoryGrid); // Log para verificar
@@ -716,7 +599,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Llamar a las funciones de configuración
     console.log("Calling setup functions...");
-    setupBulbToggle();
     setupAccordionCards();
     setupStoreLogic();
     setupStickyHeader();
@@ -739,7 +621,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const targetCard = document.querySelector(hash);
         if (targetCard && targetCard.classList.contains('accordion-card')) {
             console.log("Target card found by hash:", targetCard.id);
-            revealSections(); // Encender bombilla y revelar secciones
             // No colapsamos todas las tarjetas aquí, la lógica de expansión lo hará
             // y colapsará las demás si es necesario.
             
@@ -761,7 +642,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const targetCard = document.getElementById(storedAccordionId);
         if (targetCard && targetCard.classList.contains('accordion-card')) {
             console.log("Target card found by stored ID:", targetCard.id);
-            revealSections(); // Encender bombilla y revelar secciones
             
             // Simular un clic en el encabezado de la tarjeta objetivo para activar toggleAccordionCard
             const targetHeader = targetCard.querySelector('.accordion-header');
@@ -784,33 +664,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-// =========================================
-// LÓGICA DE LA PISTA VISUAL (Nov 2025)
-// =========================================
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Buscamos el contenedor de la pista (el letrero que acabamos de crear)
-    const clickHint = document.getElementById('click-hint');
-    // Buscamos la zona de interacción o el SVG del foco
-    // Nota: Usamos un selector amplio para asegurar que agarre el clic en la zona
-    const interactionZone = document.querySelector('.interaction-zone');
-    const lightbulbSvg = document.getElementById('lightbulb-svg'); // Si tu SVG tiene este ID
-
-    function hideHint() {
-        if (clickHint) {
-            clickHint.classList.add('hint-hidden');
-        }
-    }
-
-    // Si el usuario hace clic en el letrero, en la zona o en el foco, ocultamos la pista
-    if (clickHint) {
-        clickHint.addEventListener('click', hideHint);
-    }
-    if (interactionZone) {
-        interactionZone.addEventListener('click', hideHint);
-    }
-    // Por si acaso el clic cae directo en el SVG
-    if (lightbulbSvg) {
-        lightbulbSvg.addEventListener('click', hideHint);
-    }
-});
