@@ -9,7 +9,7 @@ from .models import Post, Prospecto
 
 
 def post_list(request):
-    posts = Post.objects.filter(is_published=True).order_by("-published_date")
+    posts = Post.objects.filter(is_published=True).exclude(pk__in=[4, 7]).order_by("-published_date")
     return render(request, "blog/post_list.html", {"posts": posts})
 
 
