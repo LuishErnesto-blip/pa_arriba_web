@@ -108,13 +108,13 @@ consultoría gastronómica Ecuador, consultoría gastronómica Quito, asesoría 
 }
 </script>
 <style>
-  .hero-section ~ section h2 {
+  section ~ section h2 {
     font-size: 1.75rem !important;
     font-weight: 800 !important;
     letter-spacing: -0.02em;
     margin-bottom: 12px;
   }
-  .hero-section ~ section h3 {
+  section ~ section h3 {
     font-size: 1.1rem !important;
     font-weight: 700 !important;
   }
@@ -122,30 +122,24 @@ consultoría gastronómica Ecuador, consultoría gastronómica Quito, asesoría 
 {% endblock %}
 
 {% block content %}
-<section class="hero-section" style="max-width: 1100px; padding-bottom: 70px;">
-
-    <div style="width: 100%; max-width: 950px; margin: 0 auto; text-align: center;">
-        <h1 class="sin-glitch">Ayudamos a restaurantes y cafeterías a ganar más dinero mediante consultoría gastronómica especializada.</h1>
-
-        <p style="max-width: 850px; margin: 20px auto 0 auto; font-size: 1.08rem; line-height: 1.7;">
-La mayoría de los restaurantes no tienen un problema de ventas.
-
-Tienen un problema de rentabilidad.
-
-Si no sabes cuánto ganas realmente, trabajas con recetas al ojo o tu inventario nunca coincide, te ayudamos a recuperar el control mediante una metodología aplicada directamente sobre la operación de tu negocio.
+<section class="bg-gradient-to-b from-gray-900 to-slate-900 text-white py-24 px-5">
+    <div class="max-w-5xl mx-auto text-center">
+        <span class="text-orange-500 uppercase tracking-widest font-bold text-sm block mb-4">
+            Consultoría especializada para restaurantes y cafeterías
+        </span>
+        <h1 class="text-5xl md:text-6xl font-black leading-tight mb-8">
+            Ayudamos a restaurantes y cafeterías a ganar más dinero mediante consultoría gastronómica especializada.
+        </h1>
+        <p class="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            La mayoría de los restaurantes no tienen un problema de ventas. Tienen un problema de rentabilidad. Si no sabes cuánto ganas realmente, trabajas con recetas al ojo o tu inventario nunca coincide, te ayudamos a recuperar el control mediante una metodología aplicada directamente sobre la operación de tu negocio.
         </p>
-
-        <div style="margin-top: 32px;">
-            <a href="https://wa.me/593997277796?text=Hola%20PA%20ARRIBA,%20quiero%20un%20diagnóstico%20gratis%20de%20mi%20restaurante." class="cta-button" target="_blank" rel="noopener noreferrer">
+        <div class="mt-12">
+            <a href="https://wa.me/593997277796?text=Hola%20PA%20ARRIBA,%20quiero%20un%20diagn%C3%B3stico%20gratis%20de%20mi%20restaurante." target="_blank" rel="noopener noreferrer" class="inline-block bg-orange-600 hover:bg-orange-700 px-10 py-5 rounded-xl font-bold text-xl shadow-xl transition">
                 Diagnóstico gratis por WhatsApp
             </a>
-            {# 🟢[NUEVO] FECHA:2026-07-10|MOTIVO: Contexto de CTA para reducir fricción #}
-<div style="width: 100%; display: flex; justify-content: center; margin-top: 10px;">
-                <span style="font-size: 0.85rem; color: #999;">20 minutos · Sin compromiso · Horario: 16:00 a 20:00</span>
-            </div>
+            <p class="text-sm text-gray-500 mt-3">20 minutos · Sin compromiso · Horario: 16:00 a 20:00</p>
         </div>
     </div>
-
 </section>
 
 <section style="width: 100%; max-width: 1050px; margin: 0 auto 35px auto; padding: 0 20px;">
