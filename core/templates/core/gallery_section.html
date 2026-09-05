@@ -1,134 +1,72 @@
 {% load static %}
-<!-- Sección de Galería Dinámica -->
-<section id="gallery-section" class="full-width-gallery-container py-8">
-    <h2 class="text-4xl font-extrabold text-center text-pa-arriba-blue-dark mb-8">
-        Nuestra Galería de Inspiración
-    </h2>
-    <div class="carousel-wrapper">
-        <div class="carousel-track">
-            <!-- Conjunto original de imágenes con overlay de texto -->
-            <div class="carousel-item"> {# Ahora el div es el carousel-item #}
-                <picture><source srcset="{% static 'core/gallery_images/emprendimiento-digital.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/emprendimiento-digital.jpg' %}" width="300" height="225" alt="Emprendimiento digital en crecimiento con Pa'arriba"></picture>
-                <div class="carousel-item-overlay">
-                    <p class="overlay-text">Emprendimiento Digital</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <picture><source srcset="{% static 'core/gallery_images/negocio-online-crecimiento.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/negocio-online-crecimiento.jpg' %}" width="300" height="225" alt="Negocio online avanzando hacia el éxito y la rentabilidad"></picture>
-                <div class="carousel-item-overlay">
-                    <p class="overlay-text">Crecimiento Online</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <picture><source srcset="{% static 'core/gallery_images/transformacion-digital-emprendedores.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/transformacion-digital-emprendedores.jpg' %}" width="300" height="225" alt="Transformación digital para pymes y emprendedores"></picture>
-                <div class="carousel-item-overlay">
-                    <p class="overlay-text">Transformación Emprendedores</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <picture><source srcset="{% static 'core/gallery_images/innovacion-para-emprendedores.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/innovacion-para-emprendedores.jpg' %}" width="300" height="225" alt="Innovación y creatividad para nuevos emprendimientos"></picture>
-                <div class="carousel-item-overlay">
-                    <p class="overlay-text">Innovación Emprendedora</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <picture><source srcset="{% static 'core/gallery_images/estrategias-marketing-digital.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/estrategias-marketing-digital.jpg' %}" width="300" height="225" alt="Estrategias de marketing digital efectivas para tu negocio"></picture>
-                <div class="carousel-item-overlay">
-                    <p class="overlay-text">Marketing Digital</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <picture><source srcset="{% static 'core/gallery_images/exito-emprendedor-capacitacion.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/exito-emprendedor-capacitacion.jpg' %}" width="300" height="225" alt="Emprendedor exitoso celebrando su capacitación"></picture>
-                <div class="carousel-item-overlay">
-                    <p class="overlay-text">Éxito y Capacitación</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <picture><source srcset="{% static 'core/gallery_images/desarrollo-web-negocios.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/desarrollo-web-negocios.jpg' %}" width="300" height="225" alt="Desarrollo web y presencia online para negocios"></picture>
-                <div class="carousel-item-overlay">
-                    <p class="overlay-text">Desarrollo Web</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <picture><source srcset="{% static 'core/gallery_images/soluciones-digitales-pa-arriba.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/soluciones-digitales-pa-arriba.jpg' %}" width="300" height="225" alt="Soluciones digitales de Pa'arriba impulsando tu visión"></picture>
-                <div class="carousel-item-overlay">
-                    <p class="overlay-text">Soluciones Digitales</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <picture><source srcset="{% static 'core/gallery_images/vision-emprendedora-futuro.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/vision-emprendedora-futuro.jpg' %}" width="300" height="225" alt="Visión emprendedora de futuro y oportunidades digitales"></picture>
-                <div class="carousel-item-overlay">
-                    <p class="overlay-text">Visión de Futuro</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <picture><source srcset="{% static 'core/gallery_images/comunidad-emprendedores-apoyo.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/comunidad-emprendedores-apoyo.jpg' %}" width="300" height="225" alt="Comunidad de emprendedores recibiendo apoyo y mentoría"></picture>
-                <div class="carousel-item-overlay">
-                    <p class="overlay-text">Comunidad y Apoyo</p>
-                </div>
-            </div>
-            
-            <!-- Conjunto duplicado de imágenes para un loop continuo (también con overlay de texto) -->
-            <div class="carousel-item">
-                <picture><source srcset="{% static 'core/gallery_images/emprendimiento-digital.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/emprendimiento-digital.jpg' %}" width="300" height="225" alt="Emprendimiento digital en crecimiento con Pa'arriba"></picture>
-                <div class="carousel-item-overlay">
-                    <p class="overlay-text">Emprendimiento Digital</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <picture><source srcset="{% static 'core/gallery_images/negocio-online-crecimiento.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/negocio-online-crecimiento.jpg' %}" width="300" height="225" alt="Negocio online avanzando hacia el éxito y la rentabilidad"></picture>
-                <div class="carousel-item-overlay">
-                    <p class="overlay-text">Crecimiento Online</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <picture><source srcset="{% static 'core/gallery_images/transformacion-digital-emprendedores.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/transformacion-digital-emprendedores.jpg' %}" width="300" height="225" alt="Transformación digital para pymes y emprendedores"></picture>
-                <div class="carousel-item-overlay">
-                    <p class="overlay-text">Transformación Emprendedores</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <picture><source srcset="{% static 'core/gallery_images/innovacion-para-emprendedores.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/innovacion-para-emprendedores.jpg' %}" width="300" height="225" alt="Innovación y creatividad para nuevos emprendimientos"></picture>
-                <div class="carousel-item-overlay">
-                    <p class="overlay-text">Innovación Emprendedora</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <picture><source srcset="{% static 'core/gallery_images/estrategias-marketing-digital.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/estrategias-marketing-digital.jpg' %}" width="300" height="225" alt="Estrategias de marketing digital efectivas para tu negocio"></picture>
-                <div class="carousel-item-overlay">
-                    <p class="overlay-text">Marketing Digital</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <picture><source srcset="{% static 'core/gallery_images/exito-emprendedor-capacitacion.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/exito-emprendedor-capacitacion.jpg' %}" width="300" height="225" alt="Emprendedor exitoso celebrando su capacitación"></picture>
-                <div class="carousel-item-overlay">
-                    <p class="overlay-text">Éxito y Capacitación</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <picture><source srcset="{% static 'core/gallery_images/desarrollo-web-negocios.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/desarrollo-web-negocios.jpg' %}" width="300" height="225" alt="Desarrollo web y presencia online para negocios"></picture>
-                <div class="carousel-item-overlay">
-                    <p class="overlay-text">Desarrollo Web</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <picture><source srcset="{% static 'core/gallery_images/soluciones-digitales-pa-arriba.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/soluciones-digitales-pa-arriba.jpg' %}" width="300" height="225" alt="Soluciones digitales de Pa'arriba impulsando tu visión"></picture>
-                <div class="carousel-item-overlay">
-                    <p class="overlay-text">Soluciones Digitales</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <picture><source srcset="{% static 'core/gallery_images/vision-emprendedora-futuro.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/vision-emprendedora-futuro.jpg' %}" width="300" height="225" alt="Visión emprendedora de futuro y oportunidades digitales"></picture>
-                <div class="carousel-item-overlay">
-                    <p class="overlay-text">Visión de Futuro</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <picture><source srcset="{% static 'core/gallery_images/comunidad-emprendedores-apoyo.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/comunidad-emprendedores-apoyo.jpg' %}" width="300" height="225" alt="Comunidad de emprendedores recibiendo apoyo y mentoría"></picture>
-                <div class="carousel-item-overlay">
-                    <p class="overlay-text">Comunidad y Apoyo</p>
-                </div>
-            </div>
-        </div>
+<div class="accordion-card" data-section-id="galeria" id="galeria-card">
+    <div class="accordion-header">
+        <h2 class="text-3xl font-extrabold flex items-center text-pa-arriba-blue-dark">
+            <i class="fas fa-image text-4xl mr-3"></i>
+            Nuestro Trabajo con Restaurantes Reales
+        </h2>
+        <span class="accordion-icon">+</span>
     </div>
-</section>
+    <div class="accordion-content rounded-b-xl">
+        <section id="gallery-section" class="full-width-gallery-container py-8">
+            <div class="carousel-wrapper">
+                <div class="carousel-track">
+
+                    <div class="carousel-item">
+                        <picture><source srcset="{% static 'core/gallery_images/asesoria-de-costos-para-restaurantes-ecuador.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/asesoria-de-costos-para-restaurantes-ecuador.jpg' %}" width="300" height="225" alt="Sesión de asesoría de costos en restaurante con Oxígeno App, Ecuador"></picture>
+                    </div>
+                    <div class="carousel-item">
+                        <picture><source srcset="{% static 'core/gallery_images/asesoria-de-restaurantes-costo-quito.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/asesoria-de-restaurantes-costo-quito.jpg' %}" width="300" height="225" alt="Revisión de costos de insumos en asesoría gastronómica, Quito"></picture>
+                    </div>
+                    <div class="carousel-item">
+                        <picture><source srcset="{% static 'core/gallery_images/asesoria-gastronomica-profesional-en-quito.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/asesoria-gastronomica-profesional-en-quito.jpg' %}" width="300" height="225" alt="Restaurantes clientes de PA' ARRIBA — SIVI, Fermento, Café Aidee, Kokoriko"></picture>
+                    </div>
+                    <div class="carousel-item">
+                        <picture><source srcset="{% static 'core/gallery_images/asesoria-para-restaurantes-ecuador.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/asesoria-para-restaurantes-ecuador.jpg' %}" width="300" height="225" alt="Estandarización de procesos en cocina, asesoría gastronómica Ecuador"></picture>
+                    </div>
+                    <div class="carousel-item">
+                        <picture><source srcset="{% static 'core/gallery_images/contabilidad-de-costos-para-restaurantes-quito.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/contabilidad-de-costos-para-restaurantes-quito.jpg' %}" width="300" height="225" alt="Asesoría de costos en cocina comercial, Quito"></picture>
+                    </div>
+                    <div class="carousel-item">
+                        <picture><source srcset="{% static 'core/gallery_images/curso-de-costos-para-restaurantes-ecuador.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/curso-de-costos-para-restaurantes-ecuador.jpg' %}" width="300" height="225" alt="Sesión de curso de costos para restaurantes, Ecuador"></picture>
+                    </div>
+                    <div class="carousel-item">
+                        <picture><source srcset="{% static 'core/gallery_images/curso-de-costos-para-restaurantes-en-quito.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/curso-de-costos-para-restaurantes-en-quito.jpg' %}" width="300" height="225" alt="Ingeniería de menú con matriz de colores, curso de costos, Quito"></picture>
+                    </div>
+                    <div class="carousel-item">
+                        <picture><source srcset="{% static 'core/gallery_images/curso-de-costos-para-restaurantes-en-santo-domingo-ecuador.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/curso-de-costos-para-restaurantes-en-santo-domingo-ecuador.jpg' %}" width="300" height="225" alt="Participante en curso de costos para restaurantes, Santo Domingo"></picture>
+                    </div>
+
+                    <div class="carousel-item">
+                        <picture><source srcset="{% static 'core/gallery_images/asesoria-de-costos-para-restaurantes-ecuador.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/asesoria-de-costos-para-restaurantes-ecuador.jpg' %}" width="300" height="225" alt="Sesión de asesoría de costos en restaurante con Oxígeno App, Ecuador"></picture>
+                    </div>
+                    <div class="carousel-item">
+                        <picture><source srcset="{% static 'core/gallery_images/asesoria-de-restaurantes-costo-quito.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/asesoria-de-restaurantes-costo-quito.jpg' %}" width="300" height="225" alt="Revisión de costos de insumos en asesoría gastronómica, Quito"></picture>
+                    </div>
+                    <div class="carousel-item">
+                        <picture><source srcset="{% static 'core/gallery_images/asesoria-gastronomica-profesional-en-quito.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/asesoria-gastronomica-profesional-en-quito.jpg' %}" width="300" height="225" alt="Restaurantes clientes de PA' ARRIBA — SIVI, Fermento, Café Aidee, Kokoriko"></picture>
+                    </div>
+                    <div class="carousel-item">
+                        <picture><source srcset="{% static 'core/gallery_images/asesoria-para-restaurantes-ecuador.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/asesoria-para-restaurantes-ecuador.jpg' %}" width="300" height="225" alt="Estandarización de procesos en cocina, asesoría gastronómica Ecuador"></picture>
+                    </div>
+                    <div class="carousel-item">
+                        <picture><source srcset="{% static 'core/gallery_images/contabilidad-de-costos-para-restaurantes-quito.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/contabilidad-de-costos-para-restaurantes-quito.jpg' %}" width="300" height="225" alt="Asesoría de costos en cocina comercial, Quito"></picture>
+                    </div>
+                    <div class="carousel-item">
+                        <picture><source srcset="{% static 'core/gallery_images/curso-de-costos-para-restaurantes-ecuador.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/curso-de-costos-para-restaurantes-ecuador.jpg' %}" width="300" height="225" alt="Sesión de curso de costos para restaurantes, Ecuador"></picture>
+                    </div>
+                    <div class="carousel-item">
+                        <picture><source srcset="{% static 'core/gallery_images/curso-de-costos-para-restaurantes-en-quito.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/curso-de-costos-para-restaurantes-en-quito.jpg' %}" width="300" height="225" alt="Ingeniería de menú con matriz de colores, curso de costos, Quito"></picture>
+                    </div>
+                    <div class="carousel-item">
+                        <picture><source srcset="{% static 'core/gallery_images/curso-de-costos-para-restaurantes-en-santo-domingo-ecuador.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/curso-de-costos-para-restaurantes-en-santo-domingo-ecuador.jpg' %}" width="300" height="225" alt="Participante en curso de costos para restaurantes, Santo Domingo"></picture>
+                    </div>
+
+                </div>
+            </div>
+            <div class="flex justify-center mt-4">
+                <span class="accordion-icon accordion-footer-collapse-btn cursor-pointer text-4xl leading-none">&minus;</span>
+            </div>
+        </section>
+    </div>
+</div>
