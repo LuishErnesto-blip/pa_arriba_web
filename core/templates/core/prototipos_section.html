@@ -15,42 +15,42 @@
             </p>
             <div class="prototipos-grid-nuevo">
 
-                <div class="prototipo-thumb">
+                <div class="prototipo-thumb" onclick="abrirModalPrototipo(this)" data-copy="Sabes cuánto vendiste hoy, en tiempo real — sin esperar al cierre de mes para enterarte.">
                     <picture><source srcset="{% static 'core/gallery_images/oxigeno-app-reporte-ejecutivo-ventas-restaurante.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/oxigeno-app-reporte-ejecutivo-ventas-restaurante.jpg' %}" width="625" height="900" loading="lazy" alt="Reporte ejecutivo de ventas en Oxígeno App — platos más vendidos de un restaurante"></picture>
                     <p class="prototipo-thumb-caption">Reporte de Ventas</p>
                 </div>
 
-                <div class="prototipo-thumb">
+                <div class="prototipo-thumb" onclick="abrirModalPrototipo(this)" data-copy="Ves cada día si ya cubriste tus costos, no solo si vendiste.">
                     <picture><source srcset="{% static 'core/gallery_images/oxigeno-app-punto-equilibrio-diario-restaurante.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/oxigeno-app-punto-equilibrio-diario-restaurante.jpg' %}" width="625" height="900" loading="lazy" alt="Punto de equilibrio diario en Oxígeno App — control de costos y utilidad, restaurante Ecuador"></picture>
                     <p class="prototipo-thumb-caption">Punto de Equilibrio</p>
                 </div>
 
-                <div class="prototipo-thumb">
+                <div class="prototipo-thumb" onclick="abrirModalPrototipo(this)" data-copy="La diferencia entre vender y ganar, con el dato real — no con el cálculo a mano.">
                     <picture><source srcset="{% static 'core/gallery_images/oxigeno-app-reporte-utilidad-bruta-neta-restaurante.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/oxigeno-app-reporte-utilidad-bruta-neta-restaurante.jpg' %}" width="625" height="900" loading="lazy" alt="Reporte de utilidad bruta y neta en Oxígeno App — margen real de un restaurante"></picture>
                     <p class="prototipo-thumb-caption">Utilidad Bruta y Neta</p>
                 </div>
 
-                <div class="prototipo-thumb">
+                <div class="prototipo-thumb" onclick="abrirModalPrototipo(this)" data-copy="Cada insumo que entra y sale queda registrado — se acabó no saber qué pasó con la mercadería.">
                     <picture><source srcset="{% static 'core/gallery_images/oxigeno-app-control-inventario-kardex-restaurante.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/oxigeno-app-control-inventario-kardex-restaurante.jpg' %}" width="625" height="900" loading="lazy" alt="Control de inventario (Kardex) en Oxígeno App — movimientos de bodega de un restaurante"></picture>
                     <p class="prototipo-thumb-caption">Control de Inventario</p>
                 </div>
 
-                <div class="prototipo-thumb">
+                <div class="prototipo-thumb" onclick="abrirModalPrototipo(this)" data-copy="Toda tu operación del día — ventas, mesas, punto de equilibrio — en una sola pantalla.">
                     <picture><source srcset="{% static 'core/gallery_images/oxigeno-app-panel-maestro-ventas-mesas-restaurante.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/oxigeno-app-panel-maestro-ventas-mesas-restaurante.jpg' %}" width="625" height="900" loading="lazy" alt="Panel maestro de Oxígeno App — ventas del día, mesas y punto de equilibrio"></picture>
                     <p class="prototipo-thumb-caption">Panel Maestro</p>
                 </div>
 
-                <div class="prototipo-thumb">
+                <div class="prototipo-thumb" onclick="abrirModalPrototipo(this)" data-copy="Control exacto de efectivo, transferencia y cuentas pendientes, turno por turno.">
                     <picture><source srcset="{% static 'core/gallery_images/oxigeno-app-caja-turno-cuentas-pendientes-restaurante.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/oxigeno-app-caja-turno-cuentas-pendientes-restaurante.jpg' %}" width="625" height="900" loading="lazy" alt="Módulo de caja en Oxígeno App — control de turno y cuentas pendientes de cobro"></picture>
                     <p class="prototipo-thumb-caption">Caja y Turno</p>
                 </div>
 
-                <div class="prototipo-thumb">
+                <div class="prototipo-thumb" onclick="abrirModalPrototipo(this)" data-copy="El costo real de cada plato, antes de ponerle precio en el menú.">
                     <picture><source srcset="{% static 'core/gallery_images/oxigeno-app-costeo-receta-menu-restaurante.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/oxigeno-app-costeo-receta-menu-restaurante.jpg' %}" width="625" height="900" loading="lazy" alt="Creación de receta estandarizada con costeo real en Oxígeno App"></picture>
                     <p class="prototipo-thumb-caption">Costeo de Recetas</p>
                 </div>
 
-                <div class="prototipo-thumb">
+                <div class="prototipo-thumb" onclick="abrirModalPrototipo(this)" data-copy="Tu utilidad real, exportada en un documento listo para revisar.">
                     <picture><source srcset="{% static 'core/gallery_images/oxigeno-app-reporte-financiero-pdf-restaurante.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/oxigeno-app-reporte-financiero-pdf-restaurante.jpg' %}" width="510" height="466" loading="lazy" alt="Reporte financiero exportable en PDF de Oxígeno App — utilidad bruta y neta"></picture>
                     <p class="prototipo-thumb-caption">Reporte PDF</p>
                 </div>
@@ -64,5 +64,14 @@
         <div class="flex justify-center mt-4">
             <span class="accordion-icon accordion-footer-collapse-btn cursor-pointer text-4xl leading-none">&minus;</span>
         </div>
+    </div>
+</div>
+
+<!-- Modal/Lightbox para capturas de Prototipos -->
+<div class="prototipo-modal-overlay" id="prototipo-modal-overlay" onclick="cerrarModalPrototipo(event)">
+    <div class="prototipo-modal-content" onclick="event.stopPropagation()">
+        <button class="prototipo-modal-close" onclick="cerrarModalPrototipo(event)">&times;</button>
+        <img id="prototipo-modal-img" src="" alt="Vista ampliada de Oxígeno App">
+        <p class="prototipo-modal-caption" id="prototipo-modal-caption"></p>
     </div>
 </div>

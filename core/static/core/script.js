@@ -663,3 +663,21 @@ function cargarVideoTestimonio(elemento) {
     elemento.innerHTML = '';
     elemento.appendChild(iframe);
 }
+
+// Modal/Lightbox para capturas de Oxígeno App en sección Prototipos
+function abrirModalPrototipo(elemento) {
+    const imgSrc = elemento.querySelector('img').src;
+    const copy = elemento.dataset.copy;
+    const overlay = document.getElementById('prototipo-modal-overlay');
+    const modalImg = document.getElementById('prototipo-modal-img');
+    const modalCaption = document.getElementById('prototipo-modal-caption');
+    modalImg.src = imgSrc;
+    modalCaption.textContent = copy;
+    overlay.classList.add('activo');
+}
+
+function cerrarModalPrototipo(event) {
+    if (event) event.stopPropagation();
+    const overlay = document.getElementById('prototipo-modal-overlay');
+    overlay.classList.remove('activo');
+}
