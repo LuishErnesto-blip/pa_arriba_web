@@ -1899,3 +1899,10 @@ body {
 .prototipo-thumb {
     cursor: pointer;
 }
+
+/* Anula el efecto glitch en el h1 de Asesorias, consistente con otras landings (Fase 5) */
+.hero-section h1.sin-glitch {
+    animation: none;
+    text-shadow: none;
+    color: #1f2937;
+}
