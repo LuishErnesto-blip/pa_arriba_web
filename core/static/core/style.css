@@ -1906,3 +1906,9 @@ body {
     text-shadow: none;
     color: #ffffff;
 }
+
+/* Fondo navy estatico para .hero-section, consistente con Metodo/Rentabilidad (Fase 5) */
+.hero-section {
+    background-image: linear-gradient(to bottom, #111827, #0f172a);
+    border-radius: 16px;
+}
