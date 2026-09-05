@@ -1811,7 +1811,7 @@ body {
    PROTOTIPOS — Grid de capturas Oxigeno App (Fase 5)
    ============================================ */
 .prototipos-grid-nuevo {
-    display: grid;
+    display: grid !important;
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
 }
