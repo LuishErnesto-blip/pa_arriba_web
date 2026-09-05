@@ -1,85 +1,66 @@
 {% load static %}
 <!-- Tarjeta para la sección de Prototipos -->
-<div class="accordion-card prototipos-card" data-section-id="prototipos" id="prototipos-card"> {# MODIFICADO: Añadido id="prototipos-card" #}
+<div class="accordion-card prototipos-card" data-section-id="prototipos" id="prototipos-card">
     <div class="accordion-header">
-        <h2 class="text-3xl font-extrabold flex items-center text-pa-arriba-blue-dark"> {# Añadido clases de Tailwind para estilo #}
-            <i class="fas fa-rocket text-4xl mr-3"></i> {# Icono de Font Awesome para el cohete #}
-            Nuestros Prototipos
+        <h2 class="text-3xl font-extrabold flex items-center text-pa-arriba-blue-dark">
+            <i class="fas fa-rocket text-4xl mr-3"></i>
+            Así Funciona el Sistema Después de la Asesoría
         </h2>
         <span class="accordion-icon">+</span>
     </div>
-    <div class="accordion-content rounded-b-xl"> {# Añadido rounded-b-xl para consistencia #}
-        <section class="prototipos-section p-6"> {# Añadido p-6 para padding interno #}
-            <p class="text-lg text-gray-700 mb-8 leading-relaxed text-center"> {# Añadido clases de Tailwind para estilo #}
-                Transformamos tus ideas en realidades digitales, prototipos que no solo son funcionales, sino que venden una experiencia única y diferencial para el re-emprendedor.
+    <div class="accordion-content rounded-b-xl">
+        <section class="prototipos-section p-6">
+            <p class="text-lg text-gray-700 mb-8 leading-relaxed text-center">
+                Después de ordenar los costos y la operación de tu restaurante, Oxígeno App sostiene ese sistema automatizado todos los días: ventas, inventario, punto de equilibrio y reportes reales.
             </p>
-            <div class="prototipos-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8"> {# Añadido clases de Tailwind para grid #}
-                <!-- Prototipo 1: Libro Digital / App de Cabeza de Pollo -->
-                <div class="prototipo-item bg-gray-100 p-6 rounded-lg shadow-md flex flex-col items-center text-center"> {# Añadido clases de Tailwind para estilo #}
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">"Prototipo: Libro Digital Interactivo"</h3> {# Añadido clases de Tailwind para estilo #}
-                    <div class="video-container w-full mb-4"> {# Añadido w-full mb-4 para consistencia #}
-                        <video class="prototipo-video w-full rounded-lg" controls muted loop playsinline preload="none"> {# Añadido w-full rounded-lg #}
-                            <source src="{% static 'core/clip_demo_libro_digital_app.mp4' %}" type="video/mp4">
-                            Tu navegador no soporta el elemento de video.
-                        </video>
-                    </div>
-                    <p class="text-gray-700 mb-4"> {# Añadido clases de Tailwind para estilo #}
-                        Convierte tu contenido en una experiencia inmersiva. Ideal para cursos, guías o catálogos interactivos, llevando el aprendizaje y la información a otro nivel.
-                    </p>
-                    <!-- Añadido onclick para WhatsApp -->
-                    <button class="cta-button bg-pa-arriba-orange-force text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition-colors duration-300 w-full" style="background-color: var(--pa-arriba-orange-force); color: var(--color-text-light);" onclick="openWhatsAppForPrototype('Libro Digital Interactivo')">¡Explora la Demo!</button> {# Añadido clases de Tailwind y estilo inline #}
+            <div class="prototipos-grid-nuevo">
+
+                <div class="prototipo-thumb">
+                    <picture><source srcset="{% static 'core/gallery_images/oxigeno-app-reporte-ejecutivo-ventas-restaurante.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/oxigeno-app-reporte-ejecutivo-ventas-restaurante.jpg' %}" width="625" height="900" loading="lazy" alt="Reporte ejecutivo de ventas en Oxígeno App — platos más vendidos de un restaurante"></picture>
+                    <p class="prototipo-thumb-caption">Reporte de Ventas</p>
                 </div>
 
-                <!-- Prototipo 2: Calculadora de Precios de Platos -->
-                <div class="prototipo-item bg-gray-100 p-6 rounded-lg shadow-md flex flex-col items-center text-center"> {# Añadido clases de Tailwind para estilo #}
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">"Prototipo: Calculadora de Costos para Restaurantes"</h3> {# Añadido clases de Tailwind para estilo #}
-                    <div class="video-container w-full mb-4"> {# Añadido w-full mb-4 para consistencia #}
-                        <video class="prototipo-video w-full rounded-lg" controls muted loop playsinline preload="none"> {# Añadido w-full rounded-lg #}
-                            <source src="{% static 'core/clip_demo_calculadora_precios_platos_app.mp4' %}" type="video/mp4">
-                            Tu navegador no soporta el elemento de video.
-                        </video>
-                    </div>
-                    <p class="text-gray-700 mb-4"> {# Añadido clases de Tailwind para estilo #}
-                        Optimiza la rentabilidad de tu negocio gastronómico. Calcula costos de ingredientes y precios de venta de forma precisa y sencilla.
-                    </p>
-                    <!-- Añadido onclick para WhatsApp -->
-                    <button class="cta-button bg-pa-arriba-orange-force text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition-colors duration-300 w-full" style="background-color: var(--pa-arriba-orange-force); color: var(--color-text-light);" onclick="openWhatsAppForPrototype('Calculadora de Costos para Restaurantes')">Calcula tu Rentabilidad</button> {# Añadido clases de Tailwind y estilo inline #}
+                <div class="prototipo-thumb">
+                    <picture><source srcset="{% static 'core/gallery_images/oxigeno-app-punto-equilibrio-diario-restaurante.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/oxigeno-app-punto-equilibrio-diario-restaurante.jpg' %}" width="625" height="900" loading="lazy" alt="Punto de equilibrio diario en Oxígeno App — control de costos y utilidad, restaurante Ecuador"></picture>
+                    <p class="prototipo-thumb-caption">Punto de Equilibrio</p>
                 </div>
 
-                <!-- Prototipo 3: Diseñador de Uñas / SPA -->
-                <div class="prototipo-item bg-gray-100 p-6 rounded-lg shadow-md flex flex-col items-center text-center"> {# Añadido clases de Tailwind para estilo #}
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">"Prototipo: Diseñador de Uñas Virtual para SPAs"</h3> {# Añadido clases de Tailwind para estilo #}
-                    <div class="video-container w-full mb-4"> {# Añadido w-full mb-4 para consistencia #}
-                        <video class="prototipo-video w-full rounded-lg" controls muted loop playsinline preload="none"> {# Añadido w-full rounded-lg #}
-                            <source src="{% static 'core/clip_demo_diseñador_de_uñas_app.mp4' %}" type="video/mp4">
-                            Tu navegador no soporta el elemento de video.
-                        </video>
-                    </div>
-                    <p class="text-gray-700 mb-4"> {# Añadido clases de Tailwind para estilo #}
-                        Visualiza diseños de uñas en tiempo real sobre la mano del cliente. Una herramienta interactiva que revoluciona la experiencia en tu salón de belleza.
-                    </p>
-                    <!-- Añadido onclick para WhatsApp -->
-                    <button class="cta-button bg-pa-arriba-orange-force text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition-colors duration-300 w-full" style="background-color: var(--pa-arriba-orange-force); color: var(--color-text-light);" onclick="openWhatsAppForPrototype('Diseñador de Uñas Virtual para SPAs')">Diseña tu Estilo</button> {# Añadido clases de Tailwind y estilo inline #}
+                <div class="prototipo-thumb">
+                    <picture><source srcset="{% static 'core/gallery_images/oxigeno-app-reporte-utilidad-bruta-neta-restaurante.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/oxigeno-app-reporte-utilidad-bruta-neta-restaurante.jpg' %}" width="625" height="900" loading="lazy" alt="Reporte de utilidad bruta y neta en Oxígeno App — margen real de un restaurante"></picture>
+                    <p class="prototipo-thumb-caption">Utilidad Bruta y Neta</p>
                 </div>
 
-                <!-- Prototipo 4: Cabeza de Pollo (App de Gestión) -->
-                <div class="prototipo-item bg-gray-100 p-6 rounded-lg shadow-md flex flex-col items-center text-center"> {# Añadido clases de Tailwind para estilo #}
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">"Prototipo: App de Gestión Empresarial 'Cabeza de Pollo'"</h3> {# Añadido clases de Tailwind para estilo #}
-                    <div class="video-container w-full mb-4"> {# Añadido w-full mb-4 para consistencia #}
-                        <video class="prototipo-video w-full rounded-lg" controls muted loop playsinline preload="none"> {# Añadido w-full rounded-lg #}
-                            <source src="{% static 'core/clip_demo_final_cabeza_de_pollo_app.mp4' %}" type="video/mp4">
-                            Tu navegador no soporta el elemento de video.
-                        </video>
-                    </div>
-                    <p class="text-gray-700 mb-4"> {# Añadido clases de Tailwind para estilo #}
-                        Simplifica la administración de tu negocio. Controla inventario, ventas y clientes desde una interfaz intuitiva y eficiente, liberándote de las "cabezas de pollo".
-                    </p>
-                    <!-- Añadido onclick para WhatsApp -->
-                    <button class="cta-button bg-pa-arriba-orange-force text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition-colors duration-300 w-full" style="background-color: var(--pa-arriba-orange-force); color: var(--color-text-light);" onclick="openWhatsAppForPrototype('App de Gestión Empresarial Cabeza de Pollo')">Organiza tu Negocio</button> {# Añadido clases de Tailwind y estilo inline #}
+                <div class="prototipo-thumb">
+                    <picture><source srcset="{% static 'core/gallery_images/oxigeno-app-control-inventario-kardex-restaurante.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/oxigeno-app-control-inventario-kardex-restaurante.jpg' %}" width="625" height="900" loading="lazy" alt="Control de inventario (Kardex) en Oxígeno App — movimientos de bodega de un restaurante"></picture>
+                    <p class="prototipo-thumb-caption">Control de Inventario</p>
                 </div>
+
+                <div class="prototipo-thumb">
+                    <picture><source srcset="{% static 'core/gallery_images/oxigeno-app-panel-maestro-ventas-mesas-restaurante.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/oxigeno-app-panel-maestro-ventas-mesas-restaurante.jpg' %}" width="625" height="900" loading="lazy" alt="Panel maestro de Oxígeno App — ventas del día, mesas y punto de equilibrio"></picture>
+                    <p class="prototipo-thumb-caption">Panel Maestro</p>
+                </div>
+
+                <div class="prototipo-thumb">
+                    <picture><source srcset="{% static 'core/gallery_images/oxigeno-app-caja-turno-cuentas-pendientes-restaurante.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/oxigeno-app-caja-turno-cuentas-pendientes-restaurante.jpg' %}" width="625" height="900" loading="lazy" alt="Módulo de caja en Oxígeno App — control de turno y cuentas pendientes de cobro"></picture>
+                    <p class="prototipo-thumb-caption">Caja y Turno</p>
+                </div>
+
+                <div class="prototipo-thumb">
+                    <picture><source srcset="{% static 'core/gallery_images/oxigeno-app-costeo-receta-menu-restaurante.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/oxigeno-app-costeo-receta-menu-restaurante.jpg' %}" width="625" height="900" loading="lazy" alt="Creación de receta estandarizada con costeo real en Oxígeno App"></picture>
+                    <p class="prototipo-thumb-caption">Costeo de Recetas</p>
+                </div>
+
+                <div class="prototipo-thumb">
+                    <picture><source srcset="{% static 'core/gallery_images/oxigeno-app-reporte-financiero-pdf-restaurante.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/oxigeno-app-reporte-financiero-pdf-restaurante.jpg' %}" width="510" height="466" loading="lazy" alt="Reporte financiero exportable en PDF de Oxígeno App — utilidad bruta y neta"></picture>
+                    <p class="prototipo-thumb-caption">Reporte PDF</p>
+                </div>
+
+            </div>
+
+            <div class="flex justify-center mt-8">
+                <a href="https://wa.me/593997277796?text=Hola%20Pa%E2%80%99Arriba%2C%20quiero%20saber%20c%C3%B3mo%20funciona%20el%20sistema%20completo%20para%20mi%20restaurante" target="_blank" rel="noopener" class="cta-button bg-pa-arriba-orange-force text-white px-8 py-3 rounded-lg hover:bg-orange-600 transition-colors duration-300" style="background-color: var(--pa-arriba-orange-force); color: var(--color-text-light); text-decoration: none;">Conoce Cómo Funciona el Sistema Completo</a>
             </div>
         </section>
-        <!-- Botón de colapsar al final de la tarjeta -->
         <div class="flex justify-center mt-4">
             <span class="accordion-icon accordion-footer-collapse-btn cursor-pointer text-4xl leading-none">&minus;</span>
         </div>

@@ -86,17 +86,6 @@ const collapseAllAccordions = () => {
 
 
 /**
- * Abre WhatsApp con un mensaje predefinido para prototipos.
- * @param {string} prototypeName - El nombre del prototipo que interesa al usuario.
- */
-function openWhatsAppForPrototype(prototypeName) {
-    const phoneNumber = '593997277796';
-    const message = `¡Hola! Me interesa el prototipo "${prototypeName}". ¿Podrías darme más información?`;
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
-}
-
-/**
  * Expande o contrae una tarjeta de acordeón. Cierra otras tarjetas abiertas.
  * @param {Event} event - El evento de clic que disparó la función.
  */
