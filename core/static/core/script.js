@@ -663,3 +663,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+
+// Facade de YouTube para testimonios — carga el iframe solo al hacer clic (performance)
+function cargarVideoTestimonio(elemento) {
+    const videoId = elemento.dataset.videoId;
+    const iframe = document.createElement('iframe');
+    iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    iframe.allowFullscreen = true;
+    elemento.innerHTML = '';
+    elemento.appendChild(iframe);
+}
