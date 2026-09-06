@@ -1,0 +1,180 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Cliente Fantasma para Restaurantes en Ecuador | PA' ARRIBA{% endblock %}
+{% block meta_description %}Auditoría de cliente fantasma y capacitación operativa para restaurantes en Ecuador: sabe qué pasa en tu negocio cuando tú no estás.{% endblock %}
+{% block meta_keywords %}cliente fantasma restaurantes ecuador, cliente misterioso restaurantes, mystery shopper restaurantes, capacitación personal restaurante ecuador, capacitación cocina restaurante{% endblock %}
+{% block og_title %}Cliente Fantasma para Restaurantes en Ecuador | PA' ARRIBA{% endblock %}
+{% block og_description %}¿Sabes qué pasa en tu restaurante cuando tú no estás mirando? Auditoría encubierta + capacitación operativa para tu equipo.{% endblock %}
+{% block extra_head %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://pa-arriba.com/#negocio",
+      "name": "PA' ARRIBA — Consultoría Gastronómica",
+      "url": "https://pa-arriba.com",
+      "telephone": "+593997277796",
+      "address": {"@type": "PostalAddress", "addressLocality": "Quito", "addressRegion": "Pichincha", "addressCountry": "EC"},
+      "areaServed": {"@type": "Country", "name": "Ecuador"},
+      "priceRange": "$$"
+    },
+    {
+      "@type": "Service",
+      "@id": "https://pa-arriba.com/cliente-fantasma-restaurantes/#servicio",
+      "name": "Cliente Fantasma y Capacitación Operativa para Restaurantes",
+      "description": "Auditoría encubierta (cliente fantasma) de la experiencia real en tu restaurante, seguida de capacitación operativa para tu equipo en los puntos débiles detectados.",
+      "provider": { "@id": "https://pa-arriba.com/#negocio" },
+      "areaServed": {"@type": "Country", "name": "Ecuador"}
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type": "Question", "name": "¿Qué es un cliente fantasma?", "acceptedAnswer": {"@type": "Answer", "text": "Es una persona que visita tu restaurante como cliente normal, sin que tu personal lo sepa, y evalúa objetivamente la experiencia real: tiempos, atención, limpieza y cumplimiento de procesos."}},
+        {"@type": "Question", "name": "¿Esto es lo mismo que una cocina fantasma (ghost kitchen)?", "acceptedAnswer": {"@type": "Answer", "text": "No. Una cocina fantasma es un modelo de negocio solo para delivery, sin local físico de atención. Nuestro servicio de cliente fantasma es una auditoría de servicio presencial en tu restaurante actual."}},
+        {"@type": "Question", "name": "¿Qué pasa después de la auditoría?", "acceptedAnswer": {"@type": "Answer", "text": "Capacitamos a tu equipo exactamente en los puntos débiles detectados: montaje de cocina, producción en serie, manejo de comandas, mise en place, o atención al cliente y ventas, según lo que haya encontrado la auditoría."}},
+        {"@type": "Question", "name": "¿Mi equipo se entera de que fueron evaluados?", "acceptedAnswer": {"@type": "Answer", "text": "La visita es encubierta para que el resultado refleje la operación real, no una versión preparada. Los hallazgos se comparten contigo, y la capacitación posterior se presenta como una mejora normal del equipo."}}
+      ]
+    }
+  ]
+}
+</script>
+{% endblock %}
+{% block content %}
+
+<section class="w-full bg-gradient-to-b from-gray-900 to-slate-900 text-white py-24 px-5">
+    <div class="max-w-5xl mx-auto text-center">
+        <span class="text-orange-500 uppercase tracking-widest font-bold text-sm block mb-4">
+            Cliente Fantasma y Capacitación Operativa
+        </span>
+        <h1 class="text-4xl md:text-6xl font-black tracking-tight leading-none mb-6">
+            ¿Sabes qué pasa en tu restaurante <span class="text-orange-500">cuando tú no estás mirando?</span>
+        </h1>
+        <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-8 leading-relaxed">
+            Cuando el dueño está presente, todo funciona bien. La pregunta real es qué pasa el resto del tiempo. Un cliente fantasma entra a tu restaurante como cualquier otro cliente, sin que tu equipo lo sepa, y te muestra la experiencia real que están viviendo tus clientes.
+        </p>
+        <div class="mt-4">
+            <a href="https://wa.me/593997277796?text=Hola%20PA%20ARRIBA%2C%20quiero%20saber%20m%C3%A1s%20del%20servicio%20de%20cliente%20fantasma."
+               target="_blank" rel="noopener noreferrer"
+               class="inline-block bg-orange-600 hover:bg-orange-700 px-10 py-5 rounded-xl font-bold text-xl shadow-xl transition">
+                Consulta por WhatsApp
+            </a>
+            <p class="text-sm text-gray-500 mt-3">Auditoría encubierta · Horario: 16:00 a 20:00</p>
+        </div>
+    </div>
+</section>
+
+<section class="w-full py-20 bg-white px-5">
+    <div class="max-w-5xl mx-auto text-center">
+        <h2 class="text-4xl font-black text-gray-900 mb-6">¿Qué es un Cliente Fantasma?</h2>
+        <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            Una persona entra a tu restaurante como un cliente cualquiera — pide, come, paga — sin que nadie de tu equipo sepa que está siendo evaluado. No es lo que tú crees que pasa en tu negocio. Es lo que realmente pasa.
+        </p>
+    </div>
+</section>
+
+<section class="w-full py-20 bg-gray-50 px-5">
+    <div class="max-w-5xl mx-auto">
+        <h2 class="text-4xl font-black text-gray-900 mb-10 text-center">¿Qué evaluamos?</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white rounded-xl p-6 shadow">
+                <h3 class="font-bold text-lg text-gray-900 mb-2">Tiempos de espera</h3>
+                <p class="text-gray-700">Cuánto tardan realmente en atenderte, tomar tu pedido y servirlo.</p>
+            </div>
+            <div class="bg-white rounded-xl p-6 shadow">
+                <h3 class="font-bold text-lg text-gray-900 mb-2">Exactitud del pedido</h3>
+                <p class="text-gray-700">Si lo que llega a la mesa es exactamente lo que se pidió.</p>
+            </div>
+            <div class="bg-white rounded-xl p-6 shadow">
+                <h3 class="font-bold text-lg text-gray-900 mb-2">Actitud del personal</h3>
+                <p class="text-gray-700">Cómo tratan realmente a un cliente cuando el dueño no está mirando.</p>
+            </div>
+            <div class="bg-white rounded-xl p-6 shadow">
+                <h3 class="font-bold text-lg text-gray-900 mb-2">Limpieza y presentación</h3>
+                <p class="text-gray-700">El estado real del local y de los platos servidos.</p>
+            </div>
+            <div class="bg-white rounded-xl p-6 shadow">
+                <h3 class="font-bold text-lg text-gray-900 mb-2">Cumplimiento de procesos</h3>
+                <p class="text-gray-700">Si tu equipo sigue de verdad los estándares que definiste, o los saltan cuando no hay supervisión.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="w-full py-20 bg-white px-5">
+    <div class="max-w-5xl mx-auto text-center">
+        <h2 class="text-4xl font-black text-gray-900 mb-6">De la auditoría a la solución</h2>
+        <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-10 leading-relaxed">
+            Un diagnóstico sin acción no cambia nada. Con lo que encuentra el cliente fantasma, capacitamos a tu equipo exactamente donde está la fuga real.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+            <div class="bg-orange-50 border-l-8 border-orange-500 rounded-xl p-6">
+                <h3 class="font-bold text-lg text-gray-900 mb-2">Montaje de cocina y producción en serie</h3>
+                <p class="text-gray-700">Procesos ordenados para que la cocina responda rápido sin perder calidad.</p>
+            </div>
+            <div class="bg-orange-50 border-l-8 border-orange-500 rounded-xl p-6">
+                <h3 class="font-bold text-lg text-gray-900 mb-2">Manejo de comandas en tiempo real</h3>
+                <p class="text-gray-700">Que ningún pedido se pierda ni se retrase entre cocina y salón.</p>
+            </div>
+            <div class="bg-orange-50 border-l-8 border-orange-500 rounded-xl p-6">
+                <h3 class="font-bold text-lg text-gray-900 mb-2">Organización de mise en place</h3>
+                <p class="text-gray-700">Todo listo antes de que empiece el servicio, no improvisado a mitad del turno.</p>
+            </div>
+            <div class="bg-orange-50 border-l-8 border-orange-500 rounded-xl p-6">
+                <h3 class="font-bold text-lg text-gray-900 mb-2">Atención al cliente y ventas</h3>
+                <p class="text-gray-700">Que tu equipo trate a cada cliente como el dueño lo trataría.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="w-full py-20 bg-gray-50 px-5">
+    <div class="max-w-5xl mx-auto">
+        <h2 class="text-4xl font-black text-gray-900 mb-10 text-center">Preguntas frecuentes</h2>
+        <div class="space-y-6">
+            <div class="bg-white rounded-xl p-6 shadow">
+                <h3 class="font-bold text-lg text-gray-900 mb-2">¿Qué es un cliente fantasma?</h3>
+                <p class="text-gray-700">Es una persona que visita tu restaurante como cliente normal, sin que tu personal lo sepa, y evalúa objetivamente la experiencia real: tiempos, atención, limpieza y cumplimiento de procesos.</p>
+            </div>
+            <div class="bg-white rounded-xl p-6 shadow">
+                <h3 class="font-bold text-lg text-gray-900 mb-2">¿Esto es lo mismo que una cocina fantasma (ghost kitchen)?</h3>
+                <p class="text-gray-700">No. Una cocina fantasma es un modelo de negocio solo para delivery, sin local físico de atención. Nuestro servicio de cliente fantasma es una auditoría de servicio presencial en tu restaurante actual.</p>
+            </div>
+            <div class="bg-white rounded-xl p-6 shadow">
+                <h3 class="font-bold text-lg text-gray-900 mb-2">¿Qué pasa después de la auditoría?</h3>
+                <p class="text-gray-700">Capacitamos a tu equipo exactamente en los puntos débiles detectados, según lo que haya encontrado la auditoría.</p>
+            </div>
+            <div class="bg-white rounded-xl p-6 shadow">
+                <h3 class="font-bold text-lg text-gray-900 mb-2">¿Mi equipo se entera de que fueron evaluados?</h3>
+                <p class="text-gray-700">La visita es encubierta para que el resultado refleje la operación real. Los hallazgos se comparten contigo, y la capacitación se presenta como una mejora normal del equipo.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="w-full bg-gray-900 text-white py-16 px-5 text-center">
+    <div class="max-w-5xl mx-auto">
+        <h2 class="text-3xl font-black mb-6">¿Listo para saber qué pasa realmente en tu restaurante?</h2>
+        <a href="https://wa.me/593997277796?text=Hola%20PA%20ARRIBA%2C%20quiero%20saber%20m%C3%A1s%20del%20servicio%20de%20cliente%20fantasma."
+           target="_blank" rel="noopener noreferrer"
+           class="inline-block bg-orange-600 hover:bg-orange-700 px-10 py-5 rounded-xl font-bold text-xl shadow-xl transition">
+            Consulta por WhatsApp
+        </a>
+    </div>
+</section>
+
+<section class="w-full py-12 px-5 bg-gray-50">
+    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+        <a href="{% url 'core:asesorias_gastronomicas' %}" class="block p-6 bg-white rounded-xl shadow hover:shadow-lg transition border border-gray-100">
+            <h3 class="font-bold text-lg text-gray-900 mb-2">Consultoría Gastronómica →</h3>
+            <p class="text-gray-600">Ordena los costos y la rentabilidad de tu negocio.</p>
+        </a>
+        <a href="{% url 'core:metodo_landing' %}" class="block p-6 bg-white rounded-xl shadow hover:shadow-lg transition border border-gray-100">
+            <h3 class="font-bold text-lg text-gray-900 mb-2">Nuestra Metodología →</h3>
+            <p class="text-gray-600">El sistema completo de gestión para tu restaurante.</p>
+        </a>
+    </div>
+</section>
+
+{% endblock %}

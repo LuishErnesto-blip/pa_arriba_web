@@ -49,6 +49,7 @@ def sitemap_xml(request):
         {"loc": f"{base_url}/asesorias-gastronomicas/", "lastmod": "2026-07-10", "changefreq": "monthly", "priority": "0.9"},
         {"loc": f"{base_url}/curso-de-costos-para-restaurantes/", "lastmod": "2026-09-05", "changefreq": "monthly", "priority": "0.9"},
         {"loc": f"{base_url}/marketing-digital-gastronomico/", "lastmod": "2026-09-06", "changefreq": "monthly", "priority": "0.9"},
+        {"loc": f"{base_url}/cliente-fantasma-restaurantes/", "lastmod": "2026-09-06", "changefreq": "monthly", "priority": "0.9"},
         {"loc": f"{base_url}/metodo/",                  "lastmod": "2026-07-10", "changefreq": "monthly", "priority": "0.9"},
         {"loc": f"{base_url}/rentabilidad/",            "lastmod": "2026-07-10", "changefreq": "monthly", "priority": "0.9"},
         {"loc": f"{base_url}/sri/",                     "lastmod": "2026-07-10", "changefreq": "monthly", "priority": "0.7"},
@@ -110,3 +111,6 @@ def curso_costos_landing(request):
 
 def marketing_digital_landing(request):
     return render(request, 'core/marketing_digital_landing.html')
+
+def cliente_fantasma_landing(request):
+    return render(request, 'core/cliente_fantasma_landing.html')
