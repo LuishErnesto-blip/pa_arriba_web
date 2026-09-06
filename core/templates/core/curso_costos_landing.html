@@ -1,0 +1,172 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Curso de Costos para Restaurantes en Ecuador | PA' ARRIBA{% endblock %}
+{% block meta_description %}Curso de costos para restaurantes en Ecuador: food cost, punto de equilibrio e ingeniería de menú aplicados a tu negocio real.{% endblock %}
+{% block meta_keywords %}curso de costos para restaurantes ecuador, food cost, punto de equilibrio restaurante, costeo de recetas, ingeniería de menú, curso gastronómico ecuador, interpreta tu restaurante{% endblock %}
+{% block og_title %}Curso de Costos para Restaurantes en Ecuador | PA' ARRIBA{% endblock %}
+{% block og_description %}Aprende a calcular el costo real de cada plato, tu punto de equilibrio y tu margen de contribución con los números de tu propio restaurante.{% endblock %}
+{% block extra_head %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://pa-arriba.com/#negocio",
+      "name": "PA' ARRIBA — Consultoría Gastronómica",
+      "url": "https://pa-arriba.com",
+      "telephone": "+593997277796",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Quito",
+        "addressRegion": "Pichincha",
+        "addressCountry": "EC"
+      },
+      "areaServed": {"@type": "Country", "name": "Ecuador"},
+      "priceRange": "$$"
+    },
+    {
+      "@type": "Course",
+      "@id": "https://pa-arriba.com/curso-de-costos-para-restaurantes/#curso",
+      "name": "Curso de Costos para Restaurantes — Interpreta tu Restaurante",
+      "description": "Curso presencial de 20 horas sobre food cost, margen de contribución, proyecciones de ventas e ingeniería de menú para dueños de restaurantes y cafeterías en Ecuador.",
+      "provider": { "@id": "https://pa-arriba.com/#negocio" },
+      "areaServed": {"@type": "Country", "name": "Ecuador"}
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cuánto dura el curso de costos para restaurantes?",
+          "acceptedAnswer": {"@type": "Answer", "text": "El curso dura 20 horas académicas, distribuidas en 4 sesiones presenciales."}
+        },
+        {
+          "@type": "Question",
+          "name": "¿El curso es presencial?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Sí, es un curso presencial. Realizamos ediciones periódicas en distintas ciudades de Ecuador."}
+        },
+        {
+          "@type": "Question",
+          "name": "¿Necesito conocimientos previos de contabilidad?",
+          "acceptedAnswer": {"@type": "Answer", "text": "No. El curso está diseñado para dueños y administradores de restaurantes sin formación contable previa."}
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué me llevo al finalizar el curso?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Un manual final con el costeo real de tus propias recetas y tus platos más vendidos, calculado con los datos de tu propio restaurante durante el curso."}
+        }
+      ]
+    }
+  ]
+}
+</script>
+{% endblock %}
+{% block content %}
+
+<section class="bg-gradient-to-b from-gray-900 to-slate-900 text-white py-24 px-5">
+    <div class="max-w-5xl mx-auto text-center">
+        <span class="text-orange-500 uppercase tracking-widest font-bold text-sm block mb-4">
+            Curso presencial de costos para restaurantes y cafeterías
+        </span>
+        <h1 class="text-4xl md:text-6xl font-black leading-tight mb-8">
+            Interpreta tu Restaurante: el curso de costos para restaurantes en Ecuador
+        </h1>
+        <p class="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            Vendes todos los días, pero no sabes cuánto te queda al final del mes. Este curso te enseña a calcular el costo real de cada plato, tu punto de equilibrio y tu margen de contribución — con los números de tu propio restaurante, no con teoría genérica.
+        </p>
+        <div class="mt-12">
+            <a href="https://wa.me/593997277796?text=Hola%20PA%20ARRIBA%2C%20quiero%20consultar%20la%20pr%C3%B3xima%20fecha%20del%20curso%20de%20costos%20para%20restaurantes."
+               target="_blank" rel="noopener noreferrer"
+               class="inline-block bg-orange-600 hover:bg-orange-700 px-10 py-5 rounded-xl font-bold text-xl shadow-xl transition">
+                Consulta la Próxima Fecha por WhatsApp
+            </a>
+            <p class="text-sm text-gray-500 mt-3">20 horas · 4 sesiones presenciales · Próximas ediciones en Quito, El Coca, Guayaquil y Santo Domingo</p>
+        </div>
+    </div>
+</section>
+
+<section class="py-20 bg-white px-5">
+    <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-black text-gray-900 mb-6">¿Qué vas a dominar en este curso?</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-orange-50 border-l-8 border-orange-500 rounded-xl p-8">
+                <h3 class="font-bold text-xl text-gray-900 mb-2">Food cost real de cada receta</h3>
+                <p class="text-gray-700">Cuánto te cuesta exactamente cada plato que vendes — no una estimación, el número real.</p>
+            </div>
+            <div class="bg-orange-50 border-l-8 border-orange-500 rounded-xl p-8">
+                <h3 class="font-bold text-xl text-gray-900 mb-2">Margen de contribución y precio de venta</h3>
+                <p class="text-gray-700">Cómo fijar el precio de cada plato para que sí te deje ganancia real.</p>
+            </div>
+            <div class="bg-orange-50 border-l-8 border-orange-500 rounded-xl p-8">
+                <h3 class="font-bold text-xl text-gray-900 mb-2">Punto de equilibrio de tu negocio</h3>
+                <p class="text-gray-700">Cuánto necesitas vender cada mes para dejar de perder dinero, con tus números reales.</p>
+            </div>
+            <div class="bg-orange-50 border-l-8 border-orange-500 rounded-xl p-8">
+                <h3 class="font-bold text-xl text-gray-900 mb-2">Ingeniería de menú</h3>
+                <p class="text-gray-700">Qué platos de tu carta potenciar y cuáles están perdiéndote dinero sin que lo notes.</p>
+            </div>
+        </div>
+        <div class="mt-8 bg-slate-900 text-white rounded-xl p-8 text-center">
+            <h3 class="font-bold text-xl mb-2">Te llevas un manual final</h3>
+            <p class="text-gray-300">Con el costeo real de tus propias recetas y tus platos más vendidos, calculado con los datos de tu restaurante durante el curso.</p>
+        </div>
+    </div>
+</section>
+
+<section class="py-20 bg-gray-50 px-5">
+    <div class="max-w-5xl mx-auto text-center">
+        <h2 class="text-4xl font-black text-gray-900 mb-6">¿Para quién es este curso?</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Para dueños y administradores de restaurantes y cafeterías que venden todos los días, pero no saben con certeza cuánto ganan realmente. No necesitas conocimientos previos de contabilidad — el curso está diseñado para aplicarse directamente sobre tu negocio, no sobre teoría.
+        </p>
+    </div>
+</section>
+
+<section class="py-20 bg-white px-5">
+    <div class="max-w-5xl mx-auto">
+        <h2 class="text-4xl font-black text-gray-900 mb-10 text-center">Así se ve el curso en vivo</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <picture><source srcset="{% static 'core/gallery_images/curso-de-costos-para-restaurantes-ecuador.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/curso-de-costos-para-restaurantes-ecuador.jpg' %}" width="625" height="900" loading="lazy" class="rounded-xl w-full" alt="Sesión de curso de costos para restaurantes, Ecuador"></picture>
+            <picture><source srcset="{% static 'core/gallery_images/curso-de-costos-para-restaurantes-en-quito.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/curso-de-costos-para-restaurantes-en-quito.jpg' %}" width="625" height="900" loading="lazy" class="rounded-xl w-full" alt="Ingeniería de menú con matriz de colores, curso de costos, Quito"></picture>
+            <picture><source srcset="{% static 'core/gallery_images/curso-de-costos-para-restaurantes-en-santo-domingo-ecuador.webp' %}" type="image/webp"><img src="{% static 'core/gallery_images/curso-de-costos-para-restaurantes-en-santo-domingo-ecuador.jpg' %}" width="625" height="900" loading="lazy" class="rounded-xl w-full" alt="Participante en curso de costos para restaurantes, Santo Domingo"></picture>
+        </div>
+    </div>
+</section>
+
+<section class="py-20 bg-gray-50 px-5">
+    <div class="max-w-3xl mx-auto">
+        <h2 class="text-4xl font-black text-gray-900 mb-10 text-center">Preguntas frecuentes</h2>
+        <div class="space-y-6">
+            <div class="bg-white rounded-xl p-6 shadow">
+                <h3 class="font-bold text-lg text-gray-900 mb-2">¿Cuánto dura el curso?</h3>
+                <p class="text-gray-700">20 horas académicas, distribuidas en 4 sesiones presenciales.</p>
+            </div>
+            <div class="bg-white rounded-xl p-6 shadow">
+                <h3 class="font-bold text-lg text-gray-900 mb-2">¿Es presencial?</h3>
+                <p class="text-gray-700">Sí. Realizamos ediciones periódicas en distintas ciudades de Ecuador.</p>
+            </div>
+            <div class="bg-white rounded-xl p-6 shadow">
+                <h3 class="font-bold text-lg text-gray-900 mb-2">¿Necesito conocimientos previos de contabilidad?</h3>
+                <p class="text-gray-700">No. Está diseñado para dueños y administradores sin formación contable previa.</p>
+            </div>
+            <div class="bg-white rounded-xl p-6 shadow">
+                <h3 class="font-bold text-lg text-gray-900 mb-2">¿Qué me llevo al finalizar?</h3>
+                <p class="text-gray-700">Un manual final con el costeo real de tus propias recetas y tus platos más vendidos.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bg-gray-900 text-white py-16 px-5 text-center">
+    <h2 class="text-3xl font-black mb-6">¿Listo para saber cuánto gana realmente tu restaurante?</h2>
+    <a href="https://wa.me/593997277796?text=Hola%20PA%20ARRIBA%2C%20quiero%20consultar%20la%20pr%C3%B3xima%20fecha%20del%20curso%20de%20costos%20para%20restaurantes."
+       target="_blank" rel="noopener noreferrer"
+       class="inline-block bg-orange-600 hover:bg-orange-700 px-10 py-5 rounded-xl font-bold text-xl shadow-xl transition">
+        Consulta la Próxima Fecha por WhatsApp
+    </a>
+</section>
+
+{% endblock %}

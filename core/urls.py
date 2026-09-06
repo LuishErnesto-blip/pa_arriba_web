@@ -11,4 +11,5 @@ urlpatterns = [
     path('asesorias-gastronomicas/', views.asesorias_gastronomicas, name='asesorias_gastronomicas'),
     path('oxigeno-app/', views.oxigeno_app_landing, name='oxigeno_app_landing'),
     path('privacy-policy/', views.privacy_policy, name='privacy_policy'),
+    path('curso-de-costos-para-restaurantes/', views.curso_costos_landing, name='curso_costos_landing'),
 ]

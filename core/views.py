@@ -47,6 +47,7 @@ def sitemap_xml(request):
     static_urls = [
         {"loc": f"{base_url}/",                        "lastmod": "2026-07-10", "changefreq": "weekly",  "priority": "1.0"},
         {"loc": f"{base_url}/asesorias-gastronomicas/", "lastmod": "2026-07-10", "changefreq": "monthly", "priority": "0.9"},
+        {"loc": f"{base_url}/curso-de-costos-para-restaurantes/", "lastmod": "2026-09-05", "changefreq": "monthly", "priority": "0.9"},
         {"loc": f"{base_url}/metodo/",                  "lastmod": "2026-07-10", "changefreq": "monthly", "priority": "0.9"},
         {"loc": f"{base_url}/rentabilidad/",            "lastmod": "2026-07-10", "changefreq": "monthly", "priority": "0.9"},
         {"loc": f"{base_url}/sri/",                     "lastmod": "2026-07-10", "changefreq": "monthly", "priority": "0.7"},
@@ -102,3 +103,6 @@ def metodo_landing(request):
 
 def oxigeno_app_landing(request):
     return render(request, 'core/oxigeno_app_landing.html')
+
+def curso_costos_landing(request):
+    return render(request, 'core/curso_costos_landing.html')
